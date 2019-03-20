@@ -20,7 +20,7 @@ NoahV框架依赖Nodejs 6.0，在执行如下步骤之前，请确保已经安�
 
 1.安装脚手架工具
 
-```
+```shell
 # 安装noahv-cli
 $   npm install noahv-cli -g
 
@@ -30,7 +30,7 @@ $   noahv --help
 
 2.初始化一个项目
 
-```
+```shell
 # 创建一个空目录，进入目录中，运行noahv init 命令创建一个通用项目
 $   mkdir project && cd project && noahv init
 
@@ -40,14 +40,14 @@ $   mkdir project && cd project && noahv init --dashboard
 
 3.运行项目
 
-```
+```shell
 # 在项目根目录启动调试server
 $   noahv start 
 ```
 
 4.复用模板
 
-```
+```shell
 # 在项目根目录复用模板创建页面
 $   noahv create 
 

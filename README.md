@@ -19,7 +19,7 @@ NoahV Rely on Nodejs 6.0+,before run following command,please check <a href="htt
 
 1.install command line tools
 
-```
+```shell
 # Install noahv-cli
 $   npm install noahv-cli -g
 
@@ -29,7 +29,7 @@ $   noahv --help
 
 2.Init a project
 
-```
+```shell
 # Creat a empty folder & run init
 $   mkdir project && cd project && noahv init
 
@@ -37,14 +37,14 @@ $   mkdir project && cd project && noahv init
 
 3.Run peoject
 
-```
+```shell
 # In the project root directory run start
 $   noahv start 
 ```
 
 4.reuse template
 
-```
+```shell
 # In the project root directory run create
 $   noahv create
 
