@@ -9,7 +9,8 @@
 let chalk = require('chalk');
 
 function log(prefix, status, msg, color) {
-    console.log(prefix + ' ' + chalk[color] + ' ' + msg);
+    let drawColor = chalk[color];
+    console.log(prefix + ' ' + drawColor(status) + ' ' + msg);
 }
 
 let logger = {
@@ -23,7 +24,7 @@ let logger = {
         log(prefix, status, msg, 'yellow');
     },
     error: function (prefix, status, msg) {
-        log(prefix, status, msg, 'red');
+        return log(prefix, status, msg, 'red');
     }
 };
 
