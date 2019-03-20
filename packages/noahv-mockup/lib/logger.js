@@ -9,7 +9,8 @@
 let chalk = require('chalk');
 
 function log(mod, status, msg, color) {
-    console.log(mod + ' ' + chalk[color] + ' ' + msg);
+	let drawColor = chalk[color];
+    console.log(mod + ' ' + drawColor(status) + ' ' + msg);
 }
 
 let logger = {
