@@ -21,7 +21,7 @@ module.exports = done => {
     }
 
     request({
-        url: 'https://registry.npmjs.com/package/noahv-cli',
+        url: 'https://registry.npmjs.org/noahv-cli',
         timeout: 10000
     }, (err, res, body) => {
         if (!err && res.statusCode === 200) {
