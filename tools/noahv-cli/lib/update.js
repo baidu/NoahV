@@ -12,7 +12,6 @@ let u = require('underscore');
 let exists = fs.existsSync;
 let spawn = require('cross-spawn');
 let logUtil = require('../lib/logUtil');
-let registry = '';
 
 let packageJson = path.resolve('package.json');
 let noahvList = [
@@ -23,7 +22,7 @@ let noahvList = [
     'noahv-request'
 ];
 let installMustModule = function (module) {
-    let installArgs = ['install', module, registry];
+    let installArgs = ['install', module];
     let npm = 'npm';
     let installCmd = spawn.sync(npm, installArgs, {stdio: 'inherit'});
     if (installCmd.status === 0) {
@@ -37,10 +36,10 @@ let installMustModule = function (module) {
 };
 
 let updateModule = function (module) {
-    let updateArgs = ['install', module + '@latest', '-S', registry];
+    let updateArgs = ['install', module + '@latest', '-S'];
     let npm = 'npm';
-    let getLatestVersion = ['view', module, 'version', registry];
-    let getCurrentInfo = ['list', module, 'version', '--json', registry];
+    let getLatestVersion = ['view', module, 'version'];
+    let getCurrentInfo = ['list', module, 'version', '--json'];
     logUtil.info('noahv-cli', 'info', 'start upgrade ' + module);
     try {
         // get current module info

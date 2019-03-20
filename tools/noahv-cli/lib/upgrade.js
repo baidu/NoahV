@@ -10,13 +10,12 @@ let u = require('underscore');
 let spawn = require('cross-spawn');
 const request = require('request');
 let logUtil = require('../lib/logUtil');
-let registry = '';
 const packageConfig = require('../package.json');
 
 let noahvCliList = ['noahv-cli'];
 
 let updateModule = function (module) {
-    let updateArgs = ['install', module + '@latest', '-g', registry];
+    let updateArgs = ['install', module + '@latest', '-g'];
     let npm = 'npm';
     logUtil.info('noahv-cli', 'info', 'start upgrade ' + module);
     try {

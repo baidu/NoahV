@@ -7,12 +7,11 @@
  */
 let spawn = require('cross-spawn');
 const logUtil = require('../lib/logUtil');
-let registry = '';
 
 console.log(process.cwd());
 
 module.exports = function (callback) {
-    let args = ['i', registry];
+    let args = ['i'];
     let cmd = spawn('npm', args, {stdio: 'inherit'});
     cmd.on('close', function (status) {
         if (status === 0) {
