@@ -1,0 +1,26 @@
+@import '../custom.less';
+.ivu-radio-inner {
+    width: @noahv-radio-width;
+    height: @noahv-radio-height;
+    background-color: @noahv-radio-default-bg;
+    border: @noahv-radio-default-border;
+}
+.ivu-radio-checked .ivu-radio-inner {
+    border-color: @noahv-radio-checked-color;
+}
+.ivu-radio-inner:after {
+    background-color: @noahv-radio-checked-color;
+}
+
+.ivu-radio-disabled .ivu-radio-inner {
+    border-color: @noahv-radio-disabled-border;
+    background-color: @noahv-radio-disabled-bg;
+}
+
+.ivu-radio-disabled .ivu-radio-inner:after {
+    background-color: @noahv-radio-disabled-border;
+}
+
+.ivu-radio-focus {
+    box-shadow: @noahv-radio-box-shadow;
+}
