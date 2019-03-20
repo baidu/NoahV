@@ -6,7 +6,7 @@
  * @author darren(darrenywyu@gmail.com)
  */
 
-const fs = require('fs');
+const fs = require('fs-extra')
 const path = require('path');
 const exists = fs.existsSync;
 const request = require('request');
@@ -27,7 +27,7 @@ function downLoad(file, type, dest) {
     const filePath = dest + file.path.replace(type, '');
     const folder = path.dirname(filePath);
     if (!fs.existsSync(folder)) {
-        fs.mkdirSync(folder, { recursive: true }, err => {
+        fs.mkdirpSync(folder, { recursive: true }, err => {
             if (err) {
                 logUtil.error('noahv-cli', 'error', err);
                 return false;
@@ -81,6 +81,5 @@ function getTemplate(type, dest, cb) {
         }
     });
 }
-
 
 module.exports = getTemplate;
