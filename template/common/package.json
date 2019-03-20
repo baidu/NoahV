@@ -17,7 +17,7 @@
   "dependencies": {
     "noahv-core": "^1.0.2",
     "noahv-component": "^1.0.1",
-    "noahv-mockup": "^1.0.1",
+    "noahv-mockup": "^1.0.2",
     "noahv-request": "^1.0.2",
     "axios": "^0.17.0",
     "babel-polyfill": "^6.26.0",
