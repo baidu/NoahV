@@ -13,10 +13,12 @@ let spawn = require('cross-spawn');
 let installModules = require('../lib/installModules');
 let logUtil = require('../lib/logUtil');
 
+let port = 8899;
+
 let nodeModule = path.resolve('node_modules');
 let packageJson = path.resolve('package.json');
 
-let startServer = function (port) {
+let startServer = function () {
     let args = ['start'];
     if (port) {
         if (0 < parseInt(port, 10) < 65535) {
@@ -34,17 +36,17 @@ let startServer = function (port) {
 };
 
 module.exports = function init(conf) {
-    let port = conf.args[0];
+    port = conf.args[0];
     if (!exists(packageJson)) {
         logUtil.error('noahv-cli', 'error', 'package.json info is not exists in `' + process.cwd() + '`');
-        return;
     }
-    if (!exists(nodeModule)) {
+    else if (!exists(nodeModule)) {
         logUtil.warn('noahv-cli', 'warn', 'dependency not found');
         logUtil.info('noahv-cli', 'info', 'install dependency');
-        installModules(startServer(port));
-        return;
+        installModules(startServer);
     }
-    startServer(port);
+    else {
+        startServer(port);
+    }
 };
 

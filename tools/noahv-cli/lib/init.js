@@ -39,6 +39,7 @@ module.exports = function init({dashboard}) {
         if (!exists(gitInfo)) {
             fse.removeSync(gitInfo);
         }
+        logUtil.ok('noahv-cli', 'ok', 'template download completed!')
         logUtil.info('noahv-cli', 'info', 'install dependence');
         installModules(printSuccessInfo);
     });

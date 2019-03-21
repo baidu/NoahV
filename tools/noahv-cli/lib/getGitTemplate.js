@@ -10,11 +10,14 @@ const fs = require('fs-extra')
 const path = require('path');
 const exists = fs.existsSync;
 const request = require('request');
+const ProgressBar = require('progress');
 
 const logUtil = require('../lib/logUtil');
 
 const gitRepo = 'https://api.github.com/repos/baidu/NoahV/git/trees/master';
 const rowRepo = 'https://github.com/baidu/NoahV/raw/master/';
+
+let bar;
 
 /**
  * downLoad file 
@@ -23,7 +26,7 @@ const rowRepo = 'https://github.com/baidu/NoahV/raw/master/';
  * @param  {string} dest  file path 
  * @return {boolean}  download status
  */
-function downLoad(file, type, dest) {
+function downLoad(file, type, dest, cb) {
     const filePath = dest + file.path.replace(type, '');
     const folder = path.dirname(filePath);
     if (!fs.existsSync(folder)) {
@@ -40,6 +43,12 @@ function downLoad(file, type, dest) {
             logUtil.error('noahv-cli', 'error', err);
             return false;
         }
+        else {
+            bar.tick();
+            if (bar.complete) {
+                cb();
+            }
+        }
     }).pipe(fs.createWriteStream(filePath));
 }
 
@@ -54,14 +63,17 @@ function filterTree(tree, type, dest, cb) {
     tree = tree.filter(function (item) {
         return item.type === 'blob' && item.path.indexOf(type) > -1;
     });
+    bar = new ProgressBar('downloading [:bar] :rate/bps :percent :etas', {
+        complete: '=',
+        incomplete: ' ',
+        width: 20,
+        total: tree.length
+    });
     for (let i = 0; i < tree.length; i++) {
-        let isDownLoad = downLoad(tree[i], type, dest);
+        let isDownLoad = downLoad(tree[i], type, dest, cb);
         if (isDownLoad === false) {
             cb('Get template fail!');
             break;
-        }
-        else if (i === tree.length - 1) {
-            cb();
         }
     }
 }
