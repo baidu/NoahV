@@ -5,7 +5,7 @@
             you can diy footer in header commponet
         -->
         <div class="copyright">
-            ©2018 NoahV团队 出品
+            ©2019 NoahV团队 出品
         </div>
     </div>
 </template>
