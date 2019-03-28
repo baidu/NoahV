@@ -2,6 +2,18 @@
 
 [English](./README.md) | 简体中文
 
+<a href="https://github.com/baidu/NoahV/blob/master/LICENSE">
+<img src="https://img.shields.io/github/license/baidu/NoahV.svg?style=popout-square" alt="license">
+</a>
+
+<a href="https://github.com/baidu/NoahV/issues">
+<img src="https://img.shields.io/github/issues/baidu/NoahV.svg?style=flat-square" alt="open issues">
+</a>
+
+<a href="https://github.com/baidu/NoahV/commits/master">
+	<img src="https://img.shields.io/github/commit-activity/w/baidu/NoahV.svg?style=flat-square" alt="commit">
+</a>
+
 NoahV是一个基于vue开发的前端应用框架，主要适用于运维监控、数据分析等场景，同时也适用于常见的后台管理系统。
 
 特性：

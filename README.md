@@ -2,6 +2,20 @@
 
 English | [简体中文](./README_ch.md)
 
+
+
+<a href="https://github.com/baidu/NoahV/blob/master/LICENSE">
+<img src="https://img.shields.io/github/license/baidu/NoahV.svg?style=popout-square" alt="license">
+</a>
+
+<a href="https://github.com/baidu/NoahV/issues">
+<img src="https://img.shields.io/github/issues/baidu/NoahV.svg?style=flat-square" alt="open issues">
+</a>
+
+<a href="https://github.com/baidu/NoahV/commits/master">
+	<img src="https://img.shields.io/github/commit-activity/w/baidu/NoahV.svg?style=flat-square" alt="commit">
+</a>
+
 A front-end application framework based on vue, easy to handle, suitable for teams lacking front-end engineers，support the monitoring、operation、data analysis and common background management system.
 
 
