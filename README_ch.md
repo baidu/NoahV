@@ -12,7 +12,7 @@ NoahV是一个基于vue开发的前端应用框架，主要适用于运维监控
 * 数据仪表盘功能，满足常见的数据可视化需求，助力数据分析场景
 * 实用的脚手架功能，项目初始化、模板复用、模拟数据创建、调试server启动、框架升级一行命令通通搞定
 
-
+文档：[http://www.noahv.org/](http://www.noahv.org/)
 
 ## 快速开始
 
@@ -53,6 +53,10 @@ $   noahv create
 
 # 根据提示选择需要创建的页面类型，目前支持form、list、filterList、chart四种模板类型
 ```
+
+详细信息请查看 [模板使用](http://www.noahv.org/#/guide/tpl)
+
+更多关于框架的使用请查看 [NoahV开发指南](http://www.noahv.org/#/guide/about)
 
 
 ## License

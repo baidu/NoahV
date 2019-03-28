@@ -13,6 +13,8 @@ Feture
 * Provide dashboard function,support data analysis scene.
 * Useful Command line tools,project init,mockup,devserver start,update and so on.
 
+Document: [http://www.noahv.org/](http://www.noahv.org/)
+
 ## Quick Start
 
 NoahV Rely on Nodejs 6.0+,before run following command,please check <a href="https://nodejs.org/en/">Node.js</a> v6.0+ already installed on your system。
@@ -50,6 +52,12 @@ $   noahv create
 
 # Choose page type According to the hint,current support form,list,filterlist,chart
 ```
+
+## Document
+
+* [Quickstart](http://www.noahv.org/#/guide/quickstart)
+* [Dashboard](http://www.noahv.org/#/doc/view/guide)
+
 
 ## License
 
