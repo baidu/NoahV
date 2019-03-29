@@ -31,9 +31,9 @@ Document: [http://www.noahv.org/](http://www.noahv.org/)
 
 ## Quick Start
 
-NoahV Rely on Nodejs 6.0+,before run following command,please check <a href="https://nodejs.org/en/">Node.js</a> v6.0+ already installed on your system。
+NoahV Rely on Nodejs 6.0+, before run following commands, please check <a href="https://nodejs.org/en/">Node.js</a> v6.0+ already installed on your system.
 
-1.install command line tools
+1.Install command line tools
 
 ```shell
 # Install noahv-cli
@@ -51,14 +51,14 @@ $   mkdir project && cd project && noahv init
 
 ```
 
-3.Run peoject
+3.Run a project
 
 ```shell
 # In the project root directory run start
 $   noahv start 
 ```
 
-4.reuse template
+4.Reuse template
 
 ```shell
 # In the project root directory run create
