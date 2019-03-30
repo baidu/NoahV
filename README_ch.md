@@ -34,34 +34,34 @@ NoahV框架依赖Nodejs 6.0，在执行如下步骤之前，请确保已经安�
 
 ```shell
 # 安装noahv-cli
-$   npm install noahv-cli -g
+$ npm install noahv-cli -g
 
 # 查看使用帮助
-$   noahv --help
+$ noahv --help
 ```
 
 2.初始化一个项目
 
 ```shell
 # 创建一个空目录，进入目录中，运行noahv init 命令创建一个通用项目
-$   mkdir project && cd project && noahv init
+$ mkdir project && cd project && noahv init
 
 # 运行noahv init --dashboard 命令创建一个包含仪表盘功能的项目
-$   mkdir project && cd project && noahv init --dashboard
+$ mkdir project && cd project && noahv init --dashboard
 ```
 
 3.运行项目
 
 ```shell
 # 在项目根目录启动调试server
-$   noahv start 
+$ noahv start 
 ```
 
 4.复用模板
 
 ```shell
 # 在项目根目录复用模板创建页面
-$   noahv create 
+$ noahv create 
 
 # 根据提示选择需要创建的页面类型，目前支持form、list、filterList、chart四种模板类型
 ```

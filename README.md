@@ -19,52 +19,52 @@ English | [简体中文](./README_ch.md)
 A front-end application framework based on vue, easy to handle, suitable for teams lacking front-end engineers，support the monitoring、operation、data analysis and common background management system.
 
 
-Feture
+Feature
 
 * Easy to use, provide a variety of commonly used components, and quickly start front-end development.
 * Navigation bar, page layout support JSON configuration.
 * Templates can be easily reuse,improving the efficiency of development.
-* Provide dashboard function,support data analysis scene.
-* Useful Command line tools,project init,mockup,devserver start,update and so on.
+* Provide the operation and maintenance dashboard feature, especially for the monitoring data analysis 
+* Provide the scaffold command line tool to init the project, mockup the API data, start the devserver, update the system and so on.
 
 Document: [http://www.noahv.org/](http://www.noahv.org/)
 
 ## Quick Start
 
-NoahV Rely on Nodejs 6.0+, before run following commands, please check <a href="https://nodejs.org/en/">Node.js</a> v6.0+ already installed on your system.
+NoahV rely on Nodejs 6.0+, please check <a href="https://nodejs.org/en/">Node.js</a> v6.0+ already installed on your system before run following commands.
 
 1.Install command line tools
 
 ```shell
 # Install noahv-cli
-$   npm install noahv-cli -g
+$ npm install noahv-cli -g
 
-# look for help
-$   noahv --help
+# Look for help
+$ noahv --help
 ```
 
-2.Init a project
+2.Init project
 
 ```shell
 # Creat a empty folder & run init
-$   mkdir project && cd project && noahv init
+$ mkdir project && cd project && noahv init
 
 ```
 
-3.Run a project
+3.Run project
 
 ```shell
-# In the project root directory run start
-$   noahv start 
+# Run noahv start in the project root directory
+$ noahv start 
 ```
 
 4.Reuse template
 
 ```shell
-# In the project root directory run create
-$   noahv create
+# Run noahv create in the project root directory
+$ noahv create
 
-# Choose page type According to the hint,current support form,list,filterlist,chart
+# Choose page type According to the hint,support form,list,filterlist,chart at present
 ```
 
 ## Document
