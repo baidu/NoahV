@@ -16,14 +16,15 @@ English | [简体中文](./README_ch.md)
 	<img src="https://img.shields.io/github/commit-activity/w/baidu/NoahV.svg?style=flat-square" alt="commit">
 </a>
 
-A front-end application framework based on vue, easy to handle, suitable for teams lacking front-end engineers，support the monitoring、operation、data analysis and common background management system.
+A front-end application framework based on Vue, easy to handle, is suitable for teams lacking front-end engineers, it can be 
+be used in the field of operation and maintenance monitoring, data analysis and common background management system, etc.
 
 
 Feature
 
 * Easy to use, provide a variety of commonly used components, and quickly start front-end development.
 * Navigation bar, page layout support JSON configuration.
-* Templates can be easily reuse,improving the efficiency of development.
+* Templates can be easily reused to improve the efficiency of development.
 * Provide the operation and maintenance dashboard feature, especially for the monitoring data analysis 
 * Provide the scaffold command line tool to init the project, mockup the API data, start the devserver, update the system and so on.
 
