@@ -243,7 +243,7 @@ export default {
         };
     },
     created() {
-        widgetConf = this.$extraConf;
+        widgetConf = this.$extraEchartsConf;
 
         // If the external configuration conf renders directly
         if (this.conf) {
