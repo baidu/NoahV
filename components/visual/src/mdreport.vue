@@ -626,7 +626,8 @@ export default {
                         let temp = item.split('}');
                         temp.map(tTemp => {
                             if (temp) {
-                                if (data[tTemp]) {
+                                // fix bug
+                                if (data[tTemp] || data[tTemp] === 0) {
                                     expressArr.push(data[tTemp]);
                                 }
                                 else {
@@ -715,6 +716,9 @@ export default {
                                     sum: mdutil.setDecimal(itemTotal, col2.decimals),
                                     avg: mdutil.setDecimal(itemTotal / bodyList.length, col2.decimals)
                                 };
+                                if (!footer[col.total]) {
+                                    return
+                                }
                                 totalInfo = col2.unit ? footer[col2.total] + col2.unit : footer[col2.total];
                             }
                             catch (e) {
@@ -747,6 +751,9 @@ export default {
                             avg: mdutil.setDecimal(itemTotal / bodyList.length, col.decimals)
                         };
                         totalInfo = col.unit ? footer[col.total] + col.unit : footer[col.total];
+                        if (!footer[col.total]) {
+                            return
+                        }
                     }
                     catch (e) {
                         totalInfo = '计算失败';
