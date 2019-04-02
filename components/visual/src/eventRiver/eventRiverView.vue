@@ -24,12 +24,12 @@
             </ul>
         </div>
         <EventRiver
-            v-if="type !== 'list'"
+            v-if="eventType !== 'list'"
             ref="eventRiver"
             :config="options"
             :layoutType="alone"
             :serieLists="series" />
-        <EventList v-if="type === 'list'" ref="eventList"
+        <EventList v-if="eventType === 'list'" ref="eventList"
             :config="options"
             :extra="extra"
             :series="series" />
@@ -43,10 +43,8 @@ import mdutil from '../util/util';
 import EventRiver from './eventRiver';
 import EventList from './eventList';
 import nvMask from '../mask';
-
 const DEFAULT_REQUEST_TYPE = 'post';
 const DEFAULTTIME = 'before(2h)';
-
 let widgetConf = {};
 let Color = {
     defualtColor: [
@@ -62,7 +60,6 @@ let Color = {
         this.colors[type] = color;
     },
     get(type) {
-
         // all the events'colors was distributed by the object of this.colors
         if (this.colors[type]) {
             return this.colors[type];
@@ -75,7 +72,6 @@ let Color = {
         return this.cache[type];
     }
 };
-
 /**
  * Processing legend data
  *
@@ -98,7 +94,6 @@ function manageLengData(lengeds) {
     }
     return lengeds;
 }
-
 /**
  * Get the event display realSchame
  *
@@ -114,7 +109,6 @@ function getRealSchame(schema, name) {
     });
     return realName;
 }
-
 /**
  * Set event display data
  * Manage the detail infomation,such as color, start, end and detailMapArr.
@@ -148,7 +142,6 @@ function manageSeries(data) {
                     event.name = item.name;
                     event.type = item.type;
                 }
-
                 // Event Detail Map
                 if (item.eventDetailMap) {
                     event.eventDetailMap = item.eventDetailMap;
@@ -165,56 +158,48 @@ function manageSeries(data) {
     }
     return data;
 }
-
 export default {
     name: 'hello',
     components: { EventRiver, EventList, nvMask},
     props: {
-
         // set eventriver's type. when user sets 'list' show eventList.
         type: {
             type: String,
             default: undefined,
             required: false
         },
-
         // get conf's url
         url: {
             type: String,
             required: false
         },
-
         // get widget's time
         params: {
             type: Object,
-            required: false
+            required: false,
+            default: () => ({})
         },
-
         // get widget's name
         path: {
             type: String,
             required: false
         },
-
         // get widget's conf
         conf: {
             type: Object,
             required: false
         },
-
         // get widget's data url
         dataUrl: {
             type: String,
             default: '',
             required: false
         },
-
         // get data's extra params
         extraParams: {
             type: Object,
             required: false
         },
-
         // get conf's method type
         confMethod: {
             type: String,
@@ -232,72 +217,47 @@ export default {
             alone: 'alone',
             extra: [],
             data: {},
-            changStatus: false,
             errTip: false,
-
             // Whether the component is loading
             isLoading: false,
-
             // Whether the component has been loaded
-            isload: false
+            isload: false,
+            eventType: ''
         };
     },
     created() {
         widgetConf = this.$extraEchartsConf;
-
         // If the external configuration conf renders directly
         if (this.conf) {
             this.getEventData();
             return;
         }
-
         // No conf gets the cloud configuration through path
         if (this.path) {
             this.getConf();
             return;
         }
-
         // Set the default conf value
         this.initConf();
     },
     watch: {
-
-        /**
-         * calculate and render event distribution
-         */
-        changStatus: {
-            handler() {
-                let eventData = this.data;
-                if (!eventData.dataSchema
-                    && this.eventRiverConf.data
-                    && this.eventRiverConf.data.schema) {
-                    eventData.dataSchema = this.eventRiverConf.data.schema;
-                }
-                let series = {
-                    start: moment(this.params.start).unix() * 1000,
-                    end: moment(this.params.end).unix() * 1000,
-                    series: manageSeries(eventData).events,
-                    // close the legend
-                    legend: 'none' || 'bottom',
-                    axis: this.params.axis || 'bottom'
-                };
-                this.eventQueue = manageSeries(eventData);
-                this.list = manageLengData(eventData.dataSchema) || [];
-                this.series = series;
-                this.extra = eventData.extra ? eventData.extra : [];
-                this.hideMask();
+        conf: {
+            handler(conf) {
+                this.eventRiverConf = Object.assign({}, conf);
+                this.getEventData();
             },
             deep: true
+        },
+        type(type) {
+            this.eventType = type;
         }
     },
     methods: {
-
         initConf() {
             this.data = [];
             // start render eventriver;
-            this.changStatus = true;
+            this.drawView();
         },
-
         /**
          * if user set no time, set default time to params
          * @return {[type]} [params time]
@@ -309,7 +269,31 @@ export default {
                 end: times[1]
             };
         },
-
+        /**
+         * drew svg
+         */
+        drewView() {
+            let eventData = this.data;
+                if (!eventData.dataSchema
+                    && this.eventRiverConf.data
+                    && this.eventRiverConf.data.schema) {
+                    eventData.dataSchema = this.eventRiverConf.data.schema;
+                }
+                const time = this.eventRiverConf.time ? mdutil.timetransfer(this.eventRiverConf.time) : [];
+                let series = {
+                    start: moment(this.params.start || time[0]).unix() * 1000,
+                    end: moment(this.params.end || time[1]).unix() * 1000,
+                    series: manageSeries(eventData).events,
+                    // close the legend
+                    legend: 'none' || 'bottom',
+                    axis: this.params.axis || 'bottom'
+                };
+                this.eventQueue = manageSeries(eventData);
+                this.list = manageLengData(eventData.dataSchema) || [];
+                this.series = series;
+                this.extra = eventData.extra ? eventData.extra : [];
+                this.hideMask();
+        },
         /**
          * Get conf through path
          */
@@ -319,7 +303,6 @@ export default {
             if (!this.url) {
                 confUrl = widgetConf.getAPI(widgetConf.mons.confApi.nvMdEventRiver);
             }
-
             let params = Object.assign({}, {
                 name: this.path
             }, this.extraParams);
@@ -340,7 +323,6 @@ export default {
                 if (data.data.success) {
                     this.errTip = false;
                     this.eventRiverConf = JSON.parse(data.data.data.configure);
-
                     // get render data
                     this.getEventData();
                 }
@@ -349,15 +331,16 @@ export default {
                 }
             });
         },
-
         /**
          * Get data by conf
          */
         getEventData() {
+            if (this.eventRiverConf.style && this.eventRiverConf.style.type) {
+                this.eventType = this.eventRiverConf.style.type;
+            }
             if (!this.timeParams) {
                 this.timeParams = this.initTime();
             }
-
             /**
              * When the configuration time type is none or the time when the dashboard is used,
              * the component is set by default.
@@ -372,16 +355,13 @@ export default {
             };
             this.showTime = showTime;
             // users can set dataUrl in a extra visualWidgetConf.js
-
             // Data request configuration
             let dataUrl;
             let dataRequestType = DEFAULT_REQUEST_TYPE;
             if (this.eventRiverConf.datasource) {
                 let datasource = this.eventRiverConf.datasource;
-
                 // Support for multiple data sources
                 dataUrl = datasource.api;
-
                 // Configuration includes data request mode
                 dataRequestType = datasource.method || DEFAULT_REQUEST_TYPE;
             }
@@ -389,13 +369,11 @@ export default {
                 dataUrl = this.dataUrl;
             }
             else {
-
                 /**
                  * get dataUrl from wigetConfig.js
                  */
                 dataUrl = widgetConf.getAPI(widgetConf.mons.dataApi.nvMdEventRiver);
             }
-
             /**
              * When the adaptation request type is get, the request field is params,
              * and when it is post, the request field is data.
@@ -411,15 +389,13 @@ export default {
             else {
                 dataParams.data = params;
             }
-
             this.isLoading = true;
             this.$wRequest(dataParams).then(mdData => {
                 if (mdData.data.success) {
                     this.errTip = false;
                     this.$nextTick(() => {
-                        this.data = mdData.data;
-                        this.changStatus = true;
                         this.data = mdData.data.data;
+                        this.drewView();
                     });
                 }
                 else {
@@ -429,7 +405,6 @@ export default {
                 this.isLoading = false;
             });
         },
-
         /**
          * switch the Events
          *
@@ -446,7 +421,6 @@ export default {
             serie.checked = checked;
             this.enableQueue(serie.type, checked);
         },
-
         /**
          * fresh event status by eventName
          *
@@ -470,9 +444,8 @@ export default {
                 else {
                     preSeries.series.push(param);
                 }
-
                 // render event erea info
-                if (this.type === 'list') {
+                if (this.eventType === 'list') {
                     this.$refs.eventList.renderRiver(preSeries);
                 }
                 else {
@@ -480,17 +453,15 @@ export default {
                 }
             }
         },
-
         /**
          * change the hover status of events
          * when user hover the Legend, active the corresponding events
          */
         serieHover(serie, isFocus) {
-            if (this.type !== 'list') {
+            if (this.eventType !== 'list') {
                 this.$refs.eventRiver.focusSerie(serie, isFocus);
             }
         },
-
         /**
          * show error massage
          */
@@ -498,14 +469,12 @@ export default {
             this.errTip = message;
             this.hideMask();
         },
-
         /**
          * show loading mdmask
          */
         showMask() {
             this.$refs.mask.show();
         },
-
         /**
          * hide loading mdmask
          */
@@ -514,6 +483,4 @@ export default {
         }
     }
 };
-
 </script>
-

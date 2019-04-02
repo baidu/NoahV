@@ -6,16 +6,18 @@
 export default {
     mons: {
         dataApi: {
-            saMdCircle: '/api/index.php?r=MetricNew/circle',
-            saMdBillboard: '/api/index.php?r=MetricNew/billboard',
-            saMdTrend: '/api/index.php?r=MetricNew/trend',
-            saMdReport: '/api/index.php?r=MetricNew/report'
+            nvMdCircle: '/api/index.php?r=MetricNew/circle',
+            nvMdBillboard: '/api/index.php?r=MetricNew/billboard',
+            nvMdTrend: '/api/index.php?r=MetricNew/trend',
+            nvMdReport: '/api/index.php?r=MetricNew/report',
+            nvMdEventRiver: '/api/index.php?r=MetricNew/eventRiver'
         },
         confApi: {
-            saMdCircle: '/api/?r=conf/get',
-            saMdBillboard: '/api/?r=conf/get',
-            saMdTrend: '/api/?r=conf/get',
-            saMdReport: '/api/?r=conf/get'
+            nvMdCircle: '/api/?r=conf/get',
+            nvMdBillboard: '/api/?r=conf/get',
+            nvMdTrend: '/api/?r=conf/get',
+            nvMdReport: '/api/?r=conf/get',
+            nvMdEventRiver: '/api/?r=conf/get'
         }
     },
     getAPI(api) {

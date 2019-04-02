@@ -15,7 +15,7 @@ export default {
     },
     data() {
         this.defaultConfig = {
-            height: 200
+            height: 283
         };
         return {
             list: []
@@ -584,4 +584,3 @@ export default {
     }
 };
 </script>
-
