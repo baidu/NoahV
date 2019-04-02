@@ -14,7 +14,6 @@ if [ -d $CUR_DIR/noahv ]; then
 fi
 
 echo "install node_module"
-npm set registry http://pnpm.baidu.com
 npm install
 
 # build
