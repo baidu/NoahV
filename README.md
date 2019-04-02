@@ -3,13 +3,16 @@
 English | [简体中文](./README_ch.md)
 
 
+<a href="https://travis-ci.org/baidu/NoahV">
+	<img src="https://img.shields.io/travis/baidu/NoahV/master.svg?style=flat-square"  alt="build">
+</a>
 
 <a href="https://github.com/baidu/NoahV/blob/master/LICENSE">
-<img src="https://img.shields.io/github/license/baidu/NoahV.svg?style=popout-square" alt="license">
+	<img src="https://img.shields.io/github/license/baidu/NoahV.svg?style=popout-square" alt="license">
 </a>
 
 <a href="https://github.com/baidu/NoahV/issues">
-<img src="https://img.shields.io/github/issues/baidu/NoahV.svg?style=flat-square" alt="open issues">
+	<img src="https://img.shields.io/github/issues/baidu/NoahV.svg?style=flat-square" alt="open issues">
 </a>
 
 <a href="https://github.com/baidu/NoahV/commits/master">
