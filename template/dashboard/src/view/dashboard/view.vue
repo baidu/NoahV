@@ -48,6 +48,9 @@ confMethod="get" />
                     <template v-else-if="item.type === 'billboard'">
                         <SaMDBillboard :path="item.path" :params="params" :extraParams="extraParams" confMethod="get" />
                     </template>
+                    <template v-else-if="item.type === 'eventRiver'" >
+                        <NvMDEventRiverView :path="item.path" :params="params" :extraParams="extraParams" confMethod="get" />
+                    </template>
                     <template v-else>
                         <div class="support-tip">
                             暂时不支持该种类型组件配置~

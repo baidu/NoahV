@@ -58,6 +58,9 @@
                                 :orderStatus="orderStatus"
                                 @changeOrder="changeOrder"/>
                         </template>
+                        <template v-else-if="basicInfoType === 'eventRiver'">
+                            <eventRiverConfig></eventRiverConfig>
+                        </template>
                         <template v-else>
                             暂时不支持该种类型组件配置~
                         </template>
@@ -81,16 +84,19 @@
                     <div class="no-preview" v-if="!preview"></div>
                     <div class="preview" v-else>
                         <template v-if="basicInfoType === 'mdtrend'">
-                            <SaMDTrend :conf="conf" dataUrl="api/get/trend"/>
+                            <NvMDTrend :conf="conf" dataUrl="api/get/trend"/>
                         </template>
                         <template v-else-if="basicInfoType === 'mdcircle'">
-                            <SaMDCircle :conf="conf" />
+                            <NvMDCircle :conf="conf" />
                         </template>
                         <template v-else-if="basicInfoType === 'mdtable'">
-                            <SaMDReport :conf="conf" />
+                            <NvMDReport :conf="conf" />
                         </template>
                         <template v-else-if="basicInfoType === 'billboard'">
-                            <SaMDBillboard :conf="conf" />
+                            <NvMDBillboard :conf="conf" />
+                        </template>
+                         <template v-else-if="basicInfoType === 'eventRiver'">
+                            <NvMDEventRiverView :conf="conf" :params="getErParams()"/>
                         </template>
                         <template v-else>
                             暂时不支持该种类型组件配置~
@@ -105,19 +111,22 @@
 <script>
 import apiConfig from '../api/config';
 import util from '../util/util';
+import m from 'moment';
 
 // 引入组件配置文件
 import mdtrendConfig from './mdtrend/mdtrend.vue';
 import mdcircleConfig from './mdcircle/mdcircle.vue';
 import mdreportConfig from './mdreport/mdreport.vue';
 import billboardConfig from './billboard/billboard.vue';
+import eventRiverConfig from './eventRiver/eventRiver.vue';
 export default {
     name: 'widgetedit',
     components: {
         mdtrendConfig,
         mdcircleConfig,
         mdreportConfig,
-        billboardConfig
+        billboardConfig,
+        eventRiverConfig
     },
     created() {
         // 获取query中的信息
@@ -152,6 +161,10 @@ export default {
                 {
                     label: '表格',
                     value: 'mdtable'
+                },
+                {
+                    label: '事件流图',
+                    value: 'eventRiver'
                 }
             ],
             baseInfoValidate: {
@@ -286,6 +299,12 @@ export default {
         },
         startOrder() {
             this.orderStatus = true;
+        },
+        getErParams() {
+            return {
+                start: m().subtract(2, 'h').format('YYYY-MM-DD HH:mm:ss'),
+                end: m().format('YYYY-MM-DD HH:mm:ss'),
+            }
         }
     },
     computed: {

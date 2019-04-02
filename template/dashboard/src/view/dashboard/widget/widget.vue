@@ -24,7 +24,8 @@ const typeMap = {
     'mdtable': '报表',
     'mdcircle': '仪表图',
     'billboard': '面板',
-    'Billboard': '面板'
+    'Billboard': '面板',
+    'eventRiver': '事件流图'
 };
 export default {
     name: 'dashboardWidget',
@@ -128,6 +129,11 @@ export default {
                     }
                     &.mdtrend {
                         background: url(../../../common/assets/img/dashboard/widget/mdtrend.png) no-repeat;
+                        background-size: auto 42px;
+                        margin-right: 5px;
+                    }
+                    &.eventRiver {
+                        background: url(../../../common/assets/img/dashboard/widget/eventriver.png) no-repeat;
                         background-size: auto 42px;
                         margin-right: 5px;
                     }

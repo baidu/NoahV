@@ -61,10 +61,11 @@ export default {
     nodata: '无数据',
     mons: {
         confApi: {
-            saMdCircle: '/api/conf/get',
-            saMdBillboard: '/api/conf/get',
-            saMdTrend: '/api/conf/get',
-            saMdReport: '/api/conf/get'
+            nvMdCircle: '/api/conf/get',
+            nvMdBillboard: '/api/conf/get',
+            nvMdTrend: '/api/conf/get',
+            nvMdReport: '/api/conf/get',
+            nvMdEventRiver: '/api/conf/get'
         }
     }
 };

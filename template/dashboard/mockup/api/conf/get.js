@@ -38,8 +38,13 @@ exports.response = (path, params) => {
         title = '下游模块可用性监控-指标1报表';
         type = 'mdtable';
     }
+    else if (params.id === '_1678352_1678357' || params.name === '_1678352_1678357') {
+        configure = '{"datasource":{"api":"api/get/eventRiver","method":"GET","params":{"dev":true}},"data":{"schema":[{"name":"机房1","type":"NJ01error","checked":true},{"name":"机房二","type":"GZHXYerror","checked":true},{"name":"机房三","type":"GZNSwarning","checked":true},{"name":"机房四","type":"BJYZwarning","checked":true},{"name":"机房五","type":"NJ01warning","checked":true,"eventDetailMap":[{"name":"创造者","key":"product.operator","type":"arr"},{"name":"异常类型","key":"type","type":"text"},{"name":"详情","key":"url","type":"link"}]}],"params":{"dev":true}},"timeType":"relative","time":"","style":{"type":"image"},"title":"新建组件"}';
+        title = '下游模块可用性监控-事件流图';
+        type = 'eventRiver';
+    }
     else {
-        configure = '';
+        configure = '{}';
         title = '新建组件';
         type = 'mdtrend';
     }
