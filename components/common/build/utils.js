@@ -6,7 +6,6 @@ exports.cssLoaders = function (options) {
     var cssLoader = {
         loader: 'css-loader',
         options: {
-            minimize: true,
             sourceMap: options.sourceMap
         }
     };

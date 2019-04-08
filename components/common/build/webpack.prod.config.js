@@ -5,7 +5,6 @@ const webpackBaseConfig = require('./webpack.base.config.js');
 const CompressionPlugin = require('compression-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const utils = require('./utils');
-const MiniCssTextPlugin = require('mini-css-extract-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 process.env.NODE_ENV = 'production';
@@ -52,9 +51,6 @@ module.exports = merge(webpackBaseConfig, {
         // @todo
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': '"production"'
-        }),
-        new MiniCssTextPlugin({
-            filename: 'index.min.css'
         }),
         new UglifyJsPlugin({
             sourceMap: true

@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const utils = require('./utils');
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 function resolve(dir) {
     return path.join(__dirname, '..', dir);
@@ -47,6 +48,7 @@ module.exports = {
         }
     },
     plugins: [
-        new webpack.optimize.ModuleConcatenationPlugin()
+        new webpack.optimize.ModuleConcatenationPlugin(),
+        new VueLoaderPlugin()
     ]
 };
