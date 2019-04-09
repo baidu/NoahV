@@ -1,6 +1,6 @@
 {
   "name": "noahv-component",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Components Library For NoahV",
   "main": "src/index",
   "scripts": {
@@ -16,12 +16,13 @@
   "author": "darrenywyu@gmail.com",
   "license": "Apache-2.0",
   "dependencies": {
-    "noahv-request": "1.0.2",
     "axios": "^0.17.0",
     "echarts": "^4.2.0-rc.2",
     "iview": "^2.11.0",
     "moment": "^2.19.1",
+    "noahv-request": "1.0.2",
     "underscore": "^1.8.3",
+    "uuid": "^3.3.2",
     "vue": "^2.6.10",
     "vue-codemirror": "^4.0.5",
     "vue-router": "^3.0.1"
