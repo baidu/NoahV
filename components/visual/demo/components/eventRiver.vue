@@ -118,7 +118,7 @@
                         "product": {
                             "operator": ["app", "app2", "app3"]
                         },
-                        "url": "http://www.mkt.nuomi.com/oam/#/allActivityDetail/780639"
+                        "url": "http://www.noahv.org"
                     },
                     "endTime": 1503564300
                 }, {
@@ -126,7 +126,7 @@
                     "display": {
                         "type": "BJYZ2机房异常",
                         "operator": "app",
-                        "url": "http://www.mkt.nuomi.com/oam/#/allActivityDetail/780639"
+                        "url": "http://www.noahv.org"
                     },
                     "endTime": 1503564510
                 }, {
@@ -134,7 +134,7 @@
                     "display": {
                         "type": "BJYZ3机房异常",
                         "operator": "app",
-                        "url": "http://www.mkt.nuomi.com/oam/#/allActivityDetail/780639"
+                        "url": "http://www.noahv.org"
                     },
                     "endTime": 1503562320
                 }, {
@@ -142,7 +142,7 @@
                     "display": {
                         "type": "BJYZ4机房异常",
                         "operator": "app",
-                        "url": "http://www.mkt.nuomi.com/oam/#/allActivityDetail/780639"
+                        "url": "http://www.noahv.org"
                     },
                     "endTime": 1503562860
                 }, {
@@ -150,7 +150,7 @@
                     "display": {
                         "type": "BJYZ5机房异常",
                         "operator": "app",
-                        "url": "http://www.mkt.nuomi.com/oam/#/allActivityDetail/780639"
+                        "url": "http://www.noahv.org"
                     },
                     "endTime": 1503563790
                 }, {
@@ -158,7 +158,7 @@
                     "display": {
                         "type": "BJYZ6机房异常",
                         "operator": "app",
-                        "url": "http://www.mkt.nuomi.com/oam/#/allActivityDetail/780639"
+                        "url": "http://www.noahv.org"
                     },
                     "endTime": 1503564060
                 }]
@@ -171,7 +171,7 @@
                     "display": {
                         "type": "NJ01机房异常",
                         "operator": "app",
-                        "url": "http://www.mkt.nuomi.com/oam/#/allActivityDetail/780639"
+                        "url": "http://www.noahv.org"
                     },
                     "endTime": 1503563190
                 }, {
@@ -179,7 +179,7 @@
                     "display": {
                         "type": "NJ01机房异常",
                         "operator": "app",
-                        "url": "http://www.mkt.nuomi.com/oam/#/allActivityDetail/780639"
+                        "url": "http://www.noahv.org"
                     },
                     "endTime": 1503563100
                 }, {
@@ -187,7 +187,7 @@
                     "display": {
                         "type": "NJ01机房异常",
                         "operator": "app",
-                        "url": "http://www.mkt.nuomi.com/oam/#/allActivityDetail/780639"
+                        "url": "http://www.noahv.org"
                     },
                     "endTime": 1503561390
                 }]
@@ -303,7 +303,7 @@
                         "product": {
                             "operator": ["app", "app2", "app3"]
                         },
-                        "url": "http://www.mkt.nuomi.com/oam/#/allActivityDetail/780639"
+                        "url": "http://www.noahv.org"
                     },
                     "endTime": 1503564300
                 }, {
@@ -311,7 +311,7 @@
                     "display": {
                         "type": "BJYZ2机房异常",
                         "operator": "app",
-                        "url": "http://www.mkt.nuomi.com/oam/#/allActivityDetail/780639"
+                        "url": "http://www.noahv.org"
                     },
                     "endTime": 1503564510
                 }, {
@@ -319,7 +319,7 @@
                     "display": {
                         "type": "BJYZ3机房异常",
                         "operator": "app",
-                        "url": "http://www.mkt.nuomi.com/oam/#/allActivityDetail/780639"
+                        "url": "http://www.noahv.org"
                     },
                     "endTime": 1503562320
                 }, {
@@ -327,7 +327,7 @@
                     "display": {
                         "type": "BJYZ4机房异常",
                         "operator": "app",
-                        "url": "http://www.mkt.nuomi.com/oam/#/allActivityDetail/780639"
+                        "url": "http://www.noahv.org"
                     },
                     "endTime": 1503562860
                 }, {
@@ -335,7 +335,7 @@
                     "display": {
                         "type": "BJYZ5机房异常",
                         "operator": "app",
-                        "url": "http://www.mkt.nuomi.com/oam/#/allActivityDetail/780639"
+                        "url": "http://www.noahv.org"
                     },
                     "endTime": 1503563790
                 }, {
@@ -343,7 +343,7 @@
                     "display": {
                         "type": "BJYZ6机房异常",
                         "operator": "app",
-                        "url": "http://www.mkt.nuomi.com/oam/#/allActivityDetail/780639"
+                        "url": "http://www.noahv.org"
                     },
                     "endTime": 1503564060
                 }]
@@ -355,7 +355,7 @@
                     "display": {
                         "type": "NJ01机房异常",
                         "operator": "app",
-                        "url": "http://www.mkt.nuomi.com/oam/#/allActivityDetail/780639"
+                        "url": "http://www.noahv.org"
                     },
                     "endTime": 1503563190
                 }, {
@@ -363,7 +363,7 @@
                     "display": {
                         "type": "NJ01机房异常",
                         "operator": "app",
-                        "url": "http://www.mkt.nuomi.com/oam/#/allActivityDetail/780639"
+                        "url": "http://www.noahv.org"
                     },
                     "endTime": 1503563100
                 }, {
@@ -371,7 +371,7 @@
                     "display": {
                         "type": "NJ01机房异常",
                         "operator": "app",
-                        "url": "http://www.mkt.nuomi.com/oam/#/allActivityDetail/780639"
+                        "url": "http://www.noahv.org"
                     },
                     "endTime": 1503561390
                 }]
@@ -742,7 +742,7 @@ export default {
                     initValue: '{}',
                     demo: '"type": "NJ01机房异常",\n'
                         + '"operator": "app",\n'
-                        + '"url": "http://www.mkt.nuomi.com/oam/#/allActivityDetail/780639"'
+                        + '"url": "http://www.noahv.org"'
                 }
             ]
         };

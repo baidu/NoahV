@@ -21,7 +21,7 @@ const produceNewsData = function() {
                         "product": {
                             "operator": ["app", "app2", "app3"]
                         },
-                        "url": "http://www.mkt.nuomi.com/oam/#/allActivityDetail/780639"
+                        "url": "https://www.noahv.org"
                     },
                     "endTime": 1503564300
                 }, {
@@ -29,7 +29,7 @@ const produceNewsData = function() {
                     "display": {
                         "type": "BJYZ2机房异常",
                         "operator": "app",
-                        "url": "http://www.mkt.nuomi.com/oam/#/allActivityDetail/780639"
+                        "url": "https://www.noahv.org"
                     },
                     "endTime": 1503564510
                 }, {
@@ -37,7 +37,7 @@ const produceNewsData = function() {
                     "display": {
                         "type": "BJYZ3机房异常",
                         "operator": "app",
-                        "url": "http://www.mkt.nuomi.com/oam/#/allActivityDetail/780639"
+                        "url": "https://www.noahv.org"
                     },
                     "endTime": 1503562320
                 }, {
@@ -45,7 +45,7 @@ const produceNewsData = function() {
                     "display": {
                         "type": "BJYZ4机房异常",
                         "operator": "app",
-                        "url": "http://www.mkt.nuomi.com/oam/#/allActivityDetail/780639"
+                        "url": "https://www.noahv.org"
                     },
                     "endTime": 1503562860
                 }, {
@@ -53,7 +53,7 @@ const produceNewsData = function() {
                     "display": {
                         "type": "BJYZ5机房异常",
                         "operator": "app",
-                        "url": "http://www.mkt.nuomi.com/oam/#/allActivityDetail/780639"
+                        "url": "https://www.noahv.org"
                     },
                     "endTime": 1503563790
                 }, {
@@ -61,7 +61,7 @@ const produceNewsData = function() {
                     "display": {
                         "type": "BJYZ6机房异常",
                         "operator": "app",
-                        "url": "http://www.mkt.nuomi.com/oam/#/allActivityDetail/780639"
+                        "url": "https://www.noahv.org"
                     },
                     "endTime": 1503564060
                 }]
@@ -73,7 +73,7 @@ const produceNewsData = function() {
                     "display": {
                         "type": "NJ01机房异常",
                         "operator": "app",
-                        "url": "http://www.mkt.nuomi.com/oam/#/allActivityDetail/780639"
+                        "url": "https://www.noahv.org"
                     },
                     "endTime": 1503563190
                 }, {
@@ -81,7 +81,7 @@ const produceNewsData = function() {
                     "display": {
                         "type": "NJ01机房异常",
                         "operator": "app",
-                        "url": "http://www.mkt.nuomi.com/oam/#/allActivityDetail/780639"
+                        "url": "https://www.noahv.org"
                     },
                     "endTime": 1503563100
                 }, {
@@ -89,7 +89,7 @@ const produceNewsData = function() {
                     "display": {
                         "type": "NJ01机房异常",
                         "operator": "app",
-                        "url": "http://www.mkt.nuomi.com/oam/#/allActivityDetail/780639"
+                        "url": "https://www.noahv.org"
                     },
                     "endTime": 1503561390
                 }]

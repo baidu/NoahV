@@ -89,7 +89,7 @@
                                     "green"
                                 ]]
                             },
-                            "link": "http://sia.baidu.com",
+                            "link": "http://www.baidu.com",
                             "timeType": "fixed",
                             "time": "before(2h)"
                         },
@@ -193,7 +193,7 @@
             <div class="code">
                 <pre>
 {
-    configure : '{"title":"仪表图配置path","data":[{"namespace":["forDemoNamespace"],"metric":"#{metric1}/#{metric2}","statistics":"avg"}],"style":{"decimals":4,"unit":"%","max":100,"min":0,"threshold":[[90,99,"yellow"],[0,90,"red"],[99,99.99,"green"]]},"link":"http://sia.baidu.com","timeType":"fixed","time":"before(2h)"}',
+    configure : '{"title":"仪表图配置path","data":[{"namespace":["forDemoNamespace"],"metric":"#{metric1}/#{metric2}","statistics":"avg"}],"style":{"decimals":4,"unit":"%","max":100,"min":0,"threshold":[[90,99,"yellow"],[0,90,"red"],[99,99.99,"green"]]},"link":"http://www.baidu.com","timeType":"fixed","time":"before(2h)"}',
     title: "仪表图配置path"
 }
                 </pre>
@@ -255,7 +255,7 @@ export default {
                         ]
                     ]
                 },
-                'link': 'http://sia.baidu.com',
+                'link': 'http://www.baidu.com',
                 'timeType': 'fix',
                 'time': 'before(2h)'
             },

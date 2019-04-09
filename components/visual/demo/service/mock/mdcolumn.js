@@ -11,7 +11,7 @@ const column = function() {
                 {
                     "name": "noah_namespace",
                     "values": [
-                        "group.session.nuomi.all"
+                        "cluster.xx.nuomi.all"
                     ]
                 }
             ],
