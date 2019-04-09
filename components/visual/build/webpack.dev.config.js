@@ -1,9 +1,9 @@
 const path = require('path');
 const webpack = require('webpack');
-// const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const merge = require('webpack-merge');
 const webpackBaseConfig = require('./webpack.base.config.js');
+const MiniCssTextPlugin = require('mini-css-extract-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 
 
@@ -29,11 +29,13 @@ module.exports = merge(webpackBaseConfig, {
         }
     },
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin({name: 'vendors', filename: 'vendor.bundle.js'}),
         new HtmlWebpackPlugin({
             inject: true,
             filename: path.join(__dirname, '../demo/dist/index.html'),
             template: path.join(__dirname, '../demo/index.html')
+        }),
+        new MiniCssTextPlugin({
+            filename: 'index.min.css'
         }),
         new FriendlyErrorsPlugin()
     ]

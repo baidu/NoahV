@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 function resolve(dir) {
     return path.join(__dirname, '..', dir);
@@ -67,9 +68,6 @@ module.exports = {
                         options: {
                             sourceMap: true
                         }
-                    },
-                    {
-                        loader: 'autoprefixer-loader'
                     }
                 ]
             },
@@ -97,29 +95,6 @@ module.exports = {
                 ]
             },
             {
-                test: /\.scss$/,
-                loaders: [
-                    {
-                        loader: 'style-loader',
-                        options: {
-                            sourceMap: true
-                        }
-                    },
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            sourceMap: true
-                        }
-                    },
-                    {
-                        loader: 'sass-loader',
-                        options: {
-                            sourceMap: true
-                        }
-                    }
-                ]
-            },
-            {
                 test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
                 loader: 'url-loader?limit=8192'
             },
@@ -138,6 +113,7 @@ module.exports = {
         }
     },
     plugins: [
-        new webpack.optimize.ModuleConcatenationPlugin()
+        new webpack.optimize.ModuleConcatenationPlugin(),
+        new VueLoaderPlugin()
     ]
 };
