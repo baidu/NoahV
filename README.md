@@ -19,7 +19,7 @@ Document: [http://www.noahv.org/](http://www.noahv.org/)
 
 NoahV Rely on Nodejs 6.0+,before run following command,please check <a href="https://nodejs.org/en/">Node.js</a> v6.0+ already installed on your system。
 
-1.install command line tools
+1.Install command line tools
 
 ```shell
 # Install noahv-cli
