@@ -31,6 +31,7 @@ import NvList from './components/nv-list';
 import NvSteps from './components/nv-steps';
 import NvSearch from './components/nv-search';
 import NvTag from './components/nv-tag';
+import NvDutyTable from './components/nv-dutytable';
 
 // Basic，Sa命名方式
 import SaIcon from './components/nv-icon';
@@ -82,6 +83,7 @@ const noahv = {
     NvSteps,
     NvSearch,
     NvTag,
+    NvDutyTable
 
     // 基础组件类
     SaIcon,
