@@ -29,23 +29,7 @@ var webpackConfig = merge(baseWebpackConfig, {
         }),
         new FriendlyErrorsPlugin()
         // new BundleAnalyzerPlugin()
-    ],
-    optimization: {
-        splitChunks: {
-            cacheGroups: {
-                vendors: {
-                    test: /[\\/]node_modules[\\/](?!noahv|iview|vue|echarts|moment)\.js$/,
-                    name: 'vendors',
-                    chunks: 'all'
-                },
-                visual_vendors: {
-                    test: /[\\/]node_modules[\\/]echarts|moment[\\/]\.js$/,
-                    name: 'visual_vendors',
-                    chunks: 'all'
-                }
-            }
-        }
-    }
+    ]
 });
 
 if (config.dev.cssExtract) {
