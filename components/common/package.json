@@ -6,7 +6,9 @@
   "scripts": {
     "test": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js",
     "dev": "webpack-dev-server --content-base demo/ --open --inline --hot --compress --history-api-fallback --port 8088 --config build/webpack.dev.config.js --mode development",
-    "lint": "eslint --ext .js,.vue src --quiet"
+    "lint": "eslint --ext .js,.vue src --quiet",
+    "test-single": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
+    "test:coverage": "npm run test-single  -- --report lcovonly && cat ./coverage/lcov.info | coveralls"
   },
   "homepage": "https://github.com/baidu/NoahV",
   "repository": {
@@ -40,6 +42,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "chai": "^4.2.0",
     "compression-webpack-plugin": "^1.1.11",
+    "coveralls": "^3.0.3",
     "cross-env": "^5.1.3",
     "css-loader": "^2.1.1",
     "eslint": "^5.6.0",
