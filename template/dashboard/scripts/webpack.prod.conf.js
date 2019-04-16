@@ -1,85 +1,83 @@
 /* eslint-disable */
 var path = require('path')
 var config = require('./config')
-var utils = require('./utils')
 var webpack = require('webpack')
 var merge = require('webpack-merge')
 var baseWebpackConfig = require('./webpack.base.conf')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-var env = config.build.env
+var MiniCssExtractPlugin = require('mini-css-extract-plugin');
+var OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+var env = config.build.env;
+
+var assetsPath = function (_path) {
+    return path.posix.join(config.build.assetsSubDirectory, _path)
+};
 
 var webpackConfig = merge(baseWebpackConfig, {
-    module: {
-        rules: utils.styleLoaders({
-            sourceMap: config.build.productionSourceMap,
-            extract: true
-        })
-    },
-    //devtool: config.build.productionSourceMap ? '#source-map' : false,
+    mode: 'production',
     output: {
         path: config.build.assetsRoot,
-        filename: utils.assetsPath('js/[name].js'),
-        chunkFilename: utils.assetsPath('js/[name].[chunkhash].min.js')
+        filename: assetsPath('js/[name].js'),
+        chunkFilename: assetsPath('js/[name].[chunkhash].min.js')
+    },
+     optimization: {
+        splitChunks: {
+            cacheGroups: {
+                // noahv: {
+                //     name: 'noahv',
+                //     test: /\.css$/,
+                //     chunks: 'all',
+                //     enforce: true
+                // },
+                visual_vendors: {
+                    test: /[\\/]node_modules[\\/]echarts|moment(.*)\.js$/,
+                    name: 'visual_vendors',
+                    chunks: 'all'
+                },
+                vendors: {
+                    test:/[\\/]node_modules[\\/](?!noahv|iview|vue|echarts|moment)(.*)\.js$/,
+                    name: 'vendors',
+                    chunks: 'all'
+                }
+            }
+        },
+        minimizer: [
+            new UglifyJSPlugin({
+                test: /\.js(\?.*)?$/i,
+                uglifyOptions: {
+                    output: {
+                        comments: false
+                    }
+                }
+            }),
+            new OptimizeCSSAssetsPlugin({})
+        ]
     },
     plugins: [
-        // http://vuejs.github.io/vue-loader/en/workflow/production.html
-        new webpack.DefinePlugin({
-            'process.env': env
+        new webpack.optimize.OccurrenceOrderPlugin(),
+
+        new MiniCssExtractPlugin({
+            filename: assetsPath('css/[name].css?[chunkhash]')
         }),
-        new webpack.optimize.OccurrenceOrderPlugin(), 
-        // extract css into its own file
-        new ExtractTextPlugin({filename: utils.assetsPath('css/[name].css'), allChunks: true}),
-         // generate dist index.html with correct asset hash for caching.
-        // you can customize output by editing /index.html
-        // see https://github.com/ampedandwired/html-webpack-plugin
+
         new HtmlWebpackPlugin({
             filename: config.build.index,
             template: 'index.html',
             inject: true,
-            // minify: {
-            //     removeComments: true,
-            //     collapseWhitespace: true,
-            //     removeAttributeQuotes: true
-            //         // more options:
-            //         // https://github.com/kangax/html-minifier#options-quick-reference
-            // },
-            // necessary to consistently work with multiple chunks via CommonsChunkPlugin
             chunksSortMode: 'dependency',
             hash: true,
             favicon: 'src/common/assets/img/favicon.ico',
-        }),
-        // split vendor js into its own file
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor',
-            minChunks: function(module, count) {
-                // any required modules inside node_modules are extracted to vendor
-                return (
-                    module.resource &&
-                    /\.js$/.test(module.resource) &&
-                    module.resource.indexOf(
-                        path.join(__dirname, '../node_modules')
-                    ) === 0
-                )
-            }
-        }),
-        // extract webpack runtime and module manifest to its own file in order to
-        // prevent vendor hash from being updated whenever app bundle is updated
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'manifest',
-            chunks: ['vendor']
-        }),
-        new UglifyJSPlugin()
+        })
     ]
-})
+});
 
 if (config.build.productionGzip) {
     var CompressionWebpackPlugin = require('compression-webpack-plugin')
 
     webpackConfig.plugins.push(
         new CompressionWebpackPlugin({
-            asset: '[path].gz[query]',
+            filename: '[path].gz[query]',
             algorithm: 'gzip',
             test: new RegExp(
                 '\\.(' +
@@ -92,4 +90,4 @@ if (config.build.productionGzip) {
     )
 }
 
-module.exports = webpackConfig
+module.exports = webpackConfig;
