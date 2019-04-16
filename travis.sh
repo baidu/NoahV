@@ -11,7 +11,6 @@ if [ -d $CUR_DIR/template/common/noahv ]; then
 fi
 
 cd $CUR_DIR/template/common
-echo $(pwd)
 
 echo "install node_module"
 npm install
@@ -52,3 +51,13 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "dashboard project build success"
+
+# test:coverage
+cd $CUR_DIR/components/common
+
+echo "install node_module for components"
+
+npm install
+
+# build
+npm run test:coverage
