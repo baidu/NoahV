@@ -83,7 +83,7 @@ const noahv = {
     NvSteps,
     NvSearch,
     NvTag,
-    NvDutyTable
+    NvDutyTable,
 
     // 基础组件类
     SaIcon,
