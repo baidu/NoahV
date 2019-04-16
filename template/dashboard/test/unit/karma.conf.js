@@ -4,7 +4,7 @@
  */
 
 /* eslint-disable no-undef */
-let webpackConfig = require('../../scripts/webpack.dev.conf');
+let webpackConfig = require('../../scripts/webpack.test.conf');
 
 module.exports = config => {
     config.set({
