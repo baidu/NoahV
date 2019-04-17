@@ -5,6 +5,7 @@ const webpackBaseConfig = require('./webpack.base.config.js');
 
 const webpackConfig = merge(webpackBaseConfig, {
     devtool: 'eval-source-map',
+    mode: 'development',
     plugins: [
         new webpack.DefinePlugin({
             'process.env': {

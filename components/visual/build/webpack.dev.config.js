@@ -8,6 +8,7 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 
 
 module.exports = merge(webpackBaseConfig, {
+    mode: 'development',
     devtool: 'eval-source-map',
 
     // 入口

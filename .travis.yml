@@ -4,9 +4,7 @@ os:
   - linux
 node_js:
   - '8'
-cache:
-  directories:
-    - node_modules
+cache: npm
 script:
   - bash travis.sh
 notifications:
