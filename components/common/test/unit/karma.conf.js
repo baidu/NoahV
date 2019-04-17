@@ -1,7 +1,7 @@
 var webpackConfig = require('../../build/webpack.test.config.js');
 
 module.exports = function(config) {
-    config.set({
+    var conf = {
         basePath: '',
 
         frameworks: ['mocha', 'sinon-chai'],
@@ -42,5 +42,16 @@ module.exports = function(config) {
         autoWatch: true,
 
         browsers: ['Chrome'],
-    });
+
+        customLaunchers: {
+            Chrome_travis_ci: {
+                base: 'ChromeHeadless',
+                flags: ['--no-sandbox']
+            }
+        }
+    };
+    if (process.env.TRAVIS) {
+        conf.browsers = ['Chrome_travis_ci'];
+    }
+    config.set(conf);
 };

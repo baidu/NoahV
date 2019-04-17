@@ -8,7 +8,7 @@
     "dev": "webpack-dev-server --content-base demo/ --open --inline --hot --compress --history-api-fallback --port 8088 --config build/webpack.dev.config.js --mode development",
     "lint": "eslint --ext .js,.vue src --quiet",
     "test-single": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
-    "test:coverage": "npm run test-single  -- --report lcovonly && cat ./coverage/lcov.info | coveralls"
+    "test:coverage": "npm run test-single && cat ./test/unit/coverage/lcov.info | ./node_modules/.bin/coveralls"
   },
   "homepage": "https://github.com/baidu/NoahV",
   "repository": {
