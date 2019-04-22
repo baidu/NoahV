@@ -584,9 +584,9 @@ export default {
                     || (!this.dateValue.startSelectedDate && !this.dateValue.endSelectedDate)
                 ) {
                     this.$emit('on-change', [this.dateValue.startSelectedDate, this.dateValue.endSelectedDate]);
-                    if (this.$refs['saDatePickerDatePanel' + this.postfix]) {
-                        this.$refs['saDatePickerDatePanel' + this.postfix].headerChange('left');
-                    }
+                }
+                if (this.$refs['saDatePickerDatePanel' + this.postfix]) {
+                    this.$refs['saDatePickerDatePanel' + this.postfix].headerChange('left');
                 }
             }
         },
