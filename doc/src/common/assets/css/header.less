@@ -1,0 +1,55 @@
+.noahv-layout {
+    .noahv-layout-header {
+        height: 60px !important;
+        position: fixed !important;
+        z-index: 999999 !important;
+        width: 100% !important;
+        top: 0 !important;
+        .noahv-layout-header-inner {
+            // logo
+            .noahv-layout-logo {
+                width: 200px;
+                img {
+                    width: 180px;
+                    height: 60px;
+                    margin-top: 0px;
+                }
+            }
+            .noahv-layout-nav {
+                left: 220px;
+                line-height: 60px;
+                height: 60px;
+            }
+        }
+        
+    }
+    .noahv-layout-content {
+        margin-top: 72px;
+        .noahv-layout-content-wrapper {
+            .noahv-layout-sidebar {
+                margin-top: 0;
+            }
+            & > .ivu-row {
+                background: #fff;
+                margin-top: 16px;
+                &:before {
+                    position: absolute;
+                    display: block;
+                    content: '';
+                    width: 1px;
+                    height: 100%;
+                    background: #ccc;
+                    top: 0px;
+                    z-index: 9999;
+                    left: 16.666666666%;
+                }
+            }
+            .ivu-menu-vertical.ivu-menu-light:after {
+                width: 0;
+            }
+            .noahv-layout-content-main {
+                margin-top: 0;
+            }
+        }
+    }
+}

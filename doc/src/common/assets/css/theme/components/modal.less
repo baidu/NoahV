@@ -1,0 +1,68 @@
+@import '../custom.less';
+.ivu-modal-content {
+    background-color: @noahv-dialog-bg;
+    border-radius: @noahv-dialog-border-radius;
+    .ivu-modal-close {
+        right: @noahv-dialog-close-right;
+        top: @noahv-dialog-close-top;
+    }
+    .ivu-modal-header {
+        border-bottom: @noahv-dialog-header-border;
+        padding: @noahv-dialog-header-padding;
+        background-color: @noahv-dialog-header-bg;
+        height: @noahv-dialog-header-height;
+        .ivu-modal-header-inner {
+            font-size: @noahv-font-size-large;
+            color: @noahv-font-text-color;
+        }
+    }
+    .ivu-modal-body {
+        font-size: @noahv-font-size-base;
+        color: @noahv-font-text-color;
+        margin: @noahv-dialog-body-margin;
+        padding: @noahv-dialog-body-padding;
+        .ivu-modal-confirm {
+            padding: @noahv-dialog-confirm-padding;
+            .ivu-modal-confirm-head {
+                font-size: @noahv-font-size-large;
+            }
+            .ivu-modal-confirm-body {
+                margin-top: @noahv-dialog-confirm-body-margin-top;
+                padding: @noahv-dialog-confirm-body-padding;
+                font-size: @noahv-font-size-base;
+                color: @noahv-font-text-color;
+                .ivu-modal-confirm-body-icon {
+                    font-size: @noahv-dialog-confirm-body-icon-font;
+                    top: @noahv-dialog-confirm-body-icon-top;
+                    left: @noahv-dialog-confirm-body-icon-left;
+                }
+            }
+            .ivu-modal-confirm-footer {
+                margin-top: @noahv-dialog-confirm-footer-margin-top;
+                margin-bottom: @noahv-dialog-confirm-footer-margin-bottom;
+                overflow: hidden;
+                text-align: @noahv-dialog-footer-text-align;
+                button {
+                    float: right;
+                    margin-left: @noahv-dialog-footer-margin-left;
+                }
+            }
+        } 
+    }
+    .ivu-modal-footer {
+        border-top: @noahv-dialog-footer-border;
+        padding: @noahv-dialog-footer-padding;
+        margin: @noahv-dialog-footer-margin;
+        overflow: hidden;
+        text-align: @noahv-dialog-footer-text-align;
+        button {
+            float: right;
+            margin-left: @noahv-dialog-footer-margin-left;
+        }
+    }
+    .ivu-btn-large {
+        min-width: @noahv-dialog-large-button-min-width;
+        height: @noahv-dialog-large-button-height;
+        font-size: @noahv-dialog-large-button-font-size;
+    }
+}

@@ -1,0 +1,106 @@
+saas-doc {
+    margin-top: -20px;
+    & > h2 {
+        margin: 20px 0;
+        border-left: 6px solid #eee;
+        padding-left: 10px;
+        font-size: 20px;
+        &:first-child {
+            margin-top: 0px;  
+        }
+    }
+    & > h3 {
+        margin: 10px 0;
+        font-size: 16px;
+    }
+    & > p {
+        line-height: 30px;
+        font-size: 14px;
+    }
+    .normal-code {
+        pre {
+            padding: 20px;
+            background: #f2f4f5;
+            border-radius: 2px;
+            code {
+                line-height: 1.5;
+                font-size: 13px;
+                padding: 0;
+                color: inherit;
+                background: none;
+            }
+        }
+    }
+    & > pre {
+        max-height: 300px;
+        overflow-y: scroll;
+        border: 1px solid #ccc;
+        padding: 20px;
+        code {
+            line-height: 1.5;
+            font-size: 13px;
+            padding: 0;
+            color: inherit;
+            background: none;
+        }
+    }
+    & > table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        empty-cells: show;
+        border: 1px solid #e6e6e6;
+        width: 100%;
+        tr {
+            th {
+                text-align: left;
+                height: 40px;
+                padding: 0 18px;
+                background: #f6f6f6;
+                border-bottom: 1px solid #e6e6e6;
+            }
+        }
+        tr {
+            &:hover {
+                td {
+                    background: #ebf7ff;
+                }
+            }
+            td {
+                min-width: 0;
+                height: 40px;
+                box-sizing: border-box;
+                text-align: left;
+                padding: 0 18px;
+                text-overflow: ellipsis;
+                vertical-align: middle;
+                border-bottom: 1px solid #e6e6e6;
+            }
+        }
+    }
+    code {
+        border-radius: 3px;
+        padding: 3px 5px;
+        margin: 0;
+        color: #687168;
+        background-color: #def5df;
+    }
+    .table-doc-item {
+        & > ul {
+            li {
+                padding-left: 10px;
+                line-height: 30px;
+                font-size: 14px;
+                list-style: disc inside;
+            }
+        }
+    }
+    & > ul {
+        li {
+                padding-left: 10px;
+                line-height: 30px;
+                font-size: 14px;
+                list-style: disc inside;
+            }
+    }
+    
+}
