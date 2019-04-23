@@ -478,11 +478,11 @@ export default {
                     }
                     this.dateChange();
                 }
-                else {
+                else if (!this.value) {
                     this.defaultInition();
                 }
             }
-            else {
+            else if (!this.value) {
                 this.defaultInition();
             };
             this.initOptions();
@@ -574,6 +574,9 @@ export default {
         dateChange() {
             if (['date', 'datetime'].indexOf(this.type) > -1) {
                 this.$emit('on-change', this.dateValue.selectedDate);
+                if (this.$refs['saDatePickerDatePanel' + this.postfix]) {
+                    this.$refs['saDatePickerDatePanel' + this.postfix].headerChange('left');
+                }
             }
             if (['daterange', 'daterangetime'].indexOf(this.type) > -1){
                 if (
@@ -581,6 +584,9 @@ export default {
                     || (!this.dateValue.startSelectedDate && !this.dateValue.endSelectedDate)
                 ) {
                     this.$emit('on-change', [this.dateValue.startSelectedDate, this.dateValue.endSelectedDate]);
+                }
+                if (this.$refs['saDatePickerDatePanel' + this.postfix]) {
+                    this.$refs['saDatePickerDatePanel' + this.postfix].headerChange('left');
                 }
             }
         },
@@ -785,7 +791,11 @@ export default {
          */
         isDisabledHandler(date) {
             if (this.options && this.options.disabledHandler && typeof this.options.disabledHandler === 'function') {
-                return this.options.disabledHandler(date);
+                let selectedDate = ['date', 'datetime'].indexOf(this.type) > -1 ? this.dateValue.selectedDate : {
+                    "startSelectedDate": this.dateValue.startSelectedDate,
+                    "endSelectedDate": this.dateValue.endSelectedDate
+                };
+                return this.options.disabledHandler(date, selectedDate);
             }
             else {
                 return false;
@@ -934,6 +944,9 @@ export default {
          *
          */
         resetTimePanel() {
+            this.$set(this.dateValue, 'selectedDate', '');
+            this.$set(this.dateValue, 'startSelectedDate', '');
+            this.$set(this.dateValue, 'endSelectedDate', '');
             this.$set(this.dateValue, 'startHour', 0);
             this.$set(this.dateValue, 'startMinute', 0);
             this.$set(this.dateValue, 'startSecond', 0);
