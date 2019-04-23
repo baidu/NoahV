@@ -214,6 +214,11 @@ export default [
             , 'doc-search')
     },
     {
+        path: '/doc/component/dutyTable',
+        component: r => require.ensure([], () => r(require('src/doc/component/dutyTable/dutyTable.md'))
+            , 'doc-dutyTable')
+    },
+    {
         path: '/color/index',
         component: r => require.ensure([], () => r(require('src/color/index')), 'color-index')
     },

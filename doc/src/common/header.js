@@ -150,6 +150,12 @@ export default {
                     type: 'search'
                 },
                 {
+                    label: '值班表组件',
+                    key: 'doc/component/dutyTable',
+                    link: 'doc/component/dutyTable',
+                    type: 'table'
+                },
+                {
                     label: '自定义弹出框组件',
                     key: 'doc/component/business/dialogTpl',
                     link: 'doc/component/business/dialogTpl',
