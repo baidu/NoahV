@@ -149,7 +149,8 @@ describe('form.vue', () => {
                 placeholder: '输入用户名',
                 width: '400px',
                 value: '1321313',
-                required: true  
+                required: true,
+                submitAlias: 'name'
             }
         ];
         let submitValue;
@@ -168,7 +169,7 @@ describe('form.vue', () => {
         vm.$nextTick(() => {
             vm.fireSubmitEvent();
             expect(submitValue).to.be.eql({
-                username: '1321313',
+                name: '1321313',
                 sexy: 'male'
             });
             done();
@@ -176,7 +177,7 @@ describe('form.vue', () => {
         vm.$nextTick(() => {
             vm.fireSubmitEvent({age: 10});
             expect(submitValue).to.be.eql({
-                username: '1321313',
+                name: '1321313',
                 sexy: 'male',
                 age: 10
             });
@@ -210,6 +211,46 @@ describe('form.vue', () => {
                 username: 'noahv'
             });
             expect(vm.formTemp.username).to.be.eql('noahv');
+            done();
+        });
+    });
+    it('test handleBtnEvent', done => {
+        vm = createTest(NvForm, {
+            items: [
+                {
+                    name: 'username',
+                    title: '用户名',
+                    type: 'input',
+                    placeholder: '输入用户名',
+                    width: '400px',
+                    required: true
+                }
+            ]
+        }, true);
+        vm.$nextTick(() => {
+            let value;
+            let test;
+            vm.handleBtnEvent({
+                name: 'reset',
+                callback: (item) => {
+                    value = 'test';
+                }
+            })
+            expect(value).to.be.eql('test');
+            vm.handleBtnEvent({
+                name: 'submit'
+            })
+            expect(vm.submitItem).to.be.eql({
+                name: 'submit'
+            });
+
+            vm.handleBtnEvent({
+                name: 'test',
+                callback: (item) => {
+                    test = 'noahv';
+                }
+            })
+            expect(test).to.be.eql('noahv');
             done();
         });
     });
