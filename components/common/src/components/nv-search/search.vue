@@ -11,7 +11,7 @@
             </Select>
         </div>
         <div :class="[prefixCls + '-value']">
-            <Input v-model="value.searchValue" :clearable="clearable" :placeholder="placeholder" @on-enter="enter($event)"></Input>
+            <Input v-model="value.searchValue" :clearable="clearable" :maxlength="maxlength" :placeholder="placeholder" @on-enter="enter($event)"></Input>
         </div>
     </div>
 </template>
@@ -33,6 +33,7 @@ export default {
         };
     },
     props: {
+        maxlength: Number,
         // 是否开启级联选择
         cascader: {
             type: Boolean,
