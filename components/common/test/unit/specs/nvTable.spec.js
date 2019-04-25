@@ -192,7 +192,7 @@ describe('NvTable.vue', () => {
                 }]
             }, true);
             expect(vm.$el.querySelector('.ivu-table-cell a').href).to.contain('id=1');
-        })
+        });
         it('custom label showError', () => {
             vm = createTest(NvTable, {
                 columns: [{
@@ -206,6 +206,22 @@ describe('NvTable.vue', () => {
                 }]
             }, true);
             expect(vm.$el.querySelector('.ivu-table-cell .highlight-error').textContent).to.equal('test');
+        });
+        it('test reload', () => {
+            vm = createTest(NvTable, {
+                columns: [{
+                    title: 'test',
+                    label: 'test',
+                    showError: true,
+                    key: 'id'
+                }],
+                tdata: [{
+                    id: ['test', false]
+                }],
+                url: '/api/table'
+            }, true);
+            vm.reload();
+            expect(vm.loadingConf).to.be.eql(true)
         })
     });
 });

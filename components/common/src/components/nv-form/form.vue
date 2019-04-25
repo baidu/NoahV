@@ -271,7 +271,10 @@ const initValue = item => {
 
 export default {
     props: {
-        items: Array,
+        items: {
+            type: Array,
+            default: () => []
+        },
         action: {
             type: Array,
             default: () => []

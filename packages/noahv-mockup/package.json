@@ -1,6 +1,6 @@
 {
   "name": "noahv-mockup",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "mockup library for noahv",
   "main": "index.js",
   "scripts": {
