@@ -512,7 +512,8 @@ describe('tree.vue', () => {
             setTimeout(() => {
                 nodeList[1].dispatchEvent(dragOver);
                 nodeList[2].dispatchEvent(dragend);
-                nodeList[2].dispatchEvent(drop);
+                nodeList[0].dispatchEvent(drop);
+                expect(vm.$data.items.length).to.be.equal(3);
                 done();
             }, 200);
         });
