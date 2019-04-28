@@ -26,6 +26,209 @@ describe('DatePicker.vue', () => {
             done();
         });
     });
+    it('should create a DatePicker component and footer btns fire event rightly', done => {
+        vm = createVue({
+            template: '<NvDatePicker type="daterangetime" :value="value"></NvDatePicker>',
+            data() {
+                return {
+                    value: ['2018.09.11 12:12:12', '2018.10.12 13:13:13']
+                }
+            }
+        });
+        const picker = vm.$children[0];
+        picker.openPicker();
+        vm.$nextTick(() => {
+            const timePanelBtns = vm.$el.querySelector('.date-picker-footer').querySelector('.btn-panel').querySelectorAll('button');
+            timePanelBtns[0].click();
+            picker.openPicker();
+
+            vm.$nextTick(() => {
+                timePanelBtns[1].click();
+                vm.$nextTick(() => {
+                    const input = vm.$el.querySelector('.input-wrapper').querySelector('input');
+                    const text = input.innerText;
+                    expect(text).to.be.equal('');
+                    done();
+                }); 
+            });
+        });
+    });
+    it('should create a DatePicker component and month change rightly', done => {
+        vm = createVue({
+            template: '<NvDatePicker type="daterangetime" :value="value"></NvDatePicker>',
+            data() {
+                return {
+                    value: ['2018.09.11 12:12:12', '2018.10.12 13:13:13']
+                }
+            }
+        });
+        const picker = vm.$children[0];
+        picker.openPicker();
+        vm.$nextTick(() => {
+            const leftBtns = vm.$el.querySelector('.left-panel').querySelectorAll('.btn-wrapper');
+            const rightBtns = vm.$el.querySelector('.right-panel').querySelectorAll('.btn-wrapper');
+            const lastBtnInLeft = leftBtns[0];
+            const nextBtnInLeft = leftBtns[1];
+            const lastBtnInRight = rightBtns[0];
+            const nextBtnInRight = rightBtns[1];
+
+            lastBtnInLeft.click();
+            nextBtnInLeft.click();
+            lastBtnInRight.click();
+            nextBtnInRight.click();
+
+            vm.$nextTick(() => {
+                // click update need more nextTick, so just check the value
+                // and if leftBtn click is right, the other btn click event will be right, too
+                const leftMonth = vm.$children[0].$data['dateValue'].startMonth;
+                expect(leftMonth).to.be.equal(7);
+                done();
+            });
+        });
+    });
+    it('should create a DatePicker component and deal cell click event rightly with type=daterangetime', done => {
+        vm = createVue({
+            template: '<NvDatePicker type="daterangetime"></NvDatePicker>',
+        });
+        const picker = vm.$children[0];
+        picker.openPicker();
+        vm.$nextTick(() => {
+            const cell = vm.$el.querySelector('.left-panel').querySelector('.date-picker-cells').querySelector('.current-month');
+            cell.click();
+            vm.$nextTick(() => {
+                const selectedCell = vm.$el.querySelector('.left-panel').querySelector('.date-picker-cells').querySelector('.date-picker-selected');
+                expect(selectedCell).not.to.be.equal(null);
+                done();
+            });
+        });
+    });
+    it('should create a DatePicker component and deal cell click event rightly with type=datetime', done => {
+        vm = createVue({
+            template: '<NvDatePicker type="datetime" :autoClose="true"></NvDatePicker>',
+        });
+        const picker = vm.$children[0];
+        picker.openPicker();
+        vm.$nextTick(() => {
+            const cell = vm.$el.querySelector('.left-panel').querySelector('.date-picker-cells').querySelector('.current-month');
+            cell.click();
+            vm.$nextTick(() => {
+                const selectedCell = vm.$el.querySelector('.left-panel').querySelector('.date-picker-cells').querySelector('.date-picker-selected');
+                expect(selectedCell).not.to.be.equal(null);
+                done();
+            });
+        });
+    });
+    it('should create a DatePicker component and deal cell click event rightly with select a range', done => {
+        vm = createVue({
+            template: '<NvDatePicker type="daterangetime"></NvDatePicker>',
+        });
+        const picker = vm.$children[0];
+        picker.openPicker();
+        vm.$nextTick(() => {
+            const cell = vm.$el.querySelector('.left-panel').querySelector('.date-picker-cells').querySelectorAll('.current-month');
+            cell[6].click();
+            cell[5].click();
+            vm.$nextTick(() => {
+                const selectedCell = vm.$el.querySelector('.left-panel').querySelector('.date-picker-cells').querySelector('.date-picker-selected');
+                expect(selectedCell).not.to.be.equal(null);
+
+                cell[10].click();
+                vm.$nextTick(() => {
+                    vm.$nextTick(() => {
+                        const selectedCells = vm.$el.querySelector('.left-panel').querySelectorAll('.date-picker-selected');
+                        const rangeSelectedCells = vm.$el.querySelector('.left-panel').querySelectorAll('.date-picker-range-selected');
+                        expect(selectedCells.length).to.be.equal(2);
+                        expect(rangeSelectedCells.length).to.be.equal(4);
+
+                        cell[9].click();
+                        done();
+                    });
+                });
+            });
+        });
+    });
+    it('should create a DatePicker component with console timePanel', done => {
+        vm = createVue({
+            template: '<NvDatePicker type="daterangetime" :value="value"></NvDatePicker>',
+            data() {
+                return {
+                    value: ['2018.09.11 12:12:12', '2018.10.12 13:13:13']
+                }
+            }
+        });
+        const picker = vm.$children[0];
+        picker.openPicker();
+        vm.$nextTick(() => {
+            const timePanel = vm.$children[0].$children[3].$children[0];
+            vm.$set(timePanel.dateValue, 'startHour', 15);
+            timePanel.timeChange('left');
+
+            vm.$set(timePanel.dateValue, 'endHour', 17);
+            timePanel.timeChange('right');
+
+            done();
+        });
+    });
+    it('should create a DatePicker component with console timePanel', done => {
+        vm = createVue({
+            template: '<NvDatePicker type="datetime" :value="value"></NvDatePicker>',
+            data() {
+                return {
+                    value: '2018.09.11 12:12:12'
+                }
+            }
+        });
+        const picker = vm.$children[0];
+        picker.openPicker();
+        vm.$nextTick(() => {
+            const timePanel = vm.$children[0].$children[3].$children[0];
+            vm.$set(timePanel.dateValue, 'startHour', 15);
+            timePanel.timeChange('left');
+
+            done();
+        });
+    });
+    it('should create a DatePicker component with common timePanel', done => {
+        vm = createVue({
+            template: '<NvDatePicker type="daterangetime" theme="common" :value="value"></NvDatePicker>',
+            data() {
+                return {
+                    value: ['2018.09.11 12:12:12', '2018.10.12 13:13:13']
+                }
+            }
+        });
+        const picker = vm.$children[0];
+        picker.openPicker();
+        vm.$nextTick(() => {
+            const timePanel = vm.$children[0].$children[3].$children[0];
+            vm.$set(timePanel.dateValue, 'startHour', 15);
+            timePanel.timeChange('left');
+
+            vm.$set(timePanel.dateValue, 'endHour', 17);
+            timePanel.timeChange('right');
+
+            done();
+        });
+    });
+    it('should create a DatePicker component with common timePanel', done => {
+        vm = createVue({
+            template: '<NvDatePicker type="datetime" theme="common" :value="value"></NvDatePicker>',
+            data() {
+                return {
+                    value: '2018.09.11 12:12:12'
+                }
+            }
+        });
+        const picker = vm.$children[0];
+        picker.openPicker();
+        vm.$nextTick(() => {
+            const timePanel = vm.$children[0].$children[3].$children[0];
+            vm.$set(timePanel.dateValue, 'startHour', 15);
+            timePanel.timeChange('left');
+
+            done();
+        });
+    });
     it('should create a daterangetime type DatePicker component and pick 2 dates in the current month', done => {
         vm = createVue(`
             <NvDatePicker type="daterangetime"></NvDatePicker>
@@ -150,6 +353,7 @@ describe('DatePicker.vue', () => {
             data() {
                 const self = this;
                 return {
+                    click: false,
                     options: {
                         position: 'inner',
                         shortcuts: [{
@@ -169,6 +373,86 @@ describe('DatePicker.vue', () => {
                                         new Date(2018, 0, 15),
                                         new Date(2018, 0, 29)
                                     ];
+                                },
+                                onClick: function() {
+                                    self.click = true;
+                                }
+                            },
+                            {
+                                text: '30天',
+                                value() {
+                                    return [
+                                        new Date(2018, 1, 15),
+                                        new Date(2018, 2, 14)
+                                    ];
+                                }
+                            }
+                        ]
+                    }
+                }
+            },
+        });
+        const picker = vm.$children[0];
+        picker.openPicker();
+        vm.$nextTick(() => {
+            const displayField = vm.$el.querySelector('.input');
+            const date1 = new Date(2018, 0, 23);
+            const date2 = new Date(2018, 0, 29);
+            // check pickers display value
+            const displayDates = displayField.value.split(' - '); // Date Objects
+            let startDisplayValue = new Date(displayDates[0]);
+            let endDisplayValue = new Date(displayDates[1]);
+            expect(date1.getTime()).to.equal(startDisplayValue.getTime());
+            expect(date2.getTime()).to.equal(endDisplayValue.getTime());
+
+            // open panel
+            displayField.click();
+            const secondeKey = vm.$el.querySelectorAll('.sidebar-hotkey')[1];
+            secondeKey.click();
+            vm.$nextTick(() => {
+                const text = vm.$el.querySelector('.date-picker-selected').innerText;
+                expect(text).contains('15天');
+                expect(vm.$data.click).to.be.equal(true);
+                const hotkey = vm.$children[0].$children[1];
+                hotkey.resetSidebar();
+                vm.$nextTick(() => {
+                    const selectedHotKey = vm.$el.querySelector('.sidebar-hotkey').querySelector('.date-picker-selected');
+                    expect(selectedHotKey).to.be.equal(null);
+
+                    done();
+                });
+            });
+        });
+    });
+    it('should create a daterangetime type DatePicker component which with hotkey and click hotkey get right selected date', done => {
+        vm = createVue({
+            template: '<NvDatePicker type="daterangetime" theme="common" :options="options" ref="nvDatePicker"></NvDatePicker>',
+            data() {
+                const self = this;
+                return {
+                    click: false,
+                    options: {
+                        position: 'outer',
+                        shortcuts: [{
+                                text: '7天',
+                                defaultSelected: true,
+                                value() {
+                                    return [
+                                        new Date(2018, 0, 23),
+                                        new Date(2018, 0, 29)
+                                    ];
+                                }
+                            },
+                            {
+                                text: '15天',
+                                value() {
+                                    return [
+                                        new Date(2018, 0, 15),
+                                        new Date(2018, 0, 29)
+                                    ];
+                                },
+                                onClick: function() {
+                                    self.click = true;
                                 }
                             },
                             {
@@ -197,14 +481,32 @@ describe('DatePicker.vue', () => {
             let endDisplayValue = new Date(displayDates[1]);
             expect(date1.getTime()).to.equal(startDisplayValue.getTime());
             expect(date2.getTime()).to.equal(endDisplayValue.getTime());
-            done();
+
+            const secondeKey = vm.$el.querySelectorAll('.hot-key')[1];
+            secondeKey.click();
+            vm.$nextTick(() => {
+                const text = vm.$el.querySelector('.date-picker-selected').innerText;
+                expect(text).contains('15天');
+                expect(vm.$data.click).to.be.equal(true);
+
+                const hotkey = vm.$children[0].$children[1];
+                hotkey.resetHotKeys();
+                vm.$nextTick(() => {
+                    const selectedHotKey = vm.$el.querySelector('.hot-keys-wrapper').querySelector('.date-picker-selected');
+                    expect(selectedHotKey).to.be.equal(null);
+
+                    done();
+                });
+            });
         });
     });
     it('should create a daterangetime type DatePicker component which with topbar and click hotkey get right selected date', done => {
         vm = createVue({
             template: '<NvDatePicker type="daterangetime" :options="options" ref="saDatePicker"></NvDatePicker>',
             data() {
+                const self = this;
                 return {
+                    click: false,
                     options: {
                         position: 'top',
                         shortcuts: [{
@@ -224,6 +526,9 @@ describe('DatePicker.vue', () => {
                                         new Date(2018, 0, 15),
                                         new Date(2018, 0, 29)
                                     ];
+                                },
+                                onClick: function() {
+                                    self.click = true;
                                 }
                             },
                             {
@@ -252,7 +557,25 @@ describe('DatePicker.vue', () => {
             let endDisplayValue = new Date(displayDates[1]);
             expect(date1.getTime()).to.equal(startDisplayValue.getTime());
             expect(date2.getTime()).to.equal(endDisplayValue.getTime());
-            done();
+
+
+            // open panel
+            displayField.click();
+            const secondeKey = vm.$el.querySelectorAll('.top-hotkey')[1];
+            secondeKey.click();
+            vm.$nextTick(() => {
+                const text = vm.$el.querySelector('.date-picker-selected').innerText;
+                expect(text).contains('15天');
+                expect(vm.$data.click).to.be.equal(true);
+                const hotkey = vm.$children[0].$children[2];
+                hotkey.resetTopBar();
+                vm.$nextTick(() => {
+                    const selectedHotKey = vm.$el.querySelector('.date-picker-top-bar').querySelector('.date-picker-selected');
+                    expect(selectedHotKey).to.be.equal(null);
+
+                    done();
+                });
+            });
         });
     });
     it('should create a daterangetime type DatePicker component whth disabledhandler run rightly', done => {

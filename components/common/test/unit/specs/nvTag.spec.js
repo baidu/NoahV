@@ -25,13 +25,211 @@ describe('tag.vue', () => {
             done();
         });
     });
-    it('should create a tag component rightly with datas and width=900 and maxNum=10', done => {
+    it('should create a tag component rightly with color and width<300 and wrong type', done => {
+        vm = createVue({
+            template: '<NvTag :data="datas" :width="250" color="grey" :closeable="true"></NvTag>',
+            data() {
+                return {
+                    focus: false,
+                    blur: false,
+                    datas: [
+                        {
+                            name: '000101',
+                            label: 'AAA'
+                        },
+                        {
+                            name: '000102',
+                            label: 'BBB'
+                        },
+                        {
+                            name: '000103',
+                            label: 'CCC'
+                        },
+                        {
+                            name: '000104',
+                            label: 'DDD'
+                        }
+                    ]
+                }
+            }
+        });
+        vm.$nextTick(() => {
+            const panel = vm.$el.querySelector('.noahv-tag-panel');
+            const input = vm.$el.querySelector('.noahv-tag-input');
+            const panelWidth = panel.style.width;
+            const placeholder = input.placeholder;
+            expect(panelWidth).to.be.equal('300px');
+            expect(placeholder).to.be.equal('输入文本，点击回车或空格添加标签');
+
+            const removeBtn = vm.$el.querySelector('.noahv-tag-tag-remove-btn');
+            removeBtn.click();
+
+            vm.$nextTick(() => {
+                const tags = vm.$el.querySelectorAll('.noahv-tag-tag');
+                expect(tags.length).to.be.equal(3);
+                done();
+            });
+        });
+    });
+    it('should remove tage rightly with border type', done => {
+        vm = createVue({
+            template: '<NvTag :data="datas" type="border" color="#515a6e" ref="removeTag"></NvTag>',
+            data() {
+                return {
+                    datas: [
+                        {
+                            name: '000101',
+                            label: 'AAA'
+                        },
+                        {
+                            name: '000102',
+                            label: 'BBB'
+                        },
+                        {
+                            name: '000103',
+                            label: 'CCC'
+                        },
+                        {
+                            name: '000104',
+                            label: 'DDD'
+                        }
+                    ]
+                }
+            }
+        });
+        vm.$nextTick(() => {
+            const tag = {
+                name: '000103',
+                label: 'CCC'
+            };
+            vm.$refs['removeTag'].removeTag(tag);
+            vm.$nextTick(() => {
+                const panel = vm.$el.querySelector('.noahv-tag-panel');
+                const tags = panel.querySelectorAll('.noahv-tag-tag');
+                const tagCount = tags.length;
+                expect(tagCount).to.be.equal(3);
+                done();
+            });
+        });
+    });
+    it('should fire enterKey and spaceKey event rightly', done => {
+        vm = createVue({
+            template: '<NvTag :data="datas" @on-focus="focusHandler" @on-blur="blurHandler"></NvTag>',
+            data() {
+                return {
+                    focus: false,
+                    blur: false,
+                    datas: [
+                        {
+                            name: '000101',
+                            label: 'AAA'
+                        },
+                        {
+                            name: '000102',
+                            label: 'BBB'
+                        },
+                        {
+                            name: '000103',
+                            label: 'CCC'
+                        }
+                    ]
+                }
+            },
+            methods: {
+                focusHandler() {
+                    this.focus = true;
+                },
+                blurHandler() {
+                    this.blur = true;
+                }
+            }
+        });
+        vm.$nextTick(() => {
+            const input = vm.$el.querySelector('.noahv-tag-input');
+            var enterKey = new KeyboardEvent('keydown', {
+                keyCode: 13
+            });
+            var spaceKey = new KeyboardEvent('keydown', {
+                keyCode: 32
+            });
+
+            // null input
+            input.dispatchEvent(enterKey);
+            input.dispatchEvent(spaceKey);
+            
+            // valid input
+            vm.$children[0].$data['inputValue'] = 'newtag1';
+            input.dispatchEvent(enterKey);
+
+            vm.$nextTick(() => {
+                const tags = vm.$el.querySelectorAll('.noahv-tag-tag');
+                expect(tags.length).to.be.equal(4);
+
+                vm.$children[0].$data['inputValue'] = 'newtag2';
+                // add one
+                input.dispatchEvent(spaceKey);
+                vm.$nextTick(() => {
+                    const tags2 = vm.$el.querySelectorAll('.noahv-tag-tag');
+                    expect(tags2.length).to.be.equal(5);
+                    done();
+                });
+            });
+        });
+    });
+    it('should fire keyboard event rightly', done => {
+        vm = createVue({
+            template: '<NvTag :data="datas" @on-focus="focusHandler" @on-blur="blurHandler"></NvTag>',
+            data() {
+                return {
+                    focus: false,
+                    blur: false,
+                    datas: [
+                        {
+                            name: '000101',
+                            label: 'AAA'
+                        },
+                        {
+                            name: '000102',
+                            label: 'BBB'
+                        },
+                        {
+                            name: '000103',
+                            label: 'CCC'
+                        }
+                    ]
+                }
+            },
+            methods: {
+                focusHandler() {
+                    this.focus = true;
+                },
+                blurHandler() {
+                    this.blur = true;
+                }
+            }
+        });
+        vm.$nextTick(() => {
+            const input = vm.$el.querySelector('.noahv-tag-input');
+            var backSpaceKey = new KeyboardEvent('keydown', {
+                keyCode: 8
+            });
+
+            input.dispatchEvent(backSpaceKey);
+
+            vm.$nextTick(() => {
+                const tags = vm.$el.querySelectorAll('.noahv-tag-tag');
+                expect(tags.length).to.be.equal(2);
+                done();
+            });
+        });
+    });
+    it('should create a tag component rightly with datas and width=350 and maxNum=4', done => {
         vm = createVue({
             template: '<NvTag :datas="datas" :maxNum="max" :width="width" :placeholder="placeholder"></NvTag>',
             data() {
                 return {
-                    max: 10,
-                    width: 900,
+                    max: 4,
+                    width: 350,
                     placeholder: '输入文本，点击回车或空格添加标签',
                     datas: [
                         {
@@ -63,7 +261,7 @@ describe('tag.vue', () => {
             const placeholder = input.placeholder;
             expect(panel).not.to.be.equal(null);
             expect(tips).not.to.be.equal(null);
-            expect(panelWidth).to.be.equal('900px');
+            expect(panelWidth).to.be.equal('350px');
             expect(placeholder).to.be.equal('输入文本，点击回车或空格添加标签');
             done();
         });
