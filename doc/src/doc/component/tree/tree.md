@@ -157,16 +157,16 @@
 | search     | 是否开启搜索功能                         | Boolean           | false       |
 | accordion  | 是否开启手风琴效果                       | Boolean           | false       |
 | draggable  | 是否支持拖动功能                         | Boolean           | false       |
-| editable   | 是否支持编辑功能                         | Boolean           | false       |
+| editMode   | 是否支持编辑功能                         | Boolean           | false       |
 | checkbox   | 是否开启勾选框                           | Boolean           | false       |
 | multiple   | 是否支持多项选择（非勾选）               | Boolean           | false       |
 | lazyLoad   | 是否启用异步加载功能                     | Boolean           | false       |
 | loadData   | 异步加载数据接口，当lazyLoad为true时有效 | Function          | -           |
-| appendIcon | 添加节点按钮，支持sa-icon，优先级高于appendLabel。当editable为true时有效  | String   | -           |
+| appendIcon | 添加节点按钮，支持nv-icon，优先级高于appendLabel。当editMode为true时有效  | String   | -           |
 | appendLabel| 若使用文本作为添加按钮，文本的内容。当editable为true时有效     | String            | -           |
-| removeIcon | 移除节点按钮，支持sa-icon，优先级高于removeLabel。当editable为true时有效 | String    | -           |
+| removeIcon | 移除节点按钮，支持nv-icon，优先级高于removeLabel。当editMode为true时有效 | String    | -           |
 | removeLabel| 若使用文本作为移除按钮，文本的内容。当editable为true时有效     | String            | -           |
-| editIcon   | 编辑节点按钮，支持sa-icon，优先级高于editLabel。当editable为true时有效     | String  | -           |
+| editIcon   | 编辑节点按钮，支持nv-icon，优先级高于editLabel。当editMode为true时有效     | String  | -           |
 | editLabel  | 若使用文本作为编辑按钮，文本的内容。当editable为true时有效     | String            | -           |
 
 
@@ -183,7 +183,7 @@
 | disabledCheckbox| 是否禁止勾选功能                    | Boolean           | false       |
 | checked    | 是否被勾选                               | Boolean           | false       |
 | partChecked| 是否处于半勾选状态                        | Boolean           | false       |
-| expand     | 是否展开                                 | Boolean           | false       |
+| spread     | 是否展开                                 | Boolean           | false       |
 | lazyable   | 该节点是否使用懒加载                     | Boolean             | false       |
 | appendIcon | 同data中的appendIcon，优先级更高         | String            | -           |
 | appendLabel| 同data中的appendLabel，优先级更高        | String            | -           |
@@ -439,7 +439,7 @@
         <div>
             <NvTree 
             :items="items"
-            :editable="editable"
+            :editMode="editMode"
             :appendIcon="appendIcon"
             :removeIcon="removeIcon"
             :editIcon="editIcon"
@@ -454,7 +454,7 @@
         data () {
             const self = this;
             return {
-                editable: true,
+                editMode: true,
                 appendIcon: 'plus-small-square-o',
                 removeIcon: 'minus-small-square-o',
                 editIcon: 'edit-o',
@@ -579,7 +579,7 @@
             :search="search"
             :accordion="accordion"
             :draggable="draggable"
-            :editable="editable"
+            :editMode="editMode"
             :checkbox="checkbox"
             :multiple="multiple"
             :appendIcon="appendIcon"
@@ -604,7 +604,7 @@
                 search: true,
                 accordion: false,
                 draggable: false,
-                editable: true,
+                editMode: true,
                 checkbox: true,
                 multiple: false,
                 lazyLoad: false,

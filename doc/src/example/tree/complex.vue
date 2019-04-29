@@ -5,7 +5,7 @@
         :search="search"
         :accordion="accordion"
         :draggable="draggable"
-        :editable="editable"
+        :editMode="editMode"
         :checkbox="checkbox"
         :multiple="multiple"
         :appendIcon="appendIcon"
@@ -30,7 +30,7 @@ export default {
             search: true,
             accordion: false,
             draggable: false,
-            editable: true,
+            editMode: true,
             checkbox: true,
             multiple: false,
             lazyLoad: false,

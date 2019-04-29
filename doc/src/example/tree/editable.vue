@@ -2,7 +2,7 @@
     <div>
         <NvTree
         :items="items"
-        :editable="editable"
+        :editMode="editMode"
         :appendIcon="appendIcon"
         :removeIcon="removeIcon"
         :editIcon="editIcon"
@@ -17,7 +17,7 @@ export default {
     data() {
         const self = this;
         return {
-            editable: true,
+            editMode: true,
             appendIcon: 'plus-small-square-o',
             removeIcon: 'minus-small-square-o',
             editIcon: 'edit-o',
