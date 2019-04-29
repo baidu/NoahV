@@ -191,7 +191,7 @@
 | ---------- | -----------------------------------------| --------------    | ----------- |
 | position   | 设置快捷面板的显示位置，支持inner、outer、top | String            | -           |
 | shortcuts  | 设置快捷面板，详见示例和下方说明         | Array             | -           |
-| disabledDate| 设置不可选的日期，详见示例              | Function          | -           |
+| disabledHandler| 设置不可选的日期，详见示例              | Function          | -           |
 
 
 
@@ -329,10 +329,9 @@ export default {
 `;
 
 // 设置不可选日期
-const disabledDatePickerExampleCode = `
-<template>
+const disabledDatePickerExampleCode = `<template>
     <div>
-        <NvDatePicker :language="language" :theme="theme" :width="350" type="daterangetime" :dateFormat="dateFormat" :options="options" ref="disabledPicker"></NvDatePicker>
+        <NvDatePicker :language="language" :theme="theme" :width="350" type="daterangetime" :dateFormat="dateFormat" :options="options" ref="disabledPicker"><\/NvDatePicker>
     <\/div>
 <\/template>
 
@@ -376,10 +375,29 @@ export default {
                         }
                     }
                 ],
-                disabledHandler: function (date) {
+                /**
+                 * 禁止选择日期判断策略
+                 * @params {Date} date 要被判断的日期对象
+                 * @params {Date/Object} dateValue 如果type为'date/datetime',为选中的日期对象；
+                 *                       如果type为'daterange/daterangetime',为选中的时间段集合,结构如下：
+                 *                      {"startSelecteDate": 开始时间, "endSelectedDate": 结束时间}，注意每个属性字段都可能为空
+                 */
+                disabledHandler: function(date, dateValue) {
+                    // Demo1. 限制每月18号不可选择
                     if (date.getDate() === 18) {
                         return true;
                     }
+
+                    // Demo2. 限制选择时间跨度不得超过70天
+                    // 注意：使用该功能时，或者其他禁止日期动态变化的逻辑，请自行保证快捷面板的配置、默认时间等，与禁止策略保持一致性条件约束。
+                    // 比如，这里限制了时间跨度不超过70天，快捷面板中配置的最大跨度也不要超过70天；如果有初始时间，也不要超过70天。
+                    // let selectedDate = ['date', 'datetime'].indexOf(self.type) > -1 ? dateValue : dateValue['startSelectedDate'];
+                    // if (selectedDate && m(date).diff(m(selectedDate).add(70, 'days')) > 0) {
+                    //     return true;
+                    // }
+                    // else {
+                    //     return false;
+                    // }
                 }
             }
         };

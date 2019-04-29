@@ -37,6 +37,49 @@ describe('tree.vue', () => {
             done();
         });
     });
+    
+    it('should create a basic tree component with search function excute rightly', done => {
+        vm = createVue({
+            template: '<NvTree :items="items" :search="true" :accordion="true"></NvTree>',
+            data() {
+                return {
+                    items: [
+                        {
+                            title: 'node1',
+                            name: 'node1'
+                        },
+                        {
+                            title: 'node2',
+                            name: 'node2'
+                        },
+                        {
+                            title: 'node3',
+                            name: 'node3',
+                            children: [
+                                {
+                                    title: 'node3-1',
+                                    name: 'node3-1',
+                                },
+                                {
+                                    title: 'node3-2',
+                                    name: 'node3-2',
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        });
+        vm.$nextTick(() => {
+            vm.$children[0].$data.searchValue = '3-2';
+            const searchInput = vm.$el.querySelector('.search-input');
+            var enterKey = new KeyboardEvent('keyup', {
+                keyCode: 13
+            });
+            searchInput.dispatchEvent(enterKey);
+            done();
+        });
+    });
 
     it('tree component should expand node rightly', done => {
         vm = createVue({
@@ -117,6 +160,49 @@ describe('tree.vue', () => {
         });
     });
 
+    it('should create a basic tree component with multi selected function excute rightly', done => {
+        vm = createVue({
+            template: '<NvTree :items="items" :multiple="true"></NvTree>',
+            data() {
+                return {
+                    items: [
+                        {
+                            title: 'node1',
+                            name: 'node1'
+                        },
+                        {
+                            title: 'node2',
+                            name: 'node2'
+                        },
+                        {
+                            title: 'node3',
+                            name: 'node3'
+                        }
+                    ]
+                }
+            }
+        });
+        vm.$nextTick(() => {
+            const nodeList = vm.$el.querySelectorAll('.node-title');
+            const node1 = nodeList[0];
+            const node2 = nodeList[1];
+            node1.click();
+            node2.click();
+
+            vm.$nextTick(() => {
+                let selected = vm.$el.querySelectorAll('.node-selected');
+                expect(selected.length).to.be.equal(2);
+
+                node1.click();
+                vm.$nextTick(() => {
+                    selected = vm.$el.querySelectorAll('.node-selected');
+                    expect(selected.length).to.be.equal(1);
+                    done();
+                });
+            });            
+        });
+    });
+
     it('tree component should support multi node selected rightly', done => {
         vm = createVue({
             template: '<NvTree :items="items" :multiple="true"></NvTree>',
@@ -170,6 +256,7 @@ describe('tree.vue', () => {
                             {
                                 title: 'node1',
                                 name: 'node1',
+                                spread: true,
                                 children: [
                                     {
                                         title: 'node1-1',
@@ -196,12 +283,18 @@ describe('tree.vue', () => {
             
             const checkbox = firstNode.querySelector('.node-checkbox').querySelector('label');
             checkbox.click();
-
             vm.$nextTick(() => {
-                const label = firstNode.querySelector('.node-checked');
-                expect(label).not.to.equal(null);
-                expect(label).not.to.equal(undefined);
-                done();
+                const label = firstNode.querySelectorAll('.node-checked');
+                expect(label.length).to.be.equal(2);
+
+
+                const node1_1 = firstNode.querySelector('ul').querySelector('.node-checked');
+                node1_1.click();
+                vm.$nextTick(() => {
+                    const checked = firstNode.querySelector('ul').querySelectorAll('.node-checked');
+                    expect(checked.length).to.be.equal(0);
+                    done();
+                });
             });
         });
     });
@@ -328,6 +421,101 @@ describe('tree.vue', () => {
 
             expect(searchWrapper).is.be.to.exist;
             done();
+        });
+    });
+
+    it('should create a basic tree component with lazyLoad function excute rightly', done => {
+        vm = createVue({
+            template: '<NvTree :items="items" :lazyLoad="true" :loadData="loadData" :editMode="true"></NvTree>',
+            data() {
+                return {
+                    items: [
+                        {
+                            title: 'node1',
+                            name: 'node1',
+                            lazyable: true
+                        },
+                        {
+                            title: 'node2',
+                            name: 'node2'
+                        },
+                        {
+                            title: 'node3',
+                            name: 'node3'
+                        }
+                    ]
+                }
+            },
+            methods: {
+                loadData(item, callback) {
+                    const data = [
+                        {
+                            title: 'children1',
+                            children: []
+                        },
+                        {
+                            title: 'children2',
+                            children: []
+                        }
+                    ];
+                    callback(data);
+                }
+            }
+        });
+        vm.$nextTick(() => {
+            const arrow = vm.$el.querySelector('.node-arrow').querySelector('span');
+            arrow.click();
+
+            vm.$nextTick(() => {
+                // ui update will delay than data
+                // so just check data change
+                const children = vm.$data.items[0].children;
+                expect(children.length).to.be.equal(2);
+
+                const editBtn = vm.$el.querySelector('.edit-panel').querySelector('span');
+                editBtn.click();
+                done();
+            });
+        });
+    });
+
+    it('should create a basic tree component with drag function excute rightly', done => {
+        vm = createVue({
+            template: '<NvTree :items="items" :draggable="true"></NvTree>',
+            data() {
+                return {
+                    items: [
+                        {
+                            title: 'node1',
+                            name: 'node1'
+                        },
+                        {
+                            title: 'node2',
+                            name: 'node2'
+                        },
+                        {
+                            title: 'node3',
+                            name: 'node3'
+                        }
+                    ]
+                }
+            }
+        });
+        vm.$nextTick(() => {
+            const nodeList = vm.$el.querySelectorAll('ul');
+
+            var dragStart = new MouseEvent('dragstart', {});
+            var dragOver = new MouseEvent('dragover', {});
+            var dragend = new MouseEvent('dragend', {});
+            var drop = new MouseEvent('drop', {});
+            nodeList[0].dispatchEvent(dragStart);
+            setTimeout(() => {
+                nodeList[1].dispatchEvent(dragOver);
+                nodeList[2].dispatchEvent(dragend);
+                nodeList[0].dispatchEvent(drop);
+                expect(vm.$data.items.length).to.be.equal(3);
+                done();
+            }, 200);
         });
     });
 });

@@ -45,6 +45,51 @@ describe('steps.vue', () => {
             done();
         });
     });
+    it('should change stage and deal window resize event rightly', done => {
+        vm = createVue({
+            template: '<NvSteps :datas="datas" @on-click="clickHandler"></NvSteps>',
+            data() {
+                return {
+                    click: false,
+                    datas: [
+                        {
+                            name: '阶段1',
+                            status: 'finished'
+                        },
+                        {
+                            name: '阶段2',
+                            status: 'running'
+                        },
+                        {
+                            name: '阶段3',
+                            status: 'ready'
+                        },
+                        {
+                            name: '阶段4',
+                            status: 'ready'
+                        }
+                    ]
+                }
+            },
+            methods: {
+                clickHandler() {
+                    this.click = true;
+                }
+            }
+        });
+        vm.$nextTick(() => {
+            let resizeEv = new Event('resize');
+            window.dispatchEvent(resizeEv);
+
+            const span = vm.$el.querySelector('.step-text');
+            span.click();
+
+            vm.$nextTick(() => {
+                expect(vm.$data.click).to.be.equal(true);
+                done();
+            });        
+        });
+    });
     it('should create a steps component with stage detail panel show rightly', done => {
         vm = createVue({
             template: '<NvSteps :datas="datas" :panelShow="show"><div slot="detail"><h1>hello</h1></div></NvSteps>',
@@ -142,7 +187,14 @@ describe('steps.vue', () => {
                 expect(prevBtn).not.to.be.equal(null);
                 expect(backBtn).not.to.be.equal(null);
                 expect(text).to.be.include('阶段8');
-                done();
+
+                backBtn.click();
+                vm.$nextTick(() => {
+                    const firstStepNow = vm.$el.querySelector('.noahv-steps-steps-wrapper').querySelector('.step-wrapper');
+                    const textNow = firstStepNow.querySelector('.step-text').innerHTML;
+                    expect(textNow).to.be.include('阶段1');
+                    done();
+                });
             });
         });
     });
