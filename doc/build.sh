@@ -23,7 +23,6 @@ if [ -f $CUR_DIR/dep.tar.gz ]; then
 fi
 
 echo "install node_modules"
-npm set registry http://pnpm.baidu.com
 npm install
 
 # build
