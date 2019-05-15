@@ -19,5 +19,9 @@ export default [
     {
         path: '/nveventriver',
         component: r => require.ensure([], () => r(require('./components/eventRiver.vue')), 'eventriver')
+    },
+    {
+        path: '/nvbubble',
+        component: r => require.ensure([], () => r(require('./components/bubble')), 'bubble')
     }
 ];
