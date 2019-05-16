@@ -50,7 +50,7 @@ $ noahv --help
 2.Init project
 
 ```shell
-# Creat a empty folder & run init
+# Create an empty folder & run init
 $ mkdir project && cd project && noahv init
 
 ```
