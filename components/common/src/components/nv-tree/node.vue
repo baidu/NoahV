@@ -1,5 +1,6 @@
 <template>
     <ul
+        :class="{'hidden': item.hidden}"
         :draggable="draggable"
         @dragstart="dragStartHandler($event, item)"
         @dragover="dragOverHandler($event, item)"

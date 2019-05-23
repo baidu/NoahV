@@ -111,7 +111,10 @@ export default {
                     },
                     {
                         title: 'node3',
-                        name: 'node3'
+                        name: 'node3',
+                        // hidden为true时，会在该节点dom上添加class='hidden'样式
+                        // 该class的使用，完全由用户自主定制，组件没有内置该class的样式
+                        hidden: true
                     }
                 ]
             }
