@@ -73,6 +73,24 @@ export default {
                 return yearArr.length ? yearArr : CONSTANTS.yearArr;
             }
         },
+        maxDate: {
+            get() {
+                return isDate(this.defaultMaxDate)
+                    ? this.defaultMaxDate
+                    : new Date(new Date(this.defaultMaxDate).getFullYear(),
+                        new Date(this.defaultMaxDate).getMonth(),
+                        new Date(this.defaultMaxDate).getDate());
+            }
+        },
+        minDate: {
+            get() {
+                return isDate(this.defaultMinDate)
+                    ? this.defaultMinDate
+                    : new Date(new Date(this.defaultMinDate).getFullYear(),
+                        new Date(this.defaultMinDate).getMonth(),
+                        new Date(this.defaultMinDate).getDate());
+            }
+        },
         maxYear: {
             get() {
                 return isDate(this.defaultMaxDate)
