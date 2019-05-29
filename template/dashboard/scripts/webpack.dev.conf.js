@@ -52,7 +52,7 @@ if (config.dev.cssExtract) {
         new MiniCssExtractPlugin({
             filename: '[name].css',
             chunkFilename: '[name].css',
-        }),
+        })
     )
 }
 
