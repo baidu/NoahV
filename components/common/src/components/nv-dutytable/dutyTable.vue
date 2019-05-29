@@ -388,8 +388,8 @@ export default {
         calculateDutyItemStyle(col) {
             const diffSeconds = col.diffDay * 24 * 3600 * 1000;
             return {
-                visibility: +this.startTime + diffSeconds >= this.defaultMinDate
-                && +this.startTime + diffSeconds <= this.defaultMaxDate
+                visibility: +this.startTime + diffSeconds >= +this.minDate
+                && +this.startTime + diffSeconds <= +this.maxDate
                     ? 'visible'
                     : 'hidden',
                 backgroundColor: col.nameArr.length && col.color,
