@@ -123,6 +123,10 @@ export default [
         entry: true
     },
     {
+        component: r => require.ensure([], () => r(require('src/guide/qa.md')), 'guide/qa'),
+        path: '/guide/qa'
+    },
+    {
         path: '/doc/component/icon',
         component: r => require.ensure([], () => r(require('src/doc/icon/icon')), 'icon')
     },

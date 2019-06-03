@@ -53,7 +53,7 @@ noahv.router(routerConfig);
 
 // if you want use baidu tongji, add this line
 // for detail info, you can visit this page: http://tongji.baidu.com/web/help/article?id=174&type=0
-// noahv.useBaiduTrack('baidutongjiaccountId')
+noahv.useBaiduTrack('0c5bbc0355ed6e991518ff8c26d71dda')
 
 // init project
 noahv.start('#app', store);

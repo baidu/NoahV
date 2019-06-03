@@ -84,6 +84,12 @@ export default {
                     key: 'guide/deploy',
                     link: 'guide/deploy',
                     type: 'angle-right-square'
+                },
+                {
+                    label: '常见问题',
+                    key: 'guide/qa',
+                    link: 'guide/qa',
+                    type: 'angle-right-square'
                 }
             ]
         },
