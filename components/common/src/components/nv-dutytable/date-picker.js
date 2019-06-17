@@ -12,7 +12,7 @@ function isDate(date) {
 export default {
     props: {
         defaultSelectedYear: {
-            type: Number, String,
+            type: [Number, String],
             required: false,
             default: CONSTANTS.currentYear
         },
@@ -22,17 +22,17 @@ export default {
             default: CONSTANTS.currentMonth + 1
         },
         defaultMaxDate: {
-            type: [Date, String],
+            type: [Date, String, Object],
             required: false,
             default: () => CONSTANTS.maxDate
         },
         defaultMinDate: {
-            type: [Date, String],
+            type: [Date, String, Object],
             required: false,
             default: () => CONSTANTS.minDate
         },
         defaultStartTime: {
-            type: [Date, String],
+            type: [Date, String, Object],
             required: false,
             default: () => CONSTANTS.today
         }
