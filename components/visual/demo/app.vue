@@ -6,6 +6,7 @@
             <li><router-link to="/nvtrend">nvtrend</router-link></li>
             <li><router-link to="/nvreport">nvreport</router-link></li>
             <li><router-link to="/nveventriver">nveventriver</router-link></li>
+            <li><router-link to="/nvbubble">nvbubble</router-link></li>
         </ul>
         <router-view></router-view>
     </div>
@@ -23,7 +24,7 @@ export default {
 </style>
 <style lang="less" >
 .demo-container {
-    padding: 20px 40px; 
+    padding: 20px 40px;
     margin-bottom: 40px;
     & > ul { display: flex; flex-wrap: wrap; margin-bottom: 30px;}
     & > ul > li {
