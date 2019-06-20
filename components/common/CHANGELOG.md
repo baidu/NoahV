@@ -1,4 +1,7 @@
 ## ChangeLog
+## 1.0.7
+* [修复] NvDutyTable组件最大日期和最小日期计算
+
 ## 1.0.6
 * [修复] NvDutyTable组件时间计算异常
 
