@@ -16,6 +16,10 @@ let viewRoot = document.compatMode === 'BackCompat'
     ? body
     : document.documentElement;
 
+function isArray(data) {
+    return Object.prototype.toString.call(data) === '[object Array]';
+}
+
 export default {
     timetransfer(time, formatter, currentTime) {
         const self = this;
@@ -218,5 +222,18 @@ export default {
             data = data.substring(0, data.indexOf('.') + parseInt(decimals, 10) + 1);
         }
         return Number(data).toFixed(decimals);
+    },
+    deepClone(data) {
+        return JSON.parse(JSON.stringify(data));
+    },
+    isEmpty(data) {
+        if (isArray(data)) {
+            return data.length < 1;
+        }
+        return Object.keys(data).length < 1;
+    },
+    isArray,
+    upFirstWord(words) {
+        return words.slice(0, 1).toUpperCase() + words.slice(1);
     }
 };
