@@ -15,7 +15,7 @@
   "author": "yuyouwen",
   "license": "UNLICENSED",
   "dependencies": {
-    "axios": "^0.17.0",
+    "axios": "^0.18.1",
     "clipboard-polyfill": "^2.4.7",
     "highlight.js": "^9.12.0",
     "iview": "^2.9.1",

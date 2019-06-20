@@ -1,6 +1,6 @@
 {
   "name": "noahv-component",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Components Library For NoahV",
   "main": "src/index",
   "scripts": {
@@ -18,7 +18,7 @@
   "author": "darrenywyu@gmail.com",
   "license": "Apache-2.0",
   "dependencies": {
-    "axios": "^0.17.0",
+    "axios": "^0.18.1",
     "echarts": "^4.2.0-rc.2",
     "iview": "^2.11.0",
     "moment": "^2.19.1",
