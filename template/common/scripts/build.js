@@ -1,13 +1,9 @@
 /* eslint-disable */
-// https://github.com/shelljs/shelljs
-require('shelljs/global')
-env.NODE_ENV = 'production'
-
+process.env.NODE_ENV = 'production';
 var path = require('path')
 var config = require('./config')
 var ora = require('ora')
-var fs = require('fs');
-var exists = fs.existsSync;
+const fs = require('fs-extra')
 var webpack = require('webpack')
 var webpackConfig = require('./webpack.prod.conf')
 
@@ -15,12 +11,12 @@ var spinner = ora('building for production...')
 spinner.start()
 
 var assetsPath = path.join(config.build.assetsRoot, config.build.assetsSubDirectory)
-rm('-rf', assetsPath)
-mkdir('-p', assetsPath)
+fs.removeSync(assetsPath)
+fs.mkdirpSync(assetsPath)
 
 var staticPath = path.resolve('static');
-if (exists(staticPath)) {
-    cp('-R', 'static/*', assetsPath);
+if (fs.pathExistsSync(staticPath)) {
+    fs.copySync('static/*', assetsPath);
 }
 
 webpack(webpackConfig, function(err, stats) {
