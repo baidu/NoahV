@@ -1,7 +1,6 @@
 # NoahV
 
-English | [简体中文](./README_ch.md)
-
+简体中文 | [English](./README_EN.md)
 
 <a href="https://travis-ci.org/baidu/NoahV">
 	<img src="https://img.shields.io/travis/baidu/NoahV/master.svg?style=flat-square"  alt="build">
@@ -19,64 +18,69 @@ English | [简体中文](./README_ch.md)
 	<img src="https://img.shields.io/github/commit-activity/w/baidu/NoahV.svg?style=flat-square" alt="commit">
 </a>
 
-A front-end application framework based on Vue, easy to handle, is suitable for teams lacking front-end engineers, it can be 
-be used in the field of operation and maintenance monitoring, data analysis and common background management system, etc.
+NoahV是一个基于vue开发的前端应用框架，主要适用于常见的后台管理系统，官网地址：https://www.noahv.org
 
+特性：
 
-Feature
+* 上手简单，提供常用的各类组件，快速开始前端开发
+* 导航栏、页面布局JSON配置，无需代码逻辑开发
+* API数据模拟和API数据代理，让前后端不再耦合，联调更简单，效率更高 
+* 数据仪表盘功能，满足常见的数据可视化需求，助力数据分析场景
+* 内置模版，只需简单配置就可以开发出想要的页面，非前端同学也能快速上手开发
+* 实用的脚手架功能，项目初始化、模板复用、模拟数据创建、调试server启动、框架升级一行命令通通搞定
 
-* Easy to use, provide a variety of commonly used components, and quickly start front-end development.
-* Navigation bar, page layout support JSON configuration.
-* Templates can be easily reused to improve the efficiency of development.
-* Provide the operation and maintenance dashboard feature, especially for the monitoring data analysis 
-* Provide the scaffold command line tool to init the project, mockup the API data, start the devserver, update the system and so on.
+文档：[http://www.noahv.org/](http://www.noahv.org/)
 
-Document: [https://www.noahv.org/](https://www.noahv.org/)
+## 快速开始
 
-## Quick Start
+NoahV框架依赖Nodejs 6.0，在执行如下步骤之前，请确保已经安装 <a href="https://nodejs.org/en/">Node.js</a> v6.0 或以上。
 
-NoahV rely on Nodejs 6.0+, please check <a href="https://nodejs.org/en/">Node.js</a> v6.0+ already installed on your system before run following commands.
-
-1.Install command line tools
+1.安装脚手架工具
 
 ```shell
-# Install noahv-cli
+# 安装noahv-cli
 $ npm install noahv-cli -g
 
-# Look for help
+# 查看使用帮助
 $ noahv --help
 ```
 
-2.Init project
+2.初始化一个项目
 
 ```shell
-# Create an empty folder & run init
+# 创建一个空目录，进入目录中，运行noahv init 命令创建一个通用项目
 $ mkdir project && cd project && noahv init
 
+# 运行noahv init --dashboard 命令创建一个包含仪表盘功能的项目
+$ mkdir project && cd project && noahv init --dashboard
 ```
 
-3.Run project
+3.运行项目
 
 ```shell
-# Run noahv start in the project root directory
+# 在项目根目录启动调试server
 $ noahv start 
 ```
 
-4.Reuse template
+4.复用模板
 
 ```shell
-# Run noahv create in the project root directory
-$ noahv create
+# 在项目根目录复用模板创建页面
+$ noahv create 
 
-# Choose page type According to the hint,support form,list,filterlist,chart at present
+# 根据提示选择需要创建的页面类型，目前支持form、list、filterList、chart四种模板类型
 ```
 
-## Document
+详细信息请查看 [模板使用](http://www.noahv.org/#/guide/tpl)
 
-* [Quickstart](http://www.noahv.org/#/guide/quickstart)
-* [Dashboard](http://www.noahv.org/#/doc/view/guide)
+更多关于框架的使用请查看 [NoahV开发指南](http://www.noahv.org/#/guide/about)
 
+
+## 讨论
+
+欢迎提 ISSUE 讨论
 
 ## License
 
 Apache License 2.0
+
