@@ -18,7 +18,7 @@
 	<img src="https://img.shields.io/github/commit-activity/w/baidu/NoahV.svg?style=flat-square" alt="commit">
 </a>
 
-NoahV是一个基于vue开发的前端应用框架，主要适用于常见的后台管理系统，官网地址：https://www.noahv.org
+NoahV是一个基于vue开发的前端应用框架，主要适用于常见的后台管理系统，官网地址：[http://www.noahv.org/](http://www.noahv.org/)
 
 特性：
 
@@ -28,8 +28,6 @@ NoahV是一个基于vue开发的前端应用框架，主要适用于常见的后
 * 数据仪表盘功能，满足常见的数据可视化需求，助力数据分析场景
 * 内置模版，只需简单配置就可以开发出想要的页面，非前端同学也能快速上手开发
 * 实用的脚手架功能，项目初始化、模板复用、模拟数据创建、调试server启动、框架升级一行命令通通搞定
-
-文档：[http://www.noahv.org/](http://www.noahv.org/)
 
 ## 快速开始
 
