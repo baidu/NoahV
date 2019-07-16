@@ -32,6 +32,10 @@ module.exports = function init({dashboard}) {
         spinner.stop();
         if (err) {
             logUtil.error('noahv-cli', 'error', 'get template failed');
+            console.log('');
+            console.log('Error info:');
+            console.log(err);
+            console.log('');
             return;
         }
         // remove git repo

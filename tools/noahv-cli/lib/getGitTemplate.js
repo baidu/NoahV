@@ -29,7 +29,7 @@ function filterGitFile(type, dest, cb) {
 function getTemplate(type, dest, cb) {
     downloadGit('github:baidu/NoahV', dest, function(err) {
         if (err) {
-            cb('Get template fail!');
+            cb(err);
         }
         else {
             filterGitFile(type, dest, cb);
