@@ -596,7 +596,7 @@ import selectDemo from '../../../example/form/selectDemo.vue'
 const complexFormExampleCode = `
 <template>
     <div >
-        <formTpl 
+        <NvForm
         :items="items" 
         :action="action"
         position="left"
@@ -892,7 +892,7 @@ export default {
 const normalFormExampleCode = `
 <template>
     <div >
-        <formTpl 
+        <NvForm
         :items="items" 
         :action="action"
         position="left"
@@ -969,7 +969,7 @@ export default {
 const preDataCode = `
 <template>
     <div >
-        <formTpl 
+        <NvForm
         :items="items" 
         :action="action"
         position="left"
@@ -1022,7 +1022,7 @@ export default {
 const aliasDemoCode = `
 <template>
     <div >
-        <formTpl 
+        <NvForm
         :items="items" 
         :action="action"
         position="left"
@@ -1092,7 +1092,7 @@ export default {
 const selectDemoCode = `
 <template>
     <div >
-        <formTpl 
+        <NvForm
         :items="items" 
         :action="action"
         position="left"

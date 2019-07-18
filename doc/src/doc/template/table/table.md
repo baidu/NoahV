@@ -220,7 +220,7 @@ import loadingTableExample from '../../../example/table/loadingTable.vue'
 const tableDemoTpl = `
 <template>
     <div class="table-demo">
-        <NvTable 
+        <NvTable
             :columns="columns" 
             :action="action"
             :pagination="pagination"
@@ -404,7 +404,7 @@ const tableDemoTpl = `
 const normalDemoTpl = `
 <template>
     <div class="noraml-table">
-        <tableTpl 
+        <NvTable
             :columns="columns" 
             :tdata="tdata"
             :pagination="false"
@@ -477,7 +477,7 @@ const loadingDemoTpl = `
     <div class="loading-table">
         <div class="btn" @click="show()">展示loading</div>
         <div class="btn" @click="hide()">隐藏loading</div>
-        <tableTpl 
+        <NvTable
             :columns="columns" 
             :tdata="tdata"
             :pagination="false"

@@ -38,6 +38,12 @@
                 :pagination="false"
                 :tdata="tdata"
             />
+            <h2>action</h2>
+            <tableTpl
+                :columns="columns"
+                :pagination="false"
+                :tdata="tdataAction"
+            />
         </div>
     </div>
 </template>
@@ -199,7 +205,7 @@ export default {
                 },
                 {
                     properties: 'content',
-                    comment: '弹框内容',
+                    comment: 'button内容',
                     type: 'String',
                     initValue: '-'
                 },
@@ -225,6 +231,38 @@ export default {
                     properties: 'action',
                     comment: '点击行为，不传时点击按钮则不发送ajax请求',
                     type: 'Object',
+                    initValue: '-'
+                }
+            ],
+            tdataAction: [
+                {
+                    properties: 'url',
+                    comment: '目标url',
+                    type: 'String',
+                    initValue: '-'
+                },
+                {
+                    properties: 'params',
+                    comment: '请求参数',
+                    type: 'Object',
+                    initValue: '-'
+                },
+                {
+                    properties: 'method',
+                    comment: '请求方法，支持put、 post、patch，get方法',
+                    type: 'String、Boolean',
+                    initValue: 'get'
+                },
+                {
+                    properties: 'successCallback',
+                    comment: '请求成功后的回调函数',
+                    type: 'Function',
+                    initValue: '-'
+                },
+                {
+                    properties: 'failCallback',
+                    comment: '请求失败后的回调函数',
+                    type: 'Function',
                     initValue: '-'
                 }
             ]
