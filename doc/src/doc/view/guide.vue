@@ -12,7 +12,7 @@
             </ul>
             如下图所示为示例Dashboard,支持阈值和自定义颜色样式展示，轻松定位数据异常。
             <br>
-            <img src="../../common/assets/img/dashboard.png" width="800">
+            <img src="../../common/assets/img/dashboard.png" width="400" @click="amplificate()">
         </div>
         <h2>使用概览</h2>
         <div class="table-doc-item">
@@ -24,6 +24,9 @@
 
             仪表盘现支持趋势图、仪表图、数据面板、数据报表四种常见可视化组件，四种组件配置和使用方式请参考<a href="#/doc/view/conf">可视化组件UI配置</a>部分文档
         </div>
+        <Modal v-model="amplification" width="850">
+            <img src="../../common/assets/img/dashboard.png" width="800">
+        </Modal>
     </div>
 </template>
 
@@ -32,8 +35,14 @@ export default {
     name: 'TableDemo',
     data() {
         return {
-
+            amplification: false
         };
+    },
+
+    methods: {
+        amplificate() {
+            this.amplification = true;
+        }
     }
 };
 </script>

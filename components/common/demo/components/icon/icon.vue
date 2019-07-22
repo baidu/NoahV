@@ -27,7 +27,7 @@
         </div>
         <div class="usage-item">
             <h2>API</h2>
-            <tableTpl
+            <NvTable
                     :columns="columns"
                     :pagination="false"
                     :tdata="tdata"

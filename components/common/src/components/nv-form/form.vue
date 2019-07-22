@@ -28,6 +28,7 @@
                             :readonly="item.readonly"
                         >
                         </Input>
+                        <slot v-if="item.slot" :name="item.name"></slot>
                     </Col>
                     <Col
                         :span="item.inline"
@@ -47,6 +48,7 @@
                             >
                                 {{list.name}}
                             </Option>
+                            <slot v-if="item.slot" :name="item.name"></slot>
                         </Select>
                     </Col>
                     <Col
@@ -61,6 +63,7 @@
                             :placeholder="item.placeholder"
                        >
                        </NvSearch>
+                       <slot v-if="item.slot" :name="item.name"></slot>
                     </Col>
                     <Col
                         :span="item.inline"
@@ -72,6 +75,7 @@
                         >
                             {{item.label}}
                         </Checkbox>
+                        <slot v-if="item.slot" :name="item.name"></slot>
                     </Col>
                     <Col
                         :span="item.inline"
@@ -88,6 +92,7 @@
                             :readonly="item.readonly"
                         >
                         </DatePicker>
+                        <slot v-if="item.slot" :name="item.name"></slot>
                     </Col>
                     <Col
                         :span="item.inline"
@@ -105,6 +110,7 @@
                             @on-clear="timerangeClear(item.name)"
                         >
                          </DatePicker>
+                         <slot v-if="item.slot" :name="item.name"></slot>
                     </Col>
                     <Col
                         :span="item.inline"
@@ -122,6 +128,7 @@
                             @on-change="formtpl[item.name] = $event"
                         >
                         </NvDatePicker>
+                        <slot v-if="item.slot" :name="item.name"></slot>
                     </Col>
                     <Col
                         :span="item.inline"
@@ -139,6 +146,7 @@
                             @on-change="formtpl[item.name] = $event"
                         >
                         </NvDatePicker>
+                        <slot v-if="item.slot" :name="item.name"></slot>
                     </Col>
                     <Col
                         :span="item.inline"
@@ -155,6 +163,7 @@
                             >
                             </Checkbox>
                         </CheckboxGroup>
+                        <slot v-if="item.slot" :name="item.name"></slot>
                     </Col>
                     <Col
                         :span="item.inline"
@@ -174,6 +183,7 @@
                                 {{list.name}}
                             </Radio>
                         </RadioGroup>
+                        <slot v-if="item.slot" :name="item.name"></slot>
                     </Col>
                     <Col
                         :span="item.inline"
@@ -185,6 +195,7 @@
                             :disabled="item.disabled"
                         >
                         </Cascader>
+                        <slot v-if="item.slot" :name="item.name"></slot>
                     </Col>
                     <Col
                         :span="item.inline"
@@ -199,6 +210,7 @@
                             :readonly="item.readonly"
                         >
                         </InputNumber>
+                        <slot v-if="item.slot" :name="item.name"></slot>
                     </Col>
                     <Col
                         :span="item.inline"
@@ -218,6 +230,7 @@
                                 {{item.closeLable || item.closeLabel}}
                             </span>
                         </i-switch>
+                        <slot v-if="item.slot" :name="item.name"></slot>
                     </Col>
                     <Col span="8" v-else>
                     </Col>
@@ -413,7 +426,7 @@ export default {
         }
     },
     created() {
-        if (this.url) {
+        if (this.url || this.data) {
             this.initDefaultValue(
                 this.url,
                 this.args,

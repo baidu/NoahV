@@ -1,7 +1,7 @@
 <template>
     <div>
         <div :class="getCls('contrast-trend')">
-            <formTpl
+            <NvForm
                 :items="items"
                 :layout="layout"
                 :action="action"
