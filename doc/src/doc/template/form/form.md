@@ -142,6 +142,8 @@
 | labelwidth | 表单项名称所占的宽度，若items中无单独指定，继承整个组件的labelWidth值 | Number | 80   |
 | params | 表单提交时，携带的额外参数 | Object | - |
 | showLoading | 提交时是否显示加载中浮层 | Boolean | true |
+| slot | 表单项尾部是否支持自定义内容，其name值与当前表单项保持一致 | Boolean | false |
+
 
 
 ### items
@@ -596,7 +598,7 @@ import selectDemo from '../../../example/form/selectDemo.vue'
 const complexFormExampleCode = `
 <template>
     <div >
-        <formTpl 
+        <NvForm
         :items="items" 
         :action="action"
         position="left"
@@ -892,7 +894,7 @@ export default {
 const normalFormExampleCode = `
 <template>
     <div >
-        <formTpl 
+        <NvForm
         :items="items" 
         :action="action"
         position="left"
@@ -969,7 +971,7 @@ export default {
 const preDataCode = `
 <template>
     <div >
-        <formTpl 
+        <NvForm
         :items="items" 
         :action="action"
         position="left"
@@ -1022,7 +1024,7 @@ export default {
 const aliasDemoCode = `
 <template>
     <div >
-        <formTpl 
+        <NvForm
         :items="items" 
         :action="action"
         position="left"
@@ -1092,7 +1094,7 @@ export default {
 const selectDemoCode = `
 <template>
     <div >
-        <formTpl 
+        <NvForm
         :items="items" 
         :action="action"
         position="left"

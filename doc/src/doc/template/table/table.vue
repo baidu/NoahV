@@ -14,7 +14,7 @@
         <h2>API</h2>
         <div class="table-doc-item">
             <div class="title">props</div>
-            <tableTpl
+            <NvTable
                 :columns="propsColumns"
                 :tdata="propsData"
                 :pagination="false"
@@ -23,7 +23,7 @@
         </div>
         <div class="table-doc-item">
             <div class="title">methods</div>
-            <tableTpl
+            <NvTable
                 :columns="methodsColumns"
                 :tdata="methodsData"
                 :pagination="false"
@@ -31,7 +31,7 @@
         </div>
         <div class="table-doc-item">
             <div class="title">events</div>
-            <tableTpl
+            <NvTable
                 :columns="eventsColumns"
                 :tdata="eventsData"
                 :pagination="false"
@@ -39,7 +39,7 @@
         </div>
         <div class="table-doc-item">
             <div class="title">columns</div>
-            <tableTpl
+            <NvTable
                 :columns="columnsColumns"
                 :tdata="columnsData"
                 :pagination="false"

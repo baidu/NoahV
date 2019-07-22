@@ -100,6 +100,7 @@
 | border        | 是否展示每个单元格的边框                                   | Boolean      | false         |
 | stripe        | 是否各行间隔展示不同颜色                                   | Boolean      | true         |
 | showelevator |    是否显示跳转到某一页功能    | Boolean      | false         |
+| highlightRow  |    是否支持高亮选中的行，即单选    | Boolean      | false         |
 
 <br>
 
@@ -220,7 +221,7 @@ import loadingTableExample from '../../../example/table/loadingTable.vue'
 const tableDemoTpl = `
 <template>
     <div class="table-demo">
-        <NvTable 
+        <NvTable
             :columns="columns" 
             :action="action"
             :pagination="pagination"
@@ -404,7 +405,7 @@ const tableDemoTpl = `
 const normalDemoTpl = `
 <template>
     <div class="noraml-table">
-        <tableTpl 
+        <NvTable
             :columns="columns" 
             :tdata="tdata"
             :pagination="false"
@@ -477,7 +478,7 @@ const loadingDemoTpl = `
     <div class="loading-table">
         <div class="btn" @click="show()">展示loading</div>
         <div class="btn" @click="hide()">隐藏loading</div>
-        <tableTpl 
+        <NvTable
             :columns="columns" 
             :tdata="tdata"
             :pagination="false"

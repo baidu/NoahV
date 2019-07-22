@@ -1,7 +1,7 @@
 <template>
     <div class="form-demo">
         <div class="page-title"><span>新建操作模板</span></div>
-        <formTpl 
+        <NvForm
             :items="items" 
             :action="action"
             position="left"
