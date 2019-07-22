@@ -1,6 +1,7 @@
 <template>
     <div :class="getCls('table')">
         <Table
+            :highlight-row="highlightRow"
             :columns="columnsData"
             :data="tableData"
             :border="border"
@@ -9,6 +10,7 @@
             :no-data-text="noDataText"
             @on-sort-change="tableSort"
             @on-selection-change="selectionChange"
+            @on-row-click="chooseRow"
         >
             <h1
                 slot="header"
@@ -93,6 +95,10 @@ export default {
             default: '暂无数据'
         },
         showelevator: {
+            type: Boolean,
+            default: false
+        },
+        highlightRow: {
             type: Boolean,
             default: false
         }
@@ -673,6 +679,10 @@ export default {
                 return;
             }
             this.loadingConf = loading;
+        },
+        chooseRow(currentRow, index) {
+            // 选中当行事件
+            this.$emit('on-current-row-click', currentRow, index);
         }
     }
 };

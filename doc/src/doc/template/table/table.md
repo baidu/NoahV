@@ -100,6 +100,7 @@
 | border        | 是否展示每个单元格的边框                                   | Boolean      | false         |
 | stripe        | 是否各行间隔展示不同颜色                                   | Boolean      | true         |
 | showelevator |    是否显示跳转到某一页功能    | Boolean      | false         |
+| highlightRow  |    是否支持高亮选中的行，即单选    | Boolean      | false         |
 
 <br>
 
