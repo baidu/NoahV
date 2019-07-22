@@ -1,4 +1,9 @@
 ## ChangeLog
+## 1.0.8
+* [修复] NvTable组件，修复必须填写url，之后data才能生效的问题
+* [功能新增] NvTable组件items属性新增slot插槽，支持项后增加自定义内容
+* [功能新增] NvForm组件新增highlight-row属性与on-current-row-click事件，支持高亮选中的行，即单选
+
 ## 1.0.7
 * [修复] NvDutyTable组件最大日期和最小日期计算
 
