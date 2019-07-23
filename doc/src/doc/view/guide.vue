@@ -24,8 +24,9 @@
 
             仪表盘现支持趋势图、仪表图、数据面板、数据报表四种常见可视化组件，四种组件配置和使用方式请参考<a href="#/doc/view/conf">可视化组件UI配置</a>部分文档
         </div>
-        <Modal v-model="amplification" width="850">
-            <img src="../../common/assets/img/dashboard.png" width="800">
+        <Modal v-model="amplification" width="950" :closable="false" :footer-hide="true" class="model-img">
+            <slot name="header"></slot>
+            <img src="../../common/assets/img/dashboard.png" width="900">
         </Modal>
     </div>
 </template>
@@ -95,6 +96,17 @@ export default {
             border-radius: 2px;
             font-size: 13px;
             color: #314659;
+        }
+    }
+    .model-img {
+        .ivu-modal-mask {
+            z-index: 999999999;
+        }
+        .ivu-modal-wrap {
+            z-index: 9999999999;
+            .ivu-modal-content {
+                background: transparent;
+            }
         }
     }
 </style>
