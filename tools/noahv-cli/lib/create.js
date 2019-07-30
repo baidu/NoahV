@@ -64,6 +64,7 @@ function askPath(type) {
         }
     ]).then(function (answers) {
         if (answers.path) {
+            answers.path = answers.path.replace(/ /g, '');
             if (isValid(answers.path)) {
                 if (type === 'api') {
                     createApi(type, answers.path);
