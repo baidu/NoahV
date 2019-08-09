@@ -1,4 +1,9 @@
 ## ChangeLog
+## 1.0.9
+* [功能新增] NvTrend组件新增dataFilter属性，可以在请求到数据之后对数据做格式转换
+* [功能新增] NvTrend组件新增header-right，可以在标题页插入插槽自定义内容
+* [功能新增] NvTrend组件新增懒加载和tooltip同步功能
+
 ## 1.0.8
 * [修复] NvTable组件，修复必须填写url，之后data才能生效的问题
 * [功能新增] NvTable组件items属性新增slot插槽，支持项后增加自定义内容
