@@ -1,4 +1,8 @@
 ## ChangeLog
+## 1.0.10
+* [功能新增] NvTrend组件支持自定义请求配置requestConfig
+* [功能修复] NvForm组件中select标签中slot位置错误问题修复
+
 ## 1.0.9
 * [功能新增] NvTrend组件新增dataFilter属性，可以在请求到数据之后对数据做格式转换
 * [功能新增] NvTrend组件新增header-right，可以在标题页插入插槽自定义内容

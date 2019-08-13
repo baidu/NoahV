@@ -140,15 +140,13 @@ export default {
     name: 'NvTrend',
     props: {
         title: String,
-        url: {
-            type: String,
-            required: true
-        },
+        url:  String,
         params: Object,
         options: Object,
         showLoading: String,
         method: String,
-        dataFilter: Function
+        dataFilter: Function,
+        requestConfig: Object
     },
 
     data() {
@@ -233,6 +231,10 @@ export default {
             }
             else {
                 config.data = this.params;
+            }
+
+            if (this.requestConfig) {
+                Object.assign(config, this.requestConfig);
             }
 
             this.$request(config).then(response => {
