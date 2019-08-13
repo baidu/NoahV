@@ -98,6 +98,7 @@
                     @on-reset="resetTimePanel"
                     @on-confirm="confirmHandler"
                     @on-clear="clearClickHandler"
+                    @on-date-change="dateChange"
                 >
                 </NvDatePickerTimePanel>
             </div>
@@ -478,11 +479,11 @@ export default {
                     }
                     this.dateChange();
                 }
-                else if (!this.value) {
+                else if (!this.value){
                     this.defaultInition();
                 }
             }
-            else if (!this.value) {
+            else if (!this.value){
                 this.defaultInition();
             };
             this.initOptions();
@@ -755,7 +756,6 @@ export default {
                         ];
                         this.updateDateValue(this.dateValue, updateStartKeys, this.dateValue.startSelectedDate);
                         this.updateDateValue(this.dateValue, updateEndKeys, this.dateValue.endSelectedDate);
-                        
                     }
                 }
             }
@@ -845,6 +845,10 @@ export default {
          *
          */
         clickOuterArea(e) {
+            // 面板关闭状态下，不执行判断逻辑
+            if (!this.showPickerPanel) {
+                return;
+            }
             let event = e || window.event;
             let target = event.target || event.srcElement;
             let domWrapper = this.$refs['date-picker-wrapper-refs'];

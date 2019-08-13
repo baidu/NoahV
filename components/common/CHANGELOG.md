@@ -1,4 +1,8 @@
 ## ChangeLog
+
+## 1.0.11
+* [功能修复] NvDatePicker组件，修复面板关闭状态下，错误触发on-ok事件问题
+
 ## 1.0.10
 * [功能新增] NvTrend组件支持自定义请求配置requestConfig
 * [功能修复] NvForm组件中select标签中slot位置错误问题修复

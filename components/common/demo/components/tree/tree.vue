@@ -132,5 +132,8 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
+    .node-wrapper .panel ul {
+        margin-bottom: 0;
+    }
 </style>

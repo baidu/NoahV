@@ -115,16 +115,19 @@ export default {
                         this.dateValue.startMinute,
                         this.dateValue.startSecond
                     );
+                    this.$emit('on-date-change');
                 }
             }
             else if (this.type === 'daterangetime') {
                 if (pos === 'left' && this.dateValue.startSelectedDate) {
                     this.setSelectedDate('start');
                     this.selfHealing('left');
+                    this.$emit('on-date-change');
                 }
                 else if (pos === 'right' && this.dateValue.endSelectedDate) {
                     this.setSelectedDate('end');
                     this.selfHealing('right');
+                    this.$emit('on-date-change');
                 }
             }
         },
@@ -134,6 +137,10 @@ export default {
          * @param {String} key left/right flag
          */
         selfHealing(key) {
+            if (!this.dateValue.startSelectedDate || !this.dateValue.endSelectedDate) {
+                return;
+            }
+            
             let start = this.dateValue.startSelectedDate.getTime();
             let end = this.dateValue.endSelectedDate.getTime();
             if (start > end) {
