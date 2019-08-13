@@ -48,8 +48,8 @@
                             >
                                 {{list.name}}
                             </Option>
-                            <slot v-if="item.slot" :name="item.name"></slot>
                         </Select>
+                        <slot v-if="item.slot" :name="item.name"></slot>
                     </Col>
                     <Col
                         :span="item.inline"
