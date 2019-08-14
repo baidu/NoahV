@@ -9,6 +9,7 @@
             :timePickerCtrl="timePickerCtrl"
             @on-reset="reset"
             @on-confirm="confirmClick"
+            @on-date-change="dateChange"
         >
         </component>
     </div>
@@ -77,6 +78,13 @@ export default {
         confirmClick() {
             this.$emit('on-confirm');
             this.$emit('on-close');
+        },
+        /**
+         * 触发chang事件
+         *
+         */
+        dateChange() {
+            this.$emit('on-date-change');
         }
     }
 };

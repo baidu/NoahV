@@ -5,7 +5,6 @@
 
 export default {
     methods: {
-
         /**
          * 树的事件派发
          *
@@ -26,7 +25,6 @@ export default {
                 parent.$emit.apply(parent, [eventName].concat(params));
             }
         },
-
         /**
          * 更新子节点的勾选逻辑
          *
@@ -41,7 +39,6 @@ export default {
                 });
             }
         },
-
         /**
          * 更新父级节点的勾选逻辑
          *
@@ -71,7 +68,6 @@ export default {
                 }
             }
         },
-
         /**
          * 更新父级节点到半勾选状态
          *
@@ -85,7 +81,6 @@ export default {
                 this.updateAncestorNodePartCheckedHandler(parent);
             }
         },
-
         /**
          * 获取一级子节点的勾选状态
          *
@@ -108,7 +103,6 @@ export default {
             }
             return status;
         },
-
         /**
          * 拖动功能状态归位处理逻辑
          *
@@ -122,7 +116,6 @@ export default {
                 }
             });
         },
-
         /**
          * 判断当前动作是否为把祖先节点放到子节点上
          *
