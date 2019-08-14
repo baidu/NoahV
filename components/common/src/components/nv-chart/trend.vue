@@ -33,8 +33,8 @@ const trendOptions = {
     },
     grid: {
         bottom: 70,
-        left: 60,
-        right: 40
+        left: 40,
+        right: 20
     },
     chart: {
         height: 250
@@ -122,7 +122,9 @@ const trendOptions = {
         }
     },
     legend: {
-        bottom: 0
+        bottom: 0,
+        type: 'scroll',
+        itemWidth: 10
     }
 };
 
@@ -152,11 +154,13 @@ export default {
     data() {
         return {
             resTitle: this.title ? this.title : '',
-            curOptions: this.getInitOptions(),
             isLoading: false,
-            chart: null,
             errTip: '',
         };
+    },
+    created() {
+        this.curOptions = this.getInitOptions();
+        this.chart = null;
     },
 
     mounted() {
@@ -409,6 +413,23 @@ export default {
                 this.chart.resize();
             }
         }
+    },
+    beforeDestroy() {
+        if (this.chart) {
+            if (typeof this.chart.off === 'function') {
+                this.chart.off('updateAxisPointer');
+            }
+            if (typeof this.chart.clear === 'function') {
+                this.chart.clear();
+            }
+            if (typeof this.chart.dispose === 'function') {
+                this.chart.dispose();
+            }
+        }
+        // 解绑事件
+        window.removeEventListener('resize', this.resizeHandler);
+        document.removeEventListener('scroll', this.redraw);
+        eventBus.$off('syncTooltips');
     }
 };
 </script>
