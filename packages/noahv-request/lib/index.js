@@ -129,7 +129,7 @@ function handlerGlobalLoadingFormRequest(config) {
     else if (config.showLoading !== false) {
         const DefaultLoading = {
             size: 40,
-            type: 'load-c',
+            type: 'ios-loading',
             class: 'noahv-loading',
             text: 'Loading...'
         };
