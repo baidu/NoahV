@@ -20,7 +20,7 @@ function filterGitFile(type, dest, cb) {
             fs.removeSync(path.resolve(dest, item));
         }
     });
-    fs.moveSync(path.resolve(dest, templateDir, type), dest);
+    fs.copySync(path.resolve(dest, templateDir, type), dest);
     fs.removeSync(path.resolve(dest, templateDir));
     cb();
 }

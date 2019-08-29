@@ -8,8 +8,6 @@
 let spawn = require('cross-spawn');
 const logUtil = require('../lib/logUtil');
 
-console.log(process.cwd());
-
 module.exports = function (callback) {
     let args = ['i'];
     let cmd = spawn('npm', args, {stdio: 'inherit'});
