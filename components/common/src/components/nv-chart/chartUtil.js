@@ -33,7 +33,12 @@ chartUtil.deepAssign = (...rest) => {
         for (let i = newArg.length - 1; i > 0; i--) {
             _.each(newArg[i], (value, key) => {
                 if ((newArg[i - 1][key]) instanceof Object && value instanceof Object) {
-                    newArg[i - 1][key] = Object.assign({}, newArg[i - 1][key], value);
+                    if ((newArg[i - 1][key]) instanceof Array && value instanceof Array) {
+                        newArg[i - 1][key] = value;
+                    }
+                    else {
+                        newArg[i - 1][key] = Object.assign({}, newArg[i - 1][key], value);
+                    }
                 }
                 else {
                     newArg[i - 1][key] = value;
