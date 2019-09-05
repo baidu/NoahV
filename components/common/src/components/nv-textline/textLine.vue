@@ -105,7 +105,7 @@ export default {
         if (mirrorWrapper) {
             let textLineWrapper = this.$refs['wrapper-' + this.mirrorId];
             let codeMirror = mirrorWrapper.$el.children[1];
-            let border = this.getClassValue(textLineWrapper, 'border-width');
+            let border = this.getClassValue(textLineWrapper, 'border-width') || this.getClassValue(textLineWrapper, 'border-bottom-width');
             border = border ? border : 0;
             codeMirror.style.height = this.height - 2 * border + 'px';
         }
