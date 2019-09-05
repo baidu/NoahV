@@ -1,7 +1,7 @@
 ## ChangeLog
 
 ## 1.0.13
-* [功能修复] NvTextline组件，修复firefox浏览器下样式错误问题。
+* [功能修复] NvTextline组件，修复firefox浏览器下的样式计算错误问题。
 
 ## 1.0.12
 * [功能修复] NvTrend组件，优化性能问题
