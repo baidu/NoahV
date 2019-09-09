@@ -2,6 +2,7 @@
     <div class="menu-div">
         <template v-if="curItem.link">
             <router-link
+                :title="curItem.label"
                 :to="'/' + curItem.link"
                 :class="{active: curItem.selected}"
                 @click.native="headerClick(curItem, parent)"
@@ -15,7 +16,7 @@
             </router-link>
         </template>
         <template v-else-if="curItem.linkTarget">
-            <a :href="curItem.linkTarget" target="_blank">
+            <a :href="curItem.linkTarget" target="_blank" :title="curItem.label">
                 <i
                     :class="['noahv-icon', 'noahv-icon-' + curItem.type]"
                     v-if="curItem.type ? true : false"
@@ -25,7 +26,7 @@
             </a>
         </template>
         <template v-else-if="curItem.linkTargetSelf">
-            <a :href="curItem.linkTargetSelf">
+            <a :href="curItem.linkTargetSelf" :title="curItem.label">
                 <i
                     :class="['noahv-icon', 'noahv-icon-' + curItem.type]"
                     v-if="curItem.type ? true : false"
@@ -36,7 +37,7 @@
         </template>
         <template v-else>
             <!-- if has the item key -->
-            <span v-if="!curItem.key" class="likeA">
+            <span v-if="!curItem.key" class="likeA" :title="curItem.label">
                 <i
                     :class="['noahv-icon', 'noahv-icon-' + curItem.type]"
                     v-if="curItem.type ? true : false"
@@ -47,6 +48,7 @@
             <!-- else if if has the item key -->
             <a v-else
                 href="javascript:;"
+                :title="curItem.label"
                 :class="{hover: isShow, active: curItem.selected}"
                 @mouseover="mouseover($event)"
                 @mouseout="mouseout($event)"
