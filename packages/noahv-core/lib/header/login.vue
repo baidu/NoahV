@@ -2,14 +2,14 @@
     <ul class="noahv-layout-login" v-if="login.hasLogin">
         <li>
             <div class="menu-div" :class="{hover: isShow}" @mouseover="mouseover($event)" @mouseout="mouseout($event)">
-                <a href="javascript:;" ><Icon type="person"></Icon>{{username}}</a>
+                <a href="javascript:;" :title="username"><Icon type="person"></Icon>{{username}}</a>
                 <ul class="menu-list" v-show="isShow">
                     <template v-for="(item, index) in login.subnav">
                         <template v-if="item.linkTarget">
-                            <li><a :href="item.linkTarget" target="_blank">{{item.label}}</a></li>
+                            <li><a :title="item.label" :href="item.linkTarget" target="_blank">{{item.label}}</a></li>
                         </template>
                         <template v-else>
-                            <li><router-link :to="'/' + item.link">{{item.label}}</router-link></li>
+                            <li><router-link :to="'/' + item.link" :title="item.label">{{item.label}}</router-link></li>
                         </template>
                     </template>
                     <li><a :href="login.logout">退出</a></li>

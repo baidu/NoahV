@@ -37,6 +37,7 @@
         .@{prefixCls}-nav {
             position: absolute;
             left: @logo-width;
+            right: @more-btn-width + @login-max-width;
             height: @header-height;
             line-height: @header-height;
             background: @header-bg-color; 
@@ -49,6 +50,23 @@
             }           
         }
 
+        .@{prefixCls}-nav-more {
+            position: absolute;
+            top: 0;
+            right: 200px;
+            font-size: 16px;
+            .more-dot {
+                position: absolute;
+                width: @more-btn-width;
+                height: @header-height;
+                line-height: 35px;
+                color: #fff; 
+                font-weight: bold;
+                text-align: center;
+                cursor: pointer;
+                z-index: 900;
+            }
+        }
         .menu-div {
             display: block;
             margin-right: 15px;
@@ -81,7 +99,7 @@
             /* 有下拉的 */
             .menu-list {
                 position: absolute;
-                // min-width: 145px;
+                min-width: 145px;
                 width: 100%;
                 left: 0;
                 top: @header-height;
@@ -154,6 +172,8 @@
             display: inline-block;
             height: @header-height;
             line-height: @header-height;
+            max-width: @login-max-width;
+            z-index: 900;
 
             li {
                 position: relative; 
@@ -161,6 +181,10 @@
 
                 a {
                     font-size: 12px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    word-break: keep-all;
+                    white-space: nowrap;
                     i {
                         margin-right: 5px;
                         font-size: 14px;

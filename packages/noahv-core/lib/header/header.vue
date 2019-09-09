@@ -9,6 +9,9 @@
                             <headerLink :item="item" :parent="null"></headerLink>
                         </MenuItem>
                     </Menu>
+                    <div class="noahv-layout-nav-more" v-show="moreShow">
+                        <div class="more-dot" title="部分导航暂无空间展示，已隐藏">...</div>
+                    </div>
                     <Login :login="login"></Login>
                 </div>
             </div>
@@ -32,12 +35,12 @@
     </div>
 </template>
 <script>
-import headerLink from './headerLink';
-import Login from './login';
-import Logo from './logo';
-import {eventBus} from '../../util/eventBus';
+import $ from 'jquery';
 import _ from 'lodash';
-
+import Logo from './logo';
+import Login from './login';
+import headerLink from './headerLink';
+import {eventBus} from '../../util/eventBus';
 export default {
     name: 'sa-header',
     props: [
@@ -63,7 +66,8 @@ export default {
             isShow: false,
             hasSidebar: false,
             separatorString: this.separator ? this.separator : '/',
-            header: this.headerConf ? this.headerConf : []
+            header: this.headerConf ? this.headerConf : [],
+            moreShow: false
         };
     },
     created() {
@@ -77,7 +81,17 @@ export default {
     watch: {
         '$route': 'routerChange'
     },
-    computed: {},
+    mounted() {
+        this.$nextTick(() => {
+            // 默认执行
+            this.caclNavWidth();
+            // resize window执行
+            window.addEventListener('resize', this.caclNavWidth, false);                     
+        });
+    },
+    destroyed() {
+        window.removeEventListener('resize', this.caclNavWidth, false);
+    },
     methods: {
         routerChange() {
             const path = this.$route.path.replace(/[\^/]/, '');
@@ -174,6 +188,27 @@ export default {
                 this.changeBreadcrumb(item.parent);
             }
             this.selectedItemHeaderClick();
+        },
+        /**
+         * nav宽度重计算
+         */
+        caclNavWidth() {
+            const nav = $('.noahv-layout-nav');
+            const navLeft = parseInt(nav.css('left'), 10);
+            const navRight = parseInt(nav.css('right'), 10);
+            const newWidth = $(window).width() - navLeft - navRight;
+
+            let allWidth = 0;
+            nav.width(newWidth);
+
+            [...$('.noahv-layout-nav > li')].map((item, i) => {
+                allWidth += parseInt($(item).width(), 10) + 20;
+
+                const display = allWidth > newWidth ? 'none' : 'block';
+                $(item).css('display', display);
+            });
+
+            this.moreShow = allWidth > newWidth ? true : false;
         }
     }
 };
