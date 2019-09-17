@@ -23,9 +23,9 @@
                         </template>
                     </Breadcrumb>
                 </div>
-                <Row>
-                    <sidebarLink :header="header"></sidebarLink>
-                    <Col :span="hasChildrenFlag ? 20 : 24">
+                <Row class="noahv-layout-content-sidebar">
+                    <sidebarLink :header="header" :span="hasChildrenFlag ? 4 : 0"></sidebarLink>
+                    <Col class="noahv-layout-content-main-root" :span="hasChildrenFlag ? 20 : 24">
                         <div class="noahv-layout-content-main">
                             <router-view></router-view>
                         </div>
