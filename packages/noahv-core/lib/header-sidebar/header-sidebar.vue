@@ -12,7 +12,7 @@
                 <Login :login="login"></Login>
             </div>
         </div>
-        <div class="noahv-layout-content">
+        <div class="noahv-layout-content noahv-layout-content-header-sidebar">
             <div class="noahv-layout-content-wrapper">
                 <div class="noahv-layout-breadcrumb" v-if="hasBread">
                     <Breadcrumb :separator="separatorString">

@@ -5,6 +5,7 @@
             v-show="item.selected"
             class="noahv-layout-sidebar"
             v-for="(item, index) in curHeader"
+            :key="item"
         >
             <template
                 v-if="item.children"
