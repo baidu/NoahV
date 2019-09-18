@@ -148,7 +148,9 @@ export default {
         showLoading: String,
         method: String,
         dataFilter: Function,
-        requestConfig: Object
+        requestConfig: Object,
+        trendData: Object,
+        seriesFilter: Function
     },
 
     data() {
@@ -177,9 +179,14 @@ export default {
             this.scrollTop();
         });
     },
+    computed: {
+        watchObj() {
+            return [this.params, this.trendData];
+        }
+    },
     watch: {
-        // params数据监听，变化的时候处理
-        params: {
+        // watchObj数据监听，变化的时候处理
+        watchObj: {
             handler() {
                 this.getData();
             },
@@ -219,141 +226,157 @@ export default {
         },
         getData() {
             // const params = self.params;
-            let config = {
-                url: this.url,
-                showLoading: false
-            };
+            if (this.url || (this.requestConfig && this.requestConfig.url)) {
+                let config = {
+                    url: this.url,
+                    showLoading: false
+                };
 
-            let method = 'post';
-            if (this.method) {
-                method = this.method.toLowerCase();
-            }
-            config.method = method;
-
-            if (method === 'get') {
-                config.params = this.params;
-            }
-            else {
-                config.data = this.params;
-            }
-
-            if (this.requestConfig) {
-                Object.assign(config, this.requestConfig);
-            }
-
-            this.$request(config).then(response => {
-                let data = response.data.data;
-
-                if (typeof this.dataFilter === 'function') {
-                    data = this.dataFilter(data);
+                let method = 'post';
+                if (this.method) {
+                    method = this.method.toLowerCase();
                 }
+                config.method = method;
 
-                // set the title
-                this.resTitle = this.title ? this.title : data.title;
-
-                let curOptions = _.cloneDeep(this.curOptions);
-
-                // 处理自定义series
-                let customSeries = [];
-                let initOptions = this.getInitOptions();
-                if (initOptions.series) {
-                    customSeries = _.cloneDeep(initOptions.series);
-                }
-
-                curOptions.series = [];
-
-
-                let timeGap = Number.MIN_VALUE;
-
-                // set the series
-                data.data.forEach(item => {
-                    item.type = 'line';
-                    item.symbol = 'none';
-                    if (this.options.nullPointMode === 'zero') {
-                        item.data.map(list => {
-                            if (list[1] === null || list[1] === undefined) {
-                                list[1] = 0;
-                            }
-                            return list;
-                        });
-                    }
-                    else if (this.options.nullPointMode === 'connect') {
-                        item.connectNulls = true;
-                    }
-                    curOptions.series.push(item);
-
-
-                    // 寻找X轴时间最佳展示Label格式
-                    if (item.data
-                        && item.data.length > 0
-                        && timeGap < (item.data[item.data.length - 1][0] - item.data[0][0]))
-                        {
-                        timeGap = (item.data[item.data.length - 1][0] - item.data[0][0]);
-                    }
-                });
-
-                /**
-                 * 处理预定义配置，预定于配置会占用颜色表
-                 * 所以这里将预定于的配置放到数据配置后面
-                 */
-                if (Array.isArray(customSeries)) {
-                    customSeries.forEach(item => {
-                        curOptions.series.push(item);
-                    });
+                if (method === 'get') {
+                    config.params = this.params;
                 }
                 else {
-                    curOptions.series.push(customSeries);
-                }
-                curOptions.chartNotMerge = true;
-                this.curOptions = Object.assign({}, curOptions);
-
-                // 判断X轴时间跨度
-                if ((timeGap / 1000) < (24 * 60 * 60)) {
-                    xAxisFormat = 'HH:mm:ss';
-                }
-                // 跨天
-                else if ((timeGap / 1000) > (24 * 60 * 60)) {
-                    xAxisFormat = 'DD HH:mm:ss';
+                    config.data = this.params;
                 }
 
-                // 跨月
-                else if ((timeGap / 1000) > (24 * 60 * 60 * 30)) {
-                    xAxisFormat = 'MM-DD HH:mm:ss';
-                }
+                Object.assign(config, this.requestConfig);
 
-                // 跨年
-                else if ((timeGap / 1000) > (24 * 60 * 60 * 30 * 12)) {
-                    xAxisFormat = 'YYYY-MM-DD HH:mm:ss';
-                }
-
-                // 画阈值线
-                if (this.options.threshold) {
-                    this.curOptions.series.push({
-                        type: 'line',
-                        markLine: {
-                            silent: true,
-                            symbol: 'none',
-                            label: {
-                                position: 'end',
-                                formatter: () => {
-                                    return  shortValue(+this.options.threshold) + (this.options.unit || '');
-                                }
-                            },
-                            data: [
-                                {
-                                    yAxis: +this.options.threshold,
-                                    lineStyle: {
-                                        color: '#f00',
-                                        type: 'solid',
-                                        width: 1
-                                    }
-                                }
-                            ]
+                this.$request(config)
+                    .then(response => {
+                        let data = response.data.data;
+                        if (typeof this.dataFilter === 'function') {
+                            data = this.dataFilter(data);
                         }
+                        return data;
+                    })
+                    .then(this.initData);
+            }
+            else if (this.trendData && this.trendData.data && this.trendData.data instanceof Array) {
+                this.initData(this.trendData);
+            }
+            
+        },
+        /**
+         * after received data
+         * @params {Object} data
+         */
+        initData(data) {
+            // set the title
+            this.resTitle = this.title ? this.title : data.title;
+
+            let curOptions = _.cloneDeep(this.curOptions);
+
+            // 处理自定义series
+            let customSeries = [];
+            let initOptions = this.getInitOptions();
+            if (initOptions.series) {
+                customSeries = _.cloneDeep(initOptions.series);
+            }
+
+            curOptions.series = [];
+
+
+            let timeGap = Number.MIN_VALUE;
+
+            // set the series
+            data.data.forEach(item => {
+                item.type = 'line';
+                item.symbol = 'none';
+                if (this.options.nullPointMode === 'zero') {
+                    item.data.map(list => {
+                        if (list[1] === null || list[1] === undefined) {
+                            list[1] = 0;
+                        }
+                        return list;
                     });
                 }
-                this.renderTrend();
+                else if (this.options.nullPointMode === 'connect') {
+                    item.connectNulls = true;
+                }
+                curOptions.series.push(item);
+
+
+                // 寻找X轴时间最佳展示Label格式
+                if (item.data
+                    && item.data.length > 0
+                    && timeGap < (item.data[item.data.length - 1][0] - item.data[0][0]))
+                    {
+                    timeGap = (item.data[item.data.length - 1][0] - item.data[0][0]);
+                }
             });
+
+            /**
+             * 处理预定义配置，预定于配置会占用颜色表
+             * 所以这里将预定于的配置放到数据配置后面
+             */
+            if (Array.isArray(customSeries)) {
+                customSeries.forEach(item => {
+                    curOptions.series.push(item);
+                });
+            }
+            else {
+                curOptions.series.push(customSeries);
+            }
+            curOptions.chartNotMerge = true;
+
+            if (typeof this.seriesFilter === 'function') {
+                curOptions.series = this.seriesFilter(curOptions.series);
+            }
+            
+            this.curOptions = Object.assign({}, curOptions);
+
+            // 判断X轴时间跨度
+            if ((timeGap / 1000) < (24 * 60 * 60)) {
+                xAxisFormat = 'HH:mm:ss';
+            }
+            // 跨天
+            else if ((timeGap / 1000) > (24 * 60 * 60)) {
+                xAxisFormat = 'DD HH:mm:ss';
+            }
+
+            // 跨月
+            else if ((timeGap / 1000) > (24 * 60 * 60 * 30)) {
+                xAxisFormat = 'MM-DD HH:mm:ss';
+            }
+
+            // 跨年
+            else if ((timeGap / 1000) > (24 * 60 * 60 * 30 * 12)) {
+                xAxisFormat = 'YYYY-MM-DD HH:mm:ss';
+            }
+
+            // 画阈值线
+            if (this.options.threshold) {
+                this.curOptions.series.push({
+                    type: 'line',
+                    markLine: {
+                        silent: true,
+                        symbol: 'none',
+                        label: {
+                            position: 'end',
+                            formatter: () => {
+                                return  shortValue(+this.options.threshold) + (this.options.unit || '');
+                            }
+                        },
+                        data: [
+                            {
+                                yAxis: +this.options.threshold,
+                                lineStyle: {
+                                    color: '#f00',
+                                    type: 'solid',
+                                    width: 1
+                                }
+                            }
+                        ]
+                    }
+                });
+            }
+            this.renderTrend();
         },
         /**
          * caculate the sceen's position and judge whether to load
