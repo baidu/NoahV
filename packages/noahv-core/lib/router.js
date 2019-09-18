@@ -72,12 +72,25 @@ const router = function (config) {
         else if (item.component && isObject(item.component)) {
             let component = {};
             _.each(item.component, function (value, key) {
-                component[key] = typeof value === 'string' ? getComponent(value) : value;
+                if (key === 'template') {
+                    component[key] = value;
+                }
+                else {
+                    component[key] = typeof value === 'string' ? getComponent(value) : value;
+                }
             });
-            temp = {
-                path: item.path,
-                components: component
-            };
+            if (component.template) {
+                temp = {
+                    path: item.path,
+                    component: component
+                };
+            }
+            else {
+                temp = {
+                    path: item.path,
+                    components: component
+                };
+            }
         }
         else {
             temp = {
