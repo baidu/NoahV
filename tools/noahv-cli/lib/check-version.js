@@ -36,14 +36,13 @@ module.exports = done => {
                 inquirer.prompt([
                     {
                         type: 'input',
-                        message: 'upgrade noahv-cli? [yn]' + '\n',
+                        message: 'upgrade noahv-cli? [y/n]' + '\n',
                         name: 'type',
                         default: 'y'
                     }
                 ]).then(function (answers) {
                     if (answers.type === 'y') {
-                        require('./upgrade')();
-                        done();
+                        require('./upgrade')(done);
                     }
                     else {
                         done();

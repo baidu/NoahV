@@ -12,9 +12,7 @@ const request = require('request');
 let logUtil = require('../lib/logUtil');
 const packageConfig = require('../package.json');
 
-let noahvCliList = ['noahv-cli'];
-
-let updateModule = function (module) {
+let updateModule = function (module, callBack) {
     let updateArgs = ['install', module + '@latest', '-g'];
     let npm = 'npm';
     logUtil.info('noahv-cli', 'info', 'start upgrade ' + module);
@@ -32,35 +30,37 @@ let updateModule = function (module) {
                     if (updateCmd.status === 0) {
                         logUtil.ok('noahv-cli', 'ok', module + ' upgraded to latest version.');
                         console.log('');
+                        callBack && callBack();
                     }
                     else {
-                        logUtil.error('noahv-cli', 'error', module + 'upgrade eror');
+                        logUtil.error('noahv-cli', 'error', module + ' upgrade error');
                         console.log('');
+                        callBack && callBack();
                     }
                 }
                 else {
                     logUtil.ok('noahv-cli', 'ok', 'current version is the latest' );
                     console.log('');
+                    callBack && callBack();
                 }
             }
             else {
-                logUtil.error('noahv-cli', 'error', module + 'upgrade eror');
+                logUtil.error('noahv-cli', 'error', module + ' upgrade eror');
                 console.log();
                 console.log(err);
                 console.log();
-                console.log('statusCode: ' + res.statusCode);
+                callBack && callBack();
             }
         });
     }
     catch (err) {
         console.log(err);
-        logUtil.error('noahv-cli', 'error', 'update error, you can try upgrade you noahv-cli');
+        logUtil.error('noahv-cli', 'error', 'upgrade error, you can retry upgrade');
+        callBack && callBack();
     }
 };
 
-module.exports = function update() {
-    u.each(noahvCliList, function (item) {
-        updateModule(item);
-    });
+module.exports = function update(callBack) {
+    updateModule('noahv-cli', typeof callBack === 'function' ? callBack : null);
 };
 
