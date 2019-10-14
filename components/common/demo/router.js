@@ -21,6 +21,10 @@ export default [
         component: r => require.ensure([], () => r(require('./components/icon/icon.vue')), 'icon')
     },
     {
+        path: '/nvcheckbox',
+        component: r => require.ensure([], () => r(require('./components/checkbox/checkbox.vue')), 'checkbox')
+    },
+    {
         path: '/nvtree',
         component: r => require.ensure([], () => r(require('./components/tree/tree.vue')), 'tree')
     },
@@ -59,6 +63,14 @@ export default [
     {
         path: '/nvtextline',
         component: r => require.ensure([], () => r(require('./components/textLine/textLine.vue')), 'textline')
+    },
+    {
+        path: '/nvpipline',
+        component: r => require.ensure([], () => r(require('./components/pipline/pipline.vue')), 'pipline')
+    },
+    {
+        path: '/nvtransfer',
+        component: r => require.ensure([], () => r(require('./components/transfer/transfer.vue')), 'transfer')
     },
     {
         path: '/nvsteps',

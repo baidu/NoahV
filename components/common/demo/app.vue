@@ -6,6 +6,7 @@
             <li><router-link to="/nvfiltertable">nv-filtertable</router-link></li>
             <li><router-link to="/nvform">nv-form</router-link></li>
             <li><router-link to="/nvicon">nv-icon</router-link></li>
+            <li><router-link to="/nvcheckbox">nv-checkbox</router-link></li>
             <li><router-link to="/nvtree">nv-tree</router-link></li>
             <li><router-link to="/nvdatepicker">nv-datepicker</router-link></li>
             <li><router-link to="/nvchart">nv-chart</router-link></li>
@@ -18,6 +19,8 @@
             <li><router-link to="/nvtextline">nv-textline</router-link></li>
             <li><router-link to="/nvsteps">nv-steps</router-link></li>
             <li><router-link to="/nvsearch">nv-search</router-link></li>
+            <li><router-link to="/nvpipline">nv-pipline</router-link></li>
+            <li><router-link to="/nvtransfer">nv-transfer</router-link></li>
             <li><router-link to="/nvtag">nv-tag</router-link></li>
             <li><router-link to="/nv404">nv-404</router-link></li>
         </ul>

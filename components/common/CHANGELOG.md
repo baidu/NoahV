@@ -1,5 +1,11 @@
 ## ChangeLog
 
+## 1.0.15
+* [功能新增] 组件库新增NvPipline、NvTransfer组件。
+
+## 1.0.14
+* [功能新增] 趋势图组件：支持配置 requestConfig，可设置种请求头；支持传入trendData直接渲染；支持传入 seriesFilter 函数，在趋势图渲染前，对数据进行操作。
+
 ## 1.0.13
 * [功能修复] NvTextline组件，修复firefox浏览器下的样式计算错误问题。
 
