@@ -1,5 +1,8 @@
 export const iconConfig = {
     iconList: [
+        ['web-mo', '网络', '显示器', '电脑', 'web'],
+        ['manage', '管理', 'manage'],
+        ['room-mo', '房间', 'room'],
         ['cloud-monitor', '云监控', '云', '电脑', '显示器', 'monitor'],
         ['permission-list', '权限', '管理', '权限列表', 'authority'],
         ['online-management', '上线', '管理', '上传'],

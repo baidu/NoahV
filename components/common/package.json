@@ -1,6 +1,6 @@
 {
   "name": "noahv-component",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "Components Library For NoahV",
   "main": "src/index",
   "scripts": {
