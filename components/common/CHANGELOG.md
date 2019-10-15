@@ -1,5 +1,8 @@
 ## ChangeLog
 
+## 1.0.16
+* [功能优化] NvPipline组件暴露cardMax、nodeMax配置项；NvTransfer组件暴露勾选、移动事件；
+
 ## 1.0.15
 * [功能新增] 组件库新增NvPipline、NvTransfer组件。
 

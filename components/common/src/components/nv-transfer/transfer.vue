@@ -30,10 +30,6 @@
             options: Array,
             leftTitle: String,
             rightTitle: String,
-            leftSearch: Boolean,
-            rightSearch: Boolean,
-            leftPlaceholder: String,
-            rightPlaceholder: String,
             leftDisabled: Boolean,
             rightDisabled: Boolean
         },
@@ -75,9 +71,11 @@
         methods: {
             leftChange(checked) {
                 this.leftChecked = checked;
+                this.$emit('on-checked-change', this.leftChecked, this.rightChecked);
             },
             rightChange(checked) {
                 this.rightChecked = checked;
+                this.$emit('on-checked-change', this.leftChecked, this.rightChecked);
             },
             goRight() {
                 const newChecked = this.getNewChecked(this.leftChecked);
@@ -90,6 +88,7 @@
                     this.rightOptions.push(item);
                 });
                 this.leftChecked = [];
+                this.$emit('on-change', this.leftOptions, this.rightOptions);
             },
             goLeft() {
                 const goLeft = u.pluck(this.rightChecked, 'name');
@@ -103,6 +102,7 @@
                     return goLeft.indexOf(item.name) === -1;
                 });
                 this.rightChecked = [];
+                this.$emit('on-change', this.leftOptions, this.rightOptions);
             },
             getNewChecked(array) {
                 return u.filter(array, item => {

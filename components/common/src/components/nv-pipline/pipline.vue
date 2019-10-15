@@ -26,7 +26,7 @@
                     </p>
                     <slot name="cardContent" v-bind:card="card"></slot>
                 </div>
-                <div class="add-card" v-if="node.cardSet && node.cardSet.length < max">
+                <div class="add-card" v-if="node.cardSet && node.cardSet.length < cardMax">
                     <Icon type="ios-plus-empty" @click.native="addCard(node)"></Icon>
                     <p @click="addCard(node)">点击新建{{cardTitle}}</p>
                 </div>
@@ -55,9 +55,19 @@ const prefixCls = "noahv-pipline";
         name: 'piplineNode',
         props: {
             data: Array,
-            disabled: {
-                type: Boolean,
-                default: false
+            cardMax: {
+                type: Number,
+                default: 5,
+                validator: (val) => {
+                    return val >= 1;
+                }
+            },
+            nodeMax: {
+                type: Number,
+                default: 3,
+                validator: (val) => {
+                    return val >= 1;
+                }
             },
             nodeTitle: {
                 type: String,
@@ -83,7 +93,6 @@ const prefixCls = "noahv-pipline";
         data() {
             return {
                 prefixCls: prefixCls,
-                max: 7,
                 nodes: [],
                 removeNodeIndex: '',
                 removeModalShow: false
@@ -159,8 +168,8 @@ const prefixCls = "noahv-pipline";
                 this.nodes[this.nodes.length - 1]['completedPause'] = false;
             },
             addNode() {
-                if (this.nodes.length >= this.max) {
-                    this.$Message.warning('最多可以添加' + this.max + '个' + this.nodeTitle);
+                if (this.nodes.length >= this.nodeMax) {
+                    this.$Message.warning('最多可以添加' + this.nodeMax + '个' + this.nodeTitle);
                     return;
                 }
 
@@ -188,7 +197,7 @@ const prefixCls = "noahv-pipline";
                 this.$set(node, 'expandText', node.expand ? '收起' : '详情');
             },
             addCard(node) {
-                if (node.cardSet && node.cardSet.length >= this.max) {
+                if (node.cardSet && node.cardSet.length >= this.cardMax) {
                     return;
                 }
                 let cardSet = node.cardSet || [];
