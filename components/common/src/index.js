@@ -36,19 +36,25 @@ import NvDutyTable from './components/nv-dutytable';
 // Basic，Sa命名方式
 import SaIcon from './components/nv-icon';
 import SaInput from './components/nv-input';
+import SaCheckbox from './components/nv-checkbox';
 import SaTextLine from './components/nv-textline';
 import SaSwitch from './components/nv-switch';
 import SaButton from './components/nv-button';
 import SaDialog from './components/nv-dialog';
+import SaPipline from './components/nv-pipline';
+import SaTransfer from './components/nv-transfer';
 import {SaTrend, SaChart} from './components/nv-chart';
 
 // Basic，Nv命名方式
 import NvIcon from './components/nv-icon';
 import NvInput from './components/nv-input';
+import NvCheckbox from './components/nv-checkbox';
 import NvTextLine from './components/nv-textline';
 import NvSwitch from './components/nv-switch';
 import NvButton from './components/nv-button';
 import NvDialog from './components/nv-dialog';
+import NvPipline from './components/nv-pipline';
+import NvTransfer from './components/nv-transfer';
 import {NvTrend, NvChart} from './components/nv-chart';
 
 // 暂时兼容部分组件老的命名
@@ -70,6 +76,7 @@ const noahv = {
     SaList,
     SaSteps,
     SaTag,
+
     // 业务模板，兼容Nv命名组件
     NvForm,
     NvTable,
@@ -88,20 +95,26 @@ const noahv = {
     // 基础组件类
     SaIcon,
     SaInput,
+    SaCheckbox,
     SaTextLine,
     SaTree,
     SaDatePicker,
     SaChart,
     SaTrend,
+    SaPipline,
+    SaTransfer,
 
     // 基础组件类，兼容Nv命名组件
     NvIcon,
     NvInput,
+    NvCheckbox,
     NvTextLine,
+    NvPipline,
     NvTree,
     NvDatePicker,
     NvChart,
     NvTrend,
+    NvTransfer,
 
     // 暂时兼容部分组件老的命名
     formTpl,
