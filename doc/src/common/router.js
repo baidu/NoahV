@@ -218,6 +218,16 @@ export default [
             , 'doc-search')
     },
     {
+        path: '/doc/component/pipline',
+        component: r => require.ensure([], () => r(require('src/doc/component/pipline/pipline.md'))
+            , 'doc-pipline')
+    },
+    {
+        path: '/doc/component/transfer',
+        component: r => require.ensure([], () => r(require('src/doc/component/transfer/transfer.md'))
+            , 'doc-transfer')
+    },
+    {
         path: '/doc/component/dutyTable',
         component: r => require.ensure([], () => r(require('src/doc/component/dutyTable/dutyTable.md'))
             , 'doc-dutyTable')

@@ -156,6 +156,18 @@ export default {
                     type: 'search'
                 },
                 {
+                    label: '流程组件',
+                    key: 'doc/component/pipline',
+                    link: 'doc/component/pipline',
+                    type: 'network-topology'
+                },
+                {
+                    label: '穿梭框组件',
+                    key: 'doc/component/transfer',
+                    link: 'doc/component/transfer',
+                    type: 'angle-double-right-square'
+                },
+                {
                     label: '值班表组件',
                     key: 'doc/component/dutyTable',
                     link: 'doc/component/dutyTable',
