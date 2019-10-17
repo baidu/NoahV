@@ -1,5 +1,8 @@
 ## ChangeLog
 
+## 1.0.17
+* [新增功能] nv-icon组件，新增noahv-icon-web-mo、noahv-icon-manage、noahv-icon-room-mo三个图标
+
 ## 1.0.16
 * [功能优化] NvPipline组件暴露cardMax、nodeMax配置项；NvTransfer组件暴露勾选、移动事件；
 
