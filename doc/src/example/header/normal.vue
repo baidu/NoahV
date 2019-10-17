@@ -68,5 +68,8 @@ export default {
                 color: #fff !important;
             }
         }
+        .ivu-menu-light.ivu-menu-horizontal .ivu-menu-item, .ivu-menu-light.ivu-menu-horizontal .ivu-menu-submenu {
+            color: #fff;
+        }
     }
 </style>
