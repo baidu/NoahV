@@ -87,6 +87,9 @@ export default {
             .login-wrapper {
                 float: right;
             }
+            .ivu-menu-light.ivu-menu-horizontal .ivu-menu-item, .ivu-menu-light.ivu-menu-horizontal .ivu-menu-submenu {
+                color: #fff;
+            }
         }
     }
 </style>
