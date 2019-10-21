@@ -7,6 +7,7 @@
             <li><router-link to="/nvreport">nvreport</router-link></li>
             <li><router-link to="/nveventriver">nveventriver</router-link></li>
             <li><router-link to="/nvbubble">nvbubble</router-link></li>
+            <li><router-link to="/nvmap">nvmap</router-link></li>
         </ul>
         <router-view></router-view>
     </div>

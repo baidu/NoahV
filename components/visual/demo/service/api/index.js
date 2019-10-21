@@ -20,6 +20,8 @@ require('../mock/trendWarning');
 
 require('../mock/trendPoint');
 
+require('../mock/dataMap');
+
 export default {
     billboard: {
         conf: '/mock/billboard',
