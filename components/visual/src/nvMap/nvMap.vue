@@ -14,7 +14,7 @@ import mdutil from '../util/util';
 const ERRORCONFIG = '加载失败';
 const MAP_OPTIONS = {
     tooltip: {
-        backgroundColor: '#fff',
+        backgroundColor: '#aaaabb',
         trigger: 'item',
         padding: [10, 20, 10, 10],
         textStyle: {
@@ -37,7 +37,6 @@ const MAP_OPTIONS = {
                 : <span style="display: block;float: right;color: #333;">
                 ${params.value ? params.value * 100 + '%' : '无数据'}
                 </span></dd>`;
-            seriesTooltip.push(html);
             if (params.data && params.data.toolTipData) {
                 _.each(params.data.toolTipData, function (item) {
                     seriesTooltip.push(`<dd style="padding: 3px 15px;color: #666;font-size: 12px;">
@@ -46,6 +45,9 @@ const MAP_OPTIONS = {
                     ${item.value + (item.unit ? item.unit : '')}
                     </span></dd>`);
                 });
+            }
+            else {
+                seriesTooltip.push(html);
             }
             return '<dl style="min-width: 180px;padding-bottom: 10px">'
                 + '<dt style="padding: 10px 15px 5px 15px;color: #333;margin-bottom: 3px;font-size:13px;">'
@@ -80,10 +82,11 @@ const MAP_OPTIONS = {
     },
     series: [
         {
-            name: '异常率',
+            name: '',
             type: 'map',
             map: 'china',
-            selectedMode : 'multiple',
+            selectedMode : false,
+            backgroundColor: '#aaaabb',
             label: {
                 normal: {
                     // show: true
@@ -97,35 +100,18 @@ const MAP_OPTIONS = {
                     areaColor: '#F0EFF0',
                     borderColor: '#FFF'
                 },
-                // emphasis: {
-                //     areaColor: '#09f'
-                // }
+                emphasis: {
+                    areaColor: '#09f'
+                }
             },
             emphasis: {
                 itemStyle: {
-                    // areaColor: '#F0EFF0',
+                    areaColor: false,
                     shadowBlur: 10,
                     shadowColor: 'rgba(0, 0, 0, 0.5)'
                 }
             },
-            data:[
-                // {name:'广东', value: 1},
-                // {name:'西藏', value: 0},
-                {name:'黑龙江', value: 0, toolTipData: [
-                    {
-                        name: '可用率',
-                        value: 0,
-                        unit: '%'
-                    },
-                    {
-                        name: '响应时间',
-                        value: 1000,
-                        unit: 'ms'
-                    }
-                ]},
-                {name:'河北', value: 0.9},
-                // {name:'南海诸岛', value: 1}
-            ]
+            data:[]
         }
     ]
 };
@@ -155,6 +141,20 @@ export default {
             type: Object,
             required: false,
             default: () => {}
+        },
+        mapData: {
+            type: Array,
+            required: false,
+            default: () => []
+        },
+        seriesName: {
+            type: String,
+            required: false,
+            default: '指标名称'
+        },
+        dataFilter: {
+            type: Function,
+            required: false
         }
     },
     data() {
@@ -184,10 +184,16 @@ export default {
             this.isLoading = true;
             this.map = echarts.init(this.$refs.map);
             Object.assign(MAP_OPTIONS, this.options);
+            if (this.seriesName) {
+                 MAP_OPTIONS.series[0].name = this.seriesName;
+            }
             if (this.url) {
                 this.getMapData();
             }
             else {
+                if (this.mapData) {
+                    MAP_OPTIONS.series[0].data = this.mapData;
+                }
                 this.map.setOption(MAP_OPTIONS);
             }
         },
@@ -203,6 +209,10 @@ export default {
                 params: this.params,
                 method: this.method
             }).then((data) => {
+                let mapData = data.data.data;
+                if (dataFilter && typeof dataFilter === 'function') {
+                    mapData = dataFilter(mapData);
+                }
                 MAP_OPTIONS.series[0].data = data.data.data;
                 this.map.setOption(MAP_OPTIONS);
             });

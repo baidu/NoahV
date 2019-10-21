@@ -1,6 +1,6 @@
 <template>
     <div class="hello">
-        <NvMap title="中国移动网络联通性视图" style="width: 50%;" :url="dataUrl"/>
+        <NvMap title="中国移动网络联通性视图" style="width: 50%;" :mapData="mapData" seriesName="test" />
     </div>
 </template>
 
@@ -10,7 +10,22 @@ export default {
     name: 'widget',
     data() {
         return {
-        	dataUrl: '/mock/dataMap'
+        	dataUrl: '/mock/dataMap',
+        	mapData: [
+	            {name:'黑龙江', value: 1, toolTipData: [
+	                {
+	                    name: '可用率',
+	                    value: 10,
+	                    unit: '%'
+	                },
+	                {
+	                    name: '响应时间',
+	                    value: 1000,
+	                    unit: 'ms'
+	                }
+	            ]},
+	            {name:'河北', value: 0.9},
+	        ]
         };
     }
 };
