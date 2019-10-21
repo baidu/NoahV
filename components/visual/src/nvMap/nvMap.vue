@@ -163,6 +163,18 @@ export default {
             isShowError: false
         }
     },
+    watch: {
+        mapData: {
+            handler () {
+                if (!this.map) {
+                    return;
+                }
+                MAP_OPTIONS.series[0].data = this.mapData;
+                this.map.setOption(MAP_OPTIONS);
+            },
+            deep: true
+        }
+    },
     mounted() {
         this.renderChart();
         // 处理resize事件，IE只兼容IE9及以上
