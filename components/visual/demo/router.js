@@ -23,5 +23,9 @@ export default [
     {
         path: '/nvbubble',
         component: r => require.ensure([], () => r(require('./components/bubble')), 'bubble')
+    },
+    {
+        path: '/nvmap',
+        component: r => require.ensure([], () => r(require('./components/nvmap')), 'nvmap')
     }
 ];

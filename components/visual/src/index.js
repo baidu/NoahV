@@ -23,6 +23,7 @@ import NvMDCustomBox from './customBox';
 import NvMDReport from './mdreport';
 import NvMDEventRiverView from './eventRiver/index';
 import NvMDBubble from './mdbubble/mdbubble';
+import NvMap from './nvMap/index';
 
 const defaultEchartsConf = Object.assign({}, ApiConf, eConfig);
 
@@ -39,7 +40,8 @@ const noahVisual = {
     NvMDCustomBox,
     NvMDReport,
     NvMDEventRiverView,
-    NvMDBubble
+    NvMDBubble,
+    NvMap
 };
 
 const install = (Vue, opts) => {
