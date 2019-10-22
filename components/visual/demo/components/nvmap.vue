@@ -1,6 +1,6 @@
 <template>
     <div class="hello">
-        <NvMap title="中国移动网络联通性视图" style="width: 50%;" :mapData="mapData" seriesName="指标名称" />
+        <NvMap title="中国移动网络联通性视图" style="width: 50%;" :mapData="mapData" seriesName="指标名称" @on-series-click="click" />
     </div>
 </template>
 
@@ -27,6 +27,11 @@ export default {
 	            {name:'河北', value: 0.9},
 	        ]
         };
+    },
+    methods: {
+    	click(data) {
+    		// handler data
+    	}
     }
 };
 </script>

@@ -159,6 +159,7 @@ export default {
     },
     data() {
         return {
+            map: null,
             isLoading: false,
             isShowError: false
         }
@@ -186,7 +187,6 @@ export default {
         if (this.url) {
             this.getMapData();
         }
-        this.map = null;
     },
     methods: {
         getInstance() {
@@ -195,6 +195,12 @@ export default {
         renderChart() {
             this.isLoading = true;
             this.map = echarts.init(this.$refs.map);
+            this.map.on('click', 'series', (data) => {
+                this.$emit('on-series-click', {
+                    name: data.name,
+                    data: data.data
+                });
+            });
             Object.assign(MAP_OPTIONS, this.options);
             if (this.seriesName) {
                  MAP_OPTIONS.series[0].name = this.seriesName;
