@@ -231,28 +231,58 @@ export default {
                     initValue: '-'
                 },
                 {
-                    properties: 'params',
-                    comment: 'request请求参数',
-                    type: 'Object',
-                    initValue: '-'
-                },
-                {
                     properties: 'method',
                     comment: 'request请求类型',
                     type: 'String',
                     initValue: 'post'
                 },
                 {
-                    properties: 'showLoading',
-                    comment: 'request请求loading文字',
-                    type: 'String',
+                    properties: 'params',
+                    comment: 'request请求参数',
+                    type: 'Object',
                     initValue: '-'
                 },
                 {
                     properties: 'options',
-                    comment: '趋势图配置',
+                    comment: 'Echarts 趋势图配置',
                     type: 'Object',
                     initValue: ''
+                },
+                {
+                    properties: 'requestConfig',
+                    comment: '可以将url和params、method等参数合并到requestConfig中',
+                    type: 'Object',
+                    initValue: '{}'
+                },
+                {
+                    properties: 'trendData',
+                    comment: '可以直接将已经获取好的数据交给趋势图来渲染',
+                    type: 'Object',
+                    initValue: '{}'
+                },
+                {
+                    properties: 'seriesFilter',
+                    comment: '数据线条后置处理钩子，参数为当前有的数据线条，必须要返回需要展示的线条数据',
+                    type: 'Function',
+                    initValue: '-'
+                },
+                {
+                    properties: 'dataFilter',
+                    comment: '数据后置处理钩子，可在数据请求完成后对数据进行封装处理，参数为请求到的数据，必须要有返回值',
+                    type: 'Function',
+                    initValue: '-'
+                },
+                {
+                    properties: 'showLoading',
+                    comment: 'request请求loading文字',
+                    type: 'String',
+                    initValue: '数据加载中...'
+                },
+                {
+                    properties: 'noDataTip',
+                    comment: '无数据提示，支持HTML',
+                    type: 'String',
+                    initValue: '无数据'
                 }
             ]
         };
