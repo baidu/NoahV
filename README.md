@@ -18,7 +18,7 @@
 	<img src="https://img.shields.io/github/commit-activity/w/baidu/NoahV.svg?style=flat-square" alt="commit">
 </a>
 
-NoahV是一个基于vue开发的前端应用框架，主要适用于常见的后台管理系统，官网地址：[http://www.noahv.org/](http://www.noahv.org/)
+NoahV是一个基于vue开发的前端应用框架，主要适用于常见的后台管理系统，官网地址：[https://baidu.github.io/NoahV](https://baidu.github.io/NoahV)
 
 特性：
 
@@ -69,9 +69,9 @@ $ noahv create
 # 根据提示选择需要创建的页面类型，目前支持form、list、filterList、chart四种模板类型
 ```
 
-详细信息请查看 [模板使用](http://www.noahv.org/#/guide/tpl)
+详细信息请查看 [模板使用](https://baidu.github.io/NoahV/#/guide/tpl)
 
-更多关于框架的使用请查看 [NoahV开发指南](http://www.noahv.org/#/guide/about)
+更多关于框架的使用请查看 [NoahV开发指南](https://baidu.github.io/NoahV/#/guide/about)
 
 
 ## 讨论

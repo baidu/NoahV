@@ -31,7 +31,7 @@ Feature
 * Provide the operation and maintenance dashboard feature, especially for the monitoring data analysis 
 * Provide the scaffold command line tool to init the project, mockup the API data, start the devserver, update the system and so on.
 
-Document: [https://www.noahv.org/](https://www.noahv.org/)
+Document: [https://baidu.github.io/NoahV](https://baidu.github.io/NoahV)
 
 ## Quick Start
 
@@ -73,8 +73,8 @@ $ noahv create
 
 ## Document
 
-* [Quickstart](http://www.noahv.org/#/guide/quickstart)
-* [Dashboard](http://www.noahv.org/#/doc/view/guide)
+* [Quickstart](https://baidu.github.io/NoahV/#/guide/quickstart)
+* [Dashboard](https://baidu.github.io/NoahV/#/doc/view/guide)
 
 
 ## License

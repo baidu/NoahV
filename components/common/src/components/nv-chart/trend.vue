@@ -5,9 +5,10 @@
             <slot name="header-right"></slot>
         </h3>
         <!-- <vue-echarts :options="curOptions" ref="chart"></vue-echarts> -->
-        <div :class="getCls('chart')" ref="chart" v-if="!errTip"></div>
+        <div :class="getCls('chart')" ref="chart" v-show="displayChart"></div>
         <div class="trend-error-holder" v-show="errTip">{{errTip}}</div>
-        <div class="show-loading" v-show="!isLoading && showLoading">
+        <div class="trend-error-holder" v-show="noData" v-html="noDataTip"></div>
+        <div class="show-loading" v-show="!isLoading">
             <div class="mask"></div>
             <div class="content">{{showLoading}}</div>
         </div>
@@ -141,16 +142,44 @@ function shortValue(value) {
 export default {
     name: 'NvTrend',
     props: {
-        title: String,
-        url:  String,
-        params: Object,
-        options: Object,
-        showLoading: String,
-        method: String,
-        dataFilter: Function,
-        requestConfig: Object,
-        trendData: Object,
-        seriesFilter: Function
+        title: {
+            type: String,
+            default: ''
+        },
+        url: {
+            type: String,
+            default: ''
+        },
+        params: {
+            type: Object,
+            default: () => ({})
+        },
+        options: {
+            type: Object,
+            default: () => ({})
+        },
+        showLoading: {
+            type: String,
+            default: '数据加载中...'
+        },
+        method: {
+            type: String,
+            default: 'post'
+        },
+        requestConfig: {
+            type: Object,
+            default: () => ({})
+        },
+        trendData: {
+            type: Object,
+            default: () => ({})
+        },
+        noDataTip: {
+            type: String,
+            default: '无数据'
+        },
+        seriesFilter: Function,
+        dataFilter: Function
     },
 
     data() {
@@ -158,6 +187,7 @@ export default {
             resTitle: this.title ? this.title : '',
             isLoading: false,
             errTip: '',
+            noData: false,
         };
     },
     created() {
@@ -182,6 +212,9 @@ export default {
     computed: {
         watchObj() {
             return [this.params, this.trendData];
+        },
+        displayChart() {
+            return !this.errTip && !this.noData
         }
     },
     watch: {
@@ -283,6 +316,12 @@ export default {
 
 
             let timeGap = Number.MIN_VALUE;
+
+            if (data.data && data.data.length === 0) {
+                this.isLoading = true;
+                this.showNoData();
+                return;
+            }
 
             // set the series
             data.data.forEach(item => {
@@ -394,6 +433,9 @@ export default {
         },
         showError(message) {
             this.errTip = message;
+        },
+        showNoData() {
+            this.noData = true;
         },
         isInScreen() {
             const main = this.$refs.trend;
