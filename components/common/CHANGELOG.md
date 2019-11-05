@@ -1,5 +1,11 @@
 ## ChangeLog
 
+## 1.0.19
+* [功能新增] 组件库新增nv-cascaderSelect组件。
+
+## 1.0.18
+* [功能新增] nv-trend组件新增支持展示无数据提示。
+
 ## 1.0.17
 * [新增功能] nv-icon组件，新增noahv-icon-web-mo、noahv-icon-manage、noahv-icon-room-mo三个图标
 

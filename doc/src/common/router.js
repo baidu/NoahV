@@ -170,6 +170,10 @@ export default [
         component: r => require.ensure([], () => r(require('src/doc/component/steps/steps.md')), 'steps')
     },
     {
+        path: '/doc/component/cascader-select',
+        component: r => require.ensure([], () => r(require('src/doc/component/cascaderSelect/cascaderSelect.md')), 'cascaderSelect')
+    },
+    {
         path: '/doc/component/tag',
         component: r => require.ensure([], () => r(require('src/doc/component/tag/tag.md')), 'tag')
     },

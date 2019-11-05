@@ -138,6 +138,12 @@ export default {
                     type: 'dot-circle-o'
                 },
                 {
+                    label: '级联选择组件',
+                    key: 'doc/component/cascader-select',
+                    link: 'doc/component/cascader-select',
+                    type: 'angle-down'
+                },
+                {
                     label: '标签组件',
                     key: 'doc/component/tag',
                     link: 'doc/component/tag',
