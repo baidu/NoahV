@@ -44,6 +44,7 @@ import SaDialog from './components/nv-dialog';
 import SaPipline from './components/nv-pipline';
 import SaTransfer from './components/nv-transfer';
 import {SaTrend, SaChart} from './components/nv-chart';
+import SaCascaderSelect from './components/nv-cascaderSelect';
 
 // Basic，Nv命名方式
 import NvIcon from './components/nv-icon';
@@ -56,6 +57,7 @@ import NvDialog from './components/nv-dialog';
 import NvPipline from './components/nv-pipline';
 import NvTransfer from './components/nv-transfer';
 import {NvTrend, NvChart} from './components/nv-chart';
+import NvCascaderSelect from './components/nv-cascaderSelect';
 
 // 暂时兼容部分组件老的命名
 import formTpl from './components/nv-form';
@@ -103,6 +105,7 @@ const noahv = {
     SaTrend,
     SaPipline,
     SaTransfer,
+    SaCascaderSelect,
 
     // 基础组件类，兼容Nv命名组件
     NvIcon,
@@ -115,6 +118,7 @@ const noahv = {
     NvChart,
     NvTrend,
     NvTransfer,
+    NvCascaderSelect,
 
     // 暂时兼容部分组件老的命名
     formTpl,
