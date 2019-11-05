@@ -33,6 +33,10 @@ export default [
         component: r => require.ensure([], () => r(require('./components/datePicker/datepicker.vue')), 'datepicker')
     },
     {
+        path: '/nvcascaderselect',
+        component: r => require.ensure([], () => r(require('./components/cascaderSelect/cascaderSelect.vue')), 'cascaderSelect')
+    },
+    {
         path: '/nvchart',
         component: r => require.ensure([], () => r(require('./components/chart/chartDemo.vue')), 'chart')
     },

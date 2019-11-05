@@ -1,6 +1,6 @@
 import { createVue, destroyVM } from '../util';
 
-describe('pipline.vue', () => {
+describe('NvTransfer.vue', () => {
     let vm;
     afterEach(() => {
     destroyVM(vm);
@@ -8,7 +8,7 @@ describe('pipline.vue', () => {
     it('should create a transfer component rightly', done => {
         vm = createVue({
             template: '<NvTransfer leftTitle="源列表" rightTitle="目标列表" :options="options1" :leftSearch="true"'
-            + ':rightSearch="true" :leftDisabled="false" :rightDisabled="false" @on-change="change"></NvTransfer>',
+            + ':rightSearch="true" :leftDisabled="false" :rightDisabled="false"></NvTransfer>',
             data() {
                 return {
                     options1: [],
