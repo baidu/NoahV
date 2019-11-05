@@ -37,7 +37,8 @@ if [ $? -ne 0 ]; then
 fi
 echo "npm build success"
 
-mv noahv/* ../docs
+rm -rf ../docs
+mv noahv ../docs
 
 # tar
 # cd output
