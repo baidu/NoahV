@@ -1,5 +1,9 @@
 ## ChangeLog
 
+
+## 1.0.20
+* [功能修复] 修复nv-cascaderSelect组件中，文件路径引用兼容问题。
+
 ## 1.0.19
 * [功能新增] 组件库新增nv-cascaderSelect组件。
 
