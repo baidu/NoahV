@@ -19,7 +19,7 @@
     </div>
 </template>
 <script>
-import Caspanel from './Caspanel';
+import Caspanel from './caspanel';
 import clickoutside from './cascaderSelect.js';
 
 const prefixCls = 'noahv-cascader-select';

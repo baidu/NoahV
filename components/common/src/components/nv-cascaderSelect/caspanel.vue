@@ -10,7 +10,7 @@
     </ul>
 </template>
 <script>
-    import Casitem from './Casitem';
+    import Casitem from './casitem';
 
     export default {
         name: 'Caspanel',
