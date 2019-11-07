@@ -11,11 +11,10 @@
             <div :class="getNodeCls(item)">
                 <div class="node-body">
                     <span>
-                        <div class="node-arrow">
+                        <div class="node-arrow" @click="expandHandler(item)">
                             <span
                                 v-if="(item.children && item.children.length) || item.lazyable"
                                 :class="getArrowCls(item)"
-                                @click="expandHandler(item)"
                             >
                             </span>
                         </div>
