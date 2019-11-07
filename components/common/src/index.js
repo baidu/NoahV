@@ -58,6 +58,7 @@ import NvPipline from './components/nv-pipline';
 import NvTransfer from './components/nv-transfer';
 import {NvTrend, NvChart} from './components/nv-chart';
 import NvCascaderSelect from './components/nv-cascaderSelect';
+import NvEllipsis from './components/nv-ellipsis';
 
 // 暂时兼容部分组件老的命名
 import formTpl from './components/nv-form';
@@ -119,6 +120,7 @@ const noahv = {
     NvTrend,
     NvTransfer,
     NvCascaderSelect,
+    NvEllipsis,
 
     // 暂时兼容部分组件老的命名
     formTpl,

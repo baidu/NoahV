@@ -23,6 +23,7 @@
             <li><router-link to="/nvpipline">nv-pipline</router-link></li>
             <li><router-link to="/nvtransfer">nv-transfer</router-link></li>
             <li><router-link to="/nvtag">nv-tag</router-link></li>
+            <li><router-link to="/nvellipsis">nv-ellipsis</router-link></li>
             <li><router-link to="/nv404">nv-404</router-link></li>
         </ul>
         <router-view></router-view>
@@ -38,7 +39,7 @@ export default {
 </script>
 <style lang="less" >
 .demo-container {
-    padding: 20px 40px; 
+    padding: 20px 40px;
     margin-bottom: 40px;
     ul { display: flex; flex-wrap: wrap; margin-bottom: 30px;}
     & > ul > li { display: inline-block; margin-right: 20px; font-size: 14px; min-width: 90px;margin-bottom: 20px;}

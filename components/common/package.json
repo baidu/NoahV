@@ -5,7 +5,7 @@
   "main": "src/index",
   "scripts": {
     "test": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js",
-    "dev": "webpack-dev-server --content-base demo/ --open --inline --hot --compress --history-api-fallback --port 8088 --config build/webpack.dev.config.js --mode development",
+    "dev": "webpack-dev-server --content-base demo/ --open --inline --hot --compress --history-api-fallback --port 8088 --config build/webpack.dev.config.js --mode development --host 0.0.0.0",
     "lint": "eslint --ext .js,.vue src --quiet",
     "test-single": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test:coverage": "npm run test-single && cat ./test/unit/coverage/lcov.info | ./node_modules/.bin/coveralls"
@@ -20,12 +20,13 @@
   "dependencies": {
     "axios": "^0.18.1",
     "echarts": "^4.2.0-rc.2",
-    "iview": "^2.11.0",
+    "iview": "^3.5.1",
     "moment": "^2.19.1",
     "noahv-request": "1.0.2",
     "underscore": "^1.8.3",
     "uuid": "^3.3.2",
     "vue": "^2.6.10",
+    "vue-clipboard2": "^0.3.1",
     "vue-codemirror": "^4.0.5",
     "vue-router": "^3.0.1"
   },
