@@ -18,7 +18,7 @@
     "axios": "^0.18.1",
     "clipboard-polyfill": "^2.4.7",
     "highlight.js": "^9.12.0",
-    "iview": "^2.9.1",
+    "iview": "3.5.1",
     "lodash": "^4.17.11",
     "moment": "^2.19.1",
     "noahv-component": "^1.0.20",

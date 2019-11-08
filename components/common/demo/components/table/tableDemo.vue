@@ -138,10 +138,10 @@ export default {
                         link: 'https://www.baidu.com?id={hangzhou}'
                     },
                     {
-                        type: 'sa-icon',
+                        type: 'nv-icon',
                         btnType: 'error',
                         className: 'delete-icon',
-                        icon: 'edit',
+                        // icon: 'edit',
                         // style: {} ,
                         // label和icon只能展示一个
                         // label: '删除',

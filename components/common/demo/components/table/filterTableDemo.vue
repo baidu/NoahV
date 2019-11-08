@@ -11,7 +11,7 @@ export default {
                 {
                     name: 'date1',
                     title: '时间',
-                    type: 'time',
+                    type: 'NvTime',
                     format: 'yyyy-MM-dd',
                     value:"2017-10-01",
                     required: true
@@ -20,7 +20,7 @@ export default {
                     name: 'date',
                     submitAlias: ['startTime', 'endTime'],
                     title: '时间区间',
-                    type: 'timeRange',
+                    type: 'NvTimeRange',
                     format: 'yyyy-MM-dd HH:mm:ss',
                     value: ['2017-10-08 12:22:23', '2017-10-20 12:22:59'],
                     required: true

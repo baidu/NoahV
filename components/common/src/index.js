@@ -7,18 +7,6 @@
  *         Joannamo(joannamo123@163.com)
  */
 
-// TPL，Sa命名方式
-import SaForm from './components/nv-form';
-import SaTable from './components/nv-table';
-import SaFilterTable from './components/nv-filtertable';
-import SaContrastTrend from './components/nv-chart';
-import Sa404 from './components/nv-404';
-import SaTree from './components/nv-tree';
-import SaDatePicker from './components/nv-datepicker';
-import SaList from './components/nv-list';
-import SaSteps from './components/nv-steps';
-import SaTag from './components/nv-tag';
-
 // TPL，Nv命名方式
 import NvForm from './components/nv-form';
 import NvTable from './components/nv-table';
@@ -32,19 +20,6 @@ import NvSteps from './components/nv-steps';
 import NvSearch from './components/nv-search';
 import NvTag from './components/nv-tag';
 import NvDutyTable from './components/nv-dutytable';
-
-// Basic，Sa命名方式
-import SaIcon from './components/nv-icon';
-import SaInput from './components/nv-input';
-import SaCheckbox from './components/nv-checkbox';
-import SaTextLine from './components/nv-textline';
-import SaSwitch from './components/nv-switch';
-import SaButton from './components/nv-button';
-import SaDialog from './components/nv-dialog';
-import SaPipline from './components/nv-pipline';
-import SaTransfer from './components/nv-transfer';
-import {SaTrend, SaChart} from './components/nv-chart';
-import SaCascaderSelect from './components/nv-cascaderSelect';
 
 // Basic，Nv命名方式
 import NvIcon from './components/nv-icon';
@@ -60,24 +35,38 @@ import {NvTrend, NvChart} from './components/nv-chart';
 import NvCascaderSelect from './components/nv-cascaderSelect';
 import NvEllipsis from './components/nv-ellipsis';
 
+// TPL，Sa命名方式
+import SaForm from './components/nv-form';
+import SaTable from './components/nv-table';
+import SaFilterTable from './components/nv-filtertable';
+import SaContrastTrend from './components/nv-chart';
+import Sa404 from './components/nv-404';
+import SaTree from './components/nv-tree';
+import SaDatePicker from './components/nv-datepicker';
+import SaList from './components/nv-list';
+import SaSteps from './components/nv-steps';
+import SaTag from './components/nv-tag';
+
+// Basic，Sa命名方式
+import SaIcon from './components/nv-icon';
+import SaInput from './components/nv-input';
+import SaCheckbox from './components/nv-checkbox';
+import SaTextLine from './components/nv-textline';
+import SaSwitch from './components/nv-switch';
+import SaButton from './components/nv-button';
+import SaDialog from './components/nv-dialog';
+import SaPipline from './components/nv-pipline';
+import SaTransfer from './components/nv-transfer';
+import {SaTrend, SaChart} from './components/nv-chart';
+import SaCascaderSelect from './components/nv-cascaderSelect';
+
+
 // 暂时兼容部分组件老的命名
 import formTpl from './components/nv-form';
 import tableTpl from './components/nv-table';
 import filterTableTpl from './components/nv-filtertable';
 
 const noahv = {
-    // 业务模板
-    SaForm,
-    SaTable,
-    SaFilterTable,
-    Sa404,
-    SaSwitch,
-    SaDialog,
-    SaButton,
-    SaContrastTrend,
-    SaList,
-    SaSteps,
-    SaTag,
 
     // 业务模板，兼容Nv命名组件
     NvForm,
@@ -94,19 +83,6 @@ const noahv = {
     NvTag,
     NvDutyTable,
 
-    // 基础组件类
-    SaIcon,
-    SaInput,
-    SaCheckbox,
-    SaTextLine,
-    SaTree,
-    SaDatePicker,
-    SaChart,
-    SaTrend,
-    SaPipline,
-    SaTransfer,
-    SaCascaderSelect,
-
     // 基础组件类，兼容Nv命名组件
     NvIcon,
     NvInput,
@@ -120,6 +96,32 @@ const noahv = {
     NvTransfer,
     NvCascaderSelect,
     NvEllipsis,
+
+     // 业务模板
+    SaForm,
+    SaTable,
+    SaFilterTable,
+    Sa404,
+    SaSwitch,
+    SaDialog,
+    SaButton,
+    SaContrastTrend,
+    SaList,
+    SaSteps,
+    SaTag,
+
+    // 基础组件类
+    SaIcon,
+    SaInput,
+    SaCheckbox,
+    SaTextLine,
+    SaTree,
+    SaDatePicker,
+    SaChart,
+    SaTrend,
+    SaPipline,
+    SaTransfer,
+    SaCascaderSelect,
 
     // 暂时兼容部分组件老的命名
     formTpl,

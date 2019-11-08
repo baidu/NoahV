@@ -5,8 +5,8 @@
             </NvPool>
         </div>
         <div class="arrow">
-            <Button class="arrow-btn" type="primary" :disabled="goRightDisabled" @click="goRight" icon="chevron-right"></Button>
-            <Button class="arrow-btn" type="primary" :disabled="goLeftDisabled" @click="goLeft" icon="chevron-left"></Button>
+            <Button class="arrow-btn" type="primary" :disabled="goRightDisabled" @click="goRight" icon="ios-arrow-forward"></Button>
+            <Button class="arrow-btn" type="primary" :disabled="goLeftDisabled" @click="goLeft" icon="ios-arrow-back"></Button>
         </div>
         <div class="right">
             <NvPool :data="rightOptions" :title="rightTitle" :disabled="rightDisabled" @on-change="rightChange">

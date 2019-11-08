@@ -119,6 +119,8 @@ export const iconConfig = {
         ['th-large', '菜单', '表格'],
         ['th-large-o', '菜单', '表格'],
         ['download', '下载', '导出'],
+        ['arrow-up-line', '上移'],
+        ['arrow-down-line', '下移'],
         ['print', '打印'],
         ['sort-asc', '排序', '升序', '上'],
         ['angle-up', '排序', '升序', '上', '箭头'],

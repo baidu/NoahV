@@ -34,7 +34,7 @@
                     type: 'info',
                     content: 'success',
                     size: 'default',
-                    icon: 'social-googleplus',
+                    icon: 'ios-refresh',
                     disabled: 'false',
                     action: {
                         url: '/xxx',
@@ -110,7 +110,7 @@ export default {
             content: 'success',
             type: 'info',
             size: 'default',
-            icon: 'social-googleplus',
+            icon: 'ios-refresh',
             disabled: false,
             action: {
                 url: '/api/button',

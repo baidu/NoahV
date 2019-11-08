@@ -5,29 +5,29 @@
                 <span class="index-number">{{i + 1}}</span>
                 <span class="index-name">{{nodeTitle}}{{i + 1}}</span>
                 <span class="index-btn-group">
-                    <Icon :class="{'disabled': i === 0}" type="ios-arrow-thin-up" @click="arrowUp(i)"/>
-                    <Icon :class="{'disabled': i === nodes.length - 1}" type="ios-arrow-thin-down" @click="arrowDown(i)"/>
-                    <Icon :class="{'disabled': i === 0 && nodes.length === 1}" type="ios-trash" @click="goRemoveNode(i)"/>
+                    <NvIcon :class="{'disabled': i === 0}" type="arrow-up-line" @click.native="arrowUp(i)"></NvIcon>
+                    <NvIcon :class="{'disabled': i === nodes.length - 1}" type="arrow-down-line" @click.native="arrowDown(i)"></NvIcon>
+                    <NvIcon :class="{'disabled': i === 0 && nodes.length === 1}" type="trash" @click.native="goRemoveNode(i)"></NvIcon>
                 </span>
             </p>
             <p class="header-description">
                 <span class="description" :title="node.description || '空'">{{node.description || '空'}}</span>
                 <span class="expand-btn" @click="expand(node)">
                     {{node.expandText}}
-                    <Icon v-if="!node.expand" type="ios-arrow-down" />
-                    <Icon v-else type="ios-arrow-up" />
+                    <NvIcon v-if="!node.expand" type="angle-down"></NvIcon>
+                    <NvIcon v-else type="angle-up"></NvIcon>
                 </span>
             </p>
             <div class="node-content" v-if="node.expand">
                 <div class="card" v-for="(card, j) in node.cardSet" :key="i + '-' + j">
                     <p class="header">
                         <span>{{cardTitle}}{{j + 1}}</span>
-                        <Icon v-if="node.cardSet.length > 1" type="ios-trash" @click="removeCard(node, j)"/>
+                        <NvIcon v-if="node.cardSet.length > 1" type="trash" @click.native="removeCard(node, j)"></NvIcon>
                     </p>
                     <slot name="cardContent" v-bind:card="card"></slot>
                 </div>
                 <div class="add-card" v-if="node.cardSet && node.cardSet.length < cardMax">
-                    <Icon type="ios-plus-empty" @click.native="addCard(node)"></Icon>
+                    <NvIcon type="plus-small" @click.native="addCard(node)"></NvIcon>
                     <p @click="addCard(node)">点击新建{{cardTitle}}</p>
                 </div>
             </div>
