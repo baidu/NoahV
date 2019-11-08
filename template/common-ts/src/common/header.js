@@ -44,7 +44,7 @@ export default {
         },
         {
             label: '使用文档',
-            linkTarget: 'https://www.noahv.org/#/doc/component/icon'
+            linkTarget: 'https://baidu.github.io/NoahV/#/guide/about'
         }
     ],
     hasBread: true,

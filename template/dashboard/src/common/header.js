@@ -45,6 +45,10 @@ export default {
                     link: 'demo/chart/trend'
                 }
             ]
+        },
+        {
+            label: '使用文档',
+            linkTarget: 'https://baidu.github.io/NoahV/#/guide/about'
         }
     ],
     hasBread: true,
