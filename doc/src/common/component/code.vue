@@ -1,5 +1,5 @@
 <template>
-    <div class="sa-code">
+    <div class="nv-code">
         <div class="btn" @click="lookMore()">{{tip}}</div>
         <div class="btn" @click="copy()" v-show="isActive">{{copyTip}}</div>
         <transition name="slide">
@@ -51,7 +51,7 @@ export default {
 };
 </script>
 <style lang="less">
-.sa-code {
+.nv-code {
     .btn {
         width: 100px;
         height: 30px;

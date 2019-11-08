@@ -2,7 +2,7 @@
 const Mock = require('mockjs');
 const data = function() {
     return {
-        data: '右右右',
+        data: 'NoahV',
         success: true
     }
 }
