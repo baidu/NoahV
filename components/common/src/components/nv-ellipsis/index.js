@@ -2,9 +2,8 @@
  * NoahV
  * Copyright (c) 2016 Baidu, Inc. All Rights Reserved.
  *
- * @file NvSpanPro/NvTableSpanPro Component
- * @author Joannamo(joannamo123@163.com)
- *         darren(darrenywyu@gmail.com)
+ * @file NvEllipsis Component
+ * @author tanrich@foxmail.com
  */
 
 import NvEllipsis from './ellipsis';

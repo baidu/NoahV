@@ -65,6 +65,7 @@ import formTpl from './components/nv-form';
 import tableTpl from './components/nv-table';
 import filterTableTpl from './components/nv-filtertable';
 
+import VueClipboard from 'vue-clipboard2';
 
 const noahv = {
     // 业务模板
@@ -133,6 +134,7 @@ const install = Vue => {
     Object.keys(noahv).forEach(key => {
         Vue.component(key, noahv[key]);
     });
+    Vue.use(VueClipboard);
 };
 
 // auto install

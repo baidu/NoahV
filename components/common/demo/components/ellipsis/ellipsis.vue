@@ -11,6 +11,12 @@
                 <NvEllipsis content="我是nv-ellipsis，我的 tooltip 向上" placement="top"></NvEllipsis>
             </li>
             <li class="ellipsis-li">
+                <NvEllipsis content="我是nv-ellipsis，我的 tooltip 向下" placement="bottom"></NvEllipsis>
+            </li>
+            <li class="ellipsis-li">
+                <NvEllipsis content="我是nv-ellipsis，我的 tooltip 向左" placement="left"></NvEllipsis>
+            </li>
+            <li class="ellipsis-li">
                 <NvEllipsis
                     content="我是nv-ellipsis，我的文本超长,我是nv-ellipsis，我的文本超长,我是nv-ellipsis，我的文本超长,我是nv-ellipsis，我的文本超长"
                 ></NvEllipsis>
@@ -63,13 +69,13 @@ export default {
                     addr: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
                 },
                 {
-                    name: 'dddddddddddddddddddddddddddddddddddddd',
-                    age: 3,
+                    name: 'd',
+                    age: 4,
                     addr: ''
                 },
                 {
                     name: 'e',
-                    age: 33333333333333333333333333333333333333333,
+                    age: 5,
                     addr: 'xx'
                 }
             ]
@@ -80,20 +86,11 @@ export default {
             return [
                 {
                     title: '名字',
-                    key: 'name',
-                    render: (h, {row}) => h('NvEllipsis', {
-                        props: {
-                            content: row.name
-                        }
-                    })
+                    key: 'name'
                 },
                 {
                     title: '年龄',
-                    render: (h, {row}) => h('NvEllipsis', {
-                        props: {
-                            content: row.age
-                        }
-                    })
+                    key: 'age'
                 },
                 {
                     title: '地址',
@@ -108,14 +105,3 @@ export default {
     }
 };
 </script>
-
-<style lang="less">
-.ellipsis-ul {
-    width: 300px;
-    .ellipsis-li {
-        display: block;
-        width: 100%;
-        line-height: 30px;
-    }
-}
-</style>

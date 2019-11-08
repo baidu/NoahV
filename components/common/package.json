@@ -20,7 +20,7 @@
   "dependencies": {
     "axios": "^0.18.1",
     "echarts": "^4.2.0-rc.2",
-    "iview": "^3.5.1",
+    "iview": "^2.12.0",
     "moment": "^2.19.1",
     "noahv-request": "1.0.2",
     "underscore": "^1.8.3",

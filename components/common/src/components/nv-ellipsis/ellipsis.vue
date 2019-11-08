@@ -71,18 +71,12 @@ export default {
                 width: inherit;
                 max-width: 100%;
             }
-
-            .ivu-tooltip-inner {
-                width: 100%;
-                white-space: normal;
-            }
         }
     }
     .nv-ellipsis-content {
         overflow: hidden;
-        text-overflow: ellipsis;
         font-weight: bold;
-        word-break: normal;
+        word-break: break-all;
         white-space: normal;
 
         a {
@@ -92,6 +86,114 @@ export default {
 
             &:hover {
                 color: #2d8cf0;
+            }
+        }
+    }
+    .ivu-tooltip-popper {
+        .ivu-tooltip-content {
+            .ivu-tooltip-inner {
+                background-color: #fff;
+                color: #515a6e;
+            }
+        }
+    }
+    .ivu-tooltip-popper[x-placement^=right] {
+        .ivu-tooltip-content {
+            .ivu-tooltip-arrow {
+                left: 1px;
+                border-color: transparent;
+                border-right-color: rgba(217, 217, 217, 0.5);
+                border-width: 7px;
+                border-left-width: 0;
+                &:after {
+                    display: block;
+                    position: absolute;
+                    left: 1px;
+                    bottom: -7px;
+                    width: 0;
+                    height: 0;
+                    border-style: solid;
+                    content: ' ';
+                    border-width: 7px;
+                    border-left-width: 0;
+                    border-color: transparent;
+                    border-right-color: #fff;
+                }
+            }
+        }
+    }
+    .ivu-tooltip-popper[x-placement^=top] {
+        .ivu-tooltip-content {
+            .ivu-tooltip-arrow {
+                bottom: 1px;
+                border-color: transparent;
+                border-top-color: rgba(217, 217, 217, 0.5);
+                border-width: 7px;
+                border-bottom-width: 0;
+                &:after {
+                    display: block;
+                    position: absolute;
+                    left: -7px;
+                    bottom: 1px;
+                    width: 0;
+                    height: 0;
+                    border-style: solid;
+                    content: ' ';
+                    border-width: 7px;
+                    border-bottom-width: 0;
+                    border-color: transparent;
+                    border-top-color: #fff;
+                }
+            }
+        }
+    }
+    .ivu-tooltip-popper[x-placement^=bottom] {
+        .ivu-tooltip-content {
+            .ivu-tooltip-arrow {
+                top: 1px;
+                border-color: transparent;
+                border-bottom-color: rgba(217, 217, 217, 0.5);
+                border-width: 7px;
+                border-top-width: 0;
+                &:after {
+                    display: block;
+                    position: absolute;
+                    top: 1px;
+                    left: -7px;
+                    width: 0;
+                    height: 0;
+                    border-style: solid;
+                    content: ' ';
+                    border-width: 7px;
+                    border-top-width: 0;
+                    border-color: transparent;
+                    border-bottom-color: #fff;
+                }
+            }
+        }
+    }
+    .ivu-tooltip-popper[x-placement^=left] {
+        .ivu-tooltip-content {
+            .ivu-tooltip-arrow {
+                right: 1px;
+                border-color: transparent;
+                border-left-color: rgba(217, 217, 217, 0.5);
+                border-width: 7px;
+                border-right-width: 0;
+                &:after {
+                    display: block;
+                    position: absolute;
+                    right: 1px;
+                    bottom: -7px;
+                    width: 0;
+                    height: 0;
+                    border-style: solid;
+                    content: ' ';
+                    border-width: 7px;
+                    border-right-width: 0;
+                    border-color: transparent;
+                    border-left-color: #fff;
+                }
             }
         }
     }
