@@ -19,7 +19,7 @@ export default {
         // 类型
         type: {
             type: String,
-            default: 'ghost'
+            default: 'default'
         },
         // 大小
         size: String,

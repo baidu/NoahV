@@ -6,7 +6,6 @@
         <p>普通按钮</p>
         <Button type="default">Default</Button>
         <Button type="primary">Primary</Button>
-        <Button type="ghost">Ghost</Button>
         <Button type="dashed">Dashed</Button>
         <Button type="text">Text</Button>
         <br><br>
