@@ -105,3 +105,16 @@ export default {
     }
 };
 </script>
+
+<style lang="less">
+    .ellipsis-ul {
+        width: 300px;
+        margin-left: 400px;
+        .ellipsis-li {
+            display: block;
+            width: 100%;
+            line-height: 30px;
+        }
+    }
+
+</style>
