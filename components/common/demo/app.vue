@@ -41,7 +41,6 @@ export default {
 .demo-container {
     padding: 20px 40px;
     margin-bottom: 40px;
-    ul { display: flex; flex-wrap: wrap; margin-bottom: 30px;}
     & > ul > li { display: inline-block; margin-right: 20px; font-size: 14px; min-width: 90px;margin-bottom: 20px;}
     & > ul > li:hover {
         text-decoration: underline;

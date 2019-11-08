@@ -65,8 +65,6 @@ import formTpl from './components/nv-form';
 import tableTpl from './components/nv-table';
 import filterTableTpl from './components/nv-filtertable';
 
-import VueClipboard from 'vue-clipboard2';
-
 const noahv = {
     // 业务模板
     SaForm,

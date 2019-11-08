@@ -1,6 +1,6 @@
 <template>
     <span class="nv-ellipsis">
-        <Tooltip theme="light"
+        <Tooltip :theme="theme"
                  :placement="placement"
                  :max-width="maxWidth"
                  class="nv-ellipsis-tooltip"
@@ -53,6 +53,10 @@ export default {
         copyErrorText: {
             type: String,
             default: '浏览器不支持，请使用最新版Chrome'
+        },
+        theme: {
+            type: String,
+            default: 'light'
         }
     },
     computed: {
@@ -79,4 +83,3 @@ export default {
     }
 };
 </script>
-
