@@ -2,14 +2,14 @@
     <div :class="prefixCls" v-clickoutside="close">
         <div class="input-wrapper" @click="toggle($event)">
             <Input v-model="showValue" :readonly="true" :placeholder="placeholder" :title="showValue" clearable></Input>
-            <Icon class="arrow-btn" :type="drop ? 'ios-arrow-up' : 'ios-arrow-down'"></Icon>
+            <NvIcon class="arrow-btn" :type="drop ? 'angle-up' : 'angle-down'"></NvIcon>
         </div>
         <transition>
             <div v-show="drop" :class="{'sub-menu-open': this.selectedMenu.value}">
                 <ul v-if="data && data.length" class="menu">
                     <li v-for="(item, i) in data" :key="item.value + '_' + i" :class="getMenuCls(item)" @click="menuClick(item)" @mouseenter="mouseEnter(item)">
                         <span :title="item.label">{{ item.label }}</span>
-                        <Icon v-if="item.children && item.children.length" type="ios-arrow-right"></Icon>
+                        <NvIcon v-if="item.children && item.children.length" type="angle-right"></NvIcon>
                     </li>
                 </ul>
                 <Caspanel :data="activeMenu.children" @on-change="subMenuClick">
