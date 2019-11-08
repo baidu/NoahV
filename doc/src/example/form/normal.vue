@@ -36,7 +36,6 @@ export default {
                     type: 'input',
                     types: 'textarea',
                     rows: 10,
-                    labelwidth: 0,
                     placeholder: '输入备注信息',
                     value: '',
                     width: '100%'
@@ -45,7 +44,7 @@ export default {
             action: [
                 {
                     name: 'reset',
-                    type: 'ghost',
+                    type: 'default',
                     title: '取消',
                     link: '#/doc/template/basic-table'
                 },

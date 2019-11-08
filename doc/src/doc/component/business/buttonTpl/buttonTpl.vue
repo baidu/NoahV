@@ -111,7 +111,7 @@ export default {
             type: 'info',
             content: 'success',
             size: 'default',
-            icon: 'social-googleplus',
+            icon: 'ios-refresh',
             disabled: false,
             action: {
                 url: '/api/xxx',
@@ -140,7 +140,7 @@ export default {
             content: 'success',
             type: 'info',
             size: 'default',
-            icon: 'social-googleplus',
+            icon: 'ios-refresh',
             disabled: false,
             action: {
                 url: '/api/xxx',
@@ -295,6 +295,11 @@ h4 {
     }
     .show-icon {
         margin-bottom: 20px;
+    }
+    .noahv-button-tpl {
+        .ivu-btn {
+            font-size: 14px;
+        }
     }
 }
 </style>

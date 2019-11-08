@@ -36,7 +36,7 @@ export default {
             action: [
                 {
                     name: 'reset',
-                    type: 'ghost',
+                    type: 'default',
                     title: '取消',
                     link: '#/doc/template/basic-table'
                 },
