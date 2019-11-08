@@ -27,7 +27,6 @@
     "underscore": "^1.8.3",
     "uuid": "^3.3.2",
     "vue": "^2.6.10",
-    "vue-clipboard2": "^0.3.1",
     "vue-codemirror": "^4.0.5",
     "vue-router": "^3.0.1"
   },
