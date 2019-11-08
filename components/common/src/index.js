@@ -134,7 +134,6 @@ const install = Vue => {
     Object.keys(noahv).forEach(key => {
         Vue.component(key, noahv[key]);
     });
-    Vue.use(VueClipboard);
 };
 
 // auto install

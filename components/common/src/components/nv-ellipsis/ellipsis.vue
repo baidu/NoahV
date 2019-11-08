@@ -4,17 +4,18 @@
                  :placement="placement"
                  :max-width="maxWidth"
                  class="nv-ellipsis-tooltip"
-                 :transfer="true">
+                 :transfer="true"
+                 @on-popper-show="$emit('on-popper-show')"
+                 @on-popper-hide="$emit('on-popper-hide')"
+        >
             <a class="nv-ellipsis" v-if="contentType === 'tel'" :href="`tel:${content}`">{{content}}</a>
             <a class="nv-ellipsis" v-else-if="contentType === 'email'" :href="`mailto:${content}`">{{content}}</a>
             <a class="nv-ellipsis" v-else-if="contentType === 'link'" :href="content.href"
                :target="content.target">{{content.text}}</a>
             <span class="nv-ellipsis" v-else>{{content}}</span>
             <span slot="content" class="nv-ellipsis-content">{{toolTipContent}}
-                <a type="copy" title="复制" v-if="copy"
-                   v-clipboard:copy="toolTipContent"
-                   v-clipboard:success="() => $Message.success('复制成功')"
-                   v-clipboard:error="() => $Message.error('浏览器不支持，请使用最新版Chrome')"
+                <a type="copy" title="复制" v-if="copy" class="copy-btn" ref="copy-btn"
+                   :data-clipboard-text="toolTipContent"
                 >复制</a>
             </span>
         </Tooltip>
@@ -22,6 +23,8 @@
 </template>
 
 <script>
+import ClipboardJS from 'clipboard';
+
 export default {
     name: 'NvEllipsis',
     props: {
@@ -42,11 +45,36 @@ export default {
         copy: {
             type: Boolean,
             default: () => true
+        },
+        copySuccessText: {
+            type: String,
+            default: '复制成功'
+        },
+        copyErrorText: {
+            type: String,
+            default: '浏览器不支持，请使用最新版Chrome'
         }
     },
     computed: {
         toolTipContent() {
             return this.toolTip || this.content;
+        }
+    },
+    mounted() {
+        if (this.$refs['copy-btn']) {
+            const clipboard = new ClipboardJS(this.$refs['copy-btn']);
+            clipboard.on('success', () => {
+                this.$Message.success(this.copySuccessText);
+                this.$emit('copy-success');
+            });
+            clipboard.on('error', () => {
+                this.$Message.error(this.copyErrorText);
+                this.$emit('copy-error');
+            });
+        }
+        else {
+            // eslint-disable-next-line no-console
+            console.warn('用于复制的dom元素可能不存在：', this.$refs['copy-btn']);
         }
     }
 };
