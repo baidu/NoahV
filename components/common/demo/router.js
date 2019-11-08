@@ -89,6 +89,10 @@ export default [
         component: r => require.ensure([], () => r(require('./components/tag/tag.vue')), 'tag')
     },
     {
+        path: '/nvellipsis',
+        component: r => require.ensure([], () => r(require('./components/ellipsis/ellipsis.vue')), 'ellipsis')
+    },
+    {
         path: '/nv404',
         component: r => require.ensure([], () => r(require('./components/404/404.vue')), '404')
     }

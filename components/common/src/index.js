@@ -58,12 +58,12 @@ import NvPipline from './components/nv-pipline';
 import NvTransfer from './components/nv-transfer';
 import {NvTrend, NvChart} from './components/nv-chart';
 import NvCascaderSelect from './components/nv-cascaderSelect';
+import NvEllipsis from './components/nv-ellipsis';
 
 // 暂时兼容部分组件老的命名
 import formTpl from './components/nv-form';
 import tableTpl from './components/nv-table';
 import filterTableTpl from './components/nv-filtertable';
-
 
 const noahv = {
     // 业务模板
@@ -119,6 +119,7 @@ const noahv = {
     NvTrend,
     NvTransfer,
     NvCascaderSelect,
+    NvEllipsis,
 
     // 暂时兼容部分组件老的命名
     formTpl,
