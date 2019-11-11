@@ -400,7 +400,8 @@ export default {
         // 是否需要logo
         hasLogo: true,
         title: 'NoahV文档',
-        src: logo
+        src: logo,
+        link: '#/'
     },
     login: {
         hasLogin: false,
