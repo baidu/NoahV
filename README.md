@@ -76,6 +76,11 @@ $ noahv create
 
 ## 讨论
 
+| 微信群 |    GitHub issues                                               |
+| ---------- | ------------------------------------------------------------ |
+| <img src="https://noahv.cdn.bcebos.com/github%2Ff414efb2572218cd6756ca483.jpg" width="120px"> | [issues](https://github.com/baidu/NoahV/issues) |
+
+
 欢迎提 ISSUE 讨论
 
 ## License
