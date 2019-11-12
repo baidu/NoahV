@@ -2,6 +2,7 @@
  * @file javascript tree
  * @author nimingdexiaohai(nimingdexiaohai@163.com)
  */
+import u from 'underscore';
 
 export default {
     methods: {
@@ -89,17 +90,19 @@ export default {
          */
         getSubNodeCheckedStatus(items) {
             let status = 'notPartChecked';
-            if (items && items.length) {
-                let firstItemStatus = items[0].checked || false;
-                for (let i = 0, len = items.length; i < len; i++) {
-                    let checked = items[i].checked || false;
-                    if ((checked && items[i].partChecked) || (checked !== firstItemStatus)) {
-                        status = 'partChecked';
-                        break;
-                    }
-                }
-                status = status === 'partChecked' ? status
-                    : firstItemStatus ? 'allChecked' : 'allUnChecked';
+            let checkedStatus = u.pluck(items, 'checked');
+            let partCheckedStatus = u.pluck(items, 'partChecked');
+            if (partCheckedStatus.indexOf(true) > -1) {
+                status = 'partChecked';
+            }
+            else if (checkedStatus.indexOf(true) > -1 && (checkedStatus.indexOf(false) > -1 || checkedStatus.indexOf(undefined) > -1)) {
+                status = 'partChecked';
+            }
+            else if (checkedStatus.indexOf(true) === -1) {
+                status = 'allUnChecked';
+            }
+            else if (checkedStatus.indexOf(false) === -1 || checkedStatus.indexOf(undefined) === -1) {
+                status = 'allChecked';
             }
             return status;
         },
