@@ -28,7 +28,7 @@
                         <nv-icon
                             v-if="item.icon"
                             :type="item.icon"
-                            class="tree-icon"
+                            class="node-icon"
                         >
                         </nv-icon>
                     </span>

@@ -79,6 +79,7 @@
                     :dateValue="dateValue"
                     :dateOptions="dateOptions"
                     :isDisabledHandler="isDisabledHandler"
+                    :disabledDateClickTip="disabledDateClickTip"
                     @on-date-change="dateChange"
                     @close-picker="closePicker"
                     @reset-side-bar="clearSideBar"
@@ -196,6 +197,10 @@ export default {
         autoClose: {
             type: Boolean,
             default: false
+        },
+         disabledDateClickTip: {
+            type: String,
+            default: '不可以设置禁止日期！'
         }
     },
     data() {

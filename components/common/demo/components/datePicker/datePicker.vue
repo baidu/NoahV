@@ -9,6 +9,7 @@
             :language="language"
             :dateFormat="dateFormat"
             :setShownTxt="setShownStr"
+            :disabledDateClickTip="disabledDateClickTip"
         >
         </NvDatePicker>
         <Button @click="setDate" type="primary">设置日期</Button>
@@ -32,6 +33,7 @@ export default {
             language: 'cn',
             theme: 'console',
             dateFormat: 'YYYY-MM-DD HH:mm:ss',
+            disabledDateClickTip: '每月18日为记账日，系统关闭，不可选择',
             options: {
                 position: 'top',
                 yearRange: [],
