@@ -32,7 +32,14 @@
         </div> -->
         <h2>联系我们</h2>
         <div class="table-doc-item">
-            了解或使用过程中有任何疑问欢迎提Issues咨询：<a href="https://github.com/baidu/NoahV/issues" target="_blank">baidu/NoahV/issues <nv-icon type="export"/></a>
+            了解或使用过程中有任何疑问都可以加入微信用户交流群或者到Github提Issues反馈咨询。
+            <br>
+            Github Issues地址: <a href="https://github.com/baidu/NoahV/issues" target="_blank">baidu/NoahV/issues <nv-icon type="export"/></a>
+            <br> 
+            微信交流群：<br>
+            <img src="https://noahv.cdn.bcebos.com/github%2Ff414efb2572218cd6756ca483.jpg" width="160px">
+
+
         </div>
     </div>
 </template>
