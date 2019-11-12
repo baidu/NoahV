@@ -37,6 +37,7 @@
                 :weekDays="dateOptions.weekDays"
                 :currentCells="dateValue.leftDays"
                 :otherCells="dateValue.rightDays"
+                :disabledDateClickTip="disabledDateClickTip"
                 @on-date-change="dateChange"
                 @reset-side-bar="resetSidebar"
                 @reset-hot-keys="resetHotKeys"
@@ -82,6 +83,7 @@
                 :weekDays="dateOptions.weekDays"
                 :currentCells="dateValue.rightDays"
                 :otherCells="dateValue.leftDays"
+                :disabledDateClickTip="disabledDateClickTip"
                 @on-date-change="dateChange"
                 @reset-side-bar="resetSidebar"
                 @reset-hot-keys="resetHotKeys"
@@ -119,6 +121,7 @@ export default {
         // 日期时间候选项
         dateOptions: Object,
         isDisabledHandler: Function,
+        disabledDateClickTip: String,
         type: {
             type: String,
             default: 'datetime'

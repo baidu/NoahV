@@ -32,7 +32,8 @@ export default {
         // 当前面板的日期集合
         currentCells: Array,
         dateValue: Object,
-        autoClose: Boolean
+        autoClose: Boolean,
+        disabledDateClickTip: String
     },
     data() {
         return {
@@ -100,7 +101,7 @@ export default {
          */
         handleClick(cell) {
             if (cell && cell.isDisabled) {
-                this.$Message.error('不可以设置禁止日期！');
+                this.$Message.error(this.disabledDateClickTip || '不可以设置禁止日期！');
                 return;
             }
             if (cell.type !== 'current-month') {
