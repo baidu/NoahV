@@ -257,6 +257,12 @@ export default {
                 eventBus.$emit('syncTooltips', params, this.chart);
             });
         },
+        refresh() {
+            this.isLoading = false;
+            this.noData = false;
+            this.errTip = '';
+            this.redraw();
+        },
         getData() {
             // const params = self.params;
             if (this.url || (this.requestConfig && this.requestConfig.url)) {
@@ -318,7 +324,14 @@ export default {
             let timeGap = Number.MIN_VALUE;
 
             if (data.data && data.data.length === 0) {
-                this.isLoading = true;
+                this.showNoData();
+                return;
+            }
+
+            let noData = _.every(data.data, item => {
+                return item.data && item.data.length === 0;
+            });
+            if (noData) {
                 this.showNoData();
                 return;
             }
@@ -435,6 +448,7 @@ export default {
             this.errTip = message;
         },
         showNoData() {
+            this.isLoading = true;
             this.noData = true;
         },
         isInScreen() {
