@@ -57,6 +57,23 @@ const MAP_OPTIONS = {
                 + '</dl>';
         }
     },
+    geo: {
+        map: 'china',
+        label: {
+            emphasis: {
+                show: false
+            }
+        },
+        itemStyle: {
+            normal: {
+                areaColor: '#F0EFF0',
+                borderColor: '#FFF'
+            },
+            emphasis: {
+                areaColor: '#2a333d'
+            }
+        }
+    },
     visualMap: {
         type: 'piecewise',
         itemWidth: 14,
