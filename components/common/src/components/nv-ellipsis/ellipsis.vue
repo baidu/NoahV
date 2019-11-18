@@ -12,12 +12,20 @@
             <a class="nv-ellipsis" v-else-if="contentType === 'email'" :href="`mailto:${content}`">{{content}}</a>
             <a class="nv-ellipsis" v-else-if="contentType === 'link'" :href="content.href"
                :target="content.target">{{content.text}}</a>
-            <span class="nv-ellipsis" v-else>{{content}}</span>
-            <span slot="content" class="nv-ellipsis-content">{{toolTipContent}}
+            <template v-else>
+                <span class="nv-ellipsis" v-if="isHTML" v-html="content"></span>
+                <span class="nv-ellipsis" v-else >{{content}}</span>
+            </template>
+            <span slot="content" class="nv-ellipsis-content" v-if="isHTML">
+                <span v-html="toolTipContent"></span>
                 <a type="copy" title="复制" v-if="copy" class="copy-btn" ref="copy-btn"
                    :data-clipboard-text="toolTipContent"
                 >复制</a>
             </span>
+            <span slot="content" class="nv-ellipsis-content" v-else>{{toolTipContent}}
+                <a type="copy" title="复制" v-if="copy" class="copy-btn" ref="copy-btn"
+                   :data-clipboard-text="toolTipContent"
+                >复制</a></span>
         </Tooltip>
     </span>
 </template>
@@ -57,6 +65,10 @@ export default {
         theme: {
             type: String,
             default: 'light'
+        },
+        isHTML: {
+            type: Boolean,
+            default: false
         }
     },
     computed: {

@@ -42,6 +42,9 @@
                             tool-tip="我是nv-ellipsis，这是一个链接"
                             content-type="link"></NvEllipsis>
             </li>
+            <li class="ellipsis-li">
+                <NvEllipsis :isHTML="true" content="<h1>我是nv-ellipsis，我支持html，这是h1</h1>" tool-tip="<h2>我是nv-ellipsis，我支持html，这是h2</h2>"></NvEllipsis>
+            </li>
         </ul>
         <Table :columns="columns" :data="tableData" style="width: 400px"></Table>
     </div>
