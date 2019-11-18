@@ -1,5 +1,8 @@
 ## ChangeLog
 
+## 1.1.3
+* [功能优化] NvEllipsis组件，content 和 toolTip 支持传入html。
+
 ## 1.1.2
 * [功能优化] NvTrend组件，添加refresh方法，支持趋势图组件重新渲染新数据。
 
