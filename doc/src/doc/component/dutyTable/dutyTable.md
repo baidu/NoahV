@@ -56,10 +56,10 @@
 | defaultSelectedMonth  | 默认选择月份                      | [Number, String]  | today.getMonth() 当前时间月        |
 | defaultMaxDate  | 最大时间限制                            | [Date, String]    | new Date(today + 50, 11, 31) 当前时间+50年         |
 | defaultMinDate  | 最小时间限制                            | [Date, String]    | new Date(today - 5, 0, 1) 当前时间-5年         |
+| defaultStartTime     | 开始时间                          | String             | new Date().forMate(YYYY-MM-DD 00:00:00)           |
 | styleConfig  | 样式配置                                  | Object            | {}           |
 | nameList     | 值班名单                                  | Array             | []           |
 | currentDutyGroup     | 当前值班组                                  | Array             | []           |
-| startTime     | 开始时间                                  | String             | new Date().forMate(YYYY-MM-DD 00:00:00)           |
 | cycle        | 值班周期                                  | Number            | 1           |
 | handOverTime | 换班时间                                  | String            | 00:00      |
 | emptyText    | 值班人员为空展示文字                         | String            | 待添加      |
@@ -67,8 +67,8 @@
 | colorBlockMinWidth | 值班组色块最小宽度                     | [String、Number]  | 0          |
 | splitShow    | 值班色块是否需要分割展示（一般用于长周期）        | Boolean           | false      |
 <br>
-<div style="color: red;font-weight: bolder">*注意: currentDutyGroup 当前值班组 与 startTime 开始值班时间，两者不建议同时传入，会产生歧义</div>
-<div style="color: red;">使用建议：<div>1.传入startTime，通过组件方法获取currentDutyGroup</div><div>2.只传入currentDutyGroup，startTime 默认为今天</div></div>
+<div style="color: red;font-weight: bolder">*注意: currentDutyGroup 当前值班组 与 defaultStartTime 开始值班时间，两者不建议同时传入，会产生歧义</div>
+<div style="color: red;">使用建议：<div>1.传入defaultStartTime，通过组件方法获取currentDutyGroup</div><div>2.只传入currentDutyGroup，defaultStartTime 默认为今天</div></div>
 
 ### nameList
 | 属性       | 说明                                               | 类型             | 默认值      |

@@ -237,6 +237,11 @@ export default [
             , 'doc-dutyTable')
     },
     {
+        path: '/doc/component/ellipsis',
+        component: r => require.ensure(
+            [], () => r(require('src/doc/component/ellipsis/ellipsis.md')), 'ellipsis')
+    },
+    {
         path: '/color/index',
         component: r => require.ensure([], () => r(require('src/color/index')), 'color-index')
     },

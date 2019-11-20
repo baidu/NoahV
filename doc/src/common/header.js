@@ -198,6 +198,12 @@ export default {
                     type: 'deployment-change'
                 },
                 {
+                    label: '省略组件',
+                    key: 'doc/component/ellipsis',
+                    link: 'doc/component/ellipsis',
+                    type: 'time'
+                },
+                {
                     label: '列表组件',
                     key: 'doc/component/business/list',
                     link: 'doc/component/business/list',
