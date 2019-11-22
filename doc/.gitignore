@@ -1,7 +1,0 @@
-.DS_Store
-node_modules/
-dist/
-npm-debug.log
-saas
-test/unit/coverage/
-package-lock.json
