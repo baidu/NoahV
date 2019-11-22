@@ -5,9 +5,22 @@ os:
 node_js:
   - '8'
 cache: npm
-script:
-  - bash travis.sh
+
+jobs:
+  include: 
+      - stage: test
+        if: (commit_message !~ /(docs|chore)/)
+        script: bash travis.sh
+      - stage: deploy
+        if: (branch = master) AND (commit_message =~ /(docs)/)
+        script: cd doc && bash release.sh
+        deploy:
+          provider: pages
+          skip_cleanup: true
+          github_token: $GITHUB_TOKEN
+          keep_history: true
+          local_dir: doc/noahv
 notifications:
   email:
     on_success: never
-    on_failure: always
+    on_failure: never
