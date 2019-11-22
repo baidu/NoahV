@@ -1,5 +1,8 @@
 ## ChangeLog
 
+## 1.1.4
+* [功能优化] NvSteps组件，移除saasv相关样式。
+
 ## 1.1.3
 * [功能优化] NvEllipsis组件，content 和 toolTip 支持传入html。
 
