@@ -67,8 +67,6 @@
 import stepsUtils from './steps.js';
 import getClassName from '../utils.js';
 
-// 组件样式前缀名，兼容新旧版本样式
-const saasvPrefixCls = 'saasv-steps';
 const noahvPrefixCls = 'noahv-steps';
 
 export default {
@@ -76,7 +74,6 @@ export default {
     data() {
         return {
             // 样式前缀
-            saasvPrefixCls: saasvPrefixCls,
             noahvPrefixCls: noahvPrefixCls,
             // 数据集合
             items: [],
@@ -174,8 +171,7 @@ export default {
          */
         stepsBodyNavStyle() {
             let style = {};
-            let stepsWrapper = document.body.querySelector('.' + this.saasvPrefixCls + '-wrapper')
-                            || document.body.querySelector('.' + this.noahvPrefixCls + '-wrapper');
+            let stepsWrapper = document.body.querySelector('.' + this.noahvPrefixCls + '-wrapper');
             if (stepsWrapper) {
                 let bodyWrapperWidth = stepsWrapper['offsetWidth']
                                     || this.getComputedAttribute(stepsWrapper, 'offsetWidth');
@@ -402,8 +398,7 @@ export default {
          */
         setStepsBodyNavStyle(inx) {
             if (this.isPanelNavShow) {
-                let stepsWrapper = document.body.querySelector('.' + this.saasvPrefixCls + '-wrapper')
-                                || document.body.querySelector('.' + this.noahvPrefixCls + '-wrapper');
+                let stepsWrapper = document.body.querySelector('.' + this.noahvPrefixCls + '-wrapper');
                 let stepsBodyNavs = stepsWrapper ? stepsWrapper.querySelectorAll('.nav') : '';
                 if (stepsWrapper && stepsBodyNavs && stepsBodyNavs.length === 2) {
                     let bodyWrapperWidth = stepsWrapper['offsetWidth']
