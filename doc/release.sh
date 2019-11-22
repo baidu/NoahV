@@ -37,9 +37,6 @@ if [ $? -ne 0 ]; then
 fi
 echo "npm build success"
 
-rm -rf ../docs
-mv noahv ../docs
-
 # tar
 # cd output
 # tar -zcf $FILE_NAME.tar.gz *
