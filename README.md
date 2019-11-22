@@ -81,8 +81,6 @@ $ noahv create
 | <img src="https://noahv.cdn.bcebos.com/github%2Ff414efb2572218cd6756ca483.jpg" width="120px"> | [issues](https://github.com/baidu/NoahV/issues) |
 
 
-欢迎提 ISSUE 讨论
-
 ## License
 
 Apache License 2.0

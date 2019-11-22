@@ -37,7 +37,7 @@
             Github Issues地址: <a href="https://github.com/baidu/NoahV/issues" target="_blank">baidu/NoahV/issues <nv-icon type="export"/></a>
             <br> 
             微信交流群：<br>
-            <img src="https://noahv.cdn.bcebos.com/github%2Ff414efb2572218cd6756ca483.jpg" width="160px">
+            <img src="https://noahv.cdn.bcebos.com/github%2Ff414efb2572218cd6756ca483.jpg" width="260px">
 
 
         </div>
