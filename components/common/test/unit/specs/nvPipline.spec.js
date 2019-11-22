@@ -5,7 +5,7 @@ describe('pipline.vue', () => {
     afterEach(() => {
     destroyVM(vm);
     });
-    it('should create a pipline component rightly whthout any init data', done => {
+    it('should create a pipline component rightly', done => {
         vm = createVue({
             template: '<NvPipline ref="piplineNodeRef" :data="pipLineNodes" :nodeTitle="nodeTitle"'
              + ':nodeTemplate="nodeTemplate" :cardTemplate="cardTemplate" :cardTitle="cardTitle"></NvPipline>',
@@ -48,7 +48,7 @@ describe('pipline.vue', () => {
             const pipline = vm.$el;
             const node = pipline.querySelector('.node');
             const indexName = node.querySelector('.index-name');
-            const btnGroup = node.querySelector('.index-btn-group').querySelectorAll('.ivu-icon');
+            const btnGroup = node.querySelector('.index-btn-group').querySelectorAll('.noahv-icon');
 
             expect(indexName.innerText).contains('步骤1');
             expect(btnGroup.length).to.be.equal(3);
