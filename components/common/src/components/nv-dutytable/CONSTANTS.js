@@ -19,6 +19,7 @@ const weekArr = ['周日', '周一', '周二', '周三', '周四', '周五', '�
 const handOverTime = '00:00';
 const colorBlockMinWidth = 0;
 const cycle = 1;
+const defaultWorkingDay = [0, 1, 2, 3, 4, 5, 6];
 
 /* eslint-disable */
 export default {
@@ -35,5 +36,6 @@ export default {
     weekArr,
     handOverTime,
     colorBlockMinWidth,
-    cycle
+    cycle,
+    defaultWorkingDay
 };
