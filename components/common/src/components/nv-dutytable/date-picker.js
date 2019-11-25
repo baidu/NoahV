@@ -128,6 +128,11 @@ export default {
                         new Date(this.defaultStartTime).getDate());
             }
         },
+        getStartTimeDay: {
+            get() {
+                return this.startTime.getDay();
+            }
+        },
         // 监听所有 props 对象
         watchTime() {
             const {defaultSelectedYear, defaultSelectedMonth, defaultMaxDate, defaultMinDate, startTime} = this;
