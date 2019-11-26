@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <Form :label-width="80">
+    <div class="nv-duty-demo">
+        <Form :label-width="80" label-position="left">
             <FormItem label="值班人员：">
                 <FormItem v-for="(list, index) in nameArr"
                           :label="index + 1 + '组：'"
@@ -18,8 +18,16 @@
                     <Option :value="30">月</Option>
                 </Select>
             </FormItem>
-            <FormItem label="空文本：">
+            <FormItem label="工作日：">
+                <CheckboxGroup v-model="workingDay">
+                    <Checkbox v-for="item in workingDayArr" :key="item.name" :label="item.name" :disabled="mustBeWorkingDay(item.name)">{{item.alias}}</Checkbox>
+                </CheckboxGroup>
+            </FormItem>    
+            <FormItem label="值班人员未填写文本：">
                 <Input v-model="emptyText" style="width: 200px" />
+            </FormItem>
+            <FormItem label="休息日文本：">
+                <Input v-model="restDayText" style="width: 200px" />
             </FormItem>
             <FormItem label="换班时间：">
                 <TimePicker :value="handOverTime"
@@ -33,9 +41,11 @@
         </Form>
         <NvDutyTable :name-list="nameLists"
                      :cycle="cycle"
-                     :emptyText="emptyText"
+                     :empty-text="emptyText"
+                     :rest-day-text="restDayText"
                      :hand-over-time="handOverTime"
                      :style="{fontSize: '12px'}"
+                     :working-day="workingDay"
         ></NvDutyTable>
     </div>
 </template>
@@ -45,11 +55,43 @@ export default {
     name: "nvDutyTableComplexDemo",
     data() {
         return {
-            nameArr: ['东皇;公孙离', '李白;陈独秀;孙尚香', '伽罗;孙悟空', '后羿', ''],
+            nameArr: ['东皇;公孙离', '李白;陈独秀;孙尚香', '', '伽罗;孙悟空', '后羿'],
             nameLists: [],
             cycle: 1,
             emptyText: '我也不知道写啥',
-            handOverTime: '00:00'
+            restDayText: '休息日',
+            handOverTime: '00:00',
+            workingDayArr: [
+                {
+                    name: 1,
+                    alias: '星期一'
+                },
+                {
+                    name: 2,
+                    alias: '星期二'
+                },
+                {
+                    name: 3,
+                    alias: '星期三'
+                },
+                {
+                    name: 4,
+                    alias: '星期四'
+                },
+                {
+                    name: 5,
+                    alias: '星期五'
+                },
+                {
+                    name: 6,
+                    alias: '星期六'
+                },
+                {
+                    name: 0,
+                    alias: '星期日'
+                }
+            ],
+            workingDay: [0, 1, 2, 3, 4, 5, 6]
         };
     },
     mounted() {
@@ -61,9 +103,20 @@ export default {
         },
         changeTime(time) {
             this.handOverTime = time;
+        },
+        mustBeWorkingDay(day) {
+            return new Date().getDay() === day;
         }
     },
     watch: {
     }
 };
 </script>
+
+<style lang="less">
+    .nv-duty-demo {
+        .ivu-checkbox-wrapper {
+            margin-right: 5px;
+        }
+    }
+</style>
