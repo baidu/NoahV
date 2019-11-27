@@ -237,7 +237,7 @@ export default {
             return getClassName.getComponentWrapperCls(postfix);
         },
         getInstance() {
-            return this.$refs.chart.getChart();
+            return this.chart;
         },
         renderTrend() {
             this.isLoading = true;
@@ -250,7 +250,7 @@ export default {
                 this.curOptions.xAxis.splitNumber = parseInt(chartWidth / 100, 10)
             }
 
-            this.chart.setOption(this.curOptions);
+            this.chart.setOption(this.curOptions, true);
 
             // 同步tooltip
             this.chart.on('updateAxisPointer', function (params) {
