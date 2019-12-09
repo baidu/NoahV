@@ -20,8 +20,8 @@ describe('DatePicker.vue', () => {
                 return !prevMonth && !nextMonth;
             });
             const today = new Date();
-            const daysInCurrentMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
-            const daysInNextMonth = new Date(today.getFullYear(), today.getMonth() + 2, 0).getDate();
+            const daysInCurrentMonth = new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+            const daysInNextMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
             expect(daysInCurrentMonth + daysInNextMonth).to.equal(calendarCells.length);
             done();
         });
@@ -237,7 +237,7 @@ describe('DatePicker.vue', () => {
         picker.openPicker();
         vm.$nextTick(() => {
             const displayField = vm.$el.querySelector('.input');
-            const clickableCells = vm.$el.querySelectorAll('.cell');
+            const clickableCells = vm.$el.querySelector('.right-panel').querySelectorAll('.cell');
             const lastMonthClass = 'last-month';
             const firstDayInMonthIndex = [...clickableCells].findIndex(cell => !cell.classList.contains(lastMonthClass));
             clickableCells[firstDayInMonthIndex].firstElementChild.click();
