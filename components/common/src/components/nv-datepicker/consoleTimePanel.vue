@@ -77,7 +77,7 @@
             <span>{{tips}}</span>
         </p>
         <div class="btn-panel" v-if="confirm">
-            <button type="button" :class="['primary', {'confirm-disabled': ['daterangetime', 'daterange'].indexOf(type) > -1 && !(dateValue.startSelectedDate && dateValue.endSelectedDate)}]" :disabled="['daterangetime', 'daterange'].indexOf(type) > -1 && !(dateValue.startSelectedDate && dateValue.endSelectedDate)" @click="confirmClick">确定</button>
+            <button type="button" :class="['primary', {'confirm-disabled': confirmDisabled}]" :disabled="confirmDisabled" @click="confirmClick">确定</button>
             <button type="button" class="reset" @click="reset">清空</button>
         </div>
     </div>
@@ -108,6 +108,12 @@ export default {
         type: {
             type: String,
             default: 'datetime'
+        }
+    },
+    computed: {
+        confirmDisabled() {
+            return ['daterangetime', 'daterange'].indexOf(this.type) > -1 
+            && !(this.dateValue.startSelectedDate && this.dateValue.endSelectedDate);
         }
     },
     methods: {
