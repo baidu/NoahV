@@ -89,6 +89,7 @@
                 </NvDatePickerDatePanel>
                 <NvDatePickerTimePanel
                     :ref="'saDataPickerTimePanel' + postfix"
+                    :tips="tips"
                     :type="type"
                     :theme="theme"
                     :confirm="confirm"
@@ -153,6 +154,11 @@ export default {
             type: String,
             default: 'console'
         },
+        tips: {
+            validator: (value) => {
+                return (typeof value === 'string' && value.length <= 40);
+            }
+        },
         type: {
             validator: function (value) {
                 return ['date', 'datetime', 'daterange', 'daterangetime'].indexOf(value) > -1;
@@ -198,7 +204,7 @@ export default {
             type: Boolean,
             default: false
         },
-         disabledDateClickTip: {
+        disabledDateClickTip: {
             type: String,
             default: '不可以设置禁止日期！'
         }
@@ -543,16 +549,16 @@ export default {
                 this.updateDateValue(this.dateValue, updateStartKeys, this.dateValue.startDate);
             }
             else if (['daterange', 'daterangetime'].indexOf(this.type) > -1) {
-                if (now.getMonth() >= 11) {
-                    this.dateValue.endYear = now.getFullYear() + 1;
-                    this.dateValue.endMonth = 0;
+                if (now.getMonth() <= 0) {
+                    this.dateValue.startYear = now.getFullYear() - 1;
+                    this.dateValue.startMonth = 11;
                 }
                 else {
-                    this.dateValue.endYear = now.getFullYear();
-                    this.dateValue.endMonth = now.getMonth() + 1;
+                    this.dateValue.startYear = now.getFullYear();
+                    this.dateValue.startMonth = now.getMonth() - 1;
                 }
-                this.dateValue.startDate = new Date(now.getFullYear(), now.getMonth(), 1);
-                this.dateValue.endDate = new Date(this.dateValue.endYear, this.dateValue.endMonth, 1);
+                this.dateValue.startDate = new Date(this.dateValue.startYear, this.dateValue.startMonth, 1);
+                this.dateValue.endDate = new Date(now.getFullYear(), now.getMonth(), 1);
                 let updateStartKeys = [
                     'startYear',
                     'startMonth',

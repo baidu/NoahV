@@ -72,9 +72,13 @@
             </InputNumber>
         </div>
         </template>
+        <p class="note-tips" v-if="tips && type === 'daterangetime'">
+            <span>*</span>
+            <span>{{tips}}</span>
+        </p>
         <div class="btn-panel" v-if="confirm">
-            <button type="button" class="primary" @click="confirmClick">确定</button>
-            <button type="button" class="reset" @click="reset">取消</button>
+            <button type="button" :class="['primary', {'confirm-disabled': ['daterangetime', 'daterange'].indexOf(type) > -1 && !(dateValue.startSelectedDate && dateValue.endSelectedDate)}]" :disabled="['daterangetime', 'daterange'].indexOf(type) > -1 && !(dateValue.startSelectedDate && dateValue.endSelectedDate)" @click="confirmClick">确定</button>
+            <button type="button" class="reset" @click="reset">清空</button>
         </div>
     </div>
 </template>
@@ -93,6 +97,8 @@ export default {
         };
     },
     props: {
+        // 信息提示
+        tips: '', 
         confirm: Boolean,
         // 维护时间日历组件的日期对象
         dateValue: Object,
@@ -190,7 +196,14 @@ export default {
          *
          */
         confirmClick() {
-            this.$emit('on-confirm');
+            if (['daterangetime', 'daterange'].indexOf(this.type) > -1) {
+                if (this.dateValue.startSelectedDate && this.dateValue.endSelectedDate) {
+                    this.$emit('on-confirm');
+                }
+            }
+            else {
+                this.$emit('on-confirm');
+            }
         }
     }
 };

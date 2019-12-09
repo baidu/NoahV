@@ -88,15 +88,18 @@
             text-align: left;
             padding: 0 0 5px 19px;
             span {
-                color: @noahv-datepicker-hotkey-color;
+                color: @noahv-datepicker-selected-color;
                 font-size: @noahv-font-size;
                 cursor: pointer;
                 display: inline-block;
-                padding: 5px 10px 5px 0;
+                padding: 2px 4px;
+            }
+            span:not(:last-child) {
+                margin-right: 5px;
             }
             .date-picker-selected {
-                color: @noahv-datepicker-selected-color;
-                background: @noahv-datepicker-bg-color !important;
+                color: #fff;
+                background: @noahv-datepicker-selected-color;
             }
         }    
         .inner-panel-body-wrapper {
@@ -305,9 +308,23 @@
                     width: 225px;
                     text-align: center;
                 }
+                .note-tips {
+                    display: inline-block;
+                    vertical-align: middle;
+                    max-width: 280px;
+                    padding-left: 15px;
+                    span:nth-child(1) {
+                        color: #ff9900;
+                    }
+                    span:nth-child(2) {
+                        color: #808695;
+                    }
+                }
                 .btn-panel {
-                    text-align: right;
-                    margin: 3px 8px 0 16px;
+                    float: right;
+                    margin: 0 10px 15px 10px;
+                    display: inline-block;
+                    vertical-align: middle;
                     .reset, .primary {
                         border: none;
                         border-radius: 0;
@@ -323,6 +340,11 @@
                     .primary {
                         background-color: @noahv-datepicker-primary-color;
                         color: @noahv-datepicker-btn-color;
+                    }
+                    .confirm-disabled {
+                        color: @noahv-datepicker-disabled-color;
+                        background-color: @noahv-datepicker-default-color;
+                        cursor: not-allowed;
                     }
                 }
             }
