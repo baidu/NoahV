@@ -2,6 +2,7 @@
     <div :class="getClassName()" v-if="['datetime', 'daterangetime'].indexOf(type) > -1 || confirm">
         <component 
             v-bind:is="componentName"
+            :tips="tips"
             :type="type"
             :confirm="confirm"
             :dateValue="dateValue"
@@ -33,6 +34,7 @@ export default {
         };
     },
     props: {
+        tips: String,
         theme: String,
         confirm: Boolean,
         dateValue: Object,
