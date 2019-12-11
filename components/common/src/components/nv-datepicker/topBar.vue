@@ -33,8 +33,7 @@ export default {
             default: 'datetime'
         },
         hotKeyCtrl: Object,
-        autoClose: Boolean,
-        needSelectedDefault: Boolean
+        autoClose: Boolean
     },
     created() {
         if (this.hotKeyCtrl.top && this.options && this.options.shortcuts) {
