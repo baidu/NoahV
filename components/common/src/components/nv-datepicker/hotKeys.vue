@@ -40,17 +40,9 @@ export default {
     created() {
         if (this.hotKeyCtrl.outer && this.options && this.options.shortcuts) {
             this.items = this.options.shortcuts;
-            let defaultSelected = false;
-            for (let i in this.items) {
-                if (this.items.hasOwnProperty(i)) {
-                    this.$set(this.items[i], 'selected', false);
-                    this.items[i].hash = (new Date()).getTime() + i;
-                    if (!defaultSelected && this.items[i].defaultSelected) {
-                        this.$set(this.items[i], 'selected', true);
-                        defaultSelected = true;
-                    }
-                }
-            }
+            this.items.forEach((item, inx) => {
+                item.hash = new Date().getTime() + inx + 1;
+            });
         }
     },
     methods: {
@@ -81,7 +73,7 @@ export default {
                 // 切换选中效果
                 for (let i in this.items) {
                     if (this.items.hasOwnProperty(i)) {
-                        if (element.getAttribute('data-hash') === this.items[i].hash) {
+                        if (element.getAttribute('data-hash') + '' === this.items[i].hash + '') {
                             this.$set(this.items[i], 'selected', true);
                         }
                         else {
@@ -117,17 +109,6 @@ export default {
             // 暴露对外点击接口
             this.$emit('on-shortcut-click', item);
             this.$emit('on-date-change');
-        },
-        /**
-         * 重置外部hotkeys面板
-         *
-         */
-        resetHotKeys() {
-            for (let i in this.items) {
-                if (this.items.hasOwnProperty(i)) {
-                    this.$set(this.items[i], 'selected', false);
-                }
-            }
         }
     }
 };

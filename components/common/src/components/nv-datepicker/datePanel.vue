@@ -39,9 +39,6 @@
                 :otherCells="dateValue.rightDays"
                 :disabledDateClickTip="disabledDateClickTip"
                 @on-date-change="dateChange"
-                @reset-side-bar="resetSidebar"
-                @reset-hot-keys="resetHotKeys"
-                @reset-top-bar="resetTopBar"
                 @auto-close-picker="autoClosePicker"
             >
             </NvDatePickerDateTable>
@@ -85,9 +82,6 @@
                 :otherCells="dateValue.leftDays"
                 :disabledDateClickTip="disabledDateClickTip"
                 @on-date-change="dateChange"
-                @reset-side-bar="resetSidebar"
-                @reset-hot-keys="resetHotKeys"
-                @reset-top-bar="resetTopBar"
                 @auto-close-picker="autoClosePicker"
             >
             </NvDatePickerDateTable>
@@ -268,13 +262,13 @@ export default {
             let rightMinYear = u.min(rightYears);
             let rightMaxYear = u.max(rightYears);
 
-            if (this.dateValue.startYear < leftMinYear) {
+            if (this.dateValue.startYear && this.dateValue.startYear < leftMinYear) {
                 leftYears.unshift(this.dateValue.startYear);
                 rightYears.unshift(this.dateValue.startYear);
                 this.$set(this.dateOptions, 'leftYears', leftYears);
                 this.$set(this.dateOptions, 'rightYears', rightYears);
             }
-            else if (this.dateValue.endYear > rightMaxYear) {
+            else if (this.dateValue.endYear && this.dateValue.endYear > rightMaxYear) {
                 leftYears.push(this.dateValue.endYear);
                 rightYears.push(this.dateValue.endYear);
                 this.$set(this.dateOptions, 'leftYears', leftYears);
@@ -396,27 +390,6 @@ export default {
          */
         dateChange() {
             this.$emit('on-date-change');
-        },
-        /**
-         * 重置内部快捷面板
-         *
-         */
-        resetSidebar() {
-            this.$emit('reset-side-bar');
-        },
-        /**
-         * 重置外部快捷面板
-         *
-         */
-        resetHotKeys() {
-            this.$emit('reset-hot-keys');
-        },
-        /**
-         * 重置外部快捷面板
-         *
-         */
-        resetTopBar() {
-            this.$emit('reset-top-bar');
         },
         /**
          * 自动关闭选择面板，当confirm=false且设置autoClose=true时有效

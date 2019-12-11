@@ -211,7 +211,6 @@ const prefixCls = "noahv-pipline";
                 this.$set(cardNameMap, index, '空');
                 this.$set(node, 'cardNameMap', cardNameMap);
                 this.$set(node, 'description', Object.values(cardNameMap).join('、'));
-                console.log('add-card')
             },
             removeCard(node, index) {
                 if (node.cardSet && node.cardSet.length <= 1) {
