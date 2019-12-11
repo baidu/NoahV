@@ -17,13 +17,14 @@
             <div class="show-icon">图标为：<nv-icon type="user"></nv-icon></div>
             <h4>方法二：</h4>
             <div class="code">
-                <pre><code><span>&lt;<span>nv-icon </span><span>type</span>=<span style="color: red">"icon名称"</span>/&gt;</span></code></pre>
+                <pre><code><span>&lt;<span>nv-icon </span><span>type</span>=<span style="color: red">"icon名称"</span>&nbsp;content=<span style="color: red">"icon的说明内容"</span>/&gt;</span></code></pre>
             </div>
             <h4>例如：</h4>
             <div class="code">
+                <pre><code><span>&lt;<span>nv-icon </span><span>type</span>=<span>"user-o" content="用户名"</span>/&gt;</span></code></pre>
                 <pre><code><span>&lt;<span>nv-icon </span><span>type</span>=<span>"user-o"</span>/&gt;</span></code></pre>
             </div>
-            <div class="show-icon">图标为：<nv-icon type="user-o"></nv-icon></div>
+            <div class="show-icon">图标为：<nv-icon type="user-o" content="用户名"></nv-icon> &nbsp;<nv-icon type="user-o"></nv-icon></div>
         </div>
         <div class="usage-item">
             <h2>API</h2>
@@ -42,7 +43,7 @@
                 <p class="icon-comment" v-else>展示所有图标，共{{iconList.length}}个</p>
             </div>
             <div class="icon" v-for="item in result">
-                <i :class="['noahv-icon', 'noahv-icon-' + item[0]]"></i>
+                <nv-icon :type="item[0]" :content="item[0]"/>
                 <p>{{item[0]}}</p>
             </div>
         </div>
@@ -50,7 +51,7 @@
 </template>
 
 <script>
-    
+
     import {iconConfig} from './iconConfig';
     var iconArr = iconConfig.iconList;
     var iconChObj = {};
@@ -116,6 +117,42 @@
                         comment: '图标名称',
                         type: 'string',
                         initValue: '-'
+                    },
+                    {
+                        properties: 'content',
+                        comment: '显示的内容，若配置该属性则自动展示tooltip，否则不展示',
+                        type: 'string',
+                        initValue: ''
+                    },
+                    {
+                        properties: 'placement',
+                        comment: '提示框出现的位置，可选值有top、top-start、top-end、bottom、bottom-start、bottom-end、left、left-start、left-end、right、right-start、right-end',
+                        type: 'string',
+                        initValue: 'bottom'
+                    },
+                    {
+                        properties: 'delay',
+                        comment: '延迟显示tooltip',
+                        type: 'string|number',
+                        initValue: '0'
+                    },
+                    {
+                        properties: 'always',
+                        comment: '是否总显示tooltip',
+                        type: 'boolean',
+                        initValue: 'false'
+                    },
+                    {
+                        properties: 'maxWidth',
+                        comment: 'tooltip的最大宽度，超出内容会换行',
+                        type: 'string|number',
+                        initValue: '-'
+                    },
+                    {
+                        properties: 'offset',
+                        comment: 'tooltip的偏移量',
+                        type: 'number',
+                        initValue: '0'
                     }
                 ]
             }
