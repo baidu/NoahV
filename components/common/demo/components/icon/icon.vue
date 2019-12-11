@@ -17,13 +17,14 @@
             <div class="show-icon">图标为：<nv-icon type="user"></nv-icon></div>
             <h4>方法二：</h4>
             <div class="code">
-                <pre><code><span>&lt;<span>nv-icon </span><span>type</span>=<span style="color: red">"icon名称"</span>/&gt;</span></code></pre>
+                <pre><code><span>&lt;<span>nv-icon </span><span>type</span>=<span style="color: red">"icon名称"</span>&nbsp;content=<span style="color: red">"icon的说明内容"</span>/&gt;</span></code></pre>
             </div>
             <h4>例如：</h4>
             <div class="code">
-                <pre><code><span>&lt;<span>nv-icon </span><span>type</span>=<span>"user-o" :hasTooltip="true" content="用户名"</span>/&gt;</span></code></pre>
+                <pre><code><span>&lt;<span>nv-icon </span><span>type</span>=<span>"user-o" content="用户名"</span>/&gt;</span></code></pre>
+                <pre><code><span>&lt;<span>nv-icon </span><span>type</span>=<span>"user-o"</span>/&gt;</span></code></pre>
             </div>
-            <div class="show-icon">图标为：<nv-icon type="user-o" :hasTooltip="true" content="用户名"></nv-icon></div>
+            <div class="show-icon">图标为：<nv-icon type="user-o" content="用户名"></nv-icon> &nbsp;<nv-icon type="user-o"></nv-icon></div>
         </div>
         <div class="usage-item">
             <h2>API</h2>
@@ -42,7 +43,6 @@
                 <p class="icon-comment" v-else>展示所有图标，共{{iconList.length}}个</p>
             </div>
             <div class="icon" v-for="item in result">
-                <nv-icon :type="item[0]"/>
                 <nv-icon :type="item[0]" :content="item[0]"/>
                 <p>{{item[0]}}</p>
             </div>
