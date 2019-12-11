@@ -153,10 +153,6 @@ export default {
                 this.dateValue.startSecond
             );
             this.$set(this.dateValue, 'selectedDate', this.selectedSingleDate);
-
-            this.$emit('reset-side-bar');
-            this.$emit('reset-hot-keys');
-            this.$emit('reset-top-bar');
         },
         /**
          * 选中时间段时，选中日期的更新处理逻辑
@@ -288,10 +284,6 @@ export default {
             }
             this.$set(this.dateValue, 'startSelectedDate', this.startSelectedDate);
             this.$set(this.dateValue, 'endSelectedDate', this.endSelectedDate);
-
-            this.$emit('reset-side-bar');
-            this.$emit('reset-hot-keys');
-            this.$emit('reset-top-bar');
         },
         /**
          * selected date is in same day
