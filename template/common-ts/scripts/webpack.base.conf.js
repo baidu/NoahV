@@ -71,7 +71,9 @@ module.exports = {
                     cacheDirectory: true
                 }
             }],
-            include: /(src|node_modules\/noahv?)/
+            include: function (filePath) {
+                return new RegExp(projectRoot + "/(src|node_modules\/noahv?)/").test(filePath);
+            }
         },
         {
             test: /\.css$/,
