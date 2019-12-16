@@ -71,9 +71,10 @@ module.exports = {
                     cacheDirectory: true
                 }
             }],
-            include: function (filePath) {
-                return new RegExp(projectRoot + "/(src|node_modules\/noahv?)/").test(filePath);
-            }
+            include: [
+                path.resolve(__dirname, '../src'),
+                path.resolve(__dirname, '../node_modules/noahv')
+            ]
         },
         {
             test: /\.css$/,
