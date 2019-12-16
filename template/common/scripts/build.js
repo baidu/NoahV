@@ -20,13 +20,15 @@ if (fs.pathExistsSync(staticPath)) {
 }
 
 webpack(webpackConfig, function(err, stats) {
-    spinner.stop()
-    if (err) throw err
+    spinner.stop();
     process.stdout.write(stats.toString({
         colors: true,
         modules: false,
         children: false,
         chunks: false,
         chunkModules: false
-    }) + '\n')
+    }) + '\n');
+    if (err || stats.hasErrors()) {
+        process.exit(1);
+    }
 })
