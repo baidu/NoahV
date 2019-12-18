@@ -7,6 +7,8 @@
  */
 import _ from 'lodash';
 
+const numUnit = ['K', 'M', 'G', 'T', 'P', 'E'];
+
 
 let viewRoot = document.compatMode === 'BackCompat'
     ? body
@@ -53,10 +55,10 @@ chartUtil.getScrollTop = () => {
         || document.documentElement.scrollTop
         || document.body.scrollTop
         || 0;
-},
+};
 chartUtil.getViewHeight = () => {
     return viewRoot ? viewRoot.clientHeight : 0;
-},
+};
 chartUtil.getOffset = (element) => {
     if (!element) {
         return;
@@ -86,6 +88,26 @@ chartUtil.getOffset = (element) => {
     offset.right = offset.right + scrollLeft - clientLeft;
 
     return offset;
-}
+};
+
+chartUtil.numberFormat = (value, number = 1) => {
+    if (value < 1000 || typeof value !== 'number') {
+        return value;
+    }
+    let formatNumber = value;
+    for (let i = 0; i < numUnit.length; i++) {
+        if (value < Math.pow(1000, i + 2) || i === numUnit.length - 1) {
+            // 保留一位小数
+            formatNumber = (value / Math.pow(1000, i + 1)).toFixed((value % Math.pow(1000, i + 1)) === 0
+                ? number
+                : Math.max(1, number)) + numUnit[i];
+            break;
+        }
+        else {
+            continue;
+        }
+    }
+    return formatNumber;
+};
 
 export default chartUtil;
