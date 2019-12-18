@@ -724,7 +724,7 @@ export default {
         setDate(startDate, endDate) {
             if (['date', 'datetime'].indexOf(this.type) > -1) {
                 if (startDate && u.isDate(startDate)) {
-                    if (this.isDisabledHandler(startDate)) {
+                    if (this.isDisabledHandler(startDate, [startDate])) {
                         //cann't set disabled date
                         return;
                     }
@@ -747,7 +747,7 @@ export default {
             }
             else if (['daterange', 'daterangetime'].indexOf(this.type) > -1) {
                 if (startDate && endDate && u.isDate(startDate) && u.isDate(endDate)) {
-                    if (this.isDisabledHandler(startDate) || this.isDisabledHandler(endDate)) {
+                    if (this.isDisabledHandler(startDate, [startDate, endDate]) || this.isDisabledHandler(endDate, [startDate, endDate])) {
                         // cann't set disabled date
                         return;
                     }
@@ -803,15 +803,16 @@ export default {
          * 处理不可选日期
          *
          * @param {Date} date 当前日期
+         * @param {Date} targetDate 将要生效的日期
          * @return {boolean} 返回当前日期是否可选
          */
-        isDisabledHandler(date) {
+        isDisabledHandler(date, targetDate) {
             if (this.options && this.options.disabledHandler && typeof this.options.disabledHandler === 'function') {
                 let selectedDate = ['date', 'datetime'].indexOf(this.type) > -1 ? this.dateValue.selectedDate : {
                     "startSelectedDate": this.dateValue.startSelectedDate,
                     "endSelectedDate": this.dateValue.endSelectedDate
                 };
-                return this.options.disabledHandler(date, selectedDate);
+                return this.options.disabledHandler(date, selectedDate, targetDate || []);
             }
             else {
                 return false;
