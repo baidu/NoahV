@@ -716,7 +716,7 @@ export default {
                                     sum: mdutil.setDecimal(itemTotal, col2.decimals),
                                     avg: mdutil.setDecimal(itemTotal / bodyList.length, col2.decimals)
                                 };
-                                if (!footer[col.total]) {
+                                if (!footer[col2.total]) {
                                     return
                                 }
                                 totalInfo = col2.unit ? footer[col2.total] + col2.unit : footer[col2.total];
@@ -850,10 +850,10 @@ export default {
                             b.columns.map(bColumnItem => {
                                 if (bColumnItem.sortid === sortId) {
                                     if (column.sortType === 'asc') {
-                                        compareResult = aColumnItem.value > bColumnItem.value;
+                                        compareResult = aColumnItem.value - bColumnItem.value;
                                     }
                                     else {
-                                        compareResult = aColumnItem.value < bColumnItem.value;
+                                        compareResult = bColumnItem.value - aColumnItem.value;
                                     }
                                 }
                                 return bColumnItem;
@@ -882,7 +882,7 @@ export default {
                                             if (b.treeInfo.isLast && aColumnItem.value > bColumnItem.value) {
                                                 a.treeInfo.isLast = true;
                                                 b.treeInfo.isLast = false;
-                                                compareResult = aColumnItem.value > bColumnItem.value;
+                                                compareResult = aColumnItem.value - bColumnItem.value;
                                             }
                                         }
 
@@ -890,7 +890,7 @@ export default {
                                         else if (b.treeInfo.isLast && aColumnItem.value < bColumnItem.value) {
                                             a.treeInfo.isLast = true;
                                             b.treeInfo.isLast = false;
-                                            compareResult = aColumnItem.value < bColumnItem.value;
+                                            compareResult = bColumnItem.value - aColumnItem.value;
                                         }
                                     }
                                     return bColumnItem;
