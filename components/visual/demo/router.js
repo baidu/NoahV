@@ -27,5 +27,9 @@ export default [
     {
         path: '/nvmap',
         component: r => require.ensure([], () => r(require('./components/nvmap')), 'nvmap')
+    },
+    {
+        path: '/nvpie',
+        component: r => require.ensure([], () => r(require('./components/nvpie')), 'nvpie')
     }
 ];

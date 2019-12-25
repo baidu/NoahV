@@ -27,7 +27,7 @@ export const eConfig = {
             }
         },
         eventRiver: {
-            color: [
+            colors: [
                 '#9276D2', '#6656C3', '#347DDD', '#31B7DF',
                 '#4DC8D7', '#75D4BB', '#1FC699', '#8FD18B',
                 '#C9E17F', '#FFD769', '#FFB685', '#FCA15C',
@@ -38,6 +38,13 @@ export const eConfig = {
                 normalColor: '#008000',
                 activeColor: '#0000ff'
             }
+        },
+        pie: {
+            colors: [
+                '#108CEE', '#3A62CA', '#F18823', '#EA2E2E',
+                '#8A58BC', '#5FB333', '#BC5858', '#04C1BA',
+                '#F5CB59', '#9AA1B3'
+            ]
         },
         themeColor: {
             warningColor: 'red'

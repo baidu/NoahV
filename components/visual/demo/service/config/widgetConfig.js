@@ -37,6 +37,14 @@ export const WidgetConfig = {
                 activeColor: '#0000ff'
             }
         },
+        pie: {
+            colors: [
+                '#108CEE', '#3A62CA', '#F18823', '#EA2E2E',
+                '#8A58BC', '#5FB333', '#BC5858', '#04C1BA',
+                '#F5CB59', '#9AA1B3'
+            ],
+            defaultColor: '#4a90ea'
+        },
         themeColor: {
             warningColor: 'red'
         }
