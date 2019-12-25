@@ -21,6 +21,8 @@ require('../mock/trendWarning');
 require('../mock/trendPoint');
 
 require('../mock/dataMap');
+require('../mock/pie');
+require('../mock/dataPie');
 
 export default {
     billboard: {
@@ -43,6 +45,10 @@ export default {
     eventRiver: {
         conf: '/mock/eventRiver',
         data: '/mock/eventlist'
+    },
+    pie: {
+        conf: '/mock/pie',
+        data: '/mock/dataPie'
     }
 };
 

@@ -551,8 +551,11 @@ let Points = {
                 }
                 else if (this.extraUrls && this.extraUrls.trendPointsUrl){
                     this.$wRequest.post(this.extraUrls.trendPointsUrl, params).then(data => {
-                        this.abnormals = data.data || [];
-                        this.renderAbnormals(chart, this.abnormals);
+                        let res = data.data;
+                        if (res && res.success) {
+                            this.abnormals = res.data || [];
+                            this.renderAbnormals(chart, this.abnormals);
+                        }
                     });
                 }
             }
@@ -573,26 +576,29 @@ let Points = {
             let series = option.series;
 
             if (series.length > 0 && abnormals.length) {
-                option.series.push({
-                    name: '异常点',
-                    type: 'line',
-                    silent: false,
-                    itemStyle: {
-                        color: '#f00'
-                    },
-                    markPoint: {
-                        data: u.map(abnormals, item => {
-                            return {
-                                coord: [item[0], item[3]]
-                            };
-                        }),
-                        symbol: 'square',
-                        symbolSize: 12,
+                u.each(abnormals, list => {
+                    option.series.push({
+                        name: list.name || '异常点',
+                        type: 'line',
+                        silent: false,
                         itemStyle: {
-                            color: '#f00'
+                            color: list.color || '#f00'
+                        },
+                        markPoint: {
+                            data: u.map(list.data, item => {
+                                return {
+                                    coord: [item[0], item[1]]
+                                };
+                            }),
+                            symbol: list.symbol || 'square',
+                            symbolSize: list.size || 12,
+                            itemStyle: {
+                                color: list.color || '#f00'
+                            }
                         }
-                    }
+                    });
                 });
+                
                 chart.setOption(option);
             }
         },
