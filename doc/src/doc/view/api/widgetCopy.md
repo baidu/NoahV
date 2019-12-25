@@ -1,4 +1,4 @@
-
+[[TOC]]
 ## 接口含义
 在仪表盘综合管理页面中复制组件
 
@@ -24,11 +24,10 @@ res.data
 | title | 新复制组件展示名称 | string | 'WIDGETS'   |
 | type | 新复制组件类型 | string | 'WIDGETS'    |
 
-### 示例
+## 示例
 
-<div class="normal-code">
 
-```
+```json
 {
     data: {
         id: 1803,
@@ -40,4 +39,3 @@ res.data
     message: 'ok'
 }
 ```
-</div>

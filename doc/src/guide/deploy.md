@@ -1,3 +1,5 @@
+[[TOC]]
+
 ## 概述
 本章主要介绍NoahV项目的构建部署相关知识。
 
@@ -7,14 +9,11 @@
  
 项目初始化后目录中会自带一个 `build.sh` 的文件，该文件主要是执行的代码编译框架的过程，经过该脚本构建之后会将所有的配置文件和依赖进行压缩合并，在output目录下产出一个 `noahv.tar.gz` 的包，压缩包中的文件结构如下所示：
 
-<div class="normal-code">
-
 ```bash
 noahv.tar.gz
 ├── static (js/css/image)
 └── index.html (入口文件)
 ```
-</div>
 
 
 <!-- 对于百度内部的项目，一般是通过 AGILE 平台来构建，在初始化的项目根目录中加入 AGILE 平台的 `BCLOUD` 文件，然后在该文件中执行 `sh build.sh` 即可，如下所示为示例的BCLOUD内容：

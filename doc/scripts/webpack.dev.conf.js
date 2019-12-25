@@ -40,6 +40,6 @@ module.exports = merge(baseWebpackConfig, {
         //     context: __dirname,
         //     manifest: path.resolve(config.build.assetsRoot, 'vendor.manifest.json')
         // })
-        new BundleAnalyzerPlugin()
+        // new BundleAnalyzerPlugin()
     ]
 })

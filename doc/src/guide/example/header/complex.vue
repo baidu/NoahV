@@ -2,7 +2,7 @@
     <div class="normal-header-example">
         <Menu mode="horizontal" active-name="1">
             <MenuItem name="0" class="logo-wrapper">
-                <img :src="img" alt="百度云" title="百度云" />
+                <img src="https://baidu.github.io/NoahV/static/img/logo.png" alt="百度云" title="百度云" />
             </MenuItem>
             <Submenu name="1">
                 <template slot="title">
@@ -34,7 +34,7 @@
             <Submenu name="5" class="login-wrapper">
                 <template slot="title">
                     <Icon type="person"></Icon>
-                    xiaodu
+                    NoahV
                 </template>
                 <MenuItem name="5-1">个人中心</MenuItem>
                 <MenuItem name="5-2">账户管理</MenuItem>

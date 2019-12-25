@@ -1,3 +1,5 @@
+[[TOC]]
+
 ## 概述
 本章主要介绍NoahV中业务模板的复用，在 [快速开始](#/guide/quickstart) 中初步介绍了下创建页面配置的功能，这里再展开介绍下模板使用。
 
@@ -40,63 +42,8 @@
 表单模板、表格模板、通用筛选表格模板中已经对业务请求做好了封装处理，无需再额外发起ajax请求，如果基于业务需要需要发起请求，可参照如下方法：
 框架中集成了axios工具，并且注入到了vue示例上，在模板中，可以使用如下方式发起请求
 
-<br>
-<nv-code :content="normalAjaxDemoCode">
-</nv-code>
 
-<br>
-
-上述示例中只给出了get、post, restful中的put、delete方法同样是支持的，更多关于请求参数、格式可以参考 [axios官网](https://github.com/axios/axios)
-
-### 完整示例代码
-
-<template>
-    <div class="demo-list">ajax请求回的数据为： {{ajaxData}}</div>
-</template>
-<script>
-const demoCode = `
-<template>
-    <div class="demo-list">ajax请求回的数据为： {{ajaxData}}</div>
-</template>
-<script>
-export default {
-    name: 'demo-list',
-    created() {
-        const self = this;
-        self.$request({
-            url: '/api/tpl/ajax',
-            method: 'post',
-            // 请求数据时展示全局loading
-            showLoading: true,
-            data: {
-                name: 'dev',
-                dev: true
-            }
-        }).then(function (res) {
-            const data = res.data;
-            if (data.success) {
-                self.ajaxData = data.data;
-            }
-            else {
-                self.$Message.error(data.message)
-            }
-        });
-    },
-    data () {
-        return {
-            ajaxData: ''
-        }
-    }
-};
-<\/script>
-<style lang="less">
-    .demo-list {
-        padding: 10px;
-        border: 1px solid #ccc;
-    }
-<\/style>
-`;
-const normalAjaxDemoCode = `
+```javascript
 // post
 this.$request({
     url: '/api/table/post',
@@ -134,7 +81,19 @@ this.$request.post('/api/table/post', {
     }
 }).then(function(data) {
 });
-`;
+```
+
+
+上述示例中只给出了get、post, restful中的put、delete方法同样是支持的，更多关于请求参数、格式可以参考 [axios官网](https://github.com/axios/axios)
+
+## 示例
+
+:::demo ajax示例
+```html
+<template>
+    <div class="demo-list">ajax请求回的数据为： {{ajaxData}}</div>
+</template>
+<script>
 export default {
     name: 'demo-list',
     created() {
@@ -160,9 +119,7 @@ export default {
     },
     data () {
         return {
-            ajaxData: '',
-            demoCode: demoCode,
-            normalAjaxDemoCode: normalAjaxDemoCode
+            ajaxData: ''
         }
     }
 };
@@ -173,10 +130,6 @@ export default {
         border: 1px solid #ccc;
     }
 </style>
-
-<br>
-<br>
-
-<nv-code :content="demoCode">
-</nv-code>
+```
+:::
 

@@ -74,7 +74,7 @@ export default [
         path: '/doc/view/quickstart'
     },
     {
-        component: r => require.ensure([], () => r(require('src/doc/view/guide')), 'doc/view/guide'),
+        component: r => require.ensure([], () => r(require('src/doc/view/guide.md')), 'doc/view/guide'),
         path: '/doc/view/guide'
     },
     {
@@ -114,11 +114,11 @@ export default [
         path: '/guide/catalog'
     },
     {
-        component: r => require.ensure([], () => r(require('src/guide/quickstart')), 'guide/quickstart'),
+        component: r => require.ensure([], () => r(require('src/guide/quickstart.md')), 'guide/quickstart'),
         path: '/guide/quickstart'
     },
     {
-        component: r => require.ensure([], () => r(require('src/guide/about')), 'guide/about'),
+        component: r => require.ensure([], () => r(require('src/guide/about.md')), 'guide/about'),
         path: '/guide/about',
         entry: true
     },

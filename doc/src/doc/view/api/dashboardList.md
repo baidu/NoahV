@@ -1,3 +1,5 @@
+[[TOC]]
+
 ## 接口含义
 获取已创建仪表盘元信息
 
@@ -25,11 +27,11 @@ res.data
 | updator| 更新人 | string  | -   |
 
 
-### 示例
+## 示例
 
-<div class="normal-code">
 
-```
+
+```json
 {
     data: [
         {
@@ -53,4 +55,3 @@ res.data
     success: true
 }
 ```
-</div>

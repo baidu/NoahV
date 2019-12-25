@@ -1,3 +1,5 @@
+[[TOC]]
+
 ## 接口含义
 获取组件配置信息
 
@@ -22,11 +24,10 @@ res.data
 | type |  组件类型 | string| ''  |
 
 
-### 示例
+## 示例
 
-<div class="normal-code">
 
-```
+```json
 {
     data: {
         title: '下游模块可用性监控',
@@ -39,4 +40,3 @@ res.data
     message: 'ok'
 }
 ```
-</div>

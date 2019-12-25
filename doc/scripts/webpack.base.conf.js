@@ -2,6 +2,7 @@
 var path = require('path')
 var config = require('./config')
 var utils = require('./utils')
+var slugify = require('transliteration').slugify;
 var projectRoot = path.resolve(__dirname, '../');
 
 var env = process.env.NODE_ENV
@@ -11,6 +12,10 @@ var cssSourceMapDev = (env === 'development' && config.dev.cssSourceMap)
 var cssSourceMapProd = (env === 'production' && config.build.productionSourceMap)
 var useCssSourceMap = cssSourceMapDev || cssSourceMapProd
 var vueLoaderConfig = require('./vue-loader.conf')
+
+const replacedlist = 'guide|template|view|api';
+
+const replaceRegx = new RegExp('(' + replacedlist + ')\/(.*)\\.md$');
 
 module.exports = {
     entry: {
@@ -44,52 +49,81 @@ module.exports = {
     }],
     module: {
         // unknownContextCritical : false,
-        rules: [{
-            test: /\.md$/,
-            loader: 'vue-markdown-loader',
-            options: {
-                wrapper: 'saas-doc'
+        rules: [
+            {
+                test: function(path) {
+                    if (!/\.md$/.test(path)) {
+                        return false;
+                    }
+                    var arr = path.split('/');
+                    var name = arr[arr.length - 2];
+                    if (replacedlist.split('|').indexOf(name) === -1) {
+                        return true;
+                    }
+                    return false;
+                },
+                loader: 'vue-markdown-loader',
+                options: {
+                    wrapper: 'saas-doc'
+                }
+            },
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader',
+                options: vueLoaderConfig
+            },
+            {
+                test: /\.js$/,
+                use: [{
+                    loader: 'babel-loader',
+                    options: {
+                        cacheDirectory: true
+                    }
+                }],
+                exclude: /(scripts|test)/,
+                include: [
+                    path.resolve(__dirname, "../src")
+                ]
+            },
+            {
+                test: replaceRegx,
+                use: [
+                  {
+                    loader: 'vue-loader',
+                    options: {
+                      compilerOptions: {
+                        preserveWhitespace: false
+                      }
+                    }
+                  },
+                  {
+                    loader: path.resolve(__dirname, './demo-loader/index.js')
+                  }
+                ]
+            },
+            {
+                test: /\.(png|jpe?g|gif|svg|ico)(\?.*)?$/,
+                use: [{
+                    loader: 'url-loader',
+                    options: {
+                        limit: 10000,
+                        name: utils.assetsPath('img/[name].[ext]')
+                    }
+                    
+                }]
+            },
+            {
+                test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+                use: [{
+                    loader: 'url-loader',
+                    options: {
+                        limit: 10000,
+                        name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
+                    }
+                }]
             }
-        },
-        {
-            test: /\.vue$/,
-            loader: 'vue-loader',
-            options: vueLoaderConfig
-        },
-        {
-            test: /\.js$/,
-            use: [{
-                loader: 'babel-loader',
-                options: {
-                    cacheDirectory: true
-                }
-            }],
-            exclude: /(scripts|test)/,
-            include: [
-                path.resolve(__dirname, "../src")
-            ]
-        },
-        {
-            test: /\.(png|jpe?g|gif|svg|ico)(\?.*)?$/,
-            use: [{
-                loader: 'url-loader',
-                options: {
-                    limit: 10000,
-                    name: utils.assetsPath('img/[name].[ext]')
-                }
-                
-            }]
-        }, {
-            test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-            use: [{
-                loader: 'url-loader',
-                options: {
-                    limit: 10000,
-                    name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
-                }
-            }]
-        }]
-    },
+        ]
+    }
     // vue: {
     //     loaders: utils.cssLoaders({
     //         sourceMap: useCssSourceMap

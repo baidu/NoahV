@@ -1,3 +1,4 @@
+[[TOC]]
 
 ## 概述
 
@@ -11,9 +12,8 @@ object中主要包含如下字段：
 * 2.path 浏览器中的访问路径，必需参数
 * 3.entry 标识该条路由是否是系统默认路由，如果设置为true页面加载完成后自动进入该条路由，当所有映射都未添加该参数时，默认进入数组中第一条路由，可选参数
 
-<div class="normal-code">
 
-```
+```javascript
 
 export default [
     // Keep this line if you want auto add router by noahv create
@@ -33,7 +33,6 @@ export default [
     }
 ];
 ```
-</div>
 
 ### router.js 配置说明
 
@@ -44,9 +43,3 @@ export default [
 | meta         | 配置点击选中效果的连带效应，详见组合示例| -                |-|
 | entry         | 是否是默认入口，当为true的时候，该条路由为默认路由| entry:true                |-|
 
-
-
-<style lang="less" >
-    .normal-header-config-example {
-    }
-</style>

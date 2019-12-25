@@ -1,3 +1,4 @@
+[[TOC]]
 
 ## 概述
 
@@ -44,10 +45,3 @@ noahv-cli INFO please enter <path> for `noahv create`
 noahv-cli ok creat success! 
 
 ```
-
-
-<style lang="less" scoped>
-pre {
-     background: #f6f6f6;
-}
-</style>

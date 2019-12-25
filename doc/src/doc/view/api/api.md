@@ -1,11 +1,12 @@
+[[TOC]]
+
 ## 概述
 仪表盘整体功能需要提供12个接口，其中仪表盘管理页面4个、仪表盘综合配置页面5个、组件配置页面2个、仪表盘查看页面1个。
 
 在项目目录 `src/view/api/config.js` 文件中维护了仪表盘所有的接口配置信息，可根据需要替换接口路径，但请保留key值不变。
 
-<div class="normal-code">
 
-```
+```javascript
 // 仪表盘管理页面
 
 // 1.获取已有仪表盘信息
@@ -45,7 +46,6 @@ widgetSave: '/api/conf/update',
 // 1.获取仪表盘配置
 dashboardGet: '/api/dashboard/get'
 ```
-</div>
 
 
 ## 各接口格式和参数
