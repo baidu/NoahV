@@ -311,7 +311,7 @@ export default {
          */
         initConf() {
             let initConf = {
-                display: 100
+                display: []
             };
             this.renderDataByConf(initConf);
         },
