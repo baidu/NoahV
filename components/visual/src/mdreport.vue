@@ -530,7 +530,9 @@ export default {
         buildTableBody(list, columns, level, parentInfo) {
             let len = list.length;
             $.each(list, (i, item) => {
-                let treeInfo = {};
+                let treeInfo = {
+                    isShow: true
+                };
                 if (item.children && item.children.length > 0) {
                     this.reportType = 'tree';
                 }
@@ -545,7 +547,7 @@ export default {
                             tempSublings.push(item);
                             return item;
                         });
-                        tempSublings.push((parentInfo.parent.length > 1));
+                        tempSublings.push((parentInfo.parent && parentInfo.parent.length > 1));
                     }
                     else {
                         parentInfo = {parentHasSublings: []};
@@ -818,7 +820,7 @@ export default {
         expandNode(nodeInfo) {
             nodeInfo.isExpend = !nodeInfo.isExpend;
             this.bodyLists.map(trItem => {
-                if (trItem.treeInfo.id.indexOf(nodeInfo.id + '-') > -1) {
+                if (trItem.treeInfo.id && trItem.treeInfo.id.indexOf(nodeInfo.id + '-') > -1) {
                     if (nodeInfo.isExpend) {
                         trItem.treeInfo.isExpend = nodeInfo.isExpend;
                     }
