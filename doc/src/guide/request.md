@@ -55,6 +55,7 @@ NoahV-request会为每一个请求匹配默认的接口返回处理程序，如�
 ### 全局的加载提示
 默认情况下，每个接口都会触发覆盖全屏幕的加载提示，如果不希望有,可以在接口请求配置中设置`showLoading`为`false`,如果希望所有接口都不默认触发加载提示，请参考`showGlobalLoading`、`hideGlobalLoading`相关hook。
 
+
 ### 支持Restful风格接口定义
 如果接口中含有大括号包含的变量，NoahV-request会在接口请求之前进行变量替换，如`{name}`,替换的真实值来自于`pathArgs`、`params`、`data`，优先使用`pathArgs`,也建议需要替换的时候提供`pathArgs`，避免和请求参数混淆。
 也可以自定义Restful处理规则，请参考`handlerRestfulUrl`相关hook。

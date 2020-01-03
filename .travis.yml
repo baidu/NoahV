@@ -2,8 +2,11 @@ sudo: false
 language: node_js
 os:
   - linux
+  - osx
+  - windows
+
 node_js:
-  - '8'
+  - '10'
 cache: npm
 
 jobs:
@@ -23,4 +26,4 @@ jobs:
 notifications:
   email:
     on_success: never
-    on_failure: never
+    on_failure: always

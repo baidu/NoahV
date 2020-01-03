@@ -60,7 +60,10 @@ module.exports = {
                     cacheDirectory: true
                 }
             }],
-            include: /(src|node_modules\/noahv?)/
+            include: [
+                path.resolve(__dirname, '../src'),
+                path.resolve(__dirname, '../node_modules/noahv')
+            ]
         },
         {
             test: /\.css$/,

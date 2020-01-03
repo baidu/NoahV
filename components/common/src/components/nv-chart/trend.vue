@@ -1,7 +1,7 @@
 <template>
     <div :class="getCls('trend')" ref="trend">
         <h3>
-            <span class="trend-title">{{resTitle}}</span>
+            <span class="trend-title" :title="resTitle">{{resTitle}}</span>
             <slot name="header-right"></slot>
         </h3>
         <!-- <vue-echarts :options="curOptions" ref="chart"></vue-echarts> -->
@@ -34,8 +34,8 @@ const trendOptions = {
     },
     grid: {
         bottom: 70,
-        left: 40,
-        right: 20
+        left: 50,
+        right: 40
     },
     chart: {
         height: 250
@@ -128,16 +128,6 @@ const trendOptions = {
         itemWidth: 10
     }
 };
-
-function shortValue(value) {
-    if (typeof value === 'number' && value > 1000000) {
-        return Math.ceil(value / 1000000) + 'M';
-    }
-    else if (typeof value === 'number' && value > 1000) {
-        return Math.ceil(value / 1000) + 'K';
-    }
-    return value;
-}
 
 export default {
     name: 'NvTrend',
@@ -412,7 +402,7 @@ export default {
                         label: {
                             position: 'end',
                             formatter: () => {
-                                return  shortValue(+this.options.threshold) + (this.options.unit || '');
+                                return  chartUtil.numberFormat(+this.options.threshold, 0) + (this.options.unit || '');
                             }
                         },
                         data: [

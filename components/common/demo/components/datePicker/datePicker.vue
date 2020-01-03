@@ -74,8 +74,10 @@ export default {
                  * @params {Date/Object} dateValue 如果type为'date/datetime',为选中的日期对象；
                  *                       如果type为'daterange/daterangetime',为选中的时间段集合,结构如下：
                  *                      {"startSelecteDate": 开始时间, "endSelectedDate": 结束时间}，注意每个属性字段都可能为空
+                 * @params {Array} targetDate 目标生效时间，如：点击快捷面板时，
+                 *                      会将快捷面板配置的时间传递过来做判断，这个时间就是目标生效时间
                  */
-                disabledHandler: function(date, dateValue) {
+                disabledHandler: function(date, dateValue, targetDate) {
                     // Demo1. 限制每月18号不可选择
                     if (date.getDate() === 18) {
                         return true;
@@ -84,12 +86,14 @@ export default {
                     // Demo2. 限制选择时间跨度不得超过70天
                     // 注意：使用该功能时，或者其他禁止日期动态变化的逻辑，请自行保证快捷面板的配置、默认时间等，与禁止策略保持一致性条件约束。
                     // 比如，这里限制了时间跨度不超过70天，快捷面板中配置的最大跨度也不要超过70天；如果有初始时间，也不要超过70天。
+                    // 这里应该设置为69，因为只限制天的跨度，加上时间点最长刚好70天的跨度。如2019.10.07 00:00:01 ～ 2019.11.06 23:59:59
+                    // 当然，你也可以按照秒等更小的粒度做控制，完全取决于你的业务需求。
                     // let selectedDate = ['date', 'datetime'].indexOf(self.type) > -1 ? dateValue : dateValue['startSelectedDate'];
-                    // if (selectedDate && m(date).diff(m(selectedDate).add(70, 'days')) > 0) {
-                    //     return true;
+                    // if (targetDate.length && targetDate.length === 2) {
+                    //     return m(targetDate[1]).diff(m(targetDate[0]).add(69, 'days')) > 0;
                     // }
                     // else {
-                    //     return false;
+                    //     return selectedDate && m(date).diff(m(selectedDate).add(69, 'days')) > 0;
                     // }
                 }
             }
