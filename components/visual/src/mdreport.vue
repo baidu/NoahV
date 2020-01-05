@@ -529,6 +529,7 @@ export default {
 
         buildTableBody(list, columns, level, parentInfo) {
             let len = list.length;
+            let hasOwnParent = parentInfo ? true : false;
             $.each(list, (i, item) => {
                 let treeInfo = {
                     isShow: true
@@ -542,7 +543,7 @@ export default {
                 }
                 else {
                     let tempSublings = [];
-                    if (parentInfo) {
+                    if (hasOwnParent && parentInfo) {
                         parentInfo.parentHasSublings.map(item => {
                             tempSublings.push(item);
                             return item;

@@ -1,6 +1,6 @@
 {
   "name": "noahv-visual-components",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Visual Components Library For NoahV",
   "main": "src/index.js",
   "scripts": {
