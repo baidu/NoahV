@@ -138,6 +138,11 @@
         }
     };
 </script>
+<style lang="less">
+.time-filter-area {
+    margin-bottom: 10px;
+}
+</style>
 ```
 :::
 
@@ -151,7 +156,7 @@
 ## 示例中接口返回数据
 
 :::demo 接口数据
-```html
+```json
 {
     data: {
         title: 'QPS',

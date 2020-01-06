@@ -128,7 +128,7 @@ export default [
     },
     {
         path: '/doc/component/icon',
-        component: r => require.ensure([], () => r(require('src/doc/icon/icon')), 'icon')
+        component: r => require.ensure([], () => r(require('src/doc/icon/icon.md')), 'icon')
     },
     {
         path: '/doc/template/basic-table',
@@ -194,12 +194,12 @@ export default [
     {
         path: '/doc/component/business/chart',
         component: r => require.ensure(
-            [], () => r(require('src/doc/component/business/chart/chart')), 'chart')
+            [], () => r(require('src/doc/component/business/chart/chart.md')), 'chart')
     },
     {
         path: '/doc/component/business/trend',
         component: r => require.ensure(
-            [], () => r(require('src/doc/component/business/trend/trend')), 'trend')
+            [], () => r(require('src/doc/component/business/trend/trend.md')), 'trend')
     },
     {
         path: '/doc/component/business/constrastTrend',

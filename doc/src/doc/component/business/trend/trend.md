@@ -1,36 +1,22 @@
+[[TOC]]
+
+## 概述
+
+趋势图组件将请求后的数据转化成趋势图
+
+## 示例
+
+:::demo 趋势图示例
+```html
 <template>
-    <div>
-        <div class="usage-item">
-            <h2>概述</h2>
-            <p>趋势图组件将请求后的数据转化成趋势图</p>
-        </div>
-
-        <div class="usage-item">
-            <nvTrend method="post" :options="optionsTrend" title="趋势图" :url="url" :params="params" show-loading="数据加载中..."  />
-            <nv-code :content="code"></nv-code><br/>
-        </div>
-
-        <div class="usage-item">
-            <h2>API</h2>
-            <tableTpl
-                :columns="columns"
-                :pagination="false"
-                :tdata="tdata"
-            />
-        </div>
-
-        <div class="usage-item">
-            <h2>request请求返回数据格式</h2>
-            <nv-code :content="responce"></nv-code><br/>
-        </div>
-    </div>
+    <nv-trend
+        title="趋势图" 
+        method="post"
+        :options="optionsTrend"
+        :url="url"
+        :params="params"
+        show-loading="数据加载中..." />
 </template>
-
-<script>
-const CODE = `
-<template>
-   <nv-trend method="post" :options="optionsTrend" title="趋势图" :url="url" :params="params" show-loading="数据加载中..."  />
-<\/template>
 <script>
 export default {
     data() {
@@ -38,16 +24,33 @@ export default {
             params: {
                 test: 'trend'
             },
-            optionsTrend: {
-
-            },
+            optionsTrend: {},
             url: '/api/trend'
         }
     }
 }
-<\/script>
-`;
-const RESPONCE = `
+</script>
+```
+:::
+
+## API
+
+| 属性          | 说明                                                         | 类型     | 默认值        |
+| ------------- | ------------------------------------------------------------ | -------- | ------------- |
+| title         | 趋势图标题                                                   | String   | -             |
+| method        | request请求类型                                              | String   | post          |
+| url           | request请求                                                  | String   | -             |
+| params        | request请求参数                                              | Object   | -             |
+| options       | Echarts 趋势图配置                                           | Object   | -             |
+| requestConfig | 可以将url和params、method等参数合并到requestConfig中         | Object   | {}            |
+| trendData     | 可以直接将已经获取好的数据交给趋势图来渲染                   | Object   | {}            |
+| seriesFilter  | 数据线条后置处理钩子，参数为当前有的数据线条，必须要返回需要展示的线条数据 | Function | -             |
+| dataFilter    | 数据后置处理钩子，可在数据请求完成后对数据进行封装处理，参数为请求到的数据，必须要有返回值 | Function | -             |
+| showLoading   | request请求loading文字                                       | String   | 数据加载中... |
+| noDataTip     | 无数据提示，支持HTML                                         | String   | 无数据        |
+
+:::demo request请求返回数据格式
+```json
 {
     success: true,
     message: 'ok',
@@ -185,129 +188,5 @@ const RESPONCE = `
         ]
     }
 }
-`;
-
-export default {
-    data() {
-        return {
-            params: {
-                test: 'trend'
-            },
-            optionsTrend: {
-
-            },
-            url: '/api/trend',
-            code: CODE,
-            responce: RESPONCE,
-            columns: [
-                {
-                    title: '属性',
-                    key: 'properties'
-                },
-                {
-                    title: '说明',
-                    key: 'comment'
-                },
-                {
-                    title: '类型',
-                    key: 'type'
-                },
-                {
-                    title: '默认值',
-                    key: 'initValue'
-                }
-            ],
-            tdata: [
-                {
-                    properties: 'title',
-                    comment: '趋势图标题',
-                    type: 'String',
-                    initValue: '-'
-                },
-                {
-                    properties: 'url',
-                    comment: 'request请求',
-                    type: 'String',
-                    initValue: '-'
-                },
-                {
-                    properties: 'method',
-                    comment: 'request请求类型',
-                    type: 'String',
-                    initValue: 'post'
-                },
-                {
-                    properties: 'params',
-                    comment: 'request请求参数',
-                    type: 'Object',
-                    initValue: '-'
-                },
-                {
-                    properties: 'options',
-                    comment: 'Echarts 趋势图配置',
-                    type: 'Object',
-                    initValue: ''
-                },
-                {
-                    properties: 'requestConfig',
-                    comment: '可以将url和params、method等参数合并到requestConfig中',
-                    type: 'Object',
-                    initValue: '{}'
-                },
-                {
-                    properties: 'trendData',
-                    comment: '可以直接将已经获取好的数据交给趋势图来渲染',
-                    type: 'Object',
-                    initValue: '{}'
-                },
-                {
-                    properties: 'seriesFilter',
-                    comment: '数据线条后置处理钩子，参数为当前有的数据线条，必须要返回需要展示的线条数据',
-                    type: 'Function',
-                    initValue: '-'
-                },
-                {
-                    properties: 'dataFilter',
-                    comment: '数据后置处理钩子，可在数据请求完成后对数据进行封装处理，参数为请求到的数据，必须要有返回值',
-                    type: 'Function',
-                    initValue: '-'
-                },
-                {
-                    properties: 'showLoading',
-                    comment: 'request请求loading文字',
-                    type: 'String',
-                    initValue: '数据加载中...'
-                },
-                {
-                    properties: 'noDataTip',
-                    comment: '无数据提示，支持HTML',
-                    type: 'String',
-                    initValue: '无数据'
-                }
-            ]
-        };
-    }
-};
-</script>
-
-<style lang="less">
-h2 {
-    margin-bottom: 10px;
-}
-h4 {
-    margin-bottom: 10px;
-}
-.usage-item {
-    margin-bottom: 30px;
-    .code {
-        border: 1px solid #ededed;
-        border-radius: 2px;
-        background: #f7f7f7;
-        padding-left: 15px;
-        margin-bottom: 10px;
-    }
-    .show-icon {
-        margin-bottom: 20px;
-    }
-}
-</style>
+```
+:::

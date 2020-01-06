@@ -13,7 +13,7 @@ var cssSourceMapProd = (env === 'production' && config.build.productionSourceMap
 var useCssSourceMap = cssSourceMapDev || cssSourceMapProd
 var vueLoaderConfig = require('./vue-loader.conf')
 
-const replacedlist = 'guide|template|view|api';
+const replacedlist = 'guide|table|form|trend|view|api|chart|icon';
 
 const replaceRegx = new RegExp('(' + replacedlist + ')\/(.*)\\.md$');
 

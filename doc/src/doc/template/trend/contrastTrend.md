@@ -6,14 +6,7 @@
 
 构建一个对比趋势图
 
-<template>
-    <div class="table-doc">
-        <div class="example">
-            <contrastTrendExample />
-        </div>
-    </div>
-</template>
-
+:::demo 构建一个对比趋势图
 ```html
 <template>
     <nv-contrast-trend :options="options" :title="title" :url="url" :params="params" :show-loading="showLoading" :items="items" :layout="layout" />
@@ -84,6 +77,8 @@
 </style>
 
 ```
+:::
+
 ## API
 
 ### props
@@ -98,22 +93,3 @@
 | layout | 图表的布局方式| String       | inline |
 | items     | 每个数组元素为object，同表单的配置参数item| Array       | - |
 
-
-<script>
-// import tableConfig from './tableConfig';
-import contrastTrendExample from  '../../../example/trend/contrastTrendDemo.vue';
-export default {
-    name: 'contrastTrendDoc',
-    components: {
-        contrastTrendExample
-    }
-};
-</script>
-
-<style lang="less" >
-    .table-doc {
-        .example {
-            margin: 20px 0;
-        }
-    }
-</style>
