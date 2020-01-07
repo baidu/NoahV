@@ -1,3 +1,4 @@
+[[TOC]]
 
 ## 概述
 
@@ -14,90 +15,14 @@
 
 ## 基础示例
 
-<br/>
-<br/>
+:::demo 基础用法示例
+```html
 
-<template>
-    <Card>
-        <p class="card-title">基础用法示例</p>
-        <template>
-            <div class="search-doc">
-                <div class="example">
-                    <normalSearchExample/>
-                </div>
-            </div>
-        </template>
-        <br/>
-        <br/>
-        <nv-code :content="normalSearchExampleCode">
-        </nv-code>
-    </Card>
-</template>
-
-<br/>
-<br/>
-
-
-
-## 组合示例
-
-构建一个复杂的时间选择器示例
-<br/>
-<br/>
-
-<template>
-    <Card>
-        <p class="card-title">组合用法示例</p>
-        <template>
-            <div class="search-doc">
-                <div class="example">
-                    <complexSearchExample/>
-                </div>
-            </div>
-        </template>
-        <br/>
-        <br/>
-        <nv-code :content="complexSearchExampleCode">
-        </nv-code>
-    </Card>
-</template>
-
-
-
-## API
-
-### props
-
-| 属性       | 说明                                     | 类型              | 默认值      |
-| ---------- | -----------------------------------------| --------------    | ----------- |
-| data       | 选择条件的集合                           | Array            | -           |
-| placeholer | 输入框的默认提示                         | String           | 请输入关键字搜索 |
-| maxlength  | 输入框的可输入最大长度                      | Number            | -         |
-| clearable  | 是否显示条件选择框和输入框的清除按钮        | Boolean           | false |
-| cascader   | 配置条件选择框的级联选择功能               | Boolean           | false |
-| value      | 条件选择值和输入值的集合对象，支持v-model，详见示例  | Boolean           | false |
-
-
-### events
-
-| 名称       | 说明                                     | 参数         |        返回值      |
-| ---------- | -----------------------------------------| ------------ |------------------- |
-| on-enter   | 监听enter键盘事件                          | event         | -                 |
-| on-change  | 监听条件项和输入值变化，使用方法详见示例      | -            | 条件项和输入值的集合对象，{searchName: String/Array, searchValue: String} |
-
-
-
-<script>
-import normalSearchExample from  '../../../example/search/normal.vue';
-import complexSearchExample from '../../../example/search/complex.vue';
-
-// 基础用法示例代码
-const normalSearchExampleCode = `
 <template>
     <div>
-        <NvSearch :data="options"><\/NvSearch>
-    <\/div>
-<\/template>
+        <NvSearch :data="options"></NvSearch>
+    </div>
+</template>
 
 <script>
 export default {
@@ -117,14 +42,23 @@ export default {
         };
     }
 };
-<\/script>
+</script>
+
 <style lang="less">
-<\/style>
-`;
+</style>
 
+```
+:::
 
-// 组合示例
-const complexSearchExampleCode = `
+<br/>
+<br/>
+
+## 组合示例
+
+构建一个复杂的时间选择器示例
+
+:::demo 组合用法示例
+```html
 <template>
     <div>
         <NvSearch
@@ -135,9 +69,9 @@ const complexSearchExampleCode = `
             :placeholder="placeholder"
             @on-change="changeHandler"
         >
-        <\/NvSearch>
-    <\/div>
-<\/template>
+        </NvSearch>
+    </div>
+</template>
 
 <script>
 export default {
@@ -209,35 +143,32 @@ export default {
         }
     }
 };
-<\/script>
-
-<style lang="less">
-<\/style>
-
-`;
-
-export default {
-    name: 'datePickerDoc',
-    components: {
-        normalSearchExample,
-        complexSearchExample
-    },
-    data() {
-        return {
-            normalSearchExampleCode: normalSearchExampleCode,
-            complexSearchExampleCode: complexSearchExampleCode
-        }
-    }
-};
 </script>
 
-<style lang="less" >
-    .search-doc {
-        .example {
-            margin: 20px 0;
-        }
-    }
-    .card-title {
-        font-weight: 600;
-    }
+<style lang="less">
 </style>
+
+
+```
+:::
+
+## API
+
+### props
+
+| 属性       | 说明                                     | 类型              | 默认值      |
+| ---------- | -----------------------------------------| --------------    | ----------- |
+| data       | 选择条件的集合                           | Array            | -           |
+| placeholer | 输入框的默认提示                         | String           | 请输入关键字搜索 |
+| maxlength  | 输入框的可输入最大长度                      | Number            | -         |
+| clearable  | 是否显示条件选择框和输入框的清除按钮        | Boolean           | false |
+| cascader   | 配置条件选择框的级联选择功能               | Boolean           | false |
+| value      | 条件选择值和输入值的集合对象，支持v-model，详见示例  | Boolean           | false |
+
+
+### events
+
+| 名称       | 说明                                     | 参数         |        返回值      |
+| ---------- | -----------------------------------------| ------------ |------------------- |
+| on-enter   | 监听enter键盘事件                          | event         | -                 |
+| on-change  | 监听条件项和输入值变化，使用方法详见示例      | -            | 条件项和输入值的集合对象，{searchName: String/Array, searchValue: String} |

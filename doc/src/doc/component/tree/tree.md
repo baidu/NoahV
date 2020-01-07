@@ -1,3 +1,4 @@
+[[TOC]]
 
 ## 概述
 
@@ -20,130 +21,547 @@
 
 ## 基础示例
 
-<br/>
-<br/>
-
+:::demo 基础用法示例
+```html
 <template>
-    <Card>
-        <p class="card-title">基础用法示例</p>
-        <template>
-            <div class="nv-tree-doc">
-                <div class="example">
-                    <normalSaTreeExample/>
-                </div>
-            </div>
-        </template>
-        <br/>
-        <br/>
-        <nv-code :content="normalSaTreeExampleCode">
-        </nv-code>
-    </Card>
+    <div>
+        <NvTree :items="items" :accordion="accordion"></NvTree>
+    </div>
 </template>
 
-<br/>
-<br/>
+<script>
+export default {
+    name: 'nvTreeNormalDemo',
+    data() {
+        const self = this;
+        return {
+            accordion: true,
+            items: [
+                {
+                    title: 'node1',
+                    name: 'node1',
+                    children: [
+                        {
+                            title: 'node1-2',
+                            name: 'node1-2',
+                            children: [
+                                {
+                                    title: 'node1-2-1',
+                                    name: 'node1-2-1'
+                                },
+                                {
+                                    title: 'node1-2-2',
+                                    name: 'node1-2-2'
+                                }
+                            ]
+                        },
+                        {
+                            title: 'node1-3',
+                            name: 'node1-3',
+                            children: [
+                                {
+                                    title: 'node1-3-1',
+                                    name: 'node1-3-1'
+                                },
+                                {
+                                    title: 'node1-3-2',
+                                    name: 'node1-3-2'
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    title: 'node2',
+                    name: 'node2',
+                    children: [
+                        {
+                            title: 'node2-1',
+                            name: 'node2-1'
+                        },
+                        {
+                            title: 'node2-2',
+                            name: 'node2-2'
+                        }
+                    ]
 
+                },
+                {
+                    title: 'node3',
+                    name: 'node3'
+                }
+            ]
+        };
+    }
+};
+</script>
+
+<style lang="less">
+</style>
+
+```
+:::
+
+:::demo Checkbox用法示例
+```html
 <template>
-    <Card>
-        <p class="card-title">Checkbox用法示例</p>
-        <template>
-            <div class="nv-tree-doc">
-                <div class="example">
-                    <checkedSaTreeExample/>
-                </div>
-            </div>
-        </template>
-        <br/>
-        <br/>
-        <nv-code :content="checkedSaTreeExampleCode">
-        </nv-code>
-    </Card>
+    <div>
+        <NvTree
+        :items="items"
+        :search="search"
+        :checkbox="checkbox"
+        @on-check-change="onCheckChangeHandler"
+        :width="300"
+        >
+        </NvTree>
+    </div>
 </template>
 
-<br/>
-<br/>
+<script>
+export default {
+    name: 'nvTreeCheckedDemo',
+    data() {
+        const self = this;
+        return {
+            search: true,
+            checkbox: true,
+            items: [
+                {
+                    title: 'node1',
+                    name: 'node1',
+                    icon: 'star',
+                    children: [
+                        {
+                            title: 'node1-2',
+                            name: 'node1-2',
+                            icon: 'star'
+                        },
+                        {
+                            title: 'node1-3',
+                            name: 'node1-3',
+                            icon: 'star'
+                        }
+                    ]
+                },
+                {
+                    title: 'node2',
+                    name: 'node2',
+                    icon: 'star',
+                    children: [
+                        {
+                            title: 'node2-1',
+                            name: 'node2-1',
+                            icon: 'star'
+                        },
+                        {
+                            title: 'node2-2',
+                            name: 'node2-2',
+                            icon: 'star'
+                        }
+                    ]
 
+                },
+                {
+                    title: 'node3',
+                    name: 'node3',
+                    icon: 'star'
+                }
+            ]
+        };
+    },
+    methods: {
+        onCheckChangeHandler: function () {
+            this.$Message.info('check changed');
+        }
+    }
+};
+</script>
+
+<style lang="less">
+</style>
+
+```
+:::
+
+:::demo 拖动用法示例
+```html
 <template>
-    <Card>
-        <p class="card-title">拖动用法示例</p>
-        <template>
-            <div class="nv-tree-doc">
-                <div class="example">
-                    <dragSaTreeExample/>
-                </div>
-            </div>
-        </template>
-        <br/>
-        <br/>
-        <nv-code :content="dragSaTreeExampleCode">
-        </nv-code>
-    </Card>
+    <div>
+        <NvTree
+        :items="items"
+        :draggable="draggable"
+        :width="300">
+        </NvTree>
+    </div>
 </template>
 
-<br/>
-<br/>
+<script>
+export default {
+    name: 'nvTreeDragDemo',
+    data() {
+        const self = this;
+        return {
+            draggable: true,
+            items: [
+                {
+                    title: 'node1',
+                    name: 'node1',
+                    children: [
+                        {
+                            title: 'node1-2',
+                            name: 'node1-2'
+                        },
+                        {
+                            title: 'node1-3',
+                            name: 'node1-3'
+                        }
+                    ]
+                },
+                {
+                    title: 'node2',
+                    name: 'node2',
+                    children: [
+                        {
+                            title: 'node2-1',
+                            name: 'node2-1'
+                        },
+                        {
+                            title: 'node2-2',
+                            name: 'node2-2'
+                        }
+                    ]
 
+                },
+                {
+                    title: 'node3',
+                    name: 'node3'
+                }
+            ]
+        };
+    }
+};
+</script>
+
+<style lang="less">
+</style>
+
+```
+:::
+
+:::demo 编辑用法示例
+```html
 <template>
-    <Card>
-        <p class="card-title">编辑用法示例</p>
-        <template>
-            <div class="nv-tree-doc">
-                <div class="example">
-                    <editSaTreeExample/>
-                </div>
-            </div>
-        </template>
-        <br/>
-        <br/>
-        <nv-code :content="editSaTreeExampleCode">
-        </nv-code>
-    </Card>
+    <div>
+        <NvTree
+        :items="items"
+        :editMode="editMode"
+        :appendIcon="appendIcon"
+        :removeIcon="removeIcon"
+        :editIcon="editIcon"
+        :width="300">
+        </NvTree>
+    </div>
 </template>
 
-<br/>
-<br/>
+<script>
+export default {
+    name: 'nvTreeEditDemo',
+    data() {
+        const self = this;
+        return {
+            editMode: true,
+            appendIcon: 'plus-small-square-o',
+            removeIcon: 'minus-small-square-o',
+            editIcon: 'edit-o',
+            items: [
+                {
+                    title: 'node1',
+                    name: 'node1',
+                    children: [
+                        {
+                            title: 'node1-2',
+                            name: 'node1-2'
+                        },
+                        {
+                            title: 'node1-3',
+                            name: 'node1-3'
+                        }
+                    ]
+                },
+                {
+                    title: 'node2',
+                    name: 'node2',
+                    children: [
+                        {
+                            title: 'node2-1',
+                            name: 'node2-1'
+                        },
+                        {
+                            title: 'node2-2',
+                            name: 'node2-2'
+                        }
+                    ]
 
+                },
+                {
+                    title: 'node3',
+                    name: 'node3'
+                }
+            ]
+        };
+    }
+};
+</script>
+
+<style lang="less">
+</style>
+
+```
+:::
+
+:::demo 监听事件示例
+```html
 <template>
-    <Card>
-        <p class="card-title">监听事件示例</p>
-        <template>
-            <div class="nv-tree-doc">
-                <div class="example">
-                    <eventsSaTreeExample/>
-                </div>
-            </div>
-        </template>
-        <br/>
-        <br/>
-        <nv-code :content="eventsSaTreeExampleCode">
-        </nv-code>
-    </Card>
+    <div>
+        <NvTree
+        :items="items"
+        :width="300"
+        @on-select-change="onSelectChangeHandler"
+        @on-expand-change="onExpandChangeHandler"
+        >
+        </NvTree>
+    </div>
 </template>
+
+<script>
+export default {
+    name: 'nvTreeEventsDemo',
+    data() {
+        const self = this;
+        return {
+            items: [
+                {
+                    title: 'node1',
+                    name: 'node1',
+                    children: [
+                        {
+                            title: 'node1-2',
+                            name: 'node1-2'
+                        },
+                        {
+                            title: 'node1-3',
+                            name: 'node1-3'
+                        }
+                    ]
+                },
+                {
+                    title: 'node2',
+                    name: 'node2',
+                    children: [
+                        {
+                            title: 'node2-1',
+                            name: 'node2-1'
+                        },
+                        {
+                            title: 'node2-2',
+                            name: 'node2-2'
+                        }
+                    ]
+
+                },
+                {
+                    title: 'node3',
+                    name: 'node3'
+                }
+            ]
+        };
+    },
+    methods: {
+        onSelectChangeHandler: function () {
+            this.$Message.info('select changed');
+        },
+        onExpandChangeHandler: function () {
+            this.$Message.info('expand changed');
+        }
+    }
+};
+</script>
+
+<style lang="less">
+</style>
+
+```
+:::
+
+<br/>
+<br/>
 
 ## 组合示例
 
 构建一个复杂的树组件示例
-<br/>
-<br/>
 
+:::demo 组合示例
+```html
 <template>
-    <Card>
-        <p class="card-title">组合示例</p>
-        <template>
-            <div class="nv-tree-doc">
-                <div class="example">
-                    <complexSaTreeExample/>
-                </div>
-            </div>
-        </template>
-        <br/>
-        <br/>
-        <nv-code :content="complexSaTreeExampleCode">
-        </nv-code>
-    </Card>
+    <div>
+        <NvTree
+        :items="items"
+        :search="search"
+        :accordion="accordion"
+        :draggable="draggable"
+        :editMode="editMode"
+        :checkbox="checkbox"
+        :multiple="multiple"
+        :appendIcon="appendIcon"
+        :removeIcon="removeIcon"
+        :editIcon="editIcon"
+        :lazyLoad="lazyLoad"
+        :loadData="loadData"
+        :width="320"
+        @on-check-change="onCheckChange"
+        @on-select-change="onSelectChange"
+        @on-expand-change="onExpandChange"
+        >
+        </NvTree>
+    </div>
 </template>
 
+<script>
+export default {
+    name: 'nvTreeComplexDemo',
+    data() {
+        return {
+            search: true,
+            accordion: false,
+            draggable: false,
+            editMode: true,
+            checkbox: true,
+            multiple: false,
+            lazyLoad: false,
+            appendIcon: 'plus-small-square-o',
+            removeIcon: 'minus-small-square-o',
+            editIcon: 'edit-o',
+            items: [
+                {
+                    title: 'node1',
+                    name: 'node1',
+                    icon: 'star',
+                    children: [
+                        {
+                            title: 'node1-2',
+                            name: 'node1-2',
+                            icon: 'star',
+                            children: [
+                                {
+                                    title: 'node1-2-1',
+                                    name: 'node1-2-1',
+                                    icon: 'star',
+                                    children: [
+                                        {
+                                            title: 'node1-2-1-1',
+                                            name: 'node1-2-1-1',
+                                            icon: 'star',
+                                            children: [
+                                                {
+                                                    title: 'node1-2-1-1-1',
+                                                    name: 'node1-2-1-1-1',
+                                                    icon: 'star'
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            title: 'node1-2-1-2',
+                                            name: 'node1-2-1-2',
+                                            icon: 'star'
+                                        }
+                                    ]
+                                },
+                                {
+                                    title: 'node1-2-2',
+                                    name: 'node1-2-2',
+                                    icon: 'star'
+                                }
+                            ]
+                        },
+                        {
+                            title: 'node1-3',
+                            name: 'node1-3',
+                            icon: 'star',
+                            children: [
+                                {
+                                    title: 'node1-3-1',
+                                    name: 'node1-3-1',
+                                    icon: 'star'
+                                },
+                                {
+                                    title: 'node1-3-2',
+                                    name: 'node1-3-2',
+                                    icon: 'star'
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    title: 'node2',
+                    name: 'node2',
+                    icon: 'star',
+                    children: [
+                        {
+                            title: 'node2-1',
+                            name: 'node2-1',
+                            icon: 'star'
+                        },
+                        {
+                            title: 'node2-2',
+                            name: 'node2-2',
+                            icon: 'star'
+                        }
+                    ]
 
+                },
+                {
+                    title: 'node3',
+                    name: 'node3',
+                    icon: 'star'
+                }
+            ]
+        };
+    },
+    methods: {
+        onSelectChange(item, items) {
+            //console.log('on-select-change watched');
+        },
+        onCheckChange(item, items) {
+            //console.log('on-check-change watched');
+        },
+        onExpandChange(item) {
+            //console.log('on-expand-change watched');
+        },
+        loadData(item, callback) {
+            // setTimeout(() => {
+            //     const data = [
+            //         {
+            //             title: 'children1',
+            //             children: []
+            //         },
+            //         {
+            //             title: 'children2',
+            //             children: []
+            //         }
+            //     ];
+            //     callback(data);
+            // }, 1000);
+        }
+    }
+};
+</script>
+
+<style lang="less">
+</style>
+
+```
+:::
 
 
 ## API
@@ -209,557 +627,3 @@
 | ------------------ | -----------------------------------------| ------------ |--------------------- |
 | getCheckedNodes    | 获取被勾选的节点集合                     | 无           | 返回被勾选的节点集合 |
 | getSelectedNodes   | 获取被选中的节点集合                     | 无           | 返回被选中的节点集合 |
-
-
-
-<script>
-    import normalSaTreeExample from '../../../example/tree/normal.vue';
-    import checkedSaTreeExample from '../../../example/tree/checked.vue';
-    import dragSaTreeExample from '../../../example/tree/drag.vue';
-    import editSaTreeExample from '../../../example/tree/editable.vue';
-    import eventsSaTreeExample from '../../../example/tree/events.vue';
-    import complexSaTreeExample from '../../../example/tree/complex.vue';
-    // 基础用法示例代码
-    const normalSaTreeExampleCode = `<template>
-        <div>
-            <NvTree :items="items" :accordion="accordion"><\/NvTree>
-        <\/div>
-    <\/template>
-
-    <script>
-    export default {
-        name: 'nvTreeNormalDemo',
-        data () {
-            const self = this;
-            return {
-                accordion: true,
-                items:[
-                    {
-                        title: 'node1',
-                        name: 'node1',
-                        children: [
-                            {
-                                title: 'node1-2',
-                                name: 'node1-2',
-                                children: [
-                                    {
-                                        title: 'node1-2-1',
-                                        name: 'node1-2-1'
-                                    },
-                                    {
-                                        title: 'node1-2-2',
-                                        name: 'node1-2-2'
-                                    }
-                                ]
-                            },
-                            {
-                                title: 'node1-3',
-                                name: 'node1-3',
-                                children: [
-                                    {
-                                        title: 'node1-3-1',
-                                        name: 'node1-3-1'
-                                    },
-                                    {
-                                        title: 'node1-3-2',
-                                        name: 'node1-3-2'
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        title: 'node2',
-                        name: 'node2',
-                        children: [
-                            {
-                                title: 'node2-1',
-                                name: 'node2-1'
-                            },
-                            {
-                                title: 'node2-2',
-                                name: 'node2-2'
-                            }
-                        ]
-
-                    },
-                    {
-                        title: 'node3',
-                        name: 'node3'
-                    }
-                ]
-            }
-        }
-    };
-    <\/script>
-
-    <style lang="less">
-    <\/style>`;
-
-    // checked用法示例
-    const checkedSaTreeExampleCode = `<template>
-        <div>
-            <NvTree 
-            :items="items"
-            :search="search"
-            :checkbox="checkbox"
-            @on-check-change="onCheckChangeHandler"
-            :width="300"
-            >
-            <\/NvTree>
-        <\/div>
-    <\/template>
-
-    <script>
-    export default {
-        name: 'nvTreeCheckedDemo',
-        data () {
-            const self = this;
-            return {
-                search: true,
-                checkbox: true,
-                items:[
-                    {
-                        title: 'node1',
-                        name: 'node1',
-                        icon: 'star',
-                        children: [
-                            {
-                                title: 'node1-2',
-                                name: 'node1-2',
-                                icon: 'star'
-                            },
-                            {
-                                title: 'node1-3',
-                                name: 'node1-3',
-                                icon: 'star'
-                            }
-                        ]
-                    },
-                    {
-                        title: 'node2',
-                        name: 'node2',
-                        icon: 'star',
-                        children: [
-                            {
-                                title: 'node2-1',
-                                name: 'node2-1',
-                                icon: 'star'
-                            },
-                            {
-                                title: 'node2-2',
-                                name: 'node2-2',
-                                icon: 'star'
-                            }
-                        ]
-
-                    },
-                    {
-                        title: 'node3',
-                        name: 'node3',
-                        icon: 'star'
-                    }
-                ]
-            }
-        },
-        methods: {
-            onCheckChangeHandler: function () {
-                this.$Message.info('check changed');
-            },
-        }
-    };
-    <\/script>
-
-    <style lang="less">
-    <\/style>`;
-
-    // drag用法示例
-    const dragSaTreeExampleCode = `<template>
-        <div>
-            <NvTree 
-            :items="items"
-            :draggable="draggable"
-            :width="300">
-            </NvTree>
-        <\/div>
-    <\/template>
-
-    <script>
-    export default {
-        name: 'nvTreeDragDemo',
-        data () {
-            const self = this;
-            return {
-                draggable: true,
-                items:[
-                    {
-                        title: 'node1',
-                        name: 'node1',
-                        children: [
-                            {
-                                title: 'node1-2',
-                                name: 'node1-2'
-                            },
-                            {
-                                title: 'node1-3',
-                                name: 'node1-3'
-                            }
-                        ]
-                    },
-                    {
-                        title: 'node2',
-                        name: 'node2',
-                        children: [
-                            {
-                                title: 'node2-1',
-                                name: 'node2-1'
-                            },
-                            {
-                                title: 'node2-2',
-                                name: 'node2-2'
-                            }
-                        ]
-
-                    },
-                    {
-                        title: 'node3',
-                        name: 'node3'
-                    }
-                ]
-            }
-        }
-    };
-    <\/script>
-
-    <style lang="less">
-    <\/style>`;
-
-    // 编辑用法示例代码
-    const editSaTreeExampleCode = `<template>
-        <div>
-            <NvTree 
-            :items="items"
-            :editMode="editMode"
-            :appendIcon="appendIcon"
-            :removeIcon="removeIcon"
-            :editIcon="editIcon"
-            :width="300">
-            </NvTree>
-        <\/div>
-    <\/template>
-
-    <script>
-    export default {
-        name: 'nvTreeEditDemo',
-        data () {
-            const self = this;
-            return {
-                editMode: true,
-                appendIcon: 'plus-small-square-o',
-                removeIcon: 'minus-small-square-o',
-                editIcon: 'edit-o',
-                items:[
-                    {
-                        title: 'node1',
-                        name: 'node1',
-                        children: [
-                            {
-                                title: 'node1-2',
-                                name: 'node1-2'
-                            },
-                            {
-                                title: 'node1-3',
-                                name: 'node1-3'
-                            }
-                        ]
-                    },
-                    {
-                        title: 'node2',
-                        name: 'node2',
-                        children: [
-                            {
-                                title: 'node2-1',
-                                name: 'node2-1'
-                            },
-                            {
-                                title: 'node2-2',
-                                name: 'node2-2'
-                            }
-                        ]
-
-                    },
-                    {
-                        title: 'node3',
-                        name: 'node3'
-                    }
-                ]
-            }
-        }
-    };
-    <\/script>
-
-    <style lang="less">
-    <\/style>`;
-
-    // 监听事件用法示例代码
-    const eventsSaTreeExampleCode = `<template>
-        <div>
-            <NvTree 
-            :items="items"
-            :width="300"
-            @on-select-change="onSelectChangeHandler"
-            @on-expand-change="onExpandChangeHandler"
-            >
-            <\/NvTree>
-        <\/div>
-    <\/template>
-
-    <script>
-    export default {
-        name: 'nvTreeEventsDemo',
-        data () {
-            const self = this;
-            return {
-                items:[
-                    {
-                        title: 'node1',
-                        name: 'node1',
-                        children: [
-                            {
-                                title: 'node1-2',
-                                name: 'node1-2'
-                            },
-                            {
-                                title: 'node1-3',
-                                name: 'node1-3'
-                            }
-                        ]
-                    },
-                    {
-                        title: 'node2',
-                        name: 'node2',
-                        children: [
-                            {
-                                title: 'node2-1',
-                                name: 'node2-1'
-                            },
-                            {
-                                title: 'node2-2',
-                                name: 'node2-2'
-                            }
-                        ]
-
-                    },
-                    {
-                        title: 'node3',
-                        name: 'node3'
-                    }
-                ]
-            }
-        },
-        methods: {
-            onSelectChangeHandler: function () {
-                this.$Message.info('select changed');
-            },
-            onExpandChangeHandler: function () {
-                this.$Message.info('expand changed');
-            }
-        }
-    };
-    <\/script>
-
-    <style lang="less">
-    <\style>`;
-
-    // 复杂示例用法代码
-    const complexSaTreeExampleCode = `<template>
-        <div>
-            <NvTree
-            :items="items"
-            :search="search"
-            :accordion="accordion"
-            :draggable="draggable"
-            :editMode="editMode"
-            :checkbox="checkbox"
-            :multiple="multiple"
-            :appendIcon="appendIcon"
-            :removeIcon="removeIcon"
-            :editIcon="editIcon"
-            :lazyLoad="lazyLoad"
-            :loadData="loadData"
-            :width="320"
-            @on-check-change="onCheckChange"
-            @on-select-change="onSelectChange"
-            @on-expand-change="onExpandChange"
-            >
-            <\/NvTree>
-        <\/div>
-    <\/template>
-
-    <script>
-    export default {
-        name: 'nvTreeComplexDemo',
-        data () {
-            return {
-                search: true,
-                accordion: false,
-                draggable: false,
-                editMode: true,
-                checkbox: true,
-                multiple: false,
-                lazyLoad: false,
-                appendIcon: 'plus-small-square-o',
-                removeIcon: 'minus-small-square-o',
-                editIcon: 'edit-o',
-                items:[
-                    {
-                        title: 'node1',
-                        name: 'node1',
-                        icon: 'star',
-                        children: [
-                            {
-                                title: 'node1-2',
-                                name: 'node1-2',
-                                icon: 'star',
-                                children: [
-                                    {
-                                        title: 'node1-2-1',
-                                        name: 'node1-2-1',
-                                        icon: 'star',
-                                        children: [
-                                            {
-                                                title: 'node1-2-1-1',
-                                                name: 'node1-2-1-1',
-                                                icon: 'star',
-                                                children: [
-                                                    {
-                                                        title: 'node1-2-1-1-1',
-                                                        name: 'node1-2-1-1-1',
-                                                        icon: 'star'
-                                                    }
-                                                ]
-                                            },
-                                            {
-                                                title: 'node1-2-1-2',
-                                                name: 'node1-2-1-2',
-                                                icon: 'star'
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        title: 'node1-2-2',
-                                        name: 'node1-2-2',
-                                        icon: 'star'
-                                    }
-                                ]
-                            },
-                            {
-                                title: 'node1-3',
-                                name: 'node1-3',
-                                icon: 'star',
-                                children: [
-                                    {
-                                        title: 'node1-3-1',
-                                        name: 'node1-3-1',
-                                        icon: 'star'
-                                    },
-                                    {
-                                        title: 'node1-3-2',
-                                        name: 'node1-3-2',
-                                        icon: 'star'
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        title: 'node2',
-                        name: 'node2',
-                        icon: 'star',
-                        children: [
-                            {
-                                title: 'node2-1',
-                                name: 'node2-1',
-                                icon: 'star'
-                            },
-                            {
-                                title: 'node2-2',
-                                name: 'node2-2',
-                                icon: 'star'
-                            }
-                        ]
-
-                    },
-                    {
-                        title: 'node3',
-                        name: 'node3',
-                        icon: 'star'
-                    }
-                ]
-            }
-        },
-        methods: {
-            onSelectChange(item, items) {
-                //console.log('on-select-change watched');
-            },
-            onCheckChange(item, items) {
-                //console.log('on-check-change watched');
-            },
-            onExpandChange(item) {
-                //console.log('on-expand-change watched');
-            },
-            loadData(item, callback) {
-                // setTimeout(() => {
-                //     const data = [
-                //         {
-                //             title: 'children1',
-                //             children: []
-                //         },
-                //         {
-                //             title: 'children2',
-                //             children: []
-                //         }
-                //     ];
-                //     callback(data);
-                // }, 1000);
-            }
-        }
-    };
-    <\/script>
-
-    <style lang="less">
-    <\/style>`;
-
-    export default {
-        name: 'treeDoc',
-        components: {
-            normalSaTreeExample,
-            checkedSaTreeExample,
-            dragSaTreeExample,
-            editSaTreeExample,
-            eventsSaTreeExample,
-            complexSaTreeExample
-        },
-        data() {
-            return {
-                normalSaTreeExampleCode: normalSaTreeExampleCode,
-                checkedSaTreeExampleCode: checkedSaTreeExampleCode,
-                dragSaTreeExampleCode: dragSaTreeExampleCode,
-                editSaTreeExampleCode: editSaTreeExampleCode,
-                eventsSaTreeExampleCode: eventsSaTreeExampleCode,
-                complexSaTreeExampleCode: complexSaTreeExampleCode
-            }
-        }
-    };
-</script>
-
-<style lang="less" >
-    .nv-tree-doc {
-        .example {
-            margin: 20px 0;
-        }
-    }
-    .card-title {
-        font-weight: 600;
-    }
-</style>

@@ -1,3 +1,5 @@
+[[TOC]]
+
 
 ## 概述
 
@@ -13,87 +15,9 @@
 
 ## 基础示例
 
-<br/>
-<br/>
-
+:::demo 基础用法示例
+```html
 <template>
-    <Card>
-        <p class="card-title">基础用法示例</p>
-        <template>
-            <div class="pipline-doc">
-                <div class="example">
-                    <normalPiplineExample/>
-                </div>
-            </div>
-        </template>
-        <br/>
-        <br/>
-        <nv-code :content="normalPiplineExampleCode">
-        </nv-code>
-    </Card>
-</template>
-
-<br/>
-<br/>
-
-
-
-## 组合示例
-
-构建一个复杂的流程组件示例
-<br/>
-<br/>
-
-<template>
-    <Card>
-        <p class="card-title">组合用法示例</p>
-        <template>
-            <div class="pipline-doc">
-                <div class="example">
-                    <complexPiplineExample/>
-                </div>
-            </div>
-        </template>
-        <br/>
-        <br/>
-        <nv-code :content="complexPiplineExampleCode">
-        </nv-code>
-    </Card>
-</template>
-
-
-
-## API
-
-### props
-
-| 属性       | 说明                                     | 类型              | 默认值      |
-| ---------- | -----------------------------------------| --------------    | ----------- |
-| data       | 节点集合数据，详见示例                      | Array            | -           |
-| nodeMax    | 允许添加的最大节点个数                      | Number            | 3          |
-| cardMax    | 单个节点允许添加的最大卡片个数                | Number            | 5          |
-| nodeTitle  | 节点的名称前缀(最终形式为：nodeTitle + i， 如“节点1”)| String           | 节点 |
-| cardTitle  | 卡片的名称前缀(cardTitle + i， 如“卡片1”)| String           | 卡片 |
-| nodeTemplate| 节点模版，新增节点时的默认数据结构，详见示列| Object           | {}, 必填项 |
-| cardTemplate| 卡片模版，新增卡片时的默认数据结构，详见示列| Object           | {}, 必填项 |
-
-
-
-
-### methods
-
-| 名称       | 说明                                     | 参数         |        返回值      |
-| ---------- | -----------------------------------------| ------------ |------------------- |
-| getNodeData | 获取节点数据                          | 无         | 节点数据                |
-
-
-
-<script>
-import normalPiplineExample from  '../../../example/pipline/normal.vue';
-import complexPiplineExample from '../../../example/pipline/complex.vue';
-
-// 基础用法示例代码
-const normalPiplineExampleCode = `<template>
     <div class="pipline-wrapper">
         <Button @click="addNode" style="margin-bottom: 20px;">点击添加节点</Button>
         <Button @click="getData" style="margin-bottom: 20px;">获取数据</Button>
@@ -155,7 +79,7 @@ export default {
         
     }
 };
-<\/script>
+</script>
 <style lang="less">
     .pipline-wrapper {
         .card-body {
@@ -176,13 +100,21 @@ export default {
             }
         }
     }
-<\/style>
-`;
+</style>
 
+```
+:::
 
-// 组合示例
-const complexPiplineExampleCode = `
-    <template>
+<br/>
+<br/>
+
+## 组合示例
+
+构建一个复杂的流程组件示例
+
+:::demo 组合用法示例
+```html
+<template>
     <div class="pipline-wrapper">
         <Button @click="addNode" style="margin-bottom: 20px;">点击添加步骤</Button>
         <Button @click="getData" style="margin-bottom: 20px;">获取数据</Button>
@@ -271,7 +203,7 @@ export default {
         
     }
 };
-<\/script>
+</script>
 <style lang="less">
     .pipline-wrapper {
         .card-body {
@@ -292,31 +224,32 @@ export default {
             }
         }
     }
-<\/style>
-`;
-
-export default {
-    name: 'piplineDoc',
-    components: {
-        normalPiplineExample,
-        complexPiplineExample
-    },
-    data() {
-        return {
-            normalPiplineExampleCode: normalPiplineExampleCode,
-            complexPiplineExampleCode: complexPiplineExampleCode
-        }
-    }
-};
-</script>
-
-<style lang="less" >
-    .pipline-doc {
-        .example {
-            margin: 20px 0;
-        }
-    }
-    .card-title {
-        font-weight: 600;
-    }
 </style>
+
+```
+:::
+
+
+
+## API
+
+### props
+
+| 属性       | 说明                                     | 类型              | 默认值      |
+| ---------- | -----------------------------------------| --------------    | ----------- |
+| data       | 节点集合数据，详见示例                      | Array            | -           |
+| nodeMax    | 允许添加的最大节点个数                      | Number            | 3          |
+| cardMax    | 单个节点允许添加的最大卡片个数                | Number            | 5          |
+| nodeTitle  | 节点的名称前缀(最终形式为：nodeTitle + i， 如“节点1”)| String           | 节点 |
+| cardTitle  | 卡片的名称前缀(cardTitle + i， 如“卡片1”)| String           | 卡片 |
+| nodeTemplate| 节点模版，新增节点时的默认数据结构，详见示列| Object           | {}, 必填项 |
+| cardTemplate| 卡片模版，新增卡片时的默认数据结构，详见示列| Object           | {}, 必填项 |
+
+
+
+
+### methods
+
+| 名称       | 说明                                     | 参数         |        返回值      |
+| ---------- | -----------------------------------------| ------------ |------------------- |
+| getNodeData | 获取节点数据                          | 无         | 节点数据                |
