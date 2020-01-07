@@ -7,6 +7,7 @@ const {
   genInlineComponentText
 } = require('./util');
 const md = require('./config');
+const lodash = require('lodash');
 
 module.exports = function(source) {
   const fileName = this.resourcePath.match(/.*\/(.*)\.md$/)[1];
@@ -19,7 +20,7 @@ module.exports = function(source) {
 
   let componenetsString = '';
   let componentsStyle = '';
-  let imports = '';
+  let imports = [];
   let style = '';
   let id = 0; // demo 的 id
   let output = []; // 输出的内容
@@ -34,7 +35,7 @@ module.exports = function(source) {
     const html = stripTemplate(commentContent);
     const script = stripScript(commentContent);
     componentsStyle += stripStyle(commentContent);
-    imports += stripImport(script);
+    imports = lodash.union(imports, stripImport(script));
     let demoComponentContent = genInlineComponentText(html, script);
     const demoComponentName = `noahv-demo${id}`;
     output.push(`<template slot="source"><${demoComponentName} /></template>`);
@@ -50,6 +51,7 @@ module.exports = function(source) {
   // 仅允许在 demo 不存在时，才可以在 Markdown 中写 script 标签
   // todo: 优化这段逻辑
   let pageScript = '';
+  imports = imports.join('');
 
   let doc = `mounted() {
     this.scrollEle = document.querySelector('.noahv-layout');
@@ -81,10 +83,10 @@ module.exports = function(source) {
           }
           u.find(this.anchorsList, (item, index) => {
         let target = document.querySelector(item);
-        if (target && scrollTop > target.offsetTop) {
+        if (target && scrollTop > target.offsetTop + 30) {
           currentIndex = index;
         }
-        else if (target && scrollTop < target.offsetTop) {
+        else if (target && scrollTop < target.offsetTop + 30) {
           return  true;
         }
           });

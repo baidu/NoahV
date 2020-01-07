@@ -21,7 +21,7 @@ function stripTemplate(content) {
 
 function stripImport(content) {
   const result = content.match(/import(.*?);/g);
-  return result && Array.isArray(result) ? result.join('') : '';
+  return result && Array.isArray(result) ? result : [];
 }
 
 function pad(source) {
