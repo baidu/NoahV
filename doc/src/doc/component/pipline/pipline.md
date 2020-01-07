@@ -99,6 +99,12 @@ export default {
                 width: 185px;
             }
         }
+        .noahv-pipline .node .node-content {
+            width: 865px;
+            .add-card, .card {
+                width: 260px;
+            }
+        }
     }
 </style>
 
@@ -221,6 +227,15 @@ export default {
             }
             p .ivu-input-wrapper {
                 width: 185px;
+            }
+        }
+        .noahv-pipline .node .node-content {
+            width: 865px;
+            .add-card, .card {
+                width: 260px;
+            }
+            .card-body p .ivu-input-wrapper {
+                width: 150px;
             }
         }
     }

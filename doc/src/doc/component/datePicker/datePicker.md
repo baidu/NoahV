@@ -286,6 +286,7 @@ export default {
 </template>
 
 <script>
+import m from 'moment';
 
 export default {
     name: 'nvDatePickerShownTextDemo',
