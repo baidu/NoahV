@@ -10,14 +10,16 @@ export default {
             nvMdBillboard: '/api/index.php?r=MetricNew/billboard',
             nvMdTrend: '/api/index.php?r=MetricNew/trend',
             nvMdReport: '/api/index.php?r=MetricNew/report',
-            nvMdEventRiver: '/api/index.php?r=MetricNew/eventRiver'
+            nvMdEventRiver: '/api/index.php?r=MetricNew/eventRiver',
+            nvMdPie: '/api/index.php?r=MetricNew/pie'
         },
         confApi: {
             nvMdCircle: '/api/?r=conf/get',
             nvMdBillboard: '/api/?r=conf/get',
             nvMdTrend: '/api/?r=conf/get',
             nvMdReport: '/api/?r=conf/get',
-            nvMdEventRiver: '/api/?r=conf/get'
+            nvMdEventRiver: '/api/?r=conf/get',
+            nvMdPie: '/api/?r=conf/get'
         }
     },
     getAPI(api) {

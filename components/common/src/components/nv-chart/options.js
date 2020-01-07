@@ -7,6 +7,7 @@
  */
 
 import _ from 'lodash';
+import util from './chartUtil';
 
 
 const commonOption = {
@@ -54,13 +55,7 @@ const commonOption = {
         axisLabel: {
             color: '#333',
             formatter(value) {
-                if (typeof value === 'number' && value > 1000000) {
-                    return Math.ceil(value / 1000000) + 'M';
-                }
-                else if (typeof value === 'number' && value > 1000) {
-                    return Math.ceil(value / 1000) + 'K';
-                }
-                return value;
+                return util.numberFormat(value);
             }
         },
         axisTick: {

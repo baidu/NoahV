@@ -529,8 +529,11 @@ export default {
 
         buildTableBody(list, columns, level, parentInfo) {
             let len = list.length;
+            let hasOwnParent = parentInfo ? true : false;
             $.each(list, (i, item) => {
-                let treeInfo = {};
+                let treeInfo = {
+                    isShow: true
+                };
                 if (item.children && item.children.length > 0) {
                     this.reportType = 'tree';
                 }
@@ -540,12 +543,12 @@ export default {
                 }
                 else {
                     let tempSublings = [];
-                    if (parentInfo) {
+                    if (hasOwnParent && parentInfo) {
                         parentInfo.parentHasSublings.map(item => {
                             tempSublings.push(item);
                             return item;
                         });
-                        tempSublings.push((parentInfo.parent.length > 1));
+                        tempSublings.push((parentInfo.parent && parentInfo.parent.length > 1));
                     }
                     else {
                         parentInfo = {parentHasSublings: []};
@@ -716,7 +719,7 @@ export default {
                                     sum: mdutil.setDecimal(itemTotal, col2.decimals),
                                     avg: mdutil.setDecimal(itemTotal / bodyList.length, col2.decimals)
                                 };
-                                if (!footer[col.total]) {
+                                if (!footer[col2.total]) {
                                     return
                                 }
                                 totalInfo = col2.unit ? footer[col2.total] + col2.unit : footer[col2.total];
@@ -818,7 +821,7 @@ export default {
         expandNode(nodeInfo) {
             nodeInfo.isExpend = !nodeInfo.isExpend;
             this.bodyLists.map(trItem => {
-                if (trItem.treeInfo.id.indexOf(nodeInfo.id + '-') > -1) {
+                if (trItem.treeInfo.id && trItem.treeInfo.id.indexOf(nodeInfo.id + '-') > -1) {
                     if (nodeInfo.isExpend) {
                         trItem.treeInfo.isExpend = nodeInfo.isExpend;
                     }
@@ -850,10 +853,10 @@ export default {
                             b.columns.map(bColumnItem => {
                                 if (bColumnItem.sortid === sortId) {
                                     if (column.sortType === 'asc') {
-                                        compareResult = aColumnItem.value > bColumnItem.value;
+                                        compareResult = aColumnItem.value - bColumnItem.value;
                                     }
                                     else {
-                                        compareResult = aColumnItem.value < bColumnItem.value;
+                                        compareResult = bColumnItem.value - aColumnItem.value;
                                     }
                                 }
                                 return bColumnItem;
@@ -882,7 +885,7 @@ export default {
                                             if (b.treeInfo.isLast && aColumnItem.value > bColumnItem.value) {
                                                 a.treeInfo.isLast = true;
                                                 b.treeInfo.isLast = false;
-                                                compareResult = aColumnItem.value > bColumnItem.value;
+                                                compareResult = aColumnItem.value - bColumnItem.value;
                                             }
                                         }
 
@@ -890,7 +893,7 @@ export default {
                                         else if (b.treeInfo.isLast && aColumnItem.value < bColumnItem.value) {
                                             a.treeInfo.isLast = true;
                                             b.treeInfo.isLast = false;
-                                            compareResult = aColumnItem.value < bColumnItem.value;
+                                            compareResult = bColumnItem.value - aColumnItem.value;
                                         }
                                     }
                                     return bColumnItem;

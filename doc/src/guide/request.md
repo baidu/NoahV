@@ -1,11 +1,11 @@
 
 ## 概述
 
-上一章我们介绍了NoahV统一的接口规范，本章我们介绍NoahV统一的数据请求工具NohaV-request。
+上一章我们介绍了NoahV统一的接口规范，本章我们介绍NoahV统一的数据请求工具NoahV-request。
 
-NohaV-request是基于Axios请求工具来扩展的，Axios是Vue.js作者尤雨溪推荐在Vue.js项目中使用的数据请求库，Axios本质上也是对原生XHR的封装，只不过它是Promise的实现版本，符合最新的ES规范。
+NoahV-request是基于Axios请求工具来扩展的，Axios是Vue.js作者尤雨溪推荐在Vue.js项目中使用的数据请求库，Axios本质上也是对原生XHR的封装，只不过它是Promise的实现版本，符合最新的ES规范。
 
-NohaV-request在Axios的基础上做了如下处理：
+NoahV-request在Axios的基础上做了如下处理：
 
 * 1.统一的接口错误处理
 * 2.全局的加载提示
@@ -49,13 +49,13 @@ this.$request({
 ## NoahV-request工具功能
 
 ### 1.统一的接口错误处理
-NohaV-request会为每一个请求匹配默认的接口返回处理程序，如果接口返回非200状态码，会自动全局弹出错误提示，如果希望自定义错误处理，请参考`beforeFailure`相关hook。
+NoahV-request会为每一个请求匹配默认的接口返回处理程序，如果接口返回非200状态码，会自动全局弹出错误提示，如果希望自定义错误处理，请参考`beforeFailure`相关hook。
 
 ### 2.全局的加载提示
 默认情况下，每个接口都会触发覆盖全屏幕的加载提示，如果不希望有,可以在接口请求配置中设置`showLoading`为`false`,如果希望所有接口都不默认触发加载提示，请参考`showGlobalLoading`、`hideGlobalLoading`相关hook。
 
 ### 3.支持Restful风格接口定义
-如果接口中含有大括号包含的变量，NohaV-request会在接口请求之前进行变量替换，如`{name}`,替换的真实值来自于`pathArgs`、`params`、`data`，优先使用`pathArgs`,也建议需要替换的时候提供`pathArgs`，避免和请求参数混淆。
+如果接口中含有大括号包含的变量，NoahV-request会在接口请求之前进行变量替换，如`{name}`,替换的真实值来自于`pathArgs`、`params`、`data`，优先使用`pathArgs`,也建议需要替换的时候提供`pathArgs`，避免和请求参数混淆。
 也可以自定义Restful处理规则，请参考`handlerRestfulUrl`相关hook。
 
 ### 4.支持hooks介绍
