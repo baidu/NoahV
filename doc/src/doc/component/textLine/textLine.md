@@ -1,135 +1,257 @@
+[[TOC]]
 
 ## 概述
 
 带有行号的文本框，支持v-model双向数据绑定
 
+<br/>
+<br/>
+
 ## 基础示例
 
-<br/>
-<br/>
-
+:::demo 基础用法示例
+```html
 <template>
-    <Card>
-        <p class="card-title">基础用法示例</p>
-        <template>
-            <div class="text-line-doc">
-                <div class="example">
-                    <normalTextLineExample/>
-                </div>
-            </div>
-        </template>
-        <br/>
-        <br/>
-        <nv-code :content="normalTextLineExampleCode">
-        </nv-code>
-    </Card>
+    <NvTextLine :width="width" :height="height" :options="options"></NvTextLine>
 </template>
 
-<br/>
-<br/>
+<script>
+export default {
+    data() {
+        const self = this;
+        return {
+            width: 600,
+            height: 200,
+            options: {
+                placeholder: '请输入文本内容',
+                mode: 'text/plain'
+            }
+        };
+    }
+};
+</script>
+<style lang="less">
+     .CodeMirror .CodeMirror-code pre {
+        margin: 0;
+     }
+</style>
 
+```
+:::
+
+:::demo 只读用法示例
+```html
 <template>
-    <Card>
-        <p class="card-title">只读用法示例</p>
-        <template>
-            <div class="text-line-doc">
-                <div class="example">
-                    <disabledTextLineExample/>
-                </div>
-            </div>
-        </template>
-        <br/>
-        <br/>
-        <nv-code :content="disabledTextLineExampleCode">
-        </nv-code>
-    </Card>
+    <NvTextLine :width="width" :height="height" :value="value" :options="options"></NvTextLine>
 </template>
 
-<br/>
-<br/>
+<script>
+export default {
+    data() {
+        const self = this;
+        return {
+            width: 600,
+            height: 200,
+            value: '只读文本框',
+            options: {
+                // 设置为'nocursor'时，无光标显示
+                // 设置为true时，无法编辑，但有光标显示
+                readOnly: 'nocursor',
+                lineNumbers: true,
+                mode: 'text/plain'
+            }
+        };
+    }
+};
+</script>
+<style lang="less">
+     .CodeMirror .CodeMirror-code pre {
+        margin: 0;
+     }
+</style>
 
+```
+:::
+
+:::demo 方法使用示例
+```html
 <template>
-    <Card>
-        <p class="card-title">方法使用示例</p>
-        <template>
-            <div class="text-line-doc">
-                <div class="example">
-                    <setgetTextLineExample/>
-                </div>
-            </div>
-        </template>
-        <br/>
-        <br/>
-        <nv-code :content="setgetTextLineExampleCode">
-        </nv-code>
-    </Card>
+    <div class="nv-text-line-set-get-wrapper">
+        <div class="btn-wrapper">
+            <Button type="primary" @click="setText">设置数据</Button>
+            <Button type="primary" @click="getText">获取数据</Button>
+            <Button type="primary" @click="getLineCount">获取行数</Button>
+        </div>
+        <NvTextLine :width="width" :height="height" :options="options" ref="nvTextLineDemo"></NvTextLine>
+    </div>
 </template>
 
+<script>
+export default {
+    data() {
+        const self = this;
+        return {
+            width: 600,
+            height: 200,
+            options: {
+                lineNumbers: true,
+                mode: 'text/plain'
+            }
+        };
+    },
+    methods: {
+        setText: function () {
+            this.$refs['nvTextLineDemo'].setText('set data for this textarea');
+        },
+        getText: function () {
+            let text = this.$refs['nvTextLineDemo'].getText();
+            this.$Message.info(text);
+        },
+        getLineCount: function () {
+            let count = this.$refs['nvTextLineDemo'].getLineCount();
+            this.$Message.info(count + '行');
+        }
+    }
+};
+</script>
+<style lang="less" >
+    .nv-text-line-set-get-wrapper {
+        .btn-wrapper {
+            margin: 30px 0 15px 0;
+        }
+    }
+    .CodeMirror .CodeMirror-code pre {
+        margin: 0;
+    }
+</style>
 
-<br/>
-<br/>
 
+```
+:::
+
+:::demo 语法高亮示例
+```html
 <template>
-    <Card>
-        <p class="card-title">语法高亮示例</p>
-        <template>
-            <div class="text-line-doc">
-                <div class="example">
-                    <highlightTextLineExample/>
-                </div>
-            </div>
-        </template>
-        <br/>
-        <br/>
-        <nv-code :content="highlightTextLineExampleCode">
-        </nv-code>
-    </Card>
+    <NvTextLine :width="width" :height="height" :value="value" :options="options"></NvTextLine>
 </template>
 
+<script>
+export default {
+    data() {
+        const self = this;
+        return {
+            width: 600,
+            height: 200,
+            value: 'var now = new Date();',
+            options: {
+                lineNumbers: true,
+                mode: 'text/javascript'
 
-<br/>
-<br/>
+            }
+        };
+    }
+};
+</script>
+<style lang="less">
+    .CodeMirror .CodeMirror-code pre {
+        margin: 0;
+    }
+</style>
 
+```
+:::
+
+:::demo 皮肤选择示例
+```html
 <template>
-    <Card>
-        <p class="card-title">皮肤选择示例</p>
-        <template>
-            <div class="text-line-doc">
-                <div class="example">
-                    <themeTextLineExample/>
-                </div>
-            </div>
-        </template>
-        <br/>
-        <br/>
-        <nv-code :content="themeTextLineExampleCode">
-        </nv-code>
-    </Card>
+    <NvTextLine :width="width" :height="height" :options="options"></NvTextLine>
 </template>
 
+<script>
+export default {
+    data() {
+        const self = this;
+        return {
+            width: 600,
+            height: 200,
+            options: {
+                lineNumbers: true,
+                theme: 'solarized light',
+                mode: 'text/plain'
+            }
+        };
+    }
+};
+</script>
+<style lang="less">
+    .CodeMirror .CodeMirror-code pre {
+        margin: 0;
+    }
+</style>
+
+```
+:::
+
+<br/>
+<br/>
 
 ## 组合示例
 
 构建一个复杂的行号框
-<br/>
-<br/>
 
+:::demo 组合用法示例
+```html
 <template>
-    <Card>
-        <p class="card-title">组合用法示例</p>
-        <template>
-            <div class="text-line-doc">
-                <div class="example">
-                    <complexTextLineExample/>
-                </div>
-            </div>
-        </template>
-        <br/>
-        <br/>
-        <nv-code :content="complexTextLineExampleCode">
-        </nv-code>
-    </Card>
+    <NvTextLine
+    :width="width"
+    :height="height"
+    :value="value"
+    :options="options"
+    @on-change="onChangeHandler">
+    </NvTextLine>
 </template>
+
+<script>
+export default {
+    data() {
+        const self = this;
+        return {
+            width: 600,
+            height: 200,
+            value: `<!DOCTYPE html>
+<html>
+<body>
+<h1>This is a complex nv-textLine demo<\/h1>
+<script>
+<\/script>
+    document.write('replace body content');
+<\/body>
+<\/html>`,
+            options: {
+                lineNumbers: true,
+                lineWrapping: true,
+                styleActiveLine: true,
+                mode: 'text/html',
+                theme: 'monokai'
+            }
+        };
+    },
+    methods: {
+        onChangeHandler: function (val) {
+            this.$Message.info('value changed');
+        }
+    }
+};
+</script>
+
+<style lang="less">
+    .CodeMirror .CodeMirror-code pre {
+        margin: 0;
+    }
+</style>
+
+```
+:::
 
 ## API
 
@@ -200,234 +322,3 @@
 | on-change  | 监听文本变化                             |  变化后的文本值    |
 | on-focus   | 文本框获得焦点后触发                      |  组件实例对象      |
 | on-blur    | 文本框失去焦点后触发                      |  组件实例对象       |
-
-
-
-<script>
-import normalTextLineExample from  '../../../example/textLine/normal.vue';
-import disabledTextLineExample from  '../../../example/textLine/disabled.vue';
-import setgetTextLineExample from  '../../../example/textLine/setget.vue';
-import highlightTextLineExample from  '../../../example/textLine/highlight.vue';
-import themeTextLineExample from  '../../../example/textLine/theme.vue';
-import complexTextLineExample from  '../../../example/textLine/complex.vue';
-
-// 基础示例代码
-const normalTextLineExampleCode = `<template>
-    <NvTextLine :placeholder="placeholder" :width="width" :height="height" :options="options"></NvTextLine>
-<\/template>
-
-<script>
-export default {
-    data () {
-        const self = this;
-        return {
-            width: 600,
-            height: 200,
-            options: {
-                placeholder: '请输入文本内容',
-                mode: 'text/plain'
-            }
-        }
-    }
-};
-<\/script>
-`;
-
-// 只读示例
-const disabledTextLineExampleCode = `<template>
-    <NvTextLine :placeholder="placeholder" :width="width" :height="height" :value="value" :options="options"></NvTextLine>
-<\/template>
-
-<script>
-export default {
-    data () {
-        const self = this;
-        return {
-            width: 600,
-            height: 200,
-            value: '只读文本框',
-            options: {
-                // 设置为'nocursor'时，无光标显示
-                // 设置为true时，无法编辑，但有光标显示  
-                readOnly: 'nocursor',
-                lineNumbers: true,
-                mode: 'text/plain'
-            }
-        }
-    }
-};
-<\/script>`;
-
-// getset示例
-const setgetTextLineExampleCode = `
-<template>
-    <div class="sa-text-line-set-get-wrapper">
-        <div class="btn-wrapper">
-            <Button type="primary" @click="setText">设置数据</Button>
-            <Button type="primary" @click="getText">获取数据</Button>
-            <Button type="primary" @click="getLineCount">获取行数</Button>
-        </div>
-        <NvTextLine :width="width" :height="height" :options="options" ref="saTextLineDemo"></NvTextLine>
-    <\/div>
-<\/template>
-
-<script>
-export default {
-    data () {
-        const self = this;
-        return {
-            width: 600,
-            height: 200,
-            options: {
-                lineNumbers: true,
-                mode: 'text/plain'
-            }
-        }
-    },
-    methods: {
-        setText: function () {
-            this.$refs['saTextLineDemo'].setText('set data for this textarea');
-        },
-        getText: function () {
-            let text = this.$refs['saTextLineDemo'].getText();
-            this.$Message.info(text);
-        },
-        getLineCount: function () {
-            let count = this.$refs['saTextLineDemo'].getLineCount();
-            this.$Message.info(count + '行');
-        }
-    }
-};
-<\/script>
-<style lang="less" >
-    .sa-text-line-set-get-wrapper {
-        .btn-wrapper {
-            margin: 30px 0 15px 0;
-        }
-    }
-<\/style>`;
-
-// 语法高亮示例
-const highlightTextLineExampleCode = `<template>
-    <NvTextLine :width="width" :height="height" :value="value" :options="options"></NvTextLine>
-<\/template>
-
-<script>
-export default {
-    data () {
-        const self = this;
-        return {
-            width: 600,
-            height: 200,
-            value: 'var now = new Date();',
-            options: {
-                lineNumbers: true,
-                mode: 'text/javascript'
-
-            }
-        }
-    }
-};
-<\/script>`;
-
-// 皮肤配置示例
-const themeTextLineExampleCode = `<template>
-    <NvTextLine :width="width" :height="height" :options="options"></NvTextLine>
-<\/template>
-
-<script>
-export default {
-    data () {
-        const self = this;
-        return {
-            width: 600,
-            height: 200,
-            options: {
-                lineNumbers: true,
-                theme: 'solarized light',
-                mode: 'text/plain'
-
-            }
-        }
-    }
-};
-<\/script>`;
-
-// 复杂示例代码
-const complexTextLineExampleCode = `<template>
-    <NvTextLine
-    :width="width"
-    :height="height"
-    :value="value"
-    :options="options"
-    @on-change="onChangeHandler">
-    <\/NvTextLine>
-<\/template>
-
-<script>
-export default {
-    data () {
-        const self = this;
-        return {
-            width: 600,
-            height: 200,
-            value: \`<!DOCTYPE html>
-<html>
-<body>
-<h1>This is a complex sa-textLine demo<\/h1>
-<script>
-<\/script>
-    document.write('replace body content');
-<\/body>
-<\/html>
-\`,
-            options: {
-                lineNumbers: true,
-                lineWrapping: true,
-                styleActiveLine: true,
-                mode: 'text/html',
-                theme: 'monokai'
-            }
-        }
-    },
-    methods: {
-        onChangeHandler: function (val) {
-            this.$Message.info('value changed');
-        }
-    }
-};
-<\/script>`;
-
-export default {
-    name: 'textLineDoc',
-    components: {
-        normalTextLineExample,
-        disabledTextLineExample,
-        setgetTextLineExample,
-        highlightTextLineExample,
-        themeTextLineExample,
-        complexTextLineExample
-    },
-    data () {
-        return {
-            normalTextLineExampleCode: normalTextLineExampleCode,
-            disabledTextLineExampleCode: disabledTextLineExampleCode,
-            setgetTextLineExampleCode: setgetTextLineExampleCode,
-            highlightTextLineExampleCode: highlightTextLineExampleCode,
-            themeTextLineExampleCode: themeTextLineExampleCode,
-            complexTextLineExampleCode: complexTextLineExampleCode
-        }
-    }
-};
-</script>
-
-<style lang="less" >
-    .text-line-doc {
-        .example {
-            margin: 20px 0;
-        }
-    }
-    .card-title {
-        font-weight: 600;
-    }
-</style>

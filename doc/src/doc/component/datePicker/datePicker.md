@@ -1,3 +1,4 @@
+[[TOC]]
 
 ## 概述
 
@@ -21,226 +22,13 @@
 
 ## 基础示例
 
-<br/>
-<br/>
-
-<template>
-    <Card>
-        <p class="card-title">基础用法示例</p>
-        <template>
-            <div class="date-picker-doc">
-                <div class="example">
-                    <normalDatePickerExample/>
-                </div>
-            </div>
-        </template>
-        <br/>
-        <br/>
-        <nv-code :content="normalDatePickerExampleCode">
-        </nv-code>
-    </Card>
-</template>
-
-<br/>
-<br/>
-
-<template>
-    <Card>
-        <p class="card-title">设置快捷面板示例</p>
-        <template>
-            <div class="date-picker-doc">
-                <div class="example">
-                    <hotKeyDatePickerExample/>
-                </div>
-            </div>
-        </template>
-        <br/>
-        <br/>
-        <nv-code :content="hotKeyDatePickerExampleCode">
-        </nv-code>
-    </Card>
-</template>
-
-
-<br/>
-<br/>
-
-<template>
-    <Card>
-        <p class="card-title">设置不可选日期示例</p>
-        <template>
-            <div class="date-picker-doc">
-                <div class="example">
-                    <disabledDatePickerExample/>
-                </div>
-            </div>
-        </template>
-        <br/>
-        <br/>
-        <nv-code :content="disabledDatePickerExampleCode">
-        </nv-code>
-    </Card>
-</template>
-
-
-<br/>
-<br/>
-
-<template>
-    <Card>
-        <p class="card-title">公有云风格示例</p>
-        <template>
-            <div class="date-picker-doc">
-                <div class="example">
-                    <consoleDatePickerExample/>
-                </div>
-            </div>
-        </template>
-        <br/>
-        <br/>
-        <nv-code :content="consoleDatePickerExampleCode">
-        </nv-code>
-    </Card>
-</template>
-
-<br/>
-<br/>
-
-<template>
-    <Card>
-        <p class="card-title">日期显示干预示例</p>
-        <template>
-            <div class="date-picker-doc">
-                <div class="example">
-                    <shownTextDatePickerExample/>
-                </div>
-            </div>
-        </template>
-        <br/>
-        <br/>
-        <nv-code :content="shownTextDatePickerExampleCode">
-        </nv-code>
-    </Card>
-</template>
-
-<br/>
-<br/>
-
-<template>
-    <Card>
-        <p class="card-title">快捷面板反向高亮示例</p>
-        <template>
-            <div class="date-picker-doc">
-                <div class="example">
-                    <reverseDatePickerExample/>
-                </div>
-            </div>
-        </template>
-        <br/>
-        <br/>
-        <nv-code :content="reverseDatePickerExampleCode">
-        </nv-code>
-    </Card>
-</template>
-
-## 组合示例
-
-构建一个复杂的时间选择器示例
-<br/>
-<br/>
-
-<template>
-    <Card>
-        <p class="card-title">组合用法示例</p>
-        <template>
-            <div class="date-picker-doc">
-                <div class="example">
-                    <complexDatePickerExample/>
-                </div>
-            </div>
-        </template>
-        <br/>
-        <br/>
-        <nv-code :content="complexDatePickerExampleCode">
-        </nv-code>
-    </Card>
-</template>
-
-
-
-## API
-
-### props
-
-| 属性       | 说明                                     | 类型              | 默认值      |
-| ---------- | -----------------------------------------| --------------    | ----------- |
-| type       | 显示类型，可选值为 date、daterange、datetime、daterangetime  | String      | date           |
-| value      | 日期，值是 Date/String 类型或 Array 类型。配合 @on-change 使用，可以达到双向绑定的效果，详见示例|  String/Date |  - |
-| options    | 额外配置，详见示例和下方说明             | Object            | -           |
-| width      | 时间选择框的宽度                         | Number            | 300         |
-| theme      | 皮肤配置，可设置common和console两个值。console代表公有云时间组件风格。详见示列。| String | console|
-| autoClose  | 设置自动关闭面板，当type为date或daterange时有效 | Boolean    | -           |
-| dateFormat | 设置日期时间显示格式，详见示例和[说明](http://momentjs.cn/) | String       | YYYY-MM-DD  |
-| setShownTxt | 可选，时间的显示干预函数，可根据业务需要调整显示样式，详见示列 | Function     | - |
-
-
-
-### options
-
-| 属性       | 说明                                     | 类型              | 默认值      |
-| ---------- | -----------------------------------------| --------------    | ----------- |
-| position   | 设置快捷面板的显示位置，支持inner、outer、top | String            | -           |
-| shortcuts  | 设置快捷面板，详见示例和下方说明         | Array             | -           |
-| disabledHandler| 设置不可选的日期，详见示例              | Function          | -           |
-
-
-
-### shortcuts
-
-| 属性       | 说明                                     | 类型              | 默认值      |
-| ---------- | -----------------------------------------| --------------    | ----------- |
-| text       | 设置快捷项的显示文本，详见示例           | String            | -           |
-| defaultSelected  | 设置快捷面板的默认选中项，多个项同时设置时，只有第一个有效; 不建议同时配置value初值，若同时设置了value初值，则defaultSelected的优先级更高   | Boolean | -           |
-| value      | 设置快捷项对应的日期和时间，详见示例     | Function          | -           |
-| onClick    | 设置快捷项的点击回调，详见示例           | Function          | -           |
-
-
-### events
-
-| 名称       | 说明                                     | 参数         |        返回值      |
-| ---------- | -----------------------------------------| ------------ |------------------- |
-| on-ok      | 面板的关闭事件                         | 无           | 无                      |
-| on-change  | 监听日期变化，使用方法详见示例           | $event（必须）| 选中的日期或日期集合，为 Date 类型或 Array 类型  |
-| on-open    | 事件面板的打开事件                     | 无           | 无                                          |
-| on-clear   | 清除按钮的点击事件                     | 无           | 无                                          |
-| on-confirm | 确定按钮的点击事件                     | 无           | 无                                          |
-| on-shortcut-click | 快捷面板的点击事件              | 无           | 选中的快捷面板项的配置对象，为Object类型         |
-
-
-### methods
-
-| 名称       | 说明                                     | 参数         |        返回值      |
-| ---------- | -----------------------------------------| ------------ |------------------- |
-| highLightShortCut | 设置快捷项高亮功能，可实现反向高亮功能，使用方法详见示列 | 快捷项唯一标识id | 无 | 
-
-
-
-<script>
-import normalDatePickerExample from  '../../../example/datePicker/normal.vue';
-import hotKeyDatePickerExample from  '../../../example/datePicker/hotkey.vue';
-import disabledDatePickerExample from  '../../../example/datePicker/disabled.vue';
-import consoleDatePickerExample from '../../../example/datePicker/console.vue';
-import shownTextDatePickerExample from '../../../example/datePicker/showntext.vue';
-import reverseDatePickerExample from '../../../example/datePicker/reverse.vue';
-import complexDatePickerExample from '../../../example/datePicker/complex.vue';
-
-// 基础用法示例代码
-const normalDatePickerExampleCode = `
+:::demo 基础用法示例
+```html
 <template>
     <div>
         <NvDatePicker :language="language" :theme="theme" :width="350" type="date" :dateFormat="dateFormat"></NvDatePicker>
-    <\/div>
-<\/template>
+    </div>
+</template>
 
 <script>
 export default {
@@ -254,19 +42,21 @@ export default {
         };
     }
 };
-<\/script>
+</script>
 
 <style lang="less">
-<\/style>
-`;
+</style>
 
-// 快捷面板示例代码
-const hotKeyDatePickerExampleCode = `
+```
+:::
+
+:::demo 设置快捷面板示例
+```html
 <template>
     <div>
-        <NvDatePicker :language="language" :theme="theme" :width="350" type="daterangetime" :dateFormat="dateFormat" :options="options" ref="hotKeySaDatePickerRef"><\/NvDatePicker>
-    <\/div>
-<\/template>
+        <NvDatePicker :language="language" :theme="theme" :width="350" type="daterangetime" :dateFormat="dateFormat" :options="options" ref="hotKeyDatePickerRef"></NvDatePicker>
+    </div>
+</template>
 
 <script>
 export default {
@@ -325,15 +115,18 @@ export default {
         };
     }
 };
-<\/script>
-`;
+</script>
 
-// 设置不可选日期
-const disabledDatePickerExampleCode = `<template>
+```
+:::
+
+:::demo 设置不可选日期示例
+```html
+<template>
     <div>
-        <NvDatePicker :language="language" :theme="theme" :width="350" type="daterangetime" :dateFormat="dateFormat" :options="options" ref="disabledPicker"><\/NvDatePicker>
-    <\/div>
-<\/template>
+        <NvDatePicker :language="language" :theme="theme" :width="350" type="daterangetime" :dateFormat="dateFormat" :options="options" ref="disabledPicker"></NvDatePicker>
+    </div>
+</template>
 
 <script>
 export default {
@@ -405,19 +198,22 @@ export default {
     methods: {
     }
 };
-<\/script>
+</script>
 
 <style lang="less">
-<\/style>
-`;
+</style>
 
-// 公有云示例
-const consoleDatePickerExampleCode = `
+```
+:::
+
+:::demo 公有云风格示例
+```html
+
 <template>
     <div>
-        <NvDatePicker :theme="theme" :language="language" :width="350" type="daterangetime" :dateFormat="dateFormat" :options="options" ref="hotKeySaDatePickerRef"><\/NvDatePicker>
-    <\/div>
-<\/template>
+        <NvDatePicker :theme="theme" :language="language" :width="350" type="daterangetime" :dateFormat="dateFormat" :options="options" ref="hotKeyDatePickerRef"></NvDatePicker>
+    </div>
+</template>
 
 <script>
 export default {
@@ -476,20 +272,20 @@ export default {
         };
     }
 };
-<\/script>
-`;
+</script>
+```
+:::
 
-//日期显示干预示例
-const shownTextDatePickerExampleCode = `
+:::demo 日期显示干预示例
+```html
 <template>
     <div>
         <NvDatePicker :theme="theme" :language="language" :width="350" type="daterangetime" :dateFormat="dateFormat" :options="options" :setShownTxt="setShownText">
-        <\/NvDatePicker>
-    <\/div>
-<\/template>
+        </NvDatePicker>
+    </div>
+</template>
 
 <script>
-import m from 'moment';
 
 export default {
     name: 'nvDatePickerShownTextDemo',
@@ -569,20 +365,22 @@ export default {
         }
     }
 };
-<\/script>
+</script>
 
 <style lang="less">
-<\/style>
-`;
+</style>
 
-// 反向选中示例
-const reverseDatePickerExampleCode = `
+```
+:::
+
+::: demo 快捷面板反向高亮示例
+```html
 <template>
     <div>
         <NvDatePicker :theme="theme" :language="language" :width="350" type="daterangetime" :dateFormat="dateFormat" :options="options" @on-change="changeHandler($event)" ref="reverseRef">
-        <\/NvDatePicker>
-    <\/div>
-<\/template>
+        </NvDatePicker>
+    </div>
+</template>
 
 <script>
 import m from 'moment';
@@ -644,19 +442,27 @@ export default {
         }
     }
 };
-<\/script>
+</script>
 
 <style lang="less">
-<\/style>
-`;
+</style>
+```
+:::
 
-// 组合示例
-const complexDatePickerExampleCode = `
+<br/>
+<br/>
+
+## 组合示例
+
+构建一个复杂的时间选择器示例
+
+:::demo 组合用法示例
+```html
 <template>
     <div>
-        <NvDatePicker :language="language" :theme="theme" :width="350" type="daterangetime" :dateFormat="dateFormat" :options="options" ref="complexPicker" v-model="value" @on-change="value=$event"><\/NvDatePicker>
-    <\/div>
-<\/template>
+        <NvDatePicker :language="language" :theme="theme" :width="350" type="daterangetime" :dateFormat="dateFormat" :options="options" ref="complexPicker" v-model="value" @on-change="value=$event"></NvDatePicker>
+    </div>
+</template>
 
 <script>
 export default {
@@ -710,41 +516,62 @@ export default {
         };
     }
 };
-<\/script>
-`;
-
-export default {
-    name: 'datePickerDoc',
-    components: {
-        normalDatePickerExample,
-        complexDatePickerExample,
-        hotKeyDatePickerExample,
-        disabledDatePickerExample,
-        consoleDatePickerExample,
-        reverseDatePickerExample,
-        shownTextDatePickerExample
-    },
-    data() {
-        return {
-            normalDatePickerExampleCode: normalDatePickerExampleCode,
-            hotKeyDatePickerExampleCode: hotKeyDatePickerExampleCode,
-            disabledDatePickerExampleCode: disabledDatePickerExampleCode,
-            complexDatePickerExampleCode: complexDatePickerExampleCode,
-            consoleDatePickerExampleCode: consoleDatePickerExampleCode,
-            reverseDatePickerExampleCode: reverseDatePickerExampleCode,
-            shownTextDatePickerExampleCode: shownTextDatePickerExampleCode
-        }
-    }
-};
 </script>
+```
+:::
 
-<style lang="less" >
-    .date-picker-doc {
-        .example {
-            margin: 20px 0;
-        }
-    }
-    .card-title {
-        font-weight: 600;
-    }
-</style>
+## API
+
+### props
+
+| 属性       | 说明                                     | 类型              | 默认值      |
+| ---------- | -----------------------------------------| --------------    | ----------- |
+| type       | 显示类型，可选值为 date、daterange、datetime、daterangetime  | String      | date           |
+| value      | 日期，值是 Date/String 类型或 Array 类型。配合 @on-change 使用，可以达到双向绑定的效果，详见示例|  String/Date |  - |
+| options    | 额外配置，详见示例和下方说明             | Object            | -           |
+| width      | 时间选择框的宽度                         | Number            | 300         |
+| theme      | 皮肤配置，可设置common和console两个值。console代表公有云时间组件风格。详见示列。| String | console|
+| autoClose  | 设置自动关闭面板，当type为date或daterange时有效 | Boolean    | -           |
+| dateFormat | 设置日期时间显示格式，详见示例和[说明](http://momentjs.cn/) | String       | YYYY-MM-DD  |
+| setShownTxt | 可选，时间的显示干预函数，可根据业务需要调整显示样式，详见示列 | Function     | - |
+
+
+
+### options
+
+| 属性       | 说明                                     | 类型              | 默认值      |
+| ---------- | -----------------------------------------| --------------    | ----------- |
+| position   | 设置快捷面板的显示位置，支持inner、outer、top | String            | -           |
+| shortcuts  | 设置快捷面板，详见示例和下方说明         | Array             | -           |
+| disabledHandler| 设置不可选的日期，详见示例              | Function          | -           |
+
+
+
+### shortcuts
+
+| 属性       | 说明                                     | 类型              | 默认值      |
+| ---------- | -----------------------------------------| --------------    | ----------- |
+| text       | 设置快捷项的显示文本，详见示例           | String            | -           |
+| defaultSelected  | 设置快捷面板的默认选中项，多个项同时设置时，只有第一个有效; 不建议同时配置value初值，若同时设置了value初值，则defaultSelected的优先级更高   | Boolean | -           |
+| value      | 设置快捷项对应的日期和时间，详见示例     | Function          | -           |
+| onClick    | 设置快捷项的点击回调，详见示例           | Function          | -           |
+
+
+### events
+
+| 名称       | 说明                                     | 参数         |        返回值      |
+| ---------- | -----------------------------------------| ------------ |------------------- |
+| on-ok      | 面板的关闭事件                         | 无           | 无                      |
+| on-change  | 监听日期变化，使用方法详见示例           | $event（必须）| 选中的日期或日期集合，为 Date 类型或 Array 类型  |
+| on-open    | 事件面板的打开事件                     | 无           | 无                                          |
+| on-clear   | 清除按钮的点击事件                     | 无           | 无                                          |
+| on-confirm | 确定按钮的点击事件                     | 无           | 无                                          |
+| on-shortcut-click | 快捷面板的点击事件              | 无           | 选中的快捷面板项的配置对象，为Object类型         |
+
+
+### methods
+
+| 名称       | 说明                                     | 参数         |        返回值      |
+| ---------- | -----------------------------------------| ------------ |------------------- |
+| highLightShortCut | 设置快捷项高亮功能，可实现反向高亮功能，使用方法详见示列 | 快捷项唯一标识id | 无 | 
+
