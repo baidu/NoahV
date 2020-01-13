@@ -4,11 +4,14 @@ if (!process.env.NODE_ENV) process.env.NODE_ENV = JSON.parse(config.dev.env.NODE
 var path = require('path')
 var express = require('express')
 var webpack = require('webpack')
+var logger = require('morgan');
 var opn = require('./openBrowser');
 var proxyMiddleware = require('http-proxy-middleware')
 var webpackConfig = require('./webpack.dev.conf')
 var mockup = require('noahv-mockup').mockupHandler;
 var bodyParser = require('body-parser');
+
+
 
 // default port where dev server listens for incoming traffic
 var port = process.env.PORT || config.dev.port
@@ -16,9 +19,15 @@ var port = process.env.PORT || config.dev.port
     // https://github.com/chimurai/http-proxy-middleware
 
 var server = express()
+
+server.use(logger('dev'));
+
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: false }));
+
 var compiler = webpack(webpackConfig)
+
+
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
     publicPath: webpackConfig.output.publicPath,
@@ -29,8 +38,8 @@ var devMiddleware = require('webpack-dev-middleware')(compiler, {
 })
 
 var hotMiddleware = require('webpack-hot-middleware')(compiler, {
-     log: console.log
-     // heartbeat: 100
+     log: console.log,
+     heartbeat: 100
 })
     // force page reload when html-webpack-plugin template changes
 // compiler.plugin('compilation', function(compilation) {
