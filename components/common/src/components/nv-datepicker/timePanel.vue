@@ -4,6 +4,7 @@
             v-bind:is="componentName"
             :tips="tips"
             :type="type"
+            :trigger="trigger"
             :confirm="confirm"
             :dateValue="dateValue"
             :dateOptions="dateOptions"
@@ -36,6 +37,7 @@ export default {
     props: {
         tips: String,
         theme: String,
+        trigger: String,
         confirm: Boolean,
         dateValue: Object,
         // 日期时间候选项
