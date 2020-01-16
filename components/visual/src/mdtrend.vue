@@ -938,7 +938,7 @@ export default {
                 }
             }, trendConf);
             if (trendConf && trendConf.display) {
-                if (trendConf.style.displayType) {
+                if (trendConf.style && trendConf.style.displayType) {
                     this.initChatType(trendConf.style.displayType)
                 }
                 this.$nextTick(() => {
