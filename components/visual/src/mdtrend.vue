@@ -101,6 +101,7 @@ function findEventsByTimestamp(events, t, etype) {
                     temp.name = type.name;
                     temp.desc = evt.detail;
                     temp.index = index;
+                    temp.color = type.color;
 
                     // The event contains the total number
                     temp.count = len;
@@ -113,7 +114,21 @@ function findEventsByTimestamp(events, t, etype) {
     }
     else if (etype === 'point') {
         u.each(events, evt => {
-            if (t === evt[0]) {
+
+            // 兼容自定义异常点的形式
+            if (Object.prototype.toString.call(evt) === '[object Object]') {
+                u.find(evt.data, (item) => {
+                    if (item[0] === t) {
+                        data.push({
+                            name: evt.name,
+                            value: item[1],
+                            color: evt.color
+                        })
+                    }
+                     
+                });
+            }
+            else if (t === evt[0]) {
                 data.push(evt);
             }
         });
@@ -416,11 +431,11 @@ let CustomEvents = {
                 }
                 else if (this.extraUrls && this.extraUrls.customEventsUrl) {
                     this.$wRequest.post(this.extraUrls.customEventsUrl, params).then(data => {
-                        this.eventTypes = [];
-                        u.each(data.data, item => {
-                            this.eventTypes.push(item);
-                        });
-                        this.renderCustomEvents(chart, this.eventTypes);
+                        let res = data.data;
+                        if (res && res.success) {
+                            this.eventTypes = res.data;
+                            this.renderCustomEvents(chart, res.data);
+                        }
                     });
                 }
             }
@@ -463,12 +478,12 @@ let CustomEvents = {
                         type: 'line',
                         silent: false,
                         itemStyle: {
-                            color: bgColor[(index % bgColor.length)]
+                            color: eventType.color || bgColor[(index % bgColor.length)]
                         },
                         markArea: {
                             data: events,
                             itemStyle: {
-                                color: bgColor[(index % bgColor.length)],
+                                color: eventType.color || bgColor[(index % bgColor.length)],
                                 opacity: 0.4
                             }
                         }
@@ -484,9 +499,10 @@ let CustomEvents = {
             if (evts.length > 0) {
                 u.each(evts, (evt, i) => {
                     if (i === 0) {
+                        let color = evt.color || bgColor[evt.index];
                         let spanInnerHTML = '<dd class="echarts-tooltip-item" '
                             + 'style="color:'
-                            + bgColor[evt.index]
+                            + color
                             + '">'
                             + evt.name
                             + ': </dd>';
@@ -615,8 +631,19 @@ let Points = {
             let conf = toolTipObj.conf;
             if (evts.length > 0) {
                 u.each(evts, evt => {
-                    let cur = evt[3];
-                    htm.push('<dd class="echarts-tooltip-item echarts-tooltip-point-item"><span>异常点: </span>'
+                    let cur;
+                    let name;
+                    let style = '';
+                    if (Object.prototype.toString.call(evt) === '[object Object]') {
+                        cur = evt.value;
+                        name = evt.name;
+                        style = `style="color: ${evt.color};"`;
+                    }
+                    else {
+                        cur = evt[3];
+                        name = '异常点'
+                    }
+                    htm.push(`<dd class="echarts-tooltip-item echarts-tooltip-point-item"><span ${style}>${name}: </span>`
                         + mdutil.numberFormat(cur, conf.style.decimals) + '</dd>');
                 });
             }
@@ -911,6 +938,9 @@ export default {
                 }
             }, trendConf);
             if (trendConf && trendConf.display) {
+                if (trendConf.style.displayType) {
+                    this.initChatType(trendConf.style.displayType)
+                }
                 this.$nextTick(() => {
                     this.data = trendConf.display;
                     if (trendConf.display.length === 0) {

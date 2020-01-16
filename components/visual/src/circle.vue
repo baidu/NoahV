@@ -180,6 +180,7 @@ export default {
             circleConf: {},
             curOptions: {},
             mdConf: {},
+            height: height,
             mdStyle: 'height:' + height + 'px;',
             clientHeight: document.documentElement.clientHeight,
 
@@ -244,8 +245,8 @@ export default {
     mounted() {
 
         // prevent to fresh the view when windows's width change too often.
-        this.redraw = u.debounce(this.freshContainer, 200);
-        this.resizePage = u.debounce(this.resize, 200);
+        this.redraw = u.throttle(this.scrollTop, 200);
+        this.resizePage = u.throttle(this.resize, 200);
         $(window).on('resize', this.resizePage);
         eventBus.$on('refresh-page', () => {
             this.isload = false;
@@ -314,7 +315,8 @@ export default {
                     this.circleConf = JSON.parse(data.data.data.configure);
 
                     // get render data
-                    this.freshContainer();
+
+                    this.scrollTop();
                 }
                 else {
                     this.showError(data.data.message);
@@ -337,42 +339,61 @@ export default {
          * calculate width and height
          */
         freshContainer() {
-            let width = $(this.$refs.circle).innerWidth();
-            let height = this.params ? this.params.height || HEIGHT : HEIGHT;
-            if (height > width / 2) {
-                height = width / 2 - 3;
+            let width = $(this.$refs.circle).width();
+            this.height = this.params ? this.params.height || HEIGHT : HEIGHT;
+            if (this.height > width / 2 ) {
+                this.height = width / 2;
             }
-            this.mdStyle = 'height:' + height + 'px;';
-            this.scrollTop();
+            this.mdStyle = 'height:' + this.height + 'px;';
         },
 
 
+        getRadius() {
+            let width = $(this.$refs.circle).width();
+            if (width < 320) {
+                return this.height - 30;
+            }
+            else {
+                return this.height - 40;
+            }
+        },
+
+        getPositionY() {
+            let width = $(this.$refs.circle).width();
+            if (width < 320) {
+                return this.height - 15;
+            }
+            else {
+               return this.height - 25;
+            }
+            
+        },
+
         resize() {
+            // 重设下高度值
+            this.freshContainer();
             if (this.chart && typeof this.chart.resize === 'function') {
-                this.chart.resize();
                 if (typeof this.chart.getWidth !== 'function') {
                     return;
                 }
+                let options = this.chart.getOption();
+                options.series[0].radius = this.getRadius();
+                options.series[0].center = ['50%', this.getPositionY()];
                 if (this.chart.getWidth() <= 320) {
-                    let options = this.chart.getOption();
                     options.series[0].axisLine.lineStyle.width = 30;
-                    options.series[0].radius = '120%';
-                    options.series[0].center = ['50%', '65%'];
                     options.series[0].axisLabel.width = 30;
-                    this.chart.setOption(options);
                 }
                 else {
-                    let options = this.chart.getOption();
                     options.series[0].axisLine.lineStyle.width = 38;
-                    options.series[0].radius = '160%';
-                    options.series[0].center = ['50%', '85%'];
                     options.series[0].axisLabel.width = 38;
+                }
+                this.$nextTick(() => {
                     this.chart.setOption(options);
-                }
-
-                if (this.extraStyle) {
-                    this.chart.setOption(this.extraStyle);
-                }
+                    if (this.extraStyle) {
+                        this.chart.setOption(this.extraStyle);
+                    }
+                    this.chart.resize();
+                    });
             }
         },
 
@@ -501,6 +522,9 @@ export default {
          * @param  {[type]} data [description]
          */
         render(data) {
+            // 重设下宽高
+            this.freshContainer();
+
             const circleConf = this.circleConf;
 
             let style = circleConf.style;
@@ -523,8 +547,8 @@ export default {
                     type: 'gauge',
                     startAngle: 180,
                     endAngle: 0,
-                    radius: containerWidth <= 320 ? '120%' :'160%',
-                    center: ['50%', containerWidth <= 320 ? '65%' :'85%'],
+                    radius: this.getRadius(),
+                    center: ['50%', this.getPositionY()],
                     axisTick: {
                         show: false
                     },
@@ -592,15 +616,18 @@ export default {
 
 
             this.curOptions = echartsConf;
-            this.chart = echarts.init(this.$refs.chart);
-            this.chart.setOption(this.curOptions);
+            this.$nextTick(() => {
+                this.chart = echarts.init(this.$refs.chart);
+                this.chart.setOption(this.curOptions);
 
-            if (this.extraStyle) {
-                this.chart.setOption(this.extraStyle);
-            }
+                if (this.extraStyle) {
+                    this.chart.setOption(this.extraStyle);
+                }
 
-            // hide loading mdmask
-            this.hideMask();
+                // hide loading mdmask
+                this.hideMask();
+            });
+            
         },
 
         /**
@@ -619,12 +646,14 @@ export default {
          * caculate the sceen's position and judge whether to load
          */
         scrollTop() {
+            if (this.isload || this.isLoading) {
+                return;
+            }
             const main = this.$refs.circle;
             let top = mdutil.getScrollTop();
             let height = mdutil.getViewHeight();
             let offset = mdutil.getOffset(main);
-            if (offset && offset.top < top + height && offset.bottom > top
-                && !this.isload && !this.isLoading) {
+            if (offset && offset.top < top + height && offset.bottom > top) {
                 this.showMask();
                 this.freshData();
             }
