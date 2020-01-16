@@ -89,6 +89,7 @@
                     :tips="tips"
                     :type="type"
                     :theme="theme"
+                    :trigger="trigger"
                     :confirm="confirm"
                     :dateValue="dateValue"
                     :dateOptions="dateOptions"
@@ -424,6 +425,19 @@ export default {
             }
             else {
                 return this.theme;
+            }
+        },
+        /**
+         * console风格下，时间面板触发update的方式设置
+         *
+         * @return {String} 触发update的方式
+         */
+        trigger() {
+            if (this.options && this.options.trigger && this.options.trigger === 'blur') {
+                return 'blur';
+            }
+            else {
+                return 'change';
             }
         }
     },

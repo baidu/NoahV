@@ -37,6 +37,8 @@ export default {
             options: {
                 position: 'top',
                 yearRange: [],
+                // change/blur
+                trigger: 'blur',
                 autoClose: false,
                 shortcuts: [
                     {
