@@ -13,10 +13,6 @@ var cssSourceMapProd = (env === 'production' && config.build.productionSourceMap
 var useCssSourceMap = cssSourceMapDev || cssSourceMapProd
 var vueLoaderConfig = require('./vue-loader.conf')
 
-const replacedlist = 'guide|table|form|trend|view|api|chart|icon|cascaderSelect|tag|textLine|search|pipline|transfer|datePicker|tree|steps|dutyTable|list|ellipsis|dialogTpl|switchTpl|buttonTpl|visualComponent';
-
-const replaceRegx = new RegExp('(' + replacedlist + ')\/(.*)\\.md$');
-
 module.exports = {
     entry: {
         app: './src/main.js'
@@ -51,21 +47,20 @@ module.exports = {
         // unknownContextCritical : false,
         rules: [
             {
-                test: function(path) {
-                    if (!/\.md$/.test(path)) {
-                        return false;
+                test: /\.md$/,
+                use: [
+                  {
+                    loader: 'vue-loader',
+                    options: {
+                      compilerOptions: {
+                        preserveWhitespace: false
+                      }
                     }
-                    var arr = path.split('/');
-                    var name = arr[arr.length - 2];
-                    if (replacedlist.split('|').indexOf(name) === -1) {
-                        return true;
-                    }
-                    return false;
-                },
-                loader: 'vue-markdown-loader',
-                options: {
-                    wrapper: 'saas-doc'
-                }
+                  },
+                  {
+                    loader: path.resolve(__dirname, './demo-loader/index.js')
+                  }
+                ]
             },
             {
                 test: /\.vue$/,
@@ -83,22 +78,6 @@ module.exports = {
                 exclude: /(scripts|test)/,
                 include: [
                     path.resolve(__dirname, "../src")
-                ]
-            },
-            {
-                test: replaceRegx,
-                use: [
-                  {
-                    loader: 'vue-loader',
-                    options: {
-                      compilerOptions: {
-                        preserveWhitespace: false
-                      }
-                    }
-                  },
-                  {
-                    loader: path.resolve(__dirname, './demo-loader/index.js')
-                  }
                 ]
             },
             {
