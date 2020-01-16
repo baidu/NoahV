@@ -11,7 +11,8 @@ export const highchartsConfig = {
                 '#7cb5ec', '#434348', '#8bbc21', '#910000', '#1aadce',
                 '#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a'
             ],
-            eventColor: ['#36BA33', '#00D7DE', '#EADE16', '#A800FF', '#C69C06']
+            eventColor: ['#36BA33', '#00D7DE', '#EADE16', '#A800FF', '#C69C06'],
+            scrollTrigger: '.noahv-layout'
         },
         circle: {
             colors: {

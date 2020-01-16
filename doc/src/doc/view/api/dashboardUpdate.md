@@ -1,3 +1,5 @@
+[[TOC]]
+
 ## 接口含义
 更新仪表盘布局，拖动页面触发
 
@@ -21,10 +23,9 @@ widgets参数为一个二维数组，分表表示行和列。
 | title |  组件展示名称 | string | ''    |
 
 
-<div class="normal-code">
 
 
-```
+```json
 [
     [
         {
@@ -71,7 +72,6 @@ widgets参数为一个二维数组，分表表示行和列。
     ]
 ]
 ```
-</div>
 
 
 
@@ -85,11 +85,10 @@ res.data
 空
 
 
-### 示例
+## 示例
 
-<div class="normal-code">
 
-```
+```json
 {
     data: {
     }
@@ -97,4 +96,3 @@ res.data
     message: 'ok'
 }
 ```
-</div>

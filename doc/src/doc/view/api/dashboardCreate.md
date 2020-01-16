@@ -1,3 +1,4 @@
+[[TOC]]
 ## 接口含义
 新建仪表盘接口
 
@@ -20,11 +21,10 @@ res.data
 | id | 仪表盘唯一id    | number | -  |
 
 
-### 示例
+## 示例
 
-<div class="normal-code">
 
-```
+```json
 {
     data: {
         id: 1803
@@ -33,4 +33,3 @@ res.data
     message: 'ok'
 }
 ```
-</div>

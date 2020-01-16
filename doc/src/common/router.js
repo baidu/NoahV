@@ -74,7 +74,7 @@ export default [
         path: '/doc/view/quickstart'
     },
     {
-        component: r => require.ensure([], () => r(require('src/doc/view/guide')), 'doc/view/guide'),
+        component: r => require.ensure([], () => r(require('src/doc/view/guide.md')), 'doc/view/guide'),
         path: '/doc/view/guide'
     },
     {
@@ -114,11 +114,11 @@ export default [
         path: '/guide/catalog'
     },
     {
-        component: r => require.ensure([], () => r(require('src/guide/quickstart')), 'guide/quickstart'),
+        component: r => require.ensure([], () => r(require('src/guide/quickstart.md')), 'guide/quickstart'),
         path: '/guide/quickstart'
     },
     {
-        component: r => require.ensure([], () => r(require('src/guide/about')), 'guide/about'),
+        component: r => require.ensure([], () => r(require('src/guide/about.md')), 'guide/about'),
         path: '/guide/about',
         entry: true
     },
@@ -128,7 +128,7 @@ export default [
     },
     {
         path: '/doc/component/icon',
-        component: r => require.ensure([], () => r(require('src/doc/icon/icon')), 'icon')
+        component: r => require.ensure([], () => r(require('src/doc/icon/icon.md')), 'icon')
     },
     {
         path: '/doc/template/basic-table',
@@ -179,27 +179,27 @@ export default [
     },
     {
         path: '/doc/component/business/list',
-        component: r => require.ensure([], () => r(require('src/doc/component/business/list/list')), 'list')
+        component: r => require.ensure([], () => r(require('src/doc/component/business/list/list.md')), 'list')
     },
     {
         path: '/doc/component/business/buttonTpl',
         component: r => require.ensure(
-            [], () => r(require('src/doc/component/business/buttonTpl/buttonTpl')), 'buttonTpl')
+            [], () => r(require('src/doc/component/business/buttonTpl/buttonTpl.md')), 'buttonTpl')
     },
     {
         path: '/doc/component/business/switchTpl',
         component: r => require.ensure(
-            [], () => r(require('src/doc/component/business/switchTpl/switchTpl')), 'switchTpl')
+            [], () => r(require('src/doc/component/business/switchTpl/switchTpl.md')), 'switchTpl')
     },
     {
         path: '/doc/component/business/chart',
         component: r => require.ensure(
-            [], () => r(require('src/doc/component/business/chart/chart')), 'chart')
+            [], () => r(require('src/doc/component/business/chart/chart.md')), 'chart')
     },
     {
         path: '/doc/component/business/trend',
         component: r => require.ensure(
-            [], () => r(require('src/doc/component/business/trend/trend')), 'trend')
+            [], () => r(require('src/doc/component/business/trend/trend.md')), 'trend')
     },
     {
         path: '/doc/component/business/constrastTrend',
@@ -209,7 +209,7 @@ export default [
     {
         path: '/doc/component/business/dialogTpl',
         component: r => require.ensure(
-            [], () => r(require('src/doc/component/business/dialogTpl/dialogTpl')), 'dialogTpl')
+            [], () => r(require('src/doc/component/business/dialogTpl/dialogTpl.md')), 'dialogTpl')
     },
     {
         path: '/doc/component/text-line',
@@ -251,23 +251,23 @@ export default [
     },
     {
         path: '/doc/visualComponent/report',
-        component: r => require.ensure([], () => r(require('src/doc/visualComponent/report')), 'saasvReport')
+        component: r => require.ensure([], () => r(require('src/doc/visualComponent/report.md')), 'noahvReport')
     },
     {
         path: '/doc/visualComponent/billboard',
-        component: r => require.ensure([], () => r(require('src/doc/visualComponent/billboard')), 'saasvBillboard')
+        component: r => require.ensure([], () => r(require('src/doc/visualComponent/billboard.md')), 'noahvBillboard')
     },
     {
         path: '/doc/visualComponent/trend',
-        component: r => require.ensure([], () => r(require('src/doc/visualComponent/trend')), 'saasvTrend')
+        component: r => require.ensure([], () => r(require('src/doc/visualComponent/trend.md')), 'noahvTrend')
     },
     {
         path: '/doc/visualComponent/circle',
-        component: r => require.ensure([], () => r(require('src/doc/visualComponent/circle')), 'saasvCircle')
+        component: r => require.ensure([], () => r(require('src/doc/visualComponent/circle.md')), 'noahvCircle')
     },
     {
         path: '/doc/visualComponent/eventriver',
-        component: r => require.ensure([], () => r(require('src/doc/visualComponent/eventriver')), 'saasvEventrive')
+        component: r => require.ensure([], () => r(require('src/doc/visualComponent/eventriver.md')), 'noahvEventrive')
     }
 ];
 /* eslint-enable */

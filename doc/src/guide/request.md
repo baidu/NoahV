@@ -1,3 +1,4 @@
+[[TOC]]
 
 ## 概述
 
@@ -30,9 +31,8 @@ NoahV-request的数据请求对象`$request`已经绑定到了Vue实例上，所
 除上述参数外，还支持其他的一些额外参数，请参考[Axios文档](https://github.com/axios/axios#request-config)。
 
 ### 使用示例
-<div class="normal-code">
 
-```
+```javascript
 this.$request({
     url: '/api/test',
     method: 'post',
@@ -44,33 +44,35 @@ this.$request({
     // do with data
 })
 ```
-</div>
+
+
 
 ## NoahV-request工具功能
 
-### 1.统一的接口错误处理
+### 统一的接口错误处理
 NoahV-request会为每一个请求匹配默认的接口返回处理程序，如果接口返回非200状态码，会自动全局弹出错误提示，如果希望自定义错误处理，请参考`beforeFailure`相关hook。
 
-### 2.全局的加载提示
+### 全局的加载提示
 默认情况下，每个接口都会触发覆盖全屏幕的加载提示，如果不希望有,可以在接口请求配置中设置`showLoading`为`false`,如果希望所有接口都不默认触发加载提示，请参考`showGlobalLoading`、`hideGlobalLoading`相关hook。
 
-### 3.支持Restful风格接口定义
+
+### 支持Restful风格接口定义
 如果接口中含有大括号包含的变量，NoahV-request会在接口请求之前进行变量替换，如`{name}`,替换的真实值来自于`pathArgs`、`params`、`data`，优先使用`pathArgs`,也建议需要替换的时候提供`pathArgs`，避免和请求参数混淆。
 也可以自定义Restful处理规则，请参考`handlerRestfulUrl`相关hook。
 
-### 4.支持hooks介绍
+### 支持hooks全局处理
 
 在项目根目录`src/common/hook/`下有一个`ajax.js`文件，请在该文件中添加hook。示例如下，记得检查`src/common/hook/ajax.js`文件是否在`src/main.js`中import，如果没有，请手动添加下`import 'src/common/hook/ajax'`。
-<div class="normal-code">
 
-```
+
+```javascript
 import request from 'noahv-request';
 request.hooks.beforeRequest = function (config) {
     config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
     return config;
 }
 ```
-</div>
+
 
 支持hooks信息如下
 * 1.beforeRequest （在请求发出前触发，参数为当前的config,如需对config做变换处理，请将处理之后的数据return）

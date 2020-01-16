@@ -8,9 +8,9 @@ const report = function() {
             "value": "bid",
             "alias": null,
             "metrics": {
-                "alias1": null,
-                "alias2": null,
-                "alias3": null,
+                "alias1": 90,
+                "alias2": 100,
+                "alias3": 80,
             },
             "children": [{
                 "name": "im_module",
@@ -46,7 +46,7 @@ const report = function() {
                 "value": "imbsproxy",
                 "alias": null,
                 "metrics": {
-                    "alias1": null,
+                    "alias1": 100,
                     "alias2": 85,
                     "alias3": 92
                 }
@@ -54,6 +54,35 @@ const report = function() {
             {
                 "name": "im_module",
                 "value": "indexserver",
+                "alias": null,
+                "metrics": {
+                    "alias1": 90,
+                    "alias2": null,
+                    "alias3": 98
+                }
+            }]
+        },{
+            "name": "plat",
+            "value": "bcm",
+            "alias": null,
+            "metrics": {
+                "alias1": 90,
+                "alias2": 100,
+                "alias3": 80,
+            },
+            children: [{
+                "name": "im_module",
+                "value": "bcmchildrenmodule1",
+                "alias": null,
+                "metrics": {
+                    "alias1": 100,
+                    "alias2": 85,
+                    "alias3": 92
+                }
+            },
+            {
+                "name": "im_module",
+                "value": "bcmchildrenmodule2",
                 "alias": null,
                 "metrics": {
                     "alias1": 90,

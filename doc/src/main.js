@@ -16,18 +16,21 @@ import routerConfig from './common/router';
 import headerConfig from './common/header';
 import footerApp from './common/layout/footer';
 import codeCom from './common/component/code';
+import nvDemo from './common/component/nv-demo';
 import './tools/mock';
 import 'iview/dist/styles/iview.css';
 import 'noahv-component/src/assets/css/index.less';
 import 'noahv-visual-components/src/assets/css/index.less';
 import './common/assets/css/main.less';
 import 'highlight.js/styles/github.css';
+import './doc/visualComponent/config/mockApi';
+
 // If wanted diy layout, please import this file
 // import layoutApp from './common/layout/layout';
 
 Vue.component('sa-code', codeCom);
 Vue.component('nv-code', codeCom);
-
+Vue.component('nv-demo', nvDemo);
 
 // keep this
 Vue.use(VueRouter);
@@ -57,4 +60,5 @@ noahv.useBaiduTrack('0c5bbc0355ed6e991518ff8c26d71dda')
 
 // init project
 noahv.start('#app', store);
+
 

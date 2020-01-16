@@ -1,3 +1,4 @@
+[[TOC]]
 ## 接口含义
 在仪表盘综合管理页面中删除组件
 
@@ -17,15 +18,13 @@
 res.data
 空
 
-### 示例
+## 示例
 
-<div class="normal-code">
 
-```
+```json
 {
     data: {}
     success: true,
     message: 'ok'
 }
 ```
-</div>

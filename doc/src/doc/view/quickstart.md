@@ -1,53 +1,45 @@
+[[TOC]]
 ## 仪表盘
 仪表盘功能的使用也依赖NoahV-cli脚手架，如果您本地还没有安装好，请参考[NoahV快速开始](#/guide/quickstart)相关文档，根据提示安装，如果已经安装过了并且本地运行`noahv -h`能看到NoahV的相关使用提示，说明本地NoahV环境已经安装好，请参照一下步骤使用仪表盘相关功能。
 
 
-### 1.初始化仪表盘项目
+## 初始化仪表盘项目
 使用noahv命令行工具初始化一个仪表盘项目
 
-<div class="normal-code">
 
 ```
 $  mkdir project && cd project && noahv init --dashboard
 ```
-</div>
 
-### 2.运行Demo示例
+## 运行Demo示例
 
-<div class="normal-code">
 
 ```
 $  noahv start
 ```
-</div>
 
 在初始化之后的项目中运行上述命令，仪表盘Demo实例将会自动运行，查看打开的浏览器窗口，体验仪表盘相关功能(由于模拟数据的限制，更改可视化组件和仪表盘布局配置将无法生效，您可以手动修改模拟数据或者直接接入API)。
 
-### 3.查看仪表盘Demo示例
-3.1 如下图所示为仪表盘管理页面，管理着所有创建的仪表盘页面
+## 查看仪表盘Demo示例
+1 如下图所示为仪表盘管理页面，管理着所有创建的仪表盘页面
 
 <img src="../../common/assets/img/dashboard-list.png" width="800">
 
 
-<br />
+2 如下图所示为仪表盘综合配置页面，可以点击加号添加行和列的组件，也可以直接复制组件配置，同时也可以跨行跨列拖动管理组件
 
 
-3.2 如下图所示为仪表盘综合配置页面，可以点击加号添加行和列的组件，也可以直接复制组件配置，同时也可以跨行跨列拖动管理组件
 <img src="../../common/assets/img/dashboard-edit.png" width="800">
 
-<br />
 
+3 如下图所示为组件UI配置界面，通过点击仪表盘综合配置页面中组件的配置按钮就可以看到该配置图
 
-3.3 如下图所示为组件UI配置界面，通过点击仪表盘综合配置页面中组件的配置按钮就可以看到该配置图
 <img src="../../common/assets/img/conf.png" width="800">
 
-### 4.仪表盘代码目录结构
+## 仪表盘代码目录结构
 仪表盘项目和普通项目模板的代码结构基本是一致的，仪表盘项目在 `src` 目录下会多一个 `view` 文件夹，仪表盘相关代码逻辑和功能都在该目录中。
 
 `view`下的文件机构如下图所示：
-
-<div class="normal-code">
-
 
 ```
 noahv-project
@@ -86,7 +78,6 @@ noahv-project
 ├── package.json (依赖管理)
 └── README.md 
 ```
-</div>
 
 
 只需根据`api/config.js`提供API接口即可，关于具体有哪些API接口，以及各个接口的参数格式请参考[API接口](#/doc/view/api/api)文档

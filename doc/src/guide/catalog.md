@@ -1,12 +1,11 @@
+[[TOC]]
 ## 概述
 本章主要介绍NoahV的目录结构，在 [快速开始](#/guide/quickstart) 中大家对框架应该有了大体的了解，对使用工具生成的项目的目录结构一定很好奇，这里将着重介绍各个目录的作用和一些规范。
 
 ## 目录结构
 
-<div class="normal-code">
 
-
-```
+```shell
 noahv-project
 ├── mockup
 ├── node_modules
@@ -43,9 +42,10 @@ noahv-project
 ├── package.json (依赖管理)
 └── README.md 
 ```
-</div>
 
-### 如上，为框架约定的项目目录
+## 各目录作用
+
+如上，为框架约定的项目目录，他们的作用分别是：
 
 * `mockup` 该目录为模拟数据文件所在目录
 * `scripts` webpack脚本文件，编译脚本文件
@@ -56,7 +56,9 @@ noahv-project
 
 
 
-### config/common 目录下文件的作用：
+## config/common 目录作用
+
+config/common 目录下的各个子目录的作用分别是：
 
 * `assets` 公共的静态文件，如图片、样式等
 * `assets/css/header.less` 导航栏样式文件，可以再这儿编写css代码改变导航的样式
@@ -65,6 +67,8 @@ noahv-project
 * `devProxy.js` 开发环境代理配置文件，如果想在开发环境请求不同域下数据，可以在该文件下配置代理，详见 [开发环境代理配置](#/guide/proxy)
 * `header.js` 页面头部配置文件、详见 [导航配置](#/guide/menu)
 * `router.js` 路由配置文件，通过脚手架命令 `noahv create` 
+
+
 
 创建的页面不需要在手动配置路由，如果是自己手动创建的目录或者文件，需要手动添加路由才能访问
 

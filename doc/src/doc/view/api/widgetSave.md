@@ -1,3 +1,4 @@
+[[TOC]]
 ## 接口含义
 保存组件配置信息
 
@@ -18,15 +19,13 @@ res.data
 空
 
 
-### 示例
+## 示例
 
-<div class="normal-code">
 
-```
+```json
 {
     data: {}
     success: true,
     message: 'ok'
 }
 ```
-</div>

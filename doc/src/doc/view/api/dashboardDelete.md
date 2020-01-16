@@ -1,3 +1,5 @@
+[[TOC]]
+
 ## 接口含义
 删除仪表盘接口
 
@@ -19,11 +21,11 @@ res.data
 空
 
 
-### 示例
+## 示例
 
-<div class="normal-code">
 
-```
+
+```json
 {
     data: {
     }
@@ -31,4 +33,4 @@ res.data
     message: 'ok'
 }
 ```
-</div>
+

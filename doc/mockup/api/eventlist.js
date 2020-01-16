@@ -2,6 +2,7 @@
 const Mock = require('mockjs');
 // 获取 mock.Random 对象
 const Random = Mock.Random;
+
 // mock一组数据
 const produceNewsData = function() {
     return {
@@ -18,9 +19,7 @@ const produceNewsData = function() {
                     "startTime": 1503562250,
                     "display": {
                         "type": "BJYZ1机房异常",
-                        "product": {
-                            "operator": ["app", "app2", "app3"]
-                        },
+                        "product": 'app',
                         "url": "http://www.noahv.org"
                     },
                     "endTime": 1503564300

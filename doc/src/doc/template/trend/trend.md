@@ -1,46 +1,14 @@
-
+[[TOC]]
 ## 概述
 
 提供时序数据多指标展示、时间筛选、阈值展示等功能
 
-## 基础示例
+## 示例
 
+### 基础示例
 
-<template>
-    
-<Card>
-
-<p slot="title">时序趋势图示例</p>
-<template>
-    <div class="filter-table-doc">
-        <div class="example">
-            <normalTrendExample />
-        </div>
-    </div>
-</template>
-
-
-<nv-code :content="filterTableDemoTplCode">
-</nv-code>
-
-</Card>
-</template>
-
-## API
-
-
-参考[日历组件](#/doc/component/date-picker)和[趋势图组件](#/doc/component/business/trend)
-
-
-
-## 示例中接口返回数据
-
-<nv-code :content="filterTableDemoTplApi"  title="查看接口数据" closeTitle="收起接口数据" copyTitle="复制接口数据">
-</nv-code>
-
-<script>
-import normalTrendExample from  '../../../example/trend/trend.vue';
-const filterTableDemoTpl = `
+:::demo
+```html
 <template>
     <div class="example-trend-trend">
         <div class="time-filter-area">
@@ -65,126 +33,133 @@ const filterTableDemoTpl = `
 </template>
 
 <script>
-import m from 'moment';
-import _ from 'lodash';
-const DATE_FORMAT = 'YYYY-MM-DD HH:mm:ss';
-const DEFAULT_TIME = {
-    startTime: m().subtract(2, 'hour'),
-    endTime: m()
-};
-export default {
-    name: 'example-trend-trend',
-    data() {
-        return {
-            time: {
-                dateFormat: DATE_FORMAT,
-                value: [
-                    DEFAULT_TIME.startTime.toDate(),
-                    DEFAULT_TIME.endTime.toDate()
-                ],
-                dateOptions: {
-                    position: 'outer',
-                    shortcuts: [
-                        {
-                            text: '30分钟',
-                            value() {
-                                return [
-                                    m().subtract(30, 'minute').toDate(),
-                                    m().toDate()
-                                ];
+    import m from 'moment';
+    import _ from 'lodash';
+    const DATE_FORMAT = 'YYYY-MM-DD HH:mm:ss';
+    const DEFAULT_TIME = {
+        startTime: m().subtract(2, 'hour'),
+        endTime: m()
+    };
+    export default {
+        name: 'example-trend-trend',
+        data() {
+            return {
+                time: {
+                    dateFormat: DATE_FORMAT,
+                    value: [
+                        DEFAULT_TIME.startTime.toDate(),
+                        DEFAULT_TIME.endTime.toDate()
+                    ],
+                    dateOptions: {
+                        position: 'outer',
+                        shortcuts: [
+                            {
+                                text: '30分钟',
+                                value() {
+                                    return [
+                                        m().subtract(30, 'minute').toDate(),
+                                        m().toDate()
+                                    ];
+                                }
+                            },
+                            {
+                                text: '1小时',
+                                value() {
+                                    return [
+                                        m().subtract(1, 'hour').toDate(),
+                                        m().toDate()
+                                    ];
+                                }
+                            },
+                            {
+                                text: '2小时',
+                                defaultSelected: true,
+                                value() {
+                                    return [
+                                        m().subtract(2, 'hour').toDate(),
+                                        m().toDate()
+                                    ];
+                                }
+                            },
+                            {
+                                text: '1天',
+                                value() {
+                                    return [
+                                        m().subtract(1, 'day').toDate(),
+                                        m().toDate()
+                                    ];
+                                }
+                            },
+                            {
+                                text: '7天',
+                                value() {
+                                    return [
+                                        m().subtract(7, 'day').toDate(),
+                                        m().toDate()
+                                    ];
+                                }
                             }
-                        },
-                        {
-                            text: '1小时',
-                            value() {
-                                return [
-                                    m().subtract(1, 'hour').toDate(),
-                                    m().toDate()
-                                ];
-                            }
-                        },
-                        {
-                            text: '2小时',
-                            defaultSelected: true,
-                            value() {
-                                return [
-                                    m().subtract(2, 'hour').toDate(),
-                                    m().toDate()
-                                ];
-                            }
-                        },
-                        {
-                            text: '1天',
-                            value() {
-                                return [
-                                    m().subtract(1, 'day').toDate(),
-                                    m().toDate()
-                                ];
-                            }
-                        },
-                        {
-                            text: '7天',
-                            value() {
-                                return [
-                                    m().subtract(7, 'day').toDate(),
-                                    m().toDate()
-                                ];
-                            }
-                        }
-                    ]
-                }
-            },
-            trendConf: {
-                // title 可选
-                title: '趋势图',
-                // api 必选
-                url: '/api/tpl/trend/get',
-                params: {
-                    startTime: DEFAULT_TIME.startTime.format(DATE_FORMAT),
-                    endTime: DEFAULT_TIME.endTime.format(DATE_FORMAT)
+                        ]
+                    }
                 },
-                // showLoading 可选
-                showLoading: '数据加载中...',
-                // options 可选
-                options: {
-                    threshold: 150000
-                }
-            }
-        };
-    },
-    computed: {
-    },
-    methods: {
-        timeChange(time) {
-            if (Array.isArray(time) && time.length === 2) {
-                if (time[0] && time[1]) {
-                    let params = Object.assign({}, this.trendConf.params, {
-                        startTime: m(time[0]).format(DATE_FORMAT),
-                        endTime: m(time[1]).format(DATE_FORMAT)
-                    });
-                    if (!_.isEqual(this.trendConf.params, params)) {
-                        this.trendConf.params = params;
+                trendConf: {
+                    // title 可选
+                    title: '趋势图',
+                    // api 必选
+                    url: '/api/tpl/trend/get',
+                    params: {
+                        startTime: DEFAULT_TIME.startTime.format(DATE_FORMAT),
+                        endTime: DEFAULT_TIME.endTime.format(DATE_FORMAT)
+                    },
+                    // showLoading 可选
+                    showLoading: '数据加载中...',
+                    // options 可选
+                    options: {
+                        threshold: 150000
                     }
                 }
+            };
+        },
+        computed: {
+        },
+        methods: {
+            timeChange(time) {
+                if (Array.isArray(time) && time.length === 2) {
+                    if (time[0] && time[1]) {
+                        let params = Object.assign({}, this.trendConf.params, {
+                            startTime: m(time[0]).format(DATE_FORMAT),
+                            endTime: m(time[1]).format(DATE_FORMAT)
+                        });
+                        if (!_.isEqual(this.trendConf.params, params)) {
+                            this.trendConf.params = params;
+                        }
+                    }
+                }
+
             }
-
         }
-    }
-};
-<\/script>
+    };
+</script>
+<style lang="less">
+.time-filter-area {
+    margin-bottom: 10px;
+}
+</style>
+```
+:::
 
-<style lang="less" >
-    .example-trend-trend {
-        .time-filter-area {
-            border: none;
-            padding: 0;
-            margin-bottom: 20px;
-        }
-    }
-<\/style>
+## API
 
-`;
-const filterTableDemoTplApi = `
+
+参考[日历组件](#/doc/component/date-picker)和[趋势图组件](#/doc/component/business/trend)
+
+
+
+## 数据格式
+
+示例中接口返回数据
+
+```json
 {
     data: {
         title: 'QPS',
@@ -321,34 +296,4 @@ const filterTableDemoTplApi = `
     },
     success: true
 }
-`
-export default {
-    name: 'trendDoc',
-    components: {
-        normalTrendExample
-    },
-    data() {
-        return {
-            filterTableDemoTplCode: filterTableDemoTpl,
-            filterTableDemoTplApi: filterTableDemoTplApi
-        }
-    }
-};
-</script>
-
-<style lang="less" >
-    .filter-table-doc {
-        .example {
-            margin: 20px 0;
-        }
-    }
-    .filter-table-tip:before{
-        content: '*';
-        display: inline-block;
-        margin-right: 4px;
-        line-height: 1;
-        font-family: SimSun;
-        font-size: 12px;
-        color: #ed3f14;
-    }
-</style>
+```

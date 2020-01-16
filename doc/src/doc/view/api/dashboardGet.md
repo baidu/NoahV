@@ -1,3 +1,4 @@
+[[TOC]]
 
 ## 接口含义
 获取仪表盘组件和布局配置信息
@@ -22,11 +23,10 @@ res.data
 
 
 
-### 示例
+## 示例
 
-<div class="normal-code">
 
-```
+```json
 {
     data: {
         id: '223456',
@@ -41,4 +41,3 @@ res.data
     message: 'ok'
 }
 ```
-</div>

@@ -6,13 +6,13 @@ const report = function() {
         "data": [{
             "name":"noah_namespace",
             "value":"2.case-basic.service",
-            "alias":null,
-            "metrics":{"alias3":90,"alias2":95, "alias1": null}
+            "alias":'metric1',
+            "metrics":{"alias3":90,"alias2":null, "alias1": 95}
         }, {
             "name":"noah_namespace",
             "value":"1.case-basic.service",
-            "alias":null,
-            "metrics":{"alias3":100,"alias2": 80, "alias1": null}
+            "alias":'metric2',
+            "metrics":{"alias3":100,"alias2": null, "alias1": 80}
         }],
         success: true
     };

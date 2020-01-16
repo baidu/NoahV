@@ -401,7 +401,7 @@ export default {
             ]
         }
     ],
-    hasBread: true,
+    hasBread: false,
     logo: {
         // 是否需要logo
         hasLogo: true,
