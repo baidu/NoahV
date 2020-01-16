@@ -274,15 +274,11 @@ export default {
         }
     },
     created() {
-
         // Read user configuration, including external api configuration
         widgetConf = this.$extraEchartsConf;
+
         if (this.path) {
             this.getConf();
-            return;
-        }
-        if (this.conf) {
-            this.renderConf();
         }
     },
     mounted() {
@@ -293,8 +289,14 @@ export default {
          */
         this.redraw = u.throttle(this.scrollTop, 100);
 
+        let scrollTrigger = widgetConf.extraComponent.trend.scrollTrigger || document;
+
         // add lazy loading when you scroll the page
-        $(document).on('scroll', this.redraw);
+        $(scrollTrigger).on('scroll', this.redraw);
+        
+        if (this.conf) {
+            this.renderConf();
+        }
     },
     methods: {
         getConf() {
@@ -328,7 +330,6 @@ export default {
                 if (data.data.success) {
                     this.errTip = false;
                     this.reportConf = JSON.parse(data.data.data.configure || '{}');
-
                     // render data
                     this.scrollTop();
                 }
@@ -389,6 +390,8 @@ export default {
             if (this.reportConf.display) {
                 this.data = this.reportConf.display;
                 this.render(this.reportConf.display);
+                this.isLoading = false;
+                this.hideMask();
             }
             else {
                 // Data request configuration
@@ -577,7 +580,7 @@ export default {
                             }
                             catch (e) {
                                 str = {
-                                    name: '查询失败',
+                                    name: '计算失败',
                                     sortid: col2.sortid
                                 };
                             }
@@ -592,7 +595,7 @@ export default {
                         }
                         catch (e) {
                             str = {
-                                name: '查询失败',
+                                name: '计算失败',
                                 sortid: col.sortid
                             };
                         }
@@ -956,7 +959,7 @@ export default {
          * hide loading mdmask
          */
         hideMask() {
-            this.$refs.mask.hide();
+            this.$refs.mask && this.$refs.mask.hide();
         }
     },
     beforeDestroy() {
