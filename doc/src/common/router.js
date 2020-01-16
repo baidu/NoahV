@@ -251,15 +251,15 @@ export default [
     },
     {
         path: '/doc/visualComponent/report',
-        component: r => require.ensure([], () => r(require('src/doc/visualComponent/report')), 'noahvReport')
+        component: r => require.ensure([], () => r(require('src/doc/visualComponent/report.md')), 'noahvReport')
     },
     {
         path: '/doc/visualComponent/billboard',
-        component: r => require.ensure([], () => r(require('src/doc/visualComponent/billboard')), 'noahvBillboard')
+        component: r => require.ensure([], () => r(require('src/doc/visualComponent/billboard.md')), 'noahvBillboard')
     },
     {
         path: '/doc/visualComponent/trend',
-        component: r => require.ensure([], () => r(require('src/doc/visualComponent/trend')), 'noahvTrend')
+        component: r => require.ensure([], () => r(require('src/doc/visualComponent/trend.md')), 'noahvTrend')
     },
     {
         path: '/doc/visualComponent/circle',
@@ -267,7 +267,7 @@ export default [
     },
     {
         path: '/doc/visualComponent/eventriver',
-        component: r => require.ensure([], () => r(require('src/doc/visualComponent/eventriver')), 'noahvEventrive')
+        component: r => require.ensure([], () => r(require('src/doc/visualComponent/eventriver.md')), 'noahvEventrive')
     }
 ];
 /* eslint-enable */

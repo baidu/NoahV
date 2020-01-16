@@ -1,9 +1,9 @@
 /* eslint-disable */
 const Mock = require('mockjs');
 const circleData = function() {
-    return {
-        data: 99.999999,
-        success: true
-    }
+	return Mock.mock({
+		"data|75-99.1-5": 1,
+		success: true
+	});
 }
 Mock.mock('/mock/circleData', 'post', circleData);

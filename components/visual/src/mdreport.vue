@@ -274,15 +274,11 @@ export default {
         }
     },
     created() {
-
         // Read user configuration, including external api configuration
         widgetConf = this.$extraEchartsConf;
+
         if (this.path) {
             this.getConf();
-            return;
-        }
-        if (this.conf) {
-            this.renderConf();
         }
     },
     mounted() {
@@ -293,8 +289,14 @@ export default {
          */
         this.redraw = u.throttle(this.scrollTop, 100);
 
+        let scrollTrigger = widgetConf.extraComponent.trend.scrollTrigger || document;
+
         // add lazy loading when you scroll the page
-        $(document).on('scroll', this.redraw);
+        $(scrollTrigger).on('scroll', this.redraw);
+        
+        if (this.conf) {
+            this.renderConf();
+        }
     },
     methods: {
         getConf() {
@@ -328,7 +330,6 @@ export default {
                 if (data.data.success) {
                     this.errTip = false;
                     this.reportConf = JSON.parse(data.data.data.configure || '{}');
-
                     // render data
                     this.scrollTop();
                 }
@@ -389,6 +390,8 @@ export default {
             if (this.reportConf.display) {
                 this.data = this.reportConf.display;
                 this.render(this.reportConf.display);
+                this.isLoading = false;
+                this.hideMask();
             }
             else {
                 // Data request configuration
@@ -529,8 +532,11 @@ export default {
 
         buildTableBody(list, columns, level, parentInfo) {
             let len = list.length;
+            let hasOwnParent = parentInfo ? true : false;
             $.each(list, (i, item) => {
-                let treeInfo = {};
+                let treeInfo = {
+                    isShow: true
+                };
                 if (item.children && item.children.length > 0) {
                     this.reportType = 'tree';
                 }
@@ -540,12 +546,12 @@ export default {
                 }
                 else {
                     let tempSublings = [];
-                    if (parentInfo) {
+                    if (hasOwnParent && parentInfo) {
                         parentInfo.parentHasSublings.map(item => {
                             tempSublings.push(item);
                             return item;
                         });
-                        tempSublings.push((parentInfo.parent.length > 1));
+                        tempSublings.push((parentInfo.parent && parentInfo.parent.length > 1));
                     }
                     else {
                         parentInfo = {parentHasSublings: []};
@@ -574,7 +580,7 @@ export default {
                             }
                             catch (e) {
                                 str = {
-                                    name: '查询失败',
+                                    name: '计算失败',
                                     sortid: col2.sortid
                                 };
                             }
@@ -589,7 +595,7 @@ export default {
                         }
                         catch (e) {
                             str = {
-                                name: '查询失败',
+                                name: '计算失败',
                                 sortid: col.sortid
                             };
                         }
@@ -818,7 +824,7 @@ export default {
         expandNode(nodeInfo) {
             nodeInfo.isExpend = !nodeInfo.isExpend;
             this.bodyLists.map(trItem => {
-                if (trItem.treeInfo.id.indexOf(nodeInfo.id + '-') > -1) {
+                if (trItem.treeInfo.id && trItem.treeInfo.id.indexOf(nodeInfo.id + '-') > -1) {
                     if (nodeInfo.isExpend) {
                         trItem.treeInfo.isExpend = nodeInfo.isExpend;
                     }
@@ -953,7 +959,7 @@ export default {
          * hide loading mdmask
          */
         hideMask() {
-            this.$refs.mask.hide();
+            this.$refs.mask && this.$refs.mask.hide();
         }
     },
     beforeDestroy() {

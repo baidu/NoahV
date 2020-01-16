@@ -23,6 +23,8 @@ import 'noahv-component/src/assets/css/index.less';
 import 'noahv-visual-components/src/assets/css/index.less';
 import './common/assets/css/main.less';
 import 'highlight.js/styles/github.css';
+import './doc/visualComponent/config/mockApi';
+
 // If wanted diy layout, please import this file
 // import layoutApp from './common/layout/layout';
 

@@ -56,11 +56,23 @@
   }
 
   .comment {
-    padding: 5px 10px 5px 34px;
+    padding: 5px 10px 5px 10px;
     color: @strong-text-color;
     line-height: 1.6;
-    background: url(../../img/ktip.png) 5px 0px no-repeat;
+    // background: url(../../img/ktip.png) 5px 0px no-repeat;
     text-align: left;
+    &:before {
+      content: '!';
+      line-height: 15px;
+      text-align: center;
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      background: #fc6;
+      border-radius: 3px;
+      color: #fff;
+      margin-right: 5px;
+    }
   }
 
   .credit {

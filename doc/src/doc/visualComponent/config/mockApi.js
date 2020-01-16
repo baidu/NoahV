@@ -15,6 +15,8 @@ require('mock/api/dataReport');
 require('mock/api/dataTreeReport');
 require('mock/api/eventlist');
 require('mock/api/eventRiver');
+require('mock/api/trendPoint');
+require('mock/api/trendEvent');
 /* eslint-enable */
 
 export default {

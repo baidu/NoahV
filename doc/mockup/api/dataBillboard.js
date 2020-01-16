@@ -1,18 +1,22 @@
 /* eslint-disable */
 const Mock = require('mockjs');
+const Random = Mock.Random;
 const billboardData = function() {
+    const usability = Random.float(90, 99, 5, 5);
+    const overtime = Random.float(1, 3, 5, 5);
+    const abnormal = 100 - usability;
     return {
         data: [{
-            name: 'name1',
-            value: 12306,
-            warning: true
+            name: 'usability',
+            value: usability,
+            warning: usability < 95 ? true : false
         },
         {
-            name: 'name2',
-            value: 91
+            name: 'overtime',
+            value: overtime
         }, {
-            name: 'name3',
-            value: 99.99875 
+            name: 'abnormal',
+            value: abnormal
         }],
         success: true
     };
