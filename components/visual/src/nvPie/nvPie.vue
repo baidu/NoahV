@@ -311,7 +311,7 @@ export default {
          */
         initConf() {
             let initConf = {
-                display: 100
+                display: []
             };
             this.renderDataByConf(initConf);
         },
@@ -531,7 +531,7 @@ export default {
          */
         render(data) {
             if (!Array.isArray(data)) {
-                showError(dataGetError);
+                this.showError(dataGetError);
                 return;
             }
             const pieConf = this.pieConf;
