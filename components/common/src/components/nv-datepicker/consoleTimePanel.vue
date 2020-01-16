@@ -9,6 +9,7 @@
                 :formatter="formatter"
                 :parser="parser"
                 :precision="0"
+                :active-change="activeChange"
                 @on-change="timeChange('left')"
             >
             </InputNumber>
@@ -20,6 +21,7 @@
                 :formatter="formatter"
                 :parser="parser"
                 :precision="0"
+                :active-change="activeChange"
                 @on-change="timeChange('left')"
             >
             </InputNumber>
@@ -32,6 +34,7 @@
                 :formatter="formatter"
                 :parser="parser"
                 :precision="0"
+                :active-change="activeChange"
                 @on-change="timeChange('left')"
             >
             </InputNumber>
@@ -44,6 +47,7 @@
                 :formatter="formatter"
                 :parser="parser"
                 :precision="0"
+                :active-change="activeChange"
                 @on-change="timeChange('right')"
             >
             </InputNumber>
@@ -54,6 +58,7 @@
                 :formatter="formatter"
                 :parser="parser"
                 :precision="0"
+                :active-change="activeChange"
                 v-model="dateValue.endMinute"
                 @on-change="timeChange('right')"
             >
@@ -66,6 +71,7 @@
                 :formatter="formatter"
                 :parser="parser"
                 :precision="0"
+                :active-change="activeChange"
                 v-model="dateValue.endSecond"
                 @on-change="timeChange('right')"
             >
@@ -91,14 +97,21 @@ export default {
     data() {
         return {
             // 格式处理函数
-            formatter: value => (value < 10 ? `0${value}` : `${value}`),
+            formatter: val => {
+                let value = val ? (val < 10 ? `0${val}` : `${val}`) : `00`;
+                return value; 
+            },
             // 格式解析函数
-            parser: value => (value < 10 ? value.replace('0', '') : value)
+            parser: val => {
+                let value = val ? (val < 10 ? val.replace('0', '') : val) : 0;
+                return value;
+            }
         };
     },
     props: {
         // 信息提示
-        tips: '', 
+        tips: '',
+        trigger: String,
         confirm: Boolean,
         // 维护时间日历组件的日期对象
         dateValue: Object,
@@ -111,6 +124,9 @@ export default {
         }
     },
     computed: {
+        activeChange() {
+            return this.trigger === 'change' ? true : false;
+        },
         confirmDisabled() {
             return ['daterangetime', 'daterange'].indexOf(this.type) > -1 
             && !(this.dateValue.startSelectedDate && this.dateValue.endSelectedDate);
@@ -138,16 +154,30 @@ export default {
             }
             if (this.type === 'daterangetime') {
                 if (pos === 'left' && this.dateValue.startSelectedDate) {
+                    this.nullHealing();
                     this.setSelectedDate('start');
                     this.selfHealing('left');
                     this.$emit('on-date-change');
                 }
                 if (pos === 'right' && this.dateValue.endSelectedDate) {
+                    this.nullHealing();
                     this.setSelectedDate('end');
                     this.selfHealing('right');
                     this.$emit('on-date-change');
                 }
             }
+        },
+        /**
+         * self healing for null time value
+         * 
+         */
+        nullHealing() {
+            this.dateValue.startHour = this.dateValue.startHour || 0;
+            this.dateValue.startMinute = this.dateValue.startMinute || 0;
+            this.dateValue.startSecond = this.dateValue.startSecond || 0;
+            this.dateValue.endHour = this.dateValue.endHour || 0;
+            this.dateValue.endMinute = this.dateValue.endMinute || 0;
+            this.dateValue.endSecond = this.dateValue.endSecond || 0;
         },
         /**
          * self healing for invalid selected time value

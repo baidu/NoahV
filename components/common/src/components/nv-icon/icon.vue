@@ -7,9 +7,11 @@
              :theme="theme"
              :max-width="maxWidth"
              :offset="offset"
-             :transfer="transfer">
+             :transfer="transfer"
+             v-if="hasTooltip">
         <i :class="classes" :style="{cursor: cursor}"></i>
     </Tooltip>
+    <i :class="classes" :style="{cursor: cursor}" v-else></i>
 </template>
 
 <script>
