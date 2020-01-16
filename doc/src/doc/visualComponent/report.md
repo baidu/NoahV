@@ -3,9 +3,10 @@
 
 可视化组件中的报表组件，可以根据指标数据决定显示颜色。适合于可用性、容量等数值展示。
 
-## 使用示例
+## 示例
 
-:::demo 基础示例
+### 基础示例
+:::demo 
 ```html
 <template>
     <div>
@@ -215,7 +216,8 @@ export default {
 ```
 :::
 
-:::demo 对象层级
+### 对象层级展开示例
+:::demo 
 ```html
 <template>
     <div>
@@ -360,7 +362,8 @@ export default {
 ```
 :::
 
-:::demo 直接配置展示数据
+### 直接配置展示数据
+:::demo 
 ```html
 <template>
     <div>
@@ -519,7 +522,8 @@ export default {
 ```
 :::
 
-:::demo 配置path从API获取conf配置信息
+### 配置path从API获取conf配置信息
+:::demo 
 ```html
 <template>
     <div>
@@ -540,8 +544,9 @@ export default {
 ```
 :::
 
+### 配置conf，再通过dataUrl获取展示数据
 
-:::demo 配置conf，再通过dataUrl获取展示数据
+:::demo 
 ```html
 <template>
     <div>
@@ -689,7 +694,9 @@ export default {
 ```
 :::
 
-:::demo conf中配置单独的数据源获取展示数据
+### conf中配置单独的数据源获取展示数据
+
+:::demo 
 ```html
 <template>
     <div>

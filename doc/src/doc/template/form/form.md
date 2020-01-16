@@ -3,9 +3,11 @@
 
 主要用于数据收集、校验和提交功能的表单，包含复选框、单选框、输入框、下拉选择框等。
 
-## 使用示例
+## 示例
 
-:::demo 基础表单示例
+###  基础表单示例
+
+:::demo
 ```html
 <template>
     <div >
@@ -78,7 +80,9 @@ export default {
 ```
 :::
 
-:::demo 基础表单示例
+### 数据填充示例
+
+:::demo 
 ```html
 <template>
     <div >
@@ -127,7 +131,9 @@ export default {
 ```
 :::
 
-:::demo 提交别名示例
+### 提交别名示例
+
+:::demo 
 ```html
 <template>
     <div >
@@ -195,7 +201,9 @@ export default {
 ```
 :::
 
-:::demo select方法监听示例
+
+### select方法监听示例
+:::demo 
 ```html
 <template>
     <div >
@@ -254,7 +262,9 @@ export default {
 ```
 :::
 
-:::demo 组合表单示例
+### 组合表单示例
+
+:::demo 
 ```html
 <template>
     <div >
@@ -1005,8 +1015,10 @@ action 支持的公共属性有：
 | fireSubmitEvent    | 触发提交事件，并校验输入，需要配置action | 无        | -            |
 
 
-## 填充示例中接口返回数据
-:::demo 填充示例数据
+## 数据格式
+1.填充示例中接口返回数据
+
+
 ```json
 {
     data: {
@@ -1018,8 +1030,9 @@ action 支持的公共属性有：
 ```
 :::
 
-## 示例中提交接口返回数据
-:::demo 提交返回数据
+
+2.提交返回数据
+
 ```json
 {
     data: {
@@ -1028,4 +1041,3 @@ action 支持的公共属性有：
     success: true
 }
 ```
-:::

@@ -3,8 +3,11 @@
 
 集数据处理、表格分页、渲染等功能与一体的表格模板
 
-## 使用示例
-:::demo 构建一个基础表格
+## 示例
+
+### 构建一个基础表格
+
+:::demo 
 ```html
 <template>
     <div class="table-demo">
@@ -188,7 +191,9 @@ export default {
 ```
 :::
 
-:::demo tdata直接填充数据
+### tdata直接填充数据
+
+:::demo 
 ```html
 <template>
     <div class="noraml-table">
@@ -258,7 +263,9 @@ export default {
 ```
 :::
 
-:::demo loading使用示例
+### loading使用示例
+
+:::demo 
 ```html
 <template>
     <div class="loading-table">
@@ -464,8 +471,11 @@ confirm具体配置，可以基础示例
 | on-selection-change | 当选择项发生变化时触发 | 已选项 |
 | on-data-change | 当前表格展示数据变化时触发(请在this.$nextTick中处理dom) | 变化后的展示数据 |
 
-## API获取数据综合示例中接口数据格式
-:::demo 表格数据格式
+## 数据格式
+
+API获取数据综合示例中接口数据格式
+
+
 ```json
 {
     data: [
@@ -569,4 +579,3 @@ confirm具体配置，可以基础示例
     success: true
 }
 ```
-:::

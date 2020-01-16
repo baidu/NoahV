@@ -6,7 +6,9 @@
 
 
 ## 示例
-:::demo 基础使用示例
+
+### 基础使用示例
+:::demo 
 ```html
 <template>
     <div>
@@ -96,8 +98,8 @@ export default {
 ```
 :::
 
-
-:::demo 配置path从API获取conf配置信息
+### 配置path从API获取conf配置信息
+:::demo 
 ```html
 <template>
     <div>
@@ -126,7 +128,8 @@ export default {
 ```
 :::
 
-:::demo 事件列表
+### 事件列表
+:::demo 
 ```html
 <template>
     <div>

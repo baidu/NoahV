@@ -5,7 +5,8 @@
 可视化组件中的仪表图组件，可以根据指标数据决定显示颜色。适合于可用性、容量等数值展示。一个仪表图只能展示一个数据。该数据可以是一个指标、也可以是同一个namespace下多个指标运算后结果。
 
 ## 示例
-:::demo 基础使用示例
+### 基础使用示例
+:::demo 
 ```html
 <template>
     <div>
@@ -148,7 +149,8 @@ export default {
 ```
 :::
 
-:::demo 直接配置数据展示
+### 直接配置数据展示
+:::demo 
 ```html
 <template>
     <NvMDCircle :conf="circleConf" />
@@ -172,8 +174,8 @@ export default {
 ```
 :::
 
-
-:::demo 配置path从API获取conf配置信息
+### 配置path从API获取conf配置信息
+:::demo 
 ```html
 <template>
     <NvMDCircle
@@ -200,8 +202,9 @@ export default {
 ```
 :::
 
+### 配置conf,再通过dataUrl获取展示数据
 
-:::demo 配置conf,再通过dataUrl获取展示数据
+:::demo 
 ```html
 <template>
     <NvMDCircle
@@ -259,7 +262,9 @@ export default {
 ```
 :::
 
-:::demo 在conf中配置获取展示数据的API
+### 在conf中配置获取展示数据的API
+
+:::demo 
 ```html
 <template>
      <NvMDCircle :conf="circleConf" :params="params"/>

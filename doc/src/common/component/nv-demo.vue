@@ -1,9 +1,7 @@
 <template>
     <div class="nv-demo" ref="scrollContainer">
         <Card :dis-hover="true">
-            <p slot="title" ref="title">
-                <slot name="title"></slot>
-            </p>
+            <slot name="title" slot="title"></slot>
             <slot name="source"></slot>
             <div class="nv-code">
                 <div class="btn-group-box">

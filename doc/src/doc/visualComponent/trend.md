@@ -4,9 +4,11 @@
 ## 概述
 可视化组件中的趋势图组件，可以多维度数据提供数据对比、数据补全处理、异常数据提示、多种数据样式转换等功能。支持展示多维度数据以及非多维度数据。并且提供多表联动，支持多个趋势图相同时间点的数据对比。
 
-## 使用示例
+## 示例
 
-:::demo 基础示例
+### 基础示例
+
+:::demo 
 ```html
 <template>
     <div>
@@ -52,7 +54,7 @@ export default {
             params: {
                 start: '2018-01-15 13:46:00', 
                 end: '2018-01-15 15:46:00',
-                height: 300
+                height: 260
             },
             dataUrl: '/mock/dataTrend',
             dateFormat: DateFormat,
@@ -175,8 +177,9 @@ export default {
 ```
 :::
 
+### 直接配置展示数据
 
-:::demo 直接配置展示数据
+:::demo 
 ```html
 <template>
     <div>
@@ -227,8 +230,9 @@ export default {
 ```
 :::
 
+### 配置path从API获取conf配置信息
 
-:::demo 配置path从API获取conf配置信息
+:::demo 
 ```html
 <template>
     <div>
@@ -249,7 +253,9 @@ export default {
 ```
 :::
 
-:::demo 配置conf，再通过dataUrl获取展示数据
+### 配置conf，再通过dataUrl获取展示数据
+
+:::demo 
 ```html
 <template>
     <div>
@@ -277,7 +283,9 @@ export default {
 ```
 :::
 
-:::demo conf中配置单独的数据源获取展示数据
+### conf中配置单独的数据源获取展示数据
+
+:::demo 
 ```html
 <template>
     <div>

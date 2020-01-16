@@ -5,7 +5,8 @@
 
 ## 示例
 
-:::demo 基础使用实例
+### 基础使用实例
+:::demo 
 ```html
 <template>
     <div
@@ -146,8 +147,9 @@ export default {
 ```
 :::
 
+### 直接配置展示数据
 
-:::demo 直接配置展示数据
+:::demo 
 ```html
 <template>
     <NvMDBillboard :conf="billboardDisplay" class="billboard-single-demo" />
@@ -191,8 +193,9 @@ export default {
 ```
 :::
 
+### 配置path从API获取conf配置信息
 
-:::demo 配置path从API获取conf配置信息
+:::demo 
 ```html
 <template>
     <NvMDBillboard
@@ -226,8 +229,9 @@ export default {
 ```
 :::
 
+### 配置conf，再通过dataUrl获取展示数据
 
-:::demo 配置conf，再通过dataUrl获取展示数据
+:::demo 
 ```html
 <template>
     <NvMDBillboard
@@ -280,7 +284,8 @@ export default {
 ```
 :::
 
-:::demo conf中配置单独的数据源获取展示数据
+### conf中配置单独的数据源获取展示数据
+:::demo 
 ```html
 <template>
     <NvMDBillboard
