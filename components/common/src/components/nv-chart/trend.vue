@@ -48,9 +48,11 @@ const trendOptions = {
         opposite: false
     },
     xAxis: {
-        type: 'time',
+        // type: 'time',
+        boundaryGap: false,
         showMaxLabel: false,
         axisLabel: {
+            padding: [0, 10],
             formatter: value => {
                 let label = m(value).format('HH:mm:ss');
                 if (label === '00:00:00') {
@@ -59,7 +61,6 @@ const trendOptions = {
                 return m(value).format(xAxisFormat);
             },
             color: '#333',
-            showMaxLabel: false,
             rich: {
                 spStyle: {
                     fontWeight: 'bold'
@@ -192,7 +193,7 @@ export default {
         this.redraw = _.debounce(this.scrollTop, 100);
         document.addEventListener('scroll', this.redraw, false);
 
-        this.resizeHandler = _.debounce(this.resizeChart, 200);
+        this.resizeHandler = _.debounce(this.resizeChart, 100);
         window.addEventListener('resize', this.resizeHandler);
 
         this.$nextTick( () => {
