@@ -3,7 +3,7 @@
 简体中文 | [English](./README_EN.md)
 
 <a href="https://travis-ci.org/baidu/NoahV">
-	<img src="https://img.shields.io/travis/baidu/NoahV/master.svg?style=flat-square"  alt="build">
+	<img src="https://img.shields.io/travis/com/baidu/NoahV?style=flat-square"  alt="build">
 </a>
 
 <a href="https://github.com/baidu/NoahV/blob/master/LICENSE">
