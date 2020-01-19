@@ -39,7 +39,7 @@ chartUtil.deepAssign = (...rest) => {
                         newArg[i - 1][key] = value;
                     }
                     else {
-                        newArg[i - 1][key] = Object.assign({}, newArg[i - 1][key], value);
+                        newArg[i - 1][key] = _.merge({}, newArg[i - 1][key], value);
                     }
                 }
                 else {

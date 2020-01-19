@@ -1074,7 +1074,7 @@ export default {
                                 line: 'image://' + chartlinePng,
                                 bar: 'image://' + chartcolumnPng,
                                 stack: 'image://' + chartstackPng,
-                                tiled: 'image://' + chartnormalPng
+                                // tiled: 'image://' + chartnormalPng
                             },
                             option: {
                                 line: {
@@ -1158,7 +1158,10 @@ export default {
                         fillerColor: '#e9efff',
                         showDataShadow: false,
                         labelFormatter(value) {
-                            return moment(value).format(timeFormatter);
+                            return moment(value).format('YYYY-MM-DD') + '\n' + moment(value).format('HH:mm:ss');
+                        },
+                        textStyle: {
+                            fontSize: 11
                         },
                         realtime: false
                     }
