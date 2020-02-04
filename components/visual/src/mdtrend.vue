@@ -1074,7 +1074,7 @@ export default {
                                 line: 'image://' + chartlinePng,
                                 bar: 'image://' + chartcolumnPng,
                                 stack: 'image://' + chartstackPng,
-                                tiled: 'image://' + chartnormalPng
+                                // tiled: 'image://' + chartnormalPng
                             },
                             option: {
                                 line: {
