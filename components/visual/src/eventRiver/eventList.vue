@@ -5,10 +5,10 @@
             <li class="eventlist-header">
                 <div class="content">
                     <div v-for="title in extraTitles" class="fr fr-last">{{title.name}}</div>
-                    <div class="fr fr-last">结束时间</div>
-                    <div class="fr">开始时间</div>
-                    <div class="fr">事件类型</div>
-                    <div class="fr-title">事件描述</div>
+                    <div class="fr fr-last">{{t('eventRiver.endTime')}}</div>
+                    <div class="fr">{{t('eventRiver.startTime')}}</div>
+                    <div class="fr">{{t('eventRiver.eventType')}}</div>
+                    <div class="fr-title">{{t('eventRiver.eventDetail')}}</div>
                 </div>
             </li>
             <template v-if="eventList.length !== 0">
@@ -41,6 +41,8 @@ import $ from 'jquery';
 import * as d3 from 'd3';
 import moment from 'moment';
 import EventDetail from './eventDetail';
+
+import mixin from '../mixins';
 
 const TIME_FORMAT = 'YYYY-MM-DD HH:mm:ss';
 

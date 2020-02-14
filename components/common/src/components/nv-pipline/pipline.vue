@@ -11,7 +11,7 @@
                 </span>
             </p>
             <p class="header-description">
-                <span class="description" :title="node.description || '空'">{{node.description || '空'}}</span>
+                <span class="description" :title="node.description || t('pipline.empty')">{{node.description || t('pipline.empty')}}</span>
                 <span class="expand-btn" @click="expand(node)">
                     {{node.expandText}}
                     <NvIcon v-if="!node.expand" type="angle-down"></NvIcon>
@@ -28,19 +28,19 @@
                 </div>
                 <div class="add-card" v-if="node.cardSet && node.cardSet.length < cardMax">
                     <NvIcon type="plus-small" @click.native="addCard(node)"></NvIcon>
-                    <p @click="addCard(node)">点击新建{{cardTitle}}</p>
+                    <p @click="addCard(node)">{{t('pipline.clickAndNew')}}{{cardTitle}}</p>
                 </div>
             </div>
         </div>
         <Modal
             class="pipline-node-remove-modal"
             v-model="removeModalShow"
-            title="删除提示"
-            ok-text="确定"
+            :title="t('pipline.deleteTip')"
+            :ok-text="t('pipline.ok')"
             @on-ok="removeNode"
             @on-cancel="removeCancel">
             <p class="tips">
-                <span>{{nodeTitle}}删除后，所包含的{{cardTitle}}将全部被删除，是否确认删除？</span>
+                <span>{{t('pipline.deleteInfo', {nodeTitle: nodeTitle, cardTitle: cardTitle})}}</span>
             </p>
         </Modal>
     </div>
@@ -50,8 +50,12 @@
 import m from 'moment';
 import lodash from 'lodash';
 
+import {t} from '../../locale';
+import mixin from '../../mixins';
+
 const prefixCls = "noahv-pipline";
     export default {
+        mixins: [mixin],
         name: 'piplineNode',
         props: {
             data: Array,
@@ -71,11 +75,15 @@ const prefixCls = "noahv-pipline";
             },
             nodeTitle: {
                 type: String,
-                default: '节点'
+                default() {
+                    t('pipline.node')
+                }
             },
             cardTitle: {
                 type: String,
-                default: '卡片'
+                default() {
+                    t('pipline.card')
+                }
             },
             nodeTemplate: {
                 type: Object,
@@ -114,7 +122,7 @@ const prefixCls = "noahv-pipline";
                     val.forEach(node => {
                         if (node.cardSet) {
                             node.cardSet.forEach((card, index) => {
-                                node['cardNameMap'][index] = card.name || '空';
+                                node['cardNameMap'][index] = card.name || this.t('pipline.empty');
                             });
                             node.description = Object.values(node['cardNameMap']).join('、');
                         }
@@ -133,7 +141,7 @@ const prefixCls = "noahv-pipline";
             formatNode(node) {
                 node['inx'] = new Date().getTime() + Math.random().toString().replace(/\0./, '');
                 node['expand'] = node.hasOwnProperty('expand') ? node['expand'] : true;
-                node['expandText'] = node['expand'] ? '收起' : '展开';
+                node['expandText'] = node['expand'] ? this.t('pipline.collapse') : this.t('pipline.expandText');
                 node['description'] = '';
                 node['cardNameMap'] = {};
                 if (node.cardSet) {
@@ -169,7 +177,7 @@ const prefixCls = "noahv-pipline";
             },
             addNode() {
                 if (this.nodes.length >= this.nodeMax) {
-                    this.$Message.warning('最多可以添加' + this.nodeMax + '个' + this.nodeTitle);
+                    this.$Message.warning(this.t('pipline.overWarning', {nodeMax: this.nodeMax, nodeTitle: this.nodeTitle}));
                     return;
                 }
 
@@ -187,14 +195,14 @@ const prefixCls = "noahv-pipline";
             },
             removeNode() {
                 this.nodes.splice(this.removeNodeIndex, 1);
-                this.$Message.success('删除成功');
+                this.$Message.success(this.t('pipline.deleteSuccess'));
             },
             removeCancel() {
                 this.removeModalShow = false;
             },
             expand(node) {
                 this.$set(node, 'expand', !node.expand);
-                this.$set(node, 'expandText', node.expand ? '收起' : '详情');
+                this.$set(node, 'expandText', node.expand ? this.t('pipline.collapse') : this.t('pipline.detail'));
             },
             addCard(node) {
                 if (node.cardSet && node.cardSet.length >= this.cardMax) {
@@ -208,7 +216,7 @@ const prefixCls = "noahv-pipline";
                 // update description
                 let index = node.cardSet.length - 1;
                 let cardNameMap = node.cardNameMap || [];
-                this.$set(cardNameMap, index, '空');
+                this.$set(cardNameMap, index, this.t('pipline.empty'));
                 this.$set(node, 'cardNameMap', cardNameMap);
                 this.$set(node, 'description', Object.values(cardNameMap).join('、'));
             },

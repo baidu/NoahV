@@ -3,8 +3,8 @@
         <div class="ui-mdreport-container">
             <div class="ui-mdreport-header">
                 <h2>
-                    <span v-if="!link" id="${titleid.id}">{{title}}</span>
-                    <a v-if="link" :href="link" target="_blank">{{title}}</a>
+                    <span v-if="!link" id="${titleid.id}" :title="title">{{title}}</span>
+                    <a v-if="link" :href="link" target="_blank" :title="title">{{title}}</a>
                     <span class="ui-mdreport-timerange">(<time>{{times}}</time>)</span>
                 </h2>
             </div>
@@ -106,9 +106,9 @@
                     </tr>
                 </tfoot>
             </table>
-            <div v-if="bodyLists.length === 0 && isload" class="nodata">{{t('mdreport.nodataTip')}}</div>
+            <div v-if="bodyLists.length === 0 && isload" class="nodata">无数据</div>
             <div v-if="comments" class="comment">{{comments}}</div>
-            <div class="loading-panel"><div class="loading-box">{{t('mdreport.loading')}}</div></div>
+            <div class="loading-panel"><div class="loading-box">正在加载中……</div></div>
         </div>
         <div class="report-error-holder" v-if="errTip">{{errTip}}</div>
         <nv-mask ref="mask"></nv-mask>
@@ -121,10 +121,7 @@ import moment from 'moment';
 import mdutil from './util/util';
 import nvMask from './mask';
 
-import {t} from './locale';
-import mixin from './mixins';
-
-const TITLE = t('mdreport.title');
+const TITLE = '数据表格';
 const DEFAULTFORMAT = 'MM.DD HH:mm';
 const DEFAULTTIME = 'before(2h)';
 const DEFAULTCONF = {
@@ -149,7 +146,6 @@ function evil(fn) {
     return new Fn('return ' + fn)();
 }
 export default {
-    mixins: [mixin],
     props: {
         // get conf's url
         url: {
@@ -278,11 +274,15 @@ export default {
         }
     },
     created() {
+
         // Read user configuration, including external api configuration
         widgetConf = this.$extraEchartsConf;
-
         if (this.path) {
             this.getConf();
+            return;
+        }
+        if (this.conf) {
+            this.renderConf();
         }
     },
     mounted() {
@@ -293,14 +293,8 @@ export default {
          */
         this.redraw = u.throttle(this.scrollTop, 100);
 
-        let scrollTrigger = widgetConf.extraComponent.trend.scrollTrigger || document;
-
         // add lazy loading when you scroll the page
-        $(scrollTrigger).on('scroll', this.redraw);
-        
-        if (this.conf) {
-            this.renderConf();
-        }
+        $(document).on('scroll', this.redraw);
     },
     methods: {
         getConf() {
@@ -334,6 +328,7 @@ export default {
                 if (data.data.success) {
                     this.errTip = false;
                     this.reportConf = JSON.parse(data.data.data.configure || '{}');
+
                     // render data
                     this.scrollTop();
                 }
@@ -348,7 +343,7 @@ export default {
                 title: conf.title,
 
                 // show the main name of the table
-                main: conf.data.caption || this.t('mdreport.objectsName'),
+                main: conf.data.caption || '监控对象',
 
                 // whether to load children dom
                 loadChildren: conf.data.loadChildren,
@@ -394,8 +389,6 @@ export default {
             if (this.reportConf.display) {
                 this.data = this.reportConf.display;
                 this.render(this.reportConf.display);
-                this.isLoading = false;
-                this.hideMask();
             }
             else {
                 // Data request configuration
@@ -536,11 +529,8 @@ export default {
 
         buildTableBody(list, columns, level, parentInfo) {
             let len = list.length;
-            let hasOwnParent = parentInfo ? true : false;
             $.each(list, (i, item) => {
-                let treeInfo = {
-                    isShow: true
-                };
+                let treeInfo = {};
                 if (item.children && item.children.length > 0) {
                     this.reportType = 'tree';
                 }
@@ -550,12 +540,12 @@ export default {
                 }
                 else {
                     let tempSublings = [];
-                    if (hasOwnParent && parentInfo) {
+                    if (parentInfo) {
                         parentInfo.parentHasSublings.map(item => {
                             tempSublings.push(item);
                             return item;
                         });
-                        tempSublings.push((parentInfo.parent && parentInfo.parent.length > 1));
+                        tempSublings.push((parentInfo.parent.length > 1));
                     }
                     else {
                         parentInfo = {parentHasSublings: []};
@@ -584,7 +574,7 @@ export default {
                             }
                             catch (e) {
                                 str = {
-                                    name: this.t('mdreport.caculteError'),
+                                    name: '查询失败',
                                     sortid: col2.sortid
                                 };
                             }
@@ -599,7 +589,7 @@ export default {
                         }
                         catch (e) {
                             str = {
-                                name: this.t('mdreport.caculteError'),
+                                name: '查询失败',
                                 sortid: col.sortid
                             };
                         }
@@ -732,7 +722,7 @@ export default {
                                 totalInfo = col2.unit ? footer[col2.total] + col2.unit : footer[col2.total];
                             }
                             catch (e) {
-                                totalInfo = this.t('mdreport.caculteError');
+                                totalInfo = '计算失败';
                             }
                             totals.push(totalInfo);
                         }
@@ -766,7 +756,7 @@ export default {
                         }
                     }
                     catch (e) {
-                        totalInfo = this.t('mdreport.caculteError');
+                        totalInfo = '计算失败';
                     }
                     totals.push(totalInfo);
                 }
@@ -828,7 +818,7 @@ export default {
         expandNode(nodeInfo) {
             nodeInfo.isExpend = !nodeInfo.isExpend;
             this.bodyLists.map(trItem => {
-                if (trItem.treeInfo.id && trItem.treeInfo.id.indexOf(nodeInfo.id + '-') > -1) {
+                if (trItem.treeInfo.id.indexOf(nodeInfo.id + '-') > -1) {
                     if (nodeInfo.isExpend) {
                         trItem.treeInfo.isExpend = nodeInfo.isExpend;
                     }
@@ -847,13 +837,14 @@ export default {
          * @return {[type]}        [description]
          */
         sort(column) {
+            console.log(this.bodyLists)
             let bodyLists = this.bodyLists;
             let sortId = column.sortid;
             this.setColumnSortStatus(column);
 
             // sort by row type
             if (this.reportType === 'rows') {
-                bodyLists.sort((a, b) => {
+                this.bodyLists.sort((a, b) => {
                     let compareResult = false;
                     a.columns.map(aColumnItem => {
                         if (aColumnItem.sortid === sortId) {
@@ -877,7 +868,7 @@ export default {
 
             // sort by tree type
             else {
-                bodyLists.sort((a, b) => {
+                this.bodyLists.sort((a, b) => {
                     let compareResult = false;
 
                     // if sort in the same node
@@ -892,7 +883,7 @@ export default {
                                             if (b.treeInfo.isLast && aColumnItem.value > bColumnItem.value) {
                                                 a.treeInfo.isLast = true;
                                                 b.treeInfo.isLast = false;
-                                                compareResult = aColumnItem.value - bColumnItem.value;
+                                                compareResult = aColumnItem.value > bColumnItem.value;
                                             }
                                         }
 
@@ -900,7 +891,7 @@ export default {
                                         else if (b.treeInfo.isLast && aColumnItem.value < bColumnItem.value) {
                                             a.treeInfo.isLast = true;
                                             b.treeInfo.isLast = false;
-                                            compareResult = bColumnItem.value - aColumnItem.value;
+                                            compareResult = aColumnItem.value < bColumnItem.value;
                                         }
                                     }
                                     return bColumnItem;
@@ -912,6 +903,7 @@ export default {
                     return compareResult;
                 });
             }
+            console.log(this.bodyLists);
         },
         setColumnSortStatus(column) {
 
@@ -963,7 +955,7 @@ export default {
          * hide loading mdmask
          */
         hideMask() {
-            this.$refs.mask && this.$refs.mask.hide();
+            this.$refs.mask.hide();
         }
     },
     beforeDestroy() {

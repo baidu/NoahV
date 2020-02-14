@@ -23,6 +23,7 @@ import getClassName from '../utils.js';
 import options from './options';
 import chartUtil from './chartUtil';
 import {eventBus} from '../eventBus';
+import {t} from '../../locale';
 
 const DATE_FORMAT = 'YYYY-MM-DD HH:mm:ss';
 let xAxisFormat = 'YYYY-MM-DD HH:mm:ss';
@@ -48,9 +49,11 @@ const trendOptions = {
         opposite: false
     },
     xAxis: {
-        type: 'time',
+        // type: 'time',
+        boundaryGap: false,
         showMaxLabel: false,
         axisLabel: {
+            padding: [0, 10],
             formatter: value => {
                 let label = m(value).format('HH:mm:ss');
                 if (label === '00:00:00') {
@@ -59,7 +62,6 @@ const trendOptions = {
                 return m(value).format(xAxisFormat);
             },
             color: '#333',
-            showMaxLabel: false,
             rich: {
                 spStyle: {
                     fontWeight: 'bold'
@@ -150,7 +152,9 @@ export default {
         },
         showLoading: {
             type: String,
-            default: '数据加载中...'
+            default () {
+                return t('trend.loadingData');
+            }
         },
         method: {
             type: String,
@@ -166,7 +170,9 @@ export default {
         },
         noDataTip: {
             type: String,
-            default: '无数据'
+            default () {
+                return t('trend.noData');
+            }
         },
         seriesFilter: Function,
         dataFilter: Function
@@ -192,7 +198,7 @@ export default {
         this.redraw = _.debounce(this.scrollTop, 100);
         document.addEventListener('scroll', this.redraw, false);
 
-        this.resizeHandler = _.debounce(this.resizeChart, 200);
+        this.resizeHandler = _.debounce(this.resizeChart, 100);
         window.addEventListener('resize', this.resizeHandler);
 
         this.$nextTick( () => {
@@ -430,7 +436,7 @@ export default {
                     this.getData();
                 }
                 catch (e) {
-                    this.showError('获取数据失败');
+                    this.showError(this.t('trend.getDataErrot'));
                 }
             }
         },

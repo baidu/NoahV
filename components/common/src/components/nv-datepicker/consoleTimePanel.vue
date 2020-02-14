@@ -83,16 +83,19 @@
             <span>{{tips}}</span>
         </p>
         <div class="btn-panel" v-if="confirm">
-            <button type="button" :class="['primary', {'confirm-disabled': confirmDisabled}]" :disabled="confirmDisabled" @click="confirmClick">确定</button>
-            <button type="button" class="reset" @click="reset">清空</button>
+            <button type="button" :class="['primary', {'confirm-disabled': confirmDisabled}]" :disabled="confirmDisabled" @click="confirmClick">{{t('datepicker.ok')}}</button>
+            <button type="button" class="reset" @click="reset">{{t('datepicker.clear')}}</button>
         </div>
     </div>
 </template>
 
 <script>
 import datePickerUtils from './datePicker.js';
+import mixin from '../../mixins';
+import {t} from '../../locale';
 
 export default {
+    mixins: [mixin],
     name: 'NvDatePickerConsoleTimePanel',
     data() {
         return {

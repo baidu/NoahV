@@ -11,7 +11,10 @@ import _ from 'underscore';
 import echarts from 'echarts';
 import chinaMap from 'echarts/map/js/china';
 import mdutil from '../util/util';
-const ERRORCONFIG = '加载失败';
+
+import {t} from '../locale';
+
+const ERRORCONFIG = t('nvMap.loadError');
 const MAP_OPTIONS = {
     tooltip: {
         backgroundColor: '#aaaabb',
@@ -35,7 +38,7 @@ const MAP_OPTIONS = {
             let html = `<dd style="padding: 3px 15px;color: #666;font-size: 12px;">
                 ${params.seriesName}
                 : <span style="display: block;float: right;color: #333;">
-                ${params.value ? params.value * 100 + '%' : '无数据'}
+                ${params.value ? params.value * 100 + '%' : t('nvMap.noData')}
                 </span></dd>`;
             if (params.data && params.data.toolTipData) {
                 _.each(params.data.toolTipData, function (item) {
@@ -138,7 +141,9 @@ export default {
     props: {
         title: {
             type: String,
-            default: '地图'
+            default() {
+                t('nvMap.title')
+            }
         },
         url: {
             type: String,
@@ -167,7 +172,9 @@ export default {
         seriesName: {
             type: String,
             required: false,
-            default: '指标名称'
+            default() {
+                t('nvMap.metricName')
+            }
         },
         dataFilter: {
             type: Function,

@@ -84,7 +84,6 @@
                         <DatePicker
                             type="datetime"
                             v-model="formtpl[item.name]"
-                            placeholder="选择日期和时间"
                             :style="item.style"
                             :format="item.format ? item.format : 'yyyy-MM-dd HH:mm:ss'"
                             :options="item.options ? item.options : timeShortcuts"
@@ -101,7 +100,6 @@
                         <DatePicker
                             type="datetimerange"
                             v-model="formtpl[item.name]"
-                            placeholder="选择日期和时间"
                             :style="item.style"
                             :format="item.format ? item.format : 'yyyy-MM-dd HH:mm:ss'"
                             :options="item.options ? item.options : timeRangeShortcuts"
@@ -253,6 +251,8 @@
 import u from 'underscore';
 import m from 'moment';
 import getClassName from '../utils.js';
+import {t} from '../../locale';
+import mixin from '../../mixins';
 
 const FORMAT = 'YYYY-MM-DD HH:mm:ss';
 const REF = 'formtpl';
@@ -283,6 +283,7 @@ const initValue = item => {
 };
 
 export default {
+    mixins: [mixin],
     props: {
         items: {
             type: Array,
@@ -318,13 +319,13 @@ export default {
             timeShortcuts: {
                 shortcuts: [
                     {
-                        text: '今天',
+                        text: this.t('form.date.today'),
                         value() {
                             return new Date();
                         }
                     },
                     {
-                        text: '昨天',
+                        text: this.t('form.date.lastDay'),
                         value() {
                             const date = new Date();
                             date.setTime(date.getTime() - 3600 * 1000 * 24);
@@ -332,7 +333,7 @@ export default {
                         }
                     },
                     {
-                        text: '一周前',
+                        text: this.t('form.date.weekAgo'),
                         value() {
                             const date = new Date();
                             date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
@@ -345,7 +346,7 @@ export default {
             timeRangeShortcuts: {
                 shortcuts: [
                     {
-                        text: '2小时',
+                        text: this.t('form.date.hours2'),
                         value() {
                             return [
                                 m().subtract(2, 'h').toDate(),
@@ -354,7 +355,7 @@ export default {
                         }
                     },
                     {
-                        text: '12小时',
+                        text: this.t('form.date.hours12'),
                         value() {
                             return [
                                 m().subtract(12, 'h').toDate(),
@@ -363,7 +364,7 @@ export default {
                         }
                     },
                     {
-                        text: '1天',
+                        text: this.t('form.date.day1'),
                         value() {
                             return [
                                 m().subtract(1, 'd').toDate(),
@@ -372,7 +373,7 @@ export default {
                         }
                     },
                     {
-                        text: '7天',
+                        text: this.t('form.date.day7'),
                         value() {
                             return [
                                 m().subtract(7, 'd').toDate(),
@@ -381,7 +382,7 @@ export default {
                         }
                     },
                     {
-                        text: '15天',
+                        text: this.t('form.date.day15'),
                         value() {
                             return [
                                 m().subtract(15, 'd').toDate(),
@@ -390,7 +391,7 @@ export default {
                         }
                     },
                     {
-                        text: '30天',
+                        text: this.t('form.date.day30'),
                         value() {
                             return [
                                 m().subtract(30, 'd').toDate(),
@@ -463,8 +464,8 @@ export default {
                         required: true,
                         len: 2,
                         fields: {
-                            0: {type: 'date', required: true, message: item.title + '不能为空'},
-                            1: {type: 'date', required: true, message: item.title + '不能为空'}
+                            0: {type: 'date', required: true, message: item.title + this.t('form.required')},
+                            1: {type: 'date', required: true, message: item.title + this.t('form.required')}
                         }
                     };
                 }
@@ -476,8 +477,8 @@ export default {
                             type: 'object',
                             required: true,
                             fields: {
-                                searchName: {type: 'array', required: true, min: 1, message: item.title + '不能为空'},
-                                searchValue: {type: 'string', required: true, message: item.title + '不能为空'}
+                                searchName: {type: 'array', required: true, min: 1, message: item.title + this.t('form.required')},
+                                searchValue: {type: 'string', required: true, message: item.title + this.t('form.required')}
                             }
                         };
                     }
@@ -486,8 +487,8 @@ export default {
                             type: 'object',
                             required: true,
                             fields: {
-                                searchName: {type: 'string', required: true, message: item.title + '不能为空'},
-                                searchValue: {type: 'string', required: true, message: item.title + '不能为空'}
+                                searchName: {type: 'string', required: true, message: item.title + this.t('form.required')},
+                                searchValue: {type: 'string', required: true, message: item.title + this.t('form.required')}
                             }
                         };
                     }
@@ -497,7 +498,7 @@ export default {
                 return {
                     required: true,
                     type: item.validateType || this.formType[item.type.toLowerCase()] || 'string',
-                    message: item.title + '不能为空',
+                    message: item.title + this.t('form.required'),
                     trigger: item.type.toLowerCase() === 'input' ? 'blur' : 'change'
                 };
             }
@@ -653,13 +654,13 @@ export default {
                     }
                 });
                 if (!this.submitItem) {
-                    this.$Message.error('没有action配置信息');
+                    this.$Message.error(this.t('form.missActionConf'));
                     return null;
                 }
                 return this.submitItem;
             }
             else {
-                this.$Message.error('没有action配置信息');
+                this.$Message.error(this.t('form.missActionConf'));
                 return null;
             }
         },
@@ -734,14 +735,14 @@ export default {
                 this.$request(conf).then(response => {
                     if (response.data.success) {
                         if (response.data.redirect) {
-                            this.$Message.success(item.successTip || '提交成功, 即将跳转');
+                            this.$Message.success(item.successTip || this.t('form.submitAndRedirectTip'));
                             setTimeout(() => {
                                 window.location.href = response.data.redirect;
                             }, 1000);
                             return;
                         }
                         if (item.linkTo || item.link) {
-                            this.$Message.success(item.successTip || '提交成功, 即将跳转');
+                            this.$Message.success(item.successTip || this.t('form.submitAndRedirectTip'));
                             setTimeout(() => {
                                 const linkInfo = item.linkTo || item.link;
                                 window.location.href = linkInfo;
@@ -751,7 +752,7 @@ export default {
                             item.callback(submitData, response.data);
                         }
                         else {
-                            this.$Message.success(item.successTip || '提交成功');
+                            this.$Message.success(item.successTip || this.t('form.submitTip'));
                         }
                     }
                     else {
@@ -771,7 +772,7 @@ export default {
                 item.callback(submitData);
             }
             else {
-                this.$Message.error('请定义表单提交的URL或者定义回调函数');
+                this.$Message.error(this.t('form.callbackErrorTip'));
             }
         },
 
