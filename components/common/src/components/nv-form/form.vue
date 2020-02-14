@@ -251,7 +251,6 @@
 import u from 'underscore';
 import m from 'moment';
 import getClassName from '../utils.js';
-import {t} from '../../locale';
 import mixin from '../../mixins';
 
 const FORMAT = 'YYYY-MM-DD HH:mm:ss';

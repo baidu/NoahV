@@ -81,7 +81,6 @@
 
 <script>
 import mixin from '../../mixins';
-import {t} from '../../locale';
 
 export default {
     mixins: [mixin],
