@@ -2,12 +2,12 @@
     <div>
         <dl>
             <dt>{{event.name}}</dt>
-            <dt>开始时间：{{event.startTime * 1000|formatTime}}</dt>
-            <dt>结束时间：{{event.endTime * 1000|formatTime}}</dt>
+            <dt>{{t('eventRiver.startTime')}}：{{event.startTime * 1000|formatTime}}</dt>
+            <dt>{{t('eventRiver.endTime')}}：{{event.endTime * 1000|formatTime}}</dt>
             <template v-for="item in detail">
                 <dt
                     v-if="item.type === 'link'">
-                    {{item.name}}：<a v-bind:href="[item.value]" target="_blank">查看详情</a>
+                    {{item.name}}：<a v-bind:href="[item.value]" target="_blank">{{t('eventRiver.detail')}}</a>
                 </dt>
                 <dt v-if="item.type === 'arr'">{{item.name}}：{{item.value}}</dt>
                 <dt v-if="item.type === 'text'">{{item.name}}：{{item.value}}</dt>
@@ -18,6 +18,9 @@
 </template>
 <script>
 import moment from 'moment';
+
+import mixin from '../mixins';
+
 const TIME_FORMAT = 'YYYY-MM-DD HH:mm:ss';
 
 /**
@@ -50,6 +53,7 @@ function getInfoVal(key, detailObj) {
 }
 
 export default {
+    mixins: [mixin],
     props: {
         event: Object,
         series: Object

@@ -4,11 +4,12 @@
     </div>
 </template>
 <script>
+import {t} from './locale';
 export default {
     props: {
         loadingText: {
             type: String,
-            default: '加载中...'
+            default: t('mask.loading')
         }
     },
     data() {

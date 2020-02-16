@@ -118,11 +118,21 @@ import NvDatePickerSidebar from './sidebar';
 import NvDatePickerDatePanel from './datePanel';
 import NvDatePickerTimePanel from './timePanel';
 
+import {t} from '../../locale';
+
 // 日期候选项
 const dateOptions = {
     years: [],
     months: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-    weekDays: ['日', '一', '二', '三', '四', '五', '六'],
+    weekDays: [
+        t('datepicker.weeks.sun'), 
+        t('datepicker.weeks.mon'),
+        t('datepicker.weeks.tue'),
+        t('datepicker.weeks.wed'),
+        t('datepicker.weeks.thu'),
+        t('datepicker.weeks.fri'),
+        t('datepicker.weeks.sat')
+    ],
     hours: [],
     minutes: [],
     secondes: []
@@ -171,7 +181,9 @@ export default {
         },
         placeholder: {
             type: String,
-            default: '请选择时间'
+            default () {
+                return t('datepicker.placeholder')
+            }
         },
         confirm: {
             type: Boolean,
@@ -204,7 +216,9 @@ export default {
         },
         disabledDateClickTip: {
             type: String,
-            default: '不可以设置禁止日期！'
+            default () {
+                return t('datepicker.disabledDateTip');
+            }
         }
     },
     data() {

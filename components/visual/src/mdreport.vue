@@ -106,9 +106,9 @@
                     </tr>
                 </tfoot>
             </table>
-            <div v-if="bodyLists.length === 0 && isload" class="nodata">无数据</div>
+            <div v-if="bodyLists.length === 0 && isload" class="nodata">{{t('mdreport.nodataTip')}}</div>
             <div v-if="comments" class="comment">{{comments}}</div>
-            <div class="loading-panel"><div class="loading-box">正在加载中……</div></div>
+            <div class="loading-panel"><div class="loading-box">{{t('mdreport.loading')}}</div></div>
         </div>
         <div class="report-error-holder" v-if="errTip">{{errTip}}</div>
         <nv-mask ref="mask"></nv-mask>
@@ -121,7 +121,10 @@ import moment from 'moment';
 import mdutil from './util/util';
 import nvMask from './mask';
 
-const TITLE = '数据表格';
+import {t} from './locale';
+import mixin from './mixins';
+
+const TITLE = t('mdreport.title');
 const DEFAULTFORMAT = 'MM.DD HH:mm';
 const DEFAULTTIME = 'before(2h)';
 const DEFAULTCONF = {
@@ -146,6 +149,7 @@ function evil(fn) {
     return new Fn('return ' + fn)();
 }
 export default {
+    mixins: [mixin],
     props: {
         // get conf's url
         url: {
@@ -344,7 +348,7 @@ export default {
                 title: conf.title,
 
                 // show the main name of the table
-                main: conf.data.caption || '监控对象',
+                main: conf.data.caption || this.t('mdreport.objectsName'),
 
                 // whether to load children dom
                 loadChildren: conf.data.loadChildren,
@@ -580,7 +584,7 @@ export default {
                             }
                             catch (e) {
                                 str = {
-                                    name: '计算失败',
+                                    name: this.t('mdreport.caculteError'),
                                     sortid: col2.sortid
                                 };
                             }
@@ -595,7 +599,7 @@ export default {
                         }
                         catch (e) {
                             str = {
-                                name: '计算失败',
+                                name: this.t('mdreport.caculteError'),
                                 sortid: col.sortid
                             };
                         }
@@ -728,7 +732,7 @@ export default {
                                 totalInfo = col2.unit ? footer[col2.total] + col2.unit : footer[col2.total];
                             }
                             catch (e) {
-                                totalInfo = '计算失败';
+                                totalInfo = this.t('mdreport.caculteError');
                             }
                             totals.push(totalInfo);
                         }
@@ -762,7 +766,7 @@ export default {
                         }
                     }
                     catch (e) {
-                        totalInfo = '计算失败';
+                        totalInfo = this.t('mdreport.caculteError');
                     }
                     totals.push(totalInfo);
                 }

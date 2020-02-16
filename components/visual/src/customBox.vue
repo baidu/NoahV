@@ -2,7 +2,9 @@
     <div v-html="innerHtml" ref="custombox"></div>
 </template>
 <script>
+import mixin from './mixins';
 export default {
+    mixins: [mixin],
     props: {
 
         // get conf's url
@@ -49,7 +51,7 @@ export default {
     },
     computed: {
         innerHtml() {
-            return this.conf || '<div class="aligin-center">没有配置内容</div>';
+            return this.conf || '<div class="aligin-center">' + this.t('customBox.noConf') + '</div>';
         }
     },
     created() {

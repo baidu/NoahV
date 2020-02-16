@@ -3,15 +3,17 @@
         <div class="title">{{title}}</div>
         <div class="text">{{tips}}</div>
         <div class="back-to">
-            <a :href="href">返回首页</a>
+            <a :href="href">{{t('nv404.backToHomePage')}}</a>
         </div>
     </div>
 </template>
 
 <script>
-import getClassName from '../utils.js';
-
+import getClassName from '../utils';
+import mixin from '../../mixins';
+import {t} from '../../locale';
 export default {
+    mixins: [mixin],
     props: {
         title: {
             type: String,
@@ -19,22 +21,13 @@ export default {
         },
         tips: {
             type: String,
-            default: '抱歉，找不到路了~'
+            default () {
+                return t('nv404.notFound');
+            }
         },
         href: {
             type: String,
             default: '/'
-        }
-    },
-    methods: {
-        /**
-         * 获取类名
-         *
-         * @param {String} postfix 后缀名称
-         * @return {Object} 样式集合
-         */
-        getCls(postfix) {
-            return getClassName.getComponentWrapperCls(postfix);
         }
     }
 };

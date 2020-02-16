@@ -21,6 +21,7 @@
 <script>
 import Caspanel from './caspanel';
 import clickoutside from './cascaderSelect.js';
+import {t} from '../../locale';
 
 const prefixCls = 'noahv-cascader-select';
 export default {
@@ -43,7 +44,9 @@ export default {
         },
         placeholder: {
             type: String,
-            default: '请选择'
+            default () {
+                return t('select.placeholder');
+            }
         },
         splitCharacter: {
             type: String,

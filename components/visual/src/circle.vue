@@ -23,9 +23,10 @@ import {eventBus} from './eventBus';
 import mdutil from './util/util';
 import nvMask from './mask';
 import echarts from 'echarts';
+import {t} from './locale';
 
 
-const TITLE = '仪表图';
+const TITLE = t('circle.title');
 const HEIGHT = 200;
 const DEFAULTTIME = 'before(2h)';
 const DEFAULTFORMAT = 'MM.DD HH:mm';

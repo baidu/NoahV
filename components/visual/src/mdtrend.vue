@@ -28,10 +28,13 @@ import chartlinePng from './assets/img/trend/chartline.png';
 import chartnormalPng from './assets/img/trend/chartnormal.png';
 import chartstackPng from './assets/img/trend/chartstack.png';
 
+import {t} from './locale';
+import mixin from './mixins';
 
-const NODATATIP = '无数据';
-const ERRORCONFIG = '配置信息出错';
-const TITLE = '趋势图标题';
+
+const NODATATIP = t('mdtrend.nodataTip');
+const ERRORCONFIG = t('mdtrend.errorConfig');
+const TITLE = t('mdtrend.title');
 const HEIGHT = 320;
 const TIMING = 60;
 const DEFAULTTIME = 'before(2h)';
@@ -169,7 +172,7 @@ function handleTrendTime(times, contrast, timemap) {
             basetime = tt;
         }
     });
-    timemap[times[0].replace(/[-/:\s]*/g, '')] = '当前时间';
+    timemap[times[0].replace(/[-/:\s]*/g, '')] = t('mdtrend.currentTime');
 
     // calculate the time of the ring array in the same period
     if (basetime.length === 2) {
@@ -221,8 +224,8 @@ function handleTrendTime(times, contrast, timemap) {
             if (item.indexOf('d') !== -1 || item.indexOf('w') !== -1) { // 1d, 1w 这种的
                 let mt = item.match(/(\d+)(\w+)/);
                 let map = {
-                    'd': '天前',
-                    'w': '周前'
+                    'd': t('mdtrend.dayBefore'),
+                    'w': t('mdtrend.weekBefore')
                 };
                 timemap[mapkey] = mt[1] + map[mt[2]];
             }
@@ -342,7 +345,7 @@ let WarningEvents = {
             let xAxisMin = Number.MAX_VALUE;
 
             u.each(series, item => {
-                if (item.name === '正常范围' || item.name === '异常点' || !item.data) {
+                if (item.name === t() || item.name === '异常点' || !item.data) {
                     return;
                 }
                 max = max > item.dataMax ? max : item.dataMax;
@@ -712,7 +715,7 @@ export default {
         }
     },
     name: 'NvMDTrend',
-    mixins: [ChartType, WarningEvents, CustomEvents, Points],
+    mixins: [ChartType, WarningEvents, CustomEvents, Points, mixin],
     components: {nvMask},
     data() {
         let height = this.params ? this.params.height || HEIGHT : HEIGHT;
@@ -1056,7 +1059,7 @@ export default {
                     feature: {
                         myTool: {
                             show: this.changeType,
-                            title: '切换为面积图',
+                            title: this.t('mdtrend.switchToArea'),
                             icon: 'image://' + chartareaPng,
                             onclick: () => {
                                 u.each(this.commonOption.series, item => {

@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import {t} from '../../locale';
 // 组件样式前缀名
 const prefixCls = 'noahv-search';
 
@@ -49,7 +50,9 @@ export default {
         // 默认提示
         placeholder: {
             type: String,
-            default: '请输入关键字搜索'
+            default() {
+                t('search.placeholder')
+            }
         },
         // 是否支持关闭按钮
         clearable: {

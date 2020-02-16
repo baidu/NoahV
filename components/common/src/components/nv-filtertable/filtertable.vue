@@ -41,8 +41,10 @@
 </template>
 <script>
 import getClassName from '../utils.js';
+import mixin from '../../mixins';
 
 export default {
+    mixins: [mixin],
     props: {
         items: Array,
         columns: Array,
@@ -104,14 +106,14 @@ export default {
             {
                 name: 'submit',
                 type: 'primary',
-                title: '查询',
+                title: this.t('filterTable.search'),
                 submitUrl: this.url,
                 beforeXhr() {
                     this.loading = true;
                 },
                 callback: (FieldsValue, data) => {
                     if (!this.url) {
-                        this.$Message.error('请配置表格数据来源API');
+                        this.$Message.error(this.t('filterTable.missConfError'));
                         return;
                     }
                     this.tData = data.data;

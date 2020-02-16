@@ -13,9 +13,11 @@ import $ from 'jquery';
 
 import mdutil from '../util/util';
 import {COLORS, DEFAULT_POINT, LEGEND_STATUS} from './CONSTANTS';
+import mixin from '../mixins';
 
 export default {
     name: 'mdbubble',
+    mixins: [mixin],
     props: {
         // 坐标轴展示内容
         axis: {
@@ -250,7 +252,7 @@ export default {
                     formatter: params => {
                         const axisWithStyle = this.axisWithStyle;
                         const axisStatus = this.axisStatus;
-                        const tooltip = ['进入{tip}单元', '查看{tip}连通性'];
+                        const tooltip = [this.t('mdbubble.toolTip'), this.t('mdbubble.toolTip2')];
 
                         // 采用外部配置的 tooltip
                         const extraTooltip = this.tooltip(params, axisWithStyle, axisStatus);
@@ -262,6 +264,7 @@ export default {
                             const yAxisItem = axisWithStyle[params.data[1]].value;
                             const xAxisItem = axisWithStyle[params.data[0]].value;
                             const drillDownLists = axisStatus[yAxisItem].drillDownLists;
+                            const connectTip = this.t('mdbubble.connectTip');
                             let content = '';
 
                             if (params.data[0] === params.data[1]) {
@@ -274,7 +277,7 @@ export default {
                             }
                             else {
                                 content = `<li>${tooltip[1].replace('{tip}',
-                                    ` ${yAxisItem} 到 ${xAxisItem}`)}</li>`;
+                                    ` ${yAxisItem} ${connectTip} ${xAxisItem}`)}</li>`;
                             }
                             return `<ul class="diy-tooltips">${content}</ul>`;
                         }

@@ -7,7 +7,7 @@
             <input
                 v-model="searchValue"
                 class="search-input"
-                placeholder="搜索"
+                :placeholder="t('tree.placeholder')"
                 @keyup="enterSearchHandler($event)"
             />
         </div>
@@ -41,12 +41,13 @@
 import uuidV4 from 'uuid/v4';
 import tree from './tree.js';
 import NvTreeNode from './node.vue';
+import mixin from '../../mixins';
 
 const prefixCls = "noahv-tree";
 
 export default {
     name: 'NvTree',
-    mixins: [tree],
+    mixins: [tree, mixin],
     components: {
         NvTreeNode
     },

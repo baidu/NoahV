@@ -26,6 +26,8 @@
 
 <script>
 import getClassName from '../utils.js';
+import {t} from '../../locale';
+import mixin from '../../mixins';
 
 // 配色集合
 const colors = {
@@ -39,6 +41,7 @@ const colors = {
 
 export default {
     name: 'NvTag',
+    mixins: [mixin],
     data() {
         return {
             // 标签集合
@@ -63,7 +66,9 @@ export default {
         // 默认文本
         placeholder: {
             type: String,
-            default: '输入文本，点击回车或空格添加标签'
+            default() {
+                t('tag.placeholder')
+            }
         },
         // 宽度
         width: {
@@ -107,7 +112,7 @@ export default {
         // 提示信息
         tips() {
             let num = this.maxNum - this.count;
-            return '还可以添加' + num + '个';
+            return this.t('tag.addTip', {num: num});
         },
         // 已有的标签个数
         count() {

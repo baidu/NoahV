@@ -3,6 +3,8 @@
  * @author tanrich@foxmail.com
  */
 
+import {t} from '../locale';
+
 export const COLORS = ['#108CEE', '#8A58BC', '#545FC8', '#F38800', '#EA2E2E', '#5FB333', '#FBBE04', '#04C1BA'];
 export const DEFAULT_POINT = {} || {
     // 严重异常点
@@ -37,15 +39,15 @@ export const DEFAULT_POINT = {} || {
 };
 export const LEGEND_STATUS = [
     {
-        name: '正常',
+        name: t('mdbubble.normal'),
         color: '#3a62ca'
     },
     {
-        name: '延迟异常',
+        name: t('mdbubble.delayError'),
         color: '#ef8700'
     },
     {
-        name: '丢包异常',
+        name: t('mdbubble.lostError'),
         color: '#f62626'
     }
 ];

@@ -24,8 +24,11 @@ import moment from 'moment';
 import mdutil from './util/util';
 import nvMask from './mask';
 
+import {t} from './locale';
+import mixin from './mixins';
+
 const HEIGHT = 200;
-const TITLE = '数据面板';
+const TITLE = t('billboard.title');
 const DEFAULTTIME = 'before(2h)';
 const DEFAULTNULLVALUE = 'N/A';
 const DEFAULTFORMAT = 'MM.DD HH:mm';
@@ -38,7 +41,7 @@ const DEFAULTCONF = {
 // Default settings
 const DEFAULTVALUE = [
     {
-        name: '子标题',
+        name: t('billboard.subTitle'),
         value: 0,
         unit: '%'
     }
@@ -48,6 +51,7 @@ const DEFAULTVALUE = [
 let widgetConf = {};
 const DEFAULT_REQUEST_TYPE = 'post';
 export default {
+    mixins: [mixin],
     name: 'billboard',
     props: {
 
@@ -406,7 +410,7 @@ export default {
                     temp.alias = item.alias ? item.alias : '';
                     temp.data = temp.data ? temp.data : DEFAULTNULLVALUE;
                     temp.unit = item.unit || '';
-                    temp.name = item.name ? item.name : '未配置';
+                    temp.name = item.name ? item.name : this.t('billboard.noConf');
                     nData.push(temp);
                 });
                 this.hideMask();

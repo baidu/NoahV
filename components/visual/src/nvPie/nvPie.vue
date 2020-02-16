@@ -24,8 +24,10 @@ import mdutil from '../util/util';
 import nvMask from '../mask';
 import echarts from 'echarts';
 
+import {t} from '../locale';
 
-const TITLE = '饼图';
+
+const TITLE = t('nvPie.title');
 const HEIGHT = 320;
 const DEFAULTTIME = 'before(2h)';
 const DEFAULTFORMAT = 'MM.DD HH:mm';
@@ -37,8 +39,8 @@ const DEFAULTCONF = {
 const DEFAULT_REQUEST_TYPE = 'post';
 let widgetConf = {};
 
-const confGetError = '配置获取失败';
-const dataGetError = '数据获取失败';
+const confGetError = t('nvPie.getConfError');
+const dataGetError = t('nvPie.getDataError');
 
 /**
  * Repair component color gradient problem

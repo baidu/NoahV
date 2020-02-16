@@ -23,6 +23,8 @@ import getClassName from '../utils.js';
 import options from './options';
 import chartUtil from './chartUtil';
 import {eventBus} from '../eventBus';
+import {t} from '../../locale';
+import mixin from '../../mixins';
 
 const DATE_FORMAT = 'YYYY-MM-DD HH:mm:ss';
 let xAxisFormat = 'YYYY-MM-DD HH:mm:ss';
@@ -132,6 +134,7 @@ const trendOptions = {
 
 export default {
     name: 'NvTrend',
+    mixins: [mixin],
     props: {
         title: {
             type: String,
@@ -151,7 +154,9 @@ export default {
         },
         showLoading: {
             type: String,
-            default: '数据加载中...'
+            default () {
+                return t('trend.loadingData');
+            }
         },
         method: {
             type: String,
@@ -167,7 +172,9 @@ export default {
         },
         noDataTip: {
             type: String,
-            default: '无数据'
+            default () {
+                return t('trend.noData');
+            }
         },
         seriesFilter: Function,
         dataFilter: Function
@@ -431,7 +438,7 @@ export default {
                     this.getData();
                 }
                 catch (e) {
-                    this.showError('获取数据失败');
+                    this.showError(this.t('trend.getDataErrot'));
                 }
             }
         },

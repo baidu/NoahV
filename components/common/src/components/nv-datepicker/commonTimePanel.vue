@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="time-panel" v-if="['datetime', 'daterangetime'].indexOf(type) > -1">
-            <label>时间：</label>
+            <label>{{t('datepicker.timeLabel')}}：</label>
             <select v-model="dateValue.startHour" @change="timeChange('left')">
                 <option
                     v-for="(item, i) in dateOptions.hours"
@@ -73,15 +73,17 @@
             </div>
         </div>
         <div class="btn-panel" v-if="confirm">
-            <button type="button" class="reset" @click="reset">清空</button>
-            <button type="button" class="primary" @click="confirmClick">确定</button>
+            <button type="button" class="reset" @click="reset">{{t('datepicker.clear')}}</button>
+            <button type="button" class="primary" @click="confirmClick">{{t('datepicker.ok')}}</button>
         </div>
     </div>
 </template>
 
 <script>
+import mixin from '../../mixins';
 
 export default {
+    mixins: [mixin],
     name: 'NvDatePickerCommonTimePanel',
     data() {
         return {

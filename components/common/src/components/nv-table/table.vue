@@ -49,12 +49,16 @@
 import u from 'underscore';
 import getClassName from '../utils.js';
 
+import {t} from '../../locale';
+import mixin from '../../mixins';
+
 const defaultPageSizeOptions = [10, 20, 30, 40];
 const transferTableRes = (dataMap, res) => {
     // TODO
     return res;
 };
 export default {
+    mixins: [mixin],
     props: {
         url: String,
         columns: Array,
@@ -92,7 +96,9 @@ export default {
         },
         noDataText: {
             type: String,
-            default: '暂无数据'
+            default() {
+                t('table.noData')
+            }
         },
         showelevator: {
             type: Boolean,
@@ -626,10 +632,10 @@ export default {
         },
         handlerActionConfirm(confirm, row) {
             this.$Modal.confirm({
-                title: confirm.title || '确认操作',
-                content: confirm.content ? this.handlerTableLink(confirm.content, row, true) : '操作提示',
-                cancelText: confirm.cancelText || '取消',
-                okText: confirm.okText || '确认',
+                title: confirm.title || this.t('table.confirm'),
+                content: confirm.content ? this.handlerTableLink(confirm.content, row, true) : this.t('table.actionTip'),
+                cancelText: confirm.cancelText || this.t('table.cancel'),
+                okText: confirm.okText || this.t('table.confirmText'),
                 width: confirm.width || 416,
                 onOk: () => {
                     if (confirm.api) {
@@ -651,7 +657,7 @@ export default {
                         this.$request(config).then(response => {
                             const res = response.data;
                             if (res.success) {
-                                this.$Message.success(confirm.successTip || '操作成功');
+                                this.$Message.success(confirm.successTip || this.t('table.successTip'));
                                 if (confirm.autoFresh) {
                                     this.getTableData();
                                 }

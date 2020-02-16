@@ -18,22 +18,25 @@
             </template>
             <span slot="content" class="nv-ellipsis-content" v-if="isHTML">
                 <span v-html="toolTipContent"></span>
-                <a type="copy" title="复制" v-if="copy" class="copy-btn" ref="copy-btn"
+                <a type="copy" :title="t('ellipsis.copy')" v-if="copy" class="copy-btn" ref="copy-btn"
                    :data-clipboard-text="toolTipContent"
-                >复制</a>
+                >{{t('ellipsis.copy')}}</a>
             </span>
             <span slot="content" class="nv-ellipsis-content" v-else>{{toolTipContent}}
-                <a type="copy" title="复制" v-if="copy" class="copy-btn" ref="copy-btn"
+                <a type="copy" :title="t('ellipsis.copy')" v-if="copy" class="copy-btn" ref="copy-btn"
                    :data-clipboard-text="toolTipContent"
-                >复制</a></span>
+                >{{t('ellipsis.copy')}}</a></span>
         </Tooltip>
     </span>
 </template>
 
 <script>
 import ClipboardJS from 'clipboard';
+import {t} from '../../locale';
+import mixin from '../../mixins';
 
 export default {
+    mixins: [mixin],
     name: 'NvEllipsis',
     props: {
         content: [String, Object, Number],
@@ -56,11 +59,15 @@ export default {
         },
         copySuccessText: {
             type: String,
-            default: '复制成功'
+            default() {
+                t('ellipsis.copySuccessText')
+            }
         },
         copyErrorText: {
             type: String,
-            default: '浏览器不支持，请使用最新版Chrome'
+            default() {
+                t('ellipsis.copyErrorText')
+            }
         },
         theme: {
             type: String,
@@ -90,7 +97,7 @@ export default {
         }
         else {
             // eslint-disable-next-line no-console
-            console.warn('用于复制的dom元素可能不存在：', this.$refs['copy-btn']);
+            console.warn(this.t('ellipsis.domFindError'), this.$refs['copy-btn']);
         }
     }
 };
