@@ -142,7 +142,7 @@ export default {
         title: {
             type: String,
             default() {
-                t('nvMap.title')
+                return t('nvMap.title')
             }
         },
         url: {
@@ -173,7 +173,7 @@ export default {
             type: String,
             required: false,
             default() {
-                t('nvMap.metricName')
+                return t('nvMap.metricName')
             }
         },
         dataFilter: {
