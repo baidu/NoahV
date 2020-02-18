@@ -67,7 +67,7 @@ export default {
         placeholder: {
             type: String,
             default() {
-                t('tag.placeholder')
+                return t('tag.placeholder')
             }
         },
         // 宽度

@@ -56,6 +56,7 @@
 <script>
 import datePicker from './date-picker';
 import CONSTANTS from './CONSTANTS';
+import {t} from '../../locale';
 
 const prefix = 'noahv-duty-table';
 
@@ -123,7 +124,7 @@ export default {
         restDayText: {
             type: String,
             required: false,
-            default: '休息日'
+            default: () => t('dutytable.restDay')
         }
     },
     data() {

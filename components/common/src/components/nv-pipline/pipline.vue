@@ -76,13 +76,13 @@ const prefixCls = "noahv-pipline";
             nodeTitle: {
                 type: String,
                 default() {
-                    t('pipline.node')
+                    return t('pipline.node')
                 }
             },
             cardTitle: {
                 type: String,
                 default() {
-                    t('pipline.card')
+                    return t('pipline.card')
                 }
             },
             nodeTemplate: {

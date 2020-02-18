@@ -51,7 +51,7 @@ export default {
         placeholder: {
             type: String,
             default() {
-                t('search.placeholder')
+                return t('search.placeholder')
             }
         },
         // 是否支持关闭按钮
