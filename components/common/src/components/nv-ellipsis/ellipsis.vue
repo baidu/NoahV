@@ -59,15 +59,11 @@ export default {
         },
         copySuccessText: {
             type: String,
-            default() {
-                t('ellipsis.copySuccessText')
-            }
+            default: () => t('ellipsis.copySuccessText')
         },
         copyErrorText: {
             type: String,
-            default() {
-                t('ellipsis.copyErrorText')
-            }
+            default: () => t('ellipsis.copyErrorText')
         },
         theme: {
             type: String,

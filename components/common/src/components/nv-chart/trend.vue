@@ -286,13 +286,21 @@ export default {
 
                 this.$request(config)
                     .then(response => {
+                        if (response.data.success === false && response.data.message) {
+                            this.isLoading = true;
+                            this.showError(response.data.message);
+                            return Promise.reject(response.data.message);
+                        }
                         let data = response.data.data;
                         if (typeof this.dataFilter === 'function') {
                             data = this.dataFilter(data);
                         }
                         return data;
                     })
-                    .then(this.initData);
+                    .then(this.initData)
+                    .catch((err) => {
+                        console.warn(err);
+                    });
             }
             else if (this.trendData && this.trendData.data && this.trendData.data instanceof Array) {
                 this.initData(this.trendData);

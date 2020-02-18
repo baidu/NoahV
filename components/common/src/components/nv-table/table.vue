@@ -97,7 +97,7 @@ export default {
         noDataText: {
             type: String,
             default() {
-                t('table.noData')
+                return t('table.noData')
             }
         },
         showelevator: {
