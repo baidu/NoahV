@@ -46,6 +46,7 @@ const DEFAULT_REQUEST_TYPE = 'post';
 
 let timeFormatter = 'YYYY-MM-DD HH:mm:ss';
 let widgetConf = {};
+const numUnit = ['K', 'M', 'G', 'T', 'P', 'E'];
 
 
 /**
@@ -238,17 +239,24 @@ function handleTrendTime(times, contrast, timemap) {
 }
 
 
-function shortValue(value) {
-    if (typeof value === 'number' && value >= 1000000000) {
-        return Math.ceil(value / 1000000000) + 'G';
+function shortValue(value, number = 1) {
+    if (value < 1000 || typeof value !== 'number') {
+        return value;
     }
-    if (typeof value === 'number' && value >= 1000000) {
-        return Math.ceil(value / 1000000) + 'M';
+    let formatNumber = value;
+    for (let i = 0; i < numUnit.length; i++) {
+        if (value < Math.pow(1000, i + 2) || i === numUnit.length - 1) {
+            // 保留一位小数
+            formatNumber = (value / Math.pow(1000, i + 1)).toFixed((value % Math.pow(1000, i + 1)) === 0
+                ? number
+                : Math.max(1, number)) + numUnit[i];
+            break;
+        }
+        else {
+            continue;
+        }
     }
-    else if (typeof value === 'number' && value >= 1000) {
-        return Math.ceil(value / 1000) + 'K';
-    }
-    return value;
+    return formatNumber;
 }
 
 // Change the type of Chart
