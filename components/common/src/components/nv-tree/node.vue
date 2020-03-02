@@ -77,6 +77,7 @@
                 :appendLabel="appendLabel"
                 :removeLabel="removeLabel"
                 :editLabel="editLabel"
+                :autoCheckBox="autoCheckBox"
                 :nodeTemplate="nodeTemplate"
             >
             </NvTreeNode>
@@ -101,6 +102,10 @@ export default {
             }
         },
         checkbox: {
+            type: Boolean,
+            default: false
+        },
+        autoCheckBox: {
             type: Boolean,
             default: false
         },
@@ -282,6 +287,12 @@ export default {
          */
         titleClick(item) {
             if (item.disabled) {
+                return;
+            }
+            // 开启点击文本，选中勾选框
+            // 此时点击文本选中功能不可用，点击文本等同于勾选
+            if (this.autoCheckBox) {
+                this.checkedClickHandler(new Event('click'), item);
                 return;
             }
             this.dispatch('NvTree', 'title-click-handler', item);
