@@ -14,6 +14,7 @@
             :appendIcon="data.appendIcon"
             :removeIcon="data.removeIcon"
             :editIcon="data.editIcon"
+            :autoCheckBox="data.autoCheckBox"
             @on-check-change="onCheckChange"
             @on-select-change="onSelectChange"
             @on-expand-change="onExpandChange">
@@ -35,6 +36,7 @@ export default {
                 editable: false,
                 checkbox: false,
                 multiple: false,
+                autoCheckBox: false,
                 appendLabel: 'Append',
                 removeLabel: 'Delete',
                 editLabel: 'Edit',

@@ -30,6 +30,7 @@
                     :appendLabel="appendLabel"
                     :removeLabel="removeLabel"
                     :editLabel="editLabel"
+                    :autoCheckBox="autoCheckBox"
                     :nodeTemplate="nodeTemplate"
                 >
                 </NvTreeNode>
@@ -76,6 +77,11 @@ export default {
         },
         // 是否开启勾选框
         checkbox: {
+            type: Boolean,
+            default: false
+        },
+        // 点击文本，同时勾选
+        autoCheckBox: {
             type: Boolean,
             default: false
         },
