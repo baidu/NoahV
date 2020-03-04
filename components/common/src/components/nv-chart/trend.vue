@@ -177,7 +177,19 @@ export default {
             }
         },
         seriesFilter: Function,
-        dataFilter: Function
+        dataFilter: Function,
+        scrollTrigger: {
+            type: String
+        },
+        resizeTrigger: {
+            type: String
+        },
+        needSyncTooltips: {
+            type: Boolean,
+            default() {
+                return true;
+            }
+        }
     },
 
     data() {
@@ -195,13 +207,18 @@ export default {
 
     mounted() {
         // 同步tooltip
-        eventBus.$on('syncTooltips', this.syncTooltips);
+        if (this.needSyncTooltips !== false) {
+            eventBus.$on('syncTooltips', this.syncTooltips);
+        }
 
         this.redraw = _.debounce(this.scrollTop, 100);
-        document.addEventListener('scroll', this.redraw, false);
+        let scrollTarget = document.querySelector(this.scrollTrigger) || document;
+        scrollTarget.addEventListener('scroll', this.redraw, false);
 
         this.resizeHandler = _.debounce(this.resizeChart, 100);
-        window.addEventListener('resize', this.resizeHandler);
+
+        let resizeTarget = document.querySelector(this.resizeTrigger) || window;
+        resizeTarget.addEventListener('resize', this.resizeHandler);
 
         this.$nextTick( () => {
             this.scrollTop();
@@ -220,6 +237,13 @@ export default {
         watchObj: {
             handler() {
                 this.getData();
+            },
+            deep: true
+        },
+        requestConfig: {
+            handler() {
+                this.isLoading = false;
+                this.scrollTop();
             },
             deep: true
         }
@@ -251,9 +275,11 @@ export default {
             this.chart.setOption(this.curOptions, true);
 
             // 同步tooltip
-            this.chart.on('updateAxisPointer', function (params) {
-                eventBus.$emit('syncTooltips', params, this.chart);
-            });
+            if (this.needSyncTooltips !== false) {
+                this.chart.on('updateAxisPointer', function (params) {
+                    eventBus.$emit('syncTooltips', params, this.chart);
+                });
+            }
         },
         refresh() {
             this.isLoading = false;
@@ -291,7 +317,7 @@ export default {
                             this.showError(response.data.message);
                             return Promise.reject(response.data.message);
                         }
-                        let data = response.data.data;
+                        let data = response.data.data || response.data.result;
                         if (typeof this.dataFilter === 'function') {
                             data = this.dataFilter(data);
                         }
@@ -305,7 +331,7 @@ export default {
             else if (this.trendData && this.trendData.data && this.trendData.data instanceof Array) {
                 this.initData(this.trendData);
             }
-            
+
         },
         /**
          * after received data
@@ -325,7 +351,6 @@ export default {
             }
 
             curOptions.series = [];
-
 
             let timeGap = Number.MIN_VALUE;
 
@@ -357,6 +382,9 @@ export default {
                 else if (this.options.nullPointMode === 'connect') {
                     item.connectNulls = true;
                 }
+                else if (this.options.nullPointMode === '') {
+                    item.connectNulls = false;
+                }
                 curOptions.series.push(item);
 
 
@@ -364,7 +392,7 @@ export default {
                 if (item.data
                     && item.data.length > 0
                     && timeGap < (item.data[item.data.length - 1][0] - item.data[0][0]))
-                    {
+                {
                     timeGap = (item.data[item.data.length - 1][0] - item.data[0][0]);
                 }
             });
@@ -386,7 +414,7 @@ export default {
             if (typeof this.seriesFilter === 'function') {
                 curOptions.series = this.seriesFilter(curOptions.series);
             }
-            
+
             this.curOptions = Object.assign({}, curOptions);
 
             // 判断X轴时间跨度
@@ -443,6 +471,7 @@ export default {
             if (!this.isLoading
                 && this.isInScreen()) {
                 try {
+                    this.$emit('canLoading');
                     this.getData();
                 }
                 catch (e) {
@@ -459,7 +488,8 @@ export default {
         },
         isInScreen() {
             const main = this.$refs.trend;
-            let top = chartUtil.getScrollTop();
+            // let top = chartUtil.getScrollTop();
+            let top = document.querySelector(this.scrollTrigger) && document.querySelector(this.scrollTrigger).scrollTop;
             let height = chartUtil.getViewHeight();
             let offset = chartUtil.getOffset(main);
             if (offset && offset.top < top + height && offset.bottom > top) {
@@ -467,7 +497,7 @@ export default {
             }
             return false
         },
-         /**
+        /**
          * 同步tooltip
          * @param  {Object} params   tooltip相关参数
          * @param  {Object} sourceChart  echart实例
@@ -478,7 +508,7 @@ export default {
                 && typeof this.chart.dispatchAction === 'function'
                 && typeof this.chart.makeActionFromEvent === 'function'
                 && this.isInScreen()
-                ) {
+            ) {
                 this.chart.dispatchAction(
                     this.chart.makeActionFromEvent(params),
                     true
@@ -518,4 +548,3 @@ export default {
     }
 };
 </script>
-
