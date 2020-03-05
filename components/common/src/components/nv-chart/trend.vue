@@ -211,11 +211,11 @@ export default {
             eventBus.$on('syncTooltips', this.syncTooltips);
         }
 
-        this.redraw = _.debounce(this.scrollTop, 100);
+        this.redraw = _.throttle(this.scrollTop, 100);
         let scrollTarget = document.querySelector(this.scrollTrigger) || document;
         scrollTarget.addEventListener('scroll', this.redraw, false);
 
-        this.resizeHandler = _.debounce(this.resizeChart, 100);
+        this.resizeHandler = _.throttle(this.resizeChart, 100);
 
         let resizeTarget = document.querySelector(this.resizeTrigger) || window;
         resizeTarget.addEventListener('resize', this.resizeHandler);
@@ -242,8 +242,14 @@ export default {
         },
         requestConfig: {
             handler() {
-                this.isLoading = false;
-                this.scrollTop();
+                if (this.isLoading) {
+                    this.isLoading = false;
+                    this.scrollTop();
+                }
+                else {
+                    this.getData();
+                }
+                
             },
             deep: true
         }
@@ -309,11 +315,11 @@ export default {
                 }
 
                 Object.assign(config, this.requestConfig);
+                this.isLoading = true;
 
                 this.$request(config)
                     .then(response => {
                         if (response.data.success === false && response.data.message) {
-                            this.isLoading = true;
                             this.showError(response.data.message);
                             return Promise.reject(response.data.message);
                         }
@@ -488,11 +494,10 @@ export default {
         },
         isInScreen() {
             const main = this.$refs.trend;
-            // let top = chartUtil.getScrollTop();
             let top = document.querySelector(this.scrollTrigger) && document.querySelector(this.scrollTrigger).scrollTop;
             let height = chartUtil.getViewHeight();
             let offset = chartUtil.getOffset(main);
-            if (offset && offset.top < top + height && offset.bottom > top) {
+            if (offset && offset.top < top + height) {
                 return true;
             }
             return false
