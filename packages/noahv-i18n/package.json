@@ -1,6 +1,6 @@
 {
   "name": "noahv-i18n",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "i18n for noahv",
   "main": "index.js",
   "scripts": {

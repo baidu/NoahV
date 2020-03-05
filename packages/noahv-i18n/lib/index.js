@@ -55,7 +55,7 @@ const install = (Vue, conf) => {
         cookie.set(conf.cookieName, newVal);
     });
 
-    Vue.$noahvI18n = noahvI18n;
+    Vue.prototype.$noahvI18n = noahvI18n;
 
 };
 
