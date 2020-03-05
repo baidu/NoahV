@@ -5,7 +5,6 @@
  *
  * @file i18n tools
  * @author darren(darrenywyu@gmail.com)
- *         Joannamo(joannamo123@163.com)
  */
 import VueI18n from 'vue-i18n';
 import cookie from 'js-cookie';
