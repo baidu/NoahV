@@ -31,7 +31,7 @@ function render(container, noahv, store, i18n) {
     noahv.vueInstance = new Vue({
         router: noahv._router,
         store: store || {},
-        i18n: i18n || {}
+        i18n: i18n || null
     }).$mount(container);
 }
 
