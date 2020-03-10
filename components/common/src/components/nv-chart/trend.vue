@@ -198,6 +198,7 @@ export default {
             isLoading: false,
             errTip: '',
             noData: false,
+            hasRequested: false
         };
     },
     created() {
@@ -242,14 +243,11 @@ export default {
         },
         requestConfig: {
             handler() {
-                if (this.isLoading) {
+                if (this.hasRequested && this.isLoading) {
+                    this.hasRequested = false;
                     this.isLoading = false;
-                    this.scrollTop();
                 }
-                else {
-                    this.getData();
-                }
-                
+                this.scrollTop();
             },
             deep: true
         }
@@ -315,8 +313,7 @@ export default {
                 }
 
                 Object.assign(config, this.requestConfig);
-                this.isLoading = true;
-
+                this.hasRequested = true;
                 this.$request(config)
                     .then(response => {
                         if (response.data.success === false && response.data.message) {
@@ -494,10 +491,16 @@ export default {
         },
         isInScreen() {
             const main = this.$refs.trend;
-            let top = document.querySelector(this.scrollTrigger) && document.querySelector(this.scrollTrigger).scrollTop;
+            if (!main) {
+                return;
+            }
             let height = chartUtil.getViewHeight();
-            let offset = chartUtil.getOffset(main);
-            if (offset && offset.top < top + height) {
+            let rect = main.getBoundingClientRect();
+            let offset = {
+                top: rect.top,
+                bottom: rect.bottom
+            };
+            if (offset && offset.top - 50 < height && offset.bottom > 0) {
                 return true;
             }
             return false
