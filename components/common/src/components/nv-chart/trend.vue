@@ -314,7 +314,6 @@ export default {
 
                 Object.assign(config, this.requestConfig);
                 this.hasRequested = true;
-
                 this.$request(config)
                     .then(response => {
                         if (response.data.success === false && response.data.message) {

@@ -27,10 +27,11 @@ let noahv = {};
  * @param  {Object} noahv     noahv object
  * @param  {Object} store     data store
  */
-function render(container, noahv, store) {
+function render(container, noahv, store, i18n) {
     noahv.vueInstance = new Vue({
         router: noahv._router,
-        store: store || {}
+        store: store || {},
+        i18n: i18n || null
     }).$mount(container);
 }
 
@@ -41,7 +42,7 @@ function render(container, noahv, store) {
  * @param  {Object} store  data store
  * @return {Object} vue instance
  */
-const start = (container, store) => {
+const start = (container, store, i18n) => {
     // container是字符串
     if (typeof container === 'string') {
         let isContainer = document.querySelector(container);
@@ -57,7 +58,7 @@ const start = (container, store) => {
     );
 
     if (container) {
-        render(container, noahv, store);
+        render(container, noahv, store, i18n);
         return noahv.vueInstance;
     }
 };
