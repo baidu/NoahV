@@ -471,7 +471,7 @@ export default {
          * caculate the sceen's position and judge whether to load
          */
         scrollTop() {
-            if (!this.isLoading
+            if (!this.hasRequested && !this.isLoading
                 && this.isInScreen()) {
                 try {
                     this.$emit('canLoading');

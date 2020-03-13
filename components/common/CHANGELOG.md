@@ -1,5 +1,8 @@
 ## ChangeLog
 
+## 1.1.23
+[功能修复] 修复nvtrend 滚动加载bug
+
 ## 1.1.22
 [功能修复] 修复nvtrend requestconfig更新策略和修正懒加载算法
 
