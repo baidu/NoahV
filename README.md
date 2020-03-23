@@ -18,7 +18,7 @@
 	<img src="https://img.shields.io/github/commit-activity/w/baidu/NoahV.svg?style=flat-square" alt="commit">
 </a>
 
-NoahV是一个基于vue开发的前端应用框架，主要适用于常见的后台管理系统，官网地址：[https://baidu.github.io/NoahV](https://baidu.github.io/NoahV)
+NoahV是一个基于vue开发的前端应用框架，主要适用于常见的后台管理系统，文档地址：[https://baidu.github.io/NoahV](https://baidu.github.io/NoahV), 如访问速度较慢，可尝试访问如下地址：[https://noahv.gitee.io/](https://noahv.gitee.io/)
 
 特性：
 
