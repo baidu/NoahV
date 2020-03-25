@@ -35,9 +35,10 @@ const trendOptions = {
         text: ''
     },
     grid: {
-        bottom: 70,
-        left: 50,
-        right: 40
+        containLabel: true,
+        left: 0,
+        right: 5,
+        top: 15,
     },
     chart: {
         height: 250
@@ -54,7 +55,7 @@ const trendOptions = {
         boundaryGap: false,
         showMaxLabel: false,
         axisLabel: {
-            padding: [0, 10],
+            padding: [0, 10, 0, 10],
             formatter: value => {
                 let label = m(value).format('HH:mm:ss');
                 if (label === '00:00:00') {
@@ -74,6 +75,7 @@ const trendOptions = {
         {
             bottom: 24,
             start: 0,
+            end: 100,
             height: 20,
             handleStyle: {
                 color: '#d3dee5'
@@ -318,6 +320,7 @@ export default {
                     .then(response => {
                         if (response.data.success === false && response.data.message) {
                             this.showError(response.data.message);
+                            this.isLoading = true;
                             return Promise.reject(response.data.message);
                         }
                         let data = response.data.data || response.data.result;
@@ -447,7 +450,7 @@ export default {
                         silent: true,
                         symbol: 'none',
                         label: {
-                            position: 'end',
+                            position: 'insideEndTop',
                             formatter: () => {
                                 return  chartUtil.numberFormat(+this.options.threshold, 0) + (this.options.unit || '');
                             }
