@@ -24,7 +24,7 @@ NoahV开源代码主要包括5个大块，分别是：组件库、功能模块(�
 - template (项目模板)
 	- common (通用项目模版)
 	- dashboard (包含仪表盘功能的项目模版)
-	- common-ts  (通用项目模版 typescript版本)
+	- common-ts  (通用项目模版 Typescript 版本)
 	-
 - tools/noahv-cli (脚手架)
 - doc (使用文档)
@@ -36,12 +36,13 @@ NoahV开源代码主要包括5个大块，分别是：组件库、功能模块(�
 - 3.按照[commit信息填写规范](./COMMIT.md)填写 commit 信息。
 - 4.提交 PR 前请 rebase。
 - 5.PR 请提交到 dev 分支，直接提交到 master 分支的 PR 会被 drop。
-- 6.请在 PR 中尽可能详细的描述提交代码解决的问题。
+- 6.请在 PR 中尽可能详细的描述提交代码所解决的问题。
 
 
 ## 3.Issue 规范
 
-- 1.在提交 issue 可以先搜索下是否已有相关的 issue。
+- 1.在提交 issue 前可以先搜索下是否已有相关的 issue。
 - 2.如果是程序运行报错，请提供下使用的 NoahV 的版本以及当前系统的版本信息。
+- 3.issue 标题要尽可能简短的描述遇到的问题，请不要创建无意义的 issue 标题。
 
 
