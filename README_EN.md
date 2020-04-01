@@ -71,6 +71,11 @@ $ noahv create
 # Choose page type According to the hint,support form,list,filterlist,chart at present
 ```
 
+## Contribution
+
+Please make sure to read the [Contributing Guide](./CONTRIBUTING.md) before making a pull request. 
+
+
 ## Document
 
 * [Quickstart](https://baidu.github.io/NoahV/#/guide/quickstart)
