@@ -80,6 +80,9 @@ $ noahv create
 | ---------- | ------------------------------------------------------------ |
 | <img src="https://noahv.cdn.bcebos.com/github%2Ff414efb2572218cd6756ca483.jpg" width="120px"> | [issues](https://github.com/baidu/NoahV/issues) |
 
+## 参与共建
+
+欢迎大家一起参与NoahV的共建，详情请参考[贡献指南](./CONTRIBUTING.md).
 
 ## License
 
