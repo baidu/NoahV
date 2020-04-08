@@ -364,6 +364,9 @@ export default {
                 this.showNoData();
                 return;
             }
+            else {
+                this.noData = false;
+            }
 
             let noData = _.every(data.data, item => {
                 return item.data && item.data.length === 0;
@@ -371,6 +374,9 @@ export default {
             if (noData) {
                 this.showNoData();
                 return;
+            }
+            else {
+                this.noData = false;
             }
 
             // set the series
