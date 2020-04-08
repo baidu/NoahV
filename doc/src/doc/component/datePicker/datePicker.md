@@ -54,7 +54,7 @@ export default {
 ```html
 <template>
     <div>
-        <NvDatePicker :language="language" :theme="theme" :width="350" type="daterangetime" :dateFormat="dateFormat" :options="options" ref="hotKeyDatePickerRef"></NvDatePicker>
+        <NvDatePicker :language="language" :mode="mode" :theme="theme" :width="350" type="daterangetime" :dateFormat="dateFormat" :options="options" ref="hotKeyDatePickerRef"></NvDatePicker>
     </div>
 </template>
 
@@ -65,6 +65,7 @@ export default {
         const self = this;
         return {
             language: 'cn',
+            mode: 'common',
             theme: 'common',
             dateFormat: 'YYYY-MM-DD HH:mm:ss',
             options: {
@@ -226,6 +227,7 @@ export default {
             language: 'cn',
             dateFormat: 'YYYY-MM-DD HH:mm:ss',
             options: {
+                trigger: 'blur',
                 position: 'top',
                 shortcuts: [
                     {
@@ -531,8 +533,10 @@ export default {
 | value      | 日期，值是 Date/String 类型或 Array 类型。配合 @on-change 使用，可以达到双向绑定的效果，详见示例|  String/Date |  - |
 | options    | 额外配置，详见示例和下方说明             | Object            | -           |
 | width      | 时间选择框的宽度                         | Number            | 300         |
-| theme      | 皮肤配置，可设置common和console两个值。console代表公有云时间组件风格。详见示列。| String | console|
-| autoClose  | 设置自动关闭面板，当type为date或daterange时有效 | Boolean    | -           |
+| mode      | 时间展示风格配置，可设置common和console两个值。console代表公有云时间组件风格。详见示列| String | console|
+| theme      | 面板皮肤风格配置，可设置common和console两个值。console代表公有云时间组件风格。详见示列| String | console|
+| autoFix    | 选择的开始时间大于结束时间时，是否自动修正。当type为date或daterange时有效 | Boolean    | false          |
+| autoClose  | 设置自动关闭面板，当type为date或daterange时有效 | Boolean    | false          |
 | dateFormat | 设置日期时间显示格式，详见示例和[说明](http://momentjs.cn/) | String       | YYYY-MM-DD  |
 | setShownTxt | 可选，时间的显示干预函数，可根据业务需要调整显示样式，详见示列 | Function     | - |
 
@@ -556,6 +560,7 @@ export default {
 | defaultSelected  | 设置快捷面板的默认选中项，多个项同时设置时，只有第一个有效; 不建议同时配置value初值，若同时设置了value初值，则defaultSelected的优先级更高   | Boolean | -           |
 | value      | 设置快捷项对应的日期和时间，详见示例     | Function          | -           |
 | onClick    | 设置快捷项的点击回调，详见示例           | Function          | -           |
+| trigger    | 设置时间输入框的触发方式，取值为change/blur，当theme为console时有效，详见示例     | String          | change           |
 
 
 ### events

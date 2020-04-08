@@ -6,6 +6,7 @@
             :type="type"
             :trigger="trigger"
             :confirm="confirm"
+            :autoFix="autoFix"
             :dateValue="dateValue"
             :dateOptions="dateOptions"
             :timePickerCtrl="timePickerCtrl"
@@ -39,6 +40,7 @@ export default {
         theme: String,
         trigger: String,
         confirm: Boolean,
+        autoFix: Boolean,
         dateValue: Object,
         // 日期时间候选项
         dateOptions: Object,

@@ -115,6 +115,7 @@ export default {
         tips: '',
         trigger: String,
         confirm: Boolean,
+        autoFix: Boolean,
         // 维护时间日历组件的日期对象
         dateValue: Object,
         // 时间面板的显示控制
@@ -141,30 +142,32 @@ export default {
          * @param {String} pos 标识切换起始/终止时间
          */
         timeChange(pos) {
-            if (this.type === 'datetime') {
-                if (this.dateValue.selectedDate) {
-                    this.dateValue.selectedDate = new Date(
-                        this.dateValue.selectedDate.getFullYear(),
-                        this.dateValue.selectedDate.getMonth(),
-                        this.dateValue.selectedDate.getDate(),
-                        this.dateValue.startHour,
-                        this.dateValue.startMinute,
-                        this.dateValue.startSecond
-                    );
-                    this.$emit('on-date-change');
-                }
+            if (this.type === 'datetime' && this.dateValue.selectedDate) {
+                this.dateValue.selectedDate = new Date(
+                    this.dateValue.selectedDate.getFullYear(),
+                    this.dateValue.selectedDate.getMonth(),
+                    this.dateValue.selectedDate.getDate(),
+                    this.dateValue.startHour,
+                    this.dateValue.startMinute,
+                    this.dateValue.startSecond
+                );
+                this.$emit('on-date-change');
             }
             if (this.type === 'daterangetime') {
                 if (pos === 'left' && this.dateValue.startSelectedDate) {
                     this.nullHealing();
                     this.setSelectedDate('start');
-                    this.selfHealing('left');
+                    if (this.autoFix) {
+                        this.selfHealing('left');
+                    }
                     this.$emit('on-date-change');
                 }
                 if (pos === 'right' && this.dateValue.endSelectedDate) {
                     this.nullHealing();
                     this.setSelectedDate('end');
-                    this.selfHealing('right');
+                    if (this.autoFix) {
+                        this.selfHealing('right');
+                    }
                     this.$emit('on-date-change');
                 }
             }
