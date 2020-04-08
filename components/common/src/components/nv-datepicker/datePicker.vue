@@ -91,6 +91,7 @@
                     :theme="theme"
                     :trigger="trigger"
                     :confirm="confirm"
+                    :autoFix="autoFix"
                     :dateValue="dateValue"
                     :dateOptions="dateOptions"
                     :timePickerCtrl="timePickerCtrl"
@@ -158,8 +159,16 @@ export default {
     props: {
         value: [Date, String, Array],
         setShownTxt: Function,
+        // 面板皮肤风格
         theme: {
             type: String,
+            default: 'console'
+        },
+        // 时间显示风格
+        mode: {
+            validator: (value) => {
+                return ['common', 'console'].indexOf(value) > -1;
+            },
             default: 'console'
         },
         tips: {
@@ -209,6 +218,10 @@ export default {
                     return 'YYYY-MM-DD';
                 }
             }
+        },
+        autoFix: {
+            type: Boolean,
+            default: false
         },
         autoClose: {
             type: Boolean,
@@ -695,30 +708,26 @@ export default {
          * @return {string} 返回格式化后的日期字符串
          */
         getFormatDate(dateSet) {
-            let date = '';
             let startDate = dateSet[0] || '';
             let endDate = dateSet[1] || '';
             let fommater = ['date', 'daterange'].indexOf(this.type) > -1 ? 'YYYY-MM-DD' : 'YYYY-MM-DD HH:mm:ss';
-            if (startDate && ['date', 'datetime'].indexOf(this.type) > -1) {
-                try {
-                    date = moment(startDate).format(this.dateFormat || fommater);
+            try {
+                if (startDate && ['date', 'datetime'].indexOf(this.type) > -1) {
+                    return moment(startDate).format(this.dateFormat || fommater);
                 }
-                catch (e) {
+                else if (startDate && endDate && ['daterange', 'daterangetime'].indexOf(this.type) > -1) {
+                    return moment(startDate).format(this.dateFormat || fommater)
+                        + ' - ' + moment(endDate).format(this.dateFormat || fommater);
                 }
-                return date;
+                else if (startDate && !endDate && this.mode === 'common' && ['daterange', 'daterangetime'].indexOf(this.type) > -1) {
+                    return moment(startDate).format(this.dateFormat || fommater) + ' - 请选择结束时间';
+                }
+                else {
+                    return '';
+                }
             }
-            else if (startDate && endDate && ['daterange', 'daterangetime'].indexOf(this.type) > -1) {
-                try {
-                    date = moment(startDate).format(this.dateFormat || fommater)
-                        + ' - '
-                        + moment(endDate).format(this.dateFormat || fommater);
-                }
-                catch (e) {
-                }
-                return date;
-            }
-            else {
-                return date;
+            catch (e) {
+                return '';
             }
         },
         /**

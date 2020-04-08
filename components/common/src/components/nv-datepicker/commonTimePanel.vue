@@ -91,6 +91,7 @@ export default {
     },
     props: {
         confirm: Boolean,
+        autoFix: Boolean,
         dateValue: Object,
         // 日期时间候选项
         dateOptions: Object,
@@ -123,12 +124,16 @@ export default {
             else if (this.type === 'daterangetime') {
                 if (pos === 'left' && this.dateValue.startSelectedDate) {
                     this.setSelectedDate('start');
-                    this.selfHealing('left');
+                    if (this.autoFix) {
+                        this.selfHealing('left');
+                    }
                     this.$emit('on-date-change');
                 }
                 else if (pos === 'right' && this.dateValue.endSelectedDate) {
                     this.setSelectedDate('end');
-                    this.selfHealing('right');
+                    if (this.autoFix) {
+                        this.selfHealing('right');
+                    }
                     this.$emit('on-date-change');
                 }
             }

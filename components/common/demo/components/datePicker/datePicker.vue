@@ -7,6 +7,7 @@
             :theme="theme"
             :options="options"
             :language="language"
+            :autoClose="autoClose"
             :dateFormat="dateFormat"
             :setShownTxt="setShownStr"
             :disabledDateClickTip="disabledDateClickTip"
@@ -31,15 +32,21 @@ export default {
         return {
             type: 'daterangetime',
             language: 'cn',
+            // 时间显示风格
+            mode: 'console',
+            // 面板皮肤风格
             theme: 'console',
+            // 当开始时间小于结束时间时，是否自动修正
+            autoFix: false,
+            // 当没有配置confirm时，是否开启自动关闭
+            autoClose: false,
             dateFormat: 'YYYY-MM-DD HH:mm:ss',
             disabledDateClickTip: '每月18日为记账日，系统关闭，不可选择',
             options: {
                 position: 'top',
                 yearRange: [],
-                // change/blur
+                // 时间输入框的触发方式，可选项change/blur
                 trigger: 'blur',
-                autoClose: false,
                 shortcuts: [
                     {
                         text: '10天',
