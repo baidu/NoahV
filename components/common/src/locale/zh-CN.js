@@ -16,6 +16,7 @@ export default {
 		clear: '清空',
 		ok: '确认',
 		placeholder: '请选择',
+		shownDateTip: '请选择结束时间',
 		disabledDateTip: '不可以设置禁止日期！',
 		weeks: {
 			sun: '日',

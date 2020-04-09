@@ -16,6 +16,7 @@ export default {
 		clear: 'Clear',
 		ok: 'OK',
 		placeholder: 'Select',
+		shownDateTip: 'Please select the end time',
 		disabledDateTip: 'Prohibition date cannot be set',
 		weeks: {
 			sun: 'Sun',

@@ -720,7 +720,7 @@ export default {
                         + ' - ' + moment(endDate).format(this.dateFormat || fommater);
                 }
                 else if (startDate && !endDate && this.mode === 'common' && ['daterange', 'daterangetime'].indexOf(this.type) > -1) {
-                    return moment(startDate).format(this.dateFormat || fommater) + ' - 请选择结束时间';
+                    return moment(startDate).format(this.dateFormat || fommater) + ' - ' + t('datepicker.shownDateTip');
                 }
                 else {
                     return '';
