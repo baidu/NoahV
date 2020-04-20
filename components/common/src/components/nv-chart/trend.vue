@@ -6,7 +6,7 @@
         </h3>
         <!-- <vue-echarts :options="curOptions" ref="chart"></vue-echarts> -->
         <div :class="getCls('chart')" ref="chart" v-show="displayChart"></div>
-        <div class="trend-error-holder" v-show="errTip">{{errTip}}</div>
+        <div class="trend-error-holder" v-show="errTip" :title="errTip">{{errTip}}</div>
         <div class="trend-error-holder" v-show="noData" v-html="noDataTip"></div>
         <div class="show-loading" v-show="!isLoading">
             <div class="mask"></div>
@@ -323,6 +323,9 @@ export default {
                             this.isLoading = true;
                             return Promise.reject(response.data.message);
                         }
+                        else {
+                            this.errTip = '';
+                        }
                         let data = response.data.data || response.data.result;
                         if (typeof this.dataFilter === 'function') {
                             data = this.dataFilter(data);
@@ -492,7 +495,7 @@ export default {
             }
         },
         showError(message) {
-            this.errTip = message;
+            this.errTip = JSON.stringify(message);
         },
         showNoData() {
             this.isLoading = true;
