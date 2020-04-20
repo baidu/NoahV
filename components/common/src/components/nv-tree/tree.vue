@@ -18,6 +18,7 @@
                     v-for="(item, i) in dataSet"
                     :key="i"
                     :data="item"
+                    :dataList="dataList"
                     :lazyLoad="lazyLoad"
                     :loadData="loadData"
                     :icon="item.icon"
@@ -39,7 +40,6 @@
     </div>
 </template>
 <script>
-import uuidV4 from 'uuid/v4';
 import tree from './tree.js';
 import NvTreeNode from './node.vue';
 import mixin from '../../mixins';
@@ -146,6 +146,8 @@ export default {
             prefixCls: prefixCls,
             // 数据配置项
             dataSet: {},
+            // 映射线性表
+            dataList: {},
             // 搜索关键字
             searchValue: '',
             // 拖动过程数据
@@ -217,10 +219,8 @@ export default {
             handler(val) {
                 this.dataSet = val;
                 // improve performance
-                if (this.editMode) {
-                    this.buildTree(this.dataSet, 0);
-                }
                 if (this.checkbox || this.lazyLoad || this.search || this.accordion || this.editMode || this.draggable) {
+                    this.buildTree(this.dataSet, 0);
                     this.getLinkedTree(this.dataSet);
                 }                
             }
@@ -235,6 +235,9 @@ export default {
          */
         buildTree(items, level) {
             items.forEach(node => {
+                const index = node.id || [new Date().getTime(), Math.random().toString()].join('_');
+                this.dataList[index] = node;
+                this.$set(node, 'id', index);
                 this.$set(node, 'level', level);
                 if (node.children && node.children.length) {
                     this.buildTree(node.children, level + 1);
@@ -255,7 +258,7 @@ export default {
                 }
                 if (items[i].children && items[i].children.length > 0) {
                     items[i].children.forEach(value => {
-                        value.parent = items[i];
+                        value.parent = items[i].id;
                     });
                     this.getLinkedTree(items[i].children);
                 }
@@ -291,10 +294,10 @@ export default {
             items.forEach(node => {
                 if (node.title.indexOf(this.searchValue) > -1) {
                     this.$set(node, 'selected', true);
-                    let parent = node.parent;
+                    let parent = this.dataList[node.parent];
                     while (parent) {
                         this.$set(parent, 'spread', true);
-                        parent = parent.parent;
+                        parent = this.dataList[parent.parent];
                     }
                 }
                 else {
@@ -331,7 +334,7 @@ export default {
          * @param {Object} item 结点对象
          */
         accordionExpandControl(item) {
-            let parentItem = item.parent || this.dataSet;
+            let parentItem = this.dataList[item.parent] || this.dataSet;
             let type = Object.prototype.toString.call(parentItem).toLowerCase();
             if (type === '[object array]') {
                 parentItem.forEach(node => {
@@ -430,8 +433,8 @@ export default {
             item.children.push(node);
             this.$set(item, 'spread', true);
             // 当父节勾选中时，处理祖先节点的勾选逻辑
-            if (node.parent && (node.parent.checked || node.parent.partChecked)) {
-                this.updateAncestorNodeCheckedHandler(node);
+            if (node.parent && (this.dataList[node.parent].checked || this.dataList[node.parent].partChecked)) {
+                this.updateAncestorNodeCheckedHandler(node, this.dataList);
             }
         },
         /**
@@ -440,12 +443,12 @@ export default {
          * @param {Object} item 要删除的节点
          */
         removeNodeHandler(item) {
-            if (item.parent) {
-                let children = item.parent.children;
+            if (item.parent && this.dataList[item.parent]) {
+                let children = this.dataList[item.parent].children;
                 let index = children.indexOf(item);
                 children.splice(index, 1);
                 if (!children.length) {
-                    this.$set(item.parent, 'spread', false);
+                    this.$set(this.dataList[item.parent], 'spread', false);
                 }
             }
             else {
@@ -453,8 +456,8 @@ export default {
                 this.dataSet.splice(index, 1);
             }
             // 当父节勾选中时，处理祖先节点的勾选逻辑
-            if (item.parent && (item.parent.checked || item.parent.partChecked)) {
-                this.updateAncestorNodeCheckedHandler(item);
+            if (item.parent && (this.dataList[item.parent].checked || this.dataList[item.parent].partChecked)) {
+                this.updateAncestorNodeCheckedHandler(item, this.dataList);
             }
         },
         /**
@@ -524,8 +527,8 @@ export default {
          */
         dragDropHandler(event, node) {
             let sourceItem = this.transferData.dragSource;
-            let rawParent = sourceItem.parent;
-            let isAncestorNode = this.isAncestorNode(sourceItem, node);
+            let rawParent = this.dataList[sourceItem.parent];
+            let isAncestorNode = this.isAncestorNode(sourceItem, node, this.dataList);
             if (!isAncestorNode) {
                 if (node.status === 'dragover') {
                     this.removeNodeHandler(sourceItem);
@@ -540,7 +543,7 @@ export default {
                 }
                 else if (node.status === 'dragleave') {
                     this.removeNodeHandler(sourceItem);
-                    let containerItem = node.parent ? node.parent.children : this.dataSet;
+                    let containerItem = node.parent ? this.dataList[node.parent].children : this.dataSet;
                     let index = containerItem.indexOf(node);
                     containerItem.splice(index + 1, 0, sourceItem);
                 }
@@ -553,10 +556,10 @@ export default {
 
                 // 处理原位置祖先节点的选中逻辑
                 if (rawParent && rawParent.children && rawParent.children.length) {
-                    this.updateAncestorNodeCheckedHandler(rawParent.children[0]);
+                    this.updateAncestorNodeCheckedHandler(rawParent.children[0], this.dataList);
                 }
                 // 处理现位置祖先节点的选中逻辑
-                this.updateAncestorNodeCheckedHandler(sourceItem);
+                this.updateAncestorNodeCheckedHandler(sourceItem, this.dataList);
             }
         },
         /**

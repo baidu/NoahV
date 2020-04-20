@@ -285,6 +285,7 @@ export default {
 | text/javascript     | 支持javascript文本语法高亮                    |
 | text/css            | 支持css文本语法高亮                           |
 | text/html           | 支持html文本语法高亮                          |
+| text/yaml           | 支持yaml文本语法高亮                          |
 | text/application/x-httpd-php     | 支持php文本语法高亮              |
 | text/x-python       | 支持python文本语法高亮                        |
 | text/x-go           | 支持go文本语法高亮                            |
