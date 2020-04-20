@@ -17,6 +17,7 @@ const maxDate = new Date(currentYear + 50, 11, 31);
 const minDate = new Date(currentYear - 5, 0, 1);
 const colors = ['#108CEE', '#8A58BC', '#545FC8', '#F38800', '#EA2E2E', '#5FB333', '#FBBE04', '#04C1BA'];
 const emptyText = t('dutytable.emptyText');
+const restDayText = t('dutytable.restDay');
 const weekArr = t('dutytable.weekArr');
 const handOverTime = '00:00';
 const colorBlockMinWidth = 0;
@@ -35,6 +36,7 @@ export default {
     minDate,
     colors,
     emptyText,
+    restDayText,
     weekArr,
     handOverTime,
     colorBlockMinWidth,
