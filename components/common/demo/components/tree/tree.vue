@@ -6,7 +6,7 @@
             :tip="data.tip"
             :items="data.items"
             :search="data.search"
-            :editable="data.editable"
+            :editMode="data.editable"
             :checkbox="data.checkbox"
             :multiple="data.multiple"
             :accordion="data.accordion"
@@ -124,7 +124,7 @@ export default {
         onSelectChange(item, items) {
             console.log('on-select-change watched');
         },
-        onCheckChange(item, items) {
+        onCheckChange(event, item, items) {
             console.log('on-check-change watched');
         },
         onExpandChange(item) {

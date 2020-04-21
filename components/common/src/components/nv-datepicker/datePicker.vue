@@ -173,7 +173,7 @@ export default {
         },
         tips: {
             validator: (value) => {
-                return (typeof value === 'string' && value.length <= 40);
+                return typeof value === 'string';
             }
         },
         type: {
