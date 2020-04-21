@@ -30,6 +30,7 @@ export default {
 	},
 	dutytable: {
 		emptyText: 'To be added',
+		restDayText: 'Rest day',
 		weekArr: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 	},
 	ellipsis: {

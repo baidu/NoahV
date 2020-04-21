@@ -42,7 +42,7 @@
                         </li>
                         <li v-for="col in row.duty"
                             v-if="col"
-                            :class="['col-item', {'col-item-no-data': !col.nameArr.length}, {'col-item-no-work': !col.workingDay}]"
+                            :class="['col-item', {'col-item-no-data': !(col.nameArr && col.nameArr.length)}, {'col-item-no-work': !col.workingDay}]"
                             :title="dutyShowText(col)"
                             :style="calculateDutyItemStyle(col)"
                         >{{dutyShowText(col)}}</li>
@@ -124,7 +124,7 @@ export default {
         restDayText: {
             type: String,
             required: false,
-            default: () => t('dutytable.restDay')
+            default: () => CONSTANTS.restDayText
         }
     },
     data() {
@@ -295,13 +295,19 @@ export default {
                     });
                     if (this.handOverTime !== '00:00') {
                         // 如果交接时间不为 0 点，必然出现上一行末尾，便宜到这一行的组，unshift 推入
-                        const firstWeekDay = row.time[0];
-                        const diffDay = this.calculateDiffDay({
-                            ...firstWeekDay,
-                            date: firstWeekDay.date - 1
-                        });
-                        const quotient = Math.floor(diffDay / this.cycle);
-                        row.duty.unshift({quotient, flex: this.calculateRatio(), diffDay});
+                        const beforeFirstWeekDay = {
+                            ...row.time[0],
+                            date: row.time[0].date - 1
+                        };
+                        const diffDay = this.calculateDiffDay(beforeFirstWeekDay);
+                        const colDay = new Date(beforeFirstWeekDay.year, beforeFirstWeekDay.month, beforeFirstWeekDay.date).getDay();
+                        if (this.isWorkingDay(colDay)) {
+                            const quotient = Math.floor(diffDay / this.cycle);
+                            row.duty.unshift({quotient, flex: this.calculateRatio(), diffDay, workingDay: true});
+                        }
+                        else {
+                            row.duty.unshift({flex: this.calculateRatio(), diffDay, workingDay: false});
+                        }
 
                         // 修改本行最后一组的 flex 占比。
                         row.duty.push({
@@ -453,7 +459,7 @@ export default {
          */
         dutyShowText(col) {
             if (col.workingDay) {
-                return col.nameArr.length ? col.nameArr.map(item => item.name).join('、') : this.emptyText;
+                return col.nameArr && col.nameArr.length ? col.nameArr.map(item => item.name).join('、') : this.emptyText;
             }
             else {
                 return this.restDayText;
@@ -476,7 +482,7 @@ export default {
                 && +this.startTime + diffSeconds <= +this.maxDate
                     ? 'visible'
                     : 'hidden',
-                backgroundColor: col.nameArr.length && col.color,
+                backgroundColor: col.nameArr && col.nameArr.length && col.color,
                 flex: col.flex
             };
         },
