@@ -50,6 +50,7 @@
                 <NvTreeNodeEditPanel
                     v-if="item.editMode || editMode"
                     :data="item"
+                    :checkbox="checkbox"
                     :appendIcon="appendIcon"
                     :removeIcon="removeIcon"
                     :editIcon="editIcon"
@@ -66,6 +67,7 @@
                 :key="i"
                 :data="subItem"
                 :icon="item.icon"
+                :dataList="dataList"
                 :checkbox="checkbox"
                 :lazyLoad="lazyLoad"
                 :loadData="loadData"
@@ -96,6 +98,12 @@ export default {
     },
     props: {
         data: {
+            type: Object,
+            default() {
+                return {};
+            }
+        },
+        dataList: {
             type: Object,
             default() {
                 return {};
@@ -276,7 +284,7 @@ export default {
             // 更新子节点状态
             this.updateSubNodeCheckedHandler(item);
             // 处理祖先节点的勾选逻辑
-            this.updateAncestorNodeCheckedHandler(item);
+            this.updateAncestorNodeCheckedHandler(item, this.dataList);
             // 派发事件
             this.dispatch('NvTree', 'check-click-handler', [event, item]);
         },

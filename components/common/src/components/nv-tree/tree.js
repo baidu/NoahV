@@ -44,27 +44,28 @@ export default {
          * 更新父级节点的勾选逻辑
          *
          * @param {Array} item 节点对象
+         * @param {Object} dataList 映射的线性表
          */
-        updateAncestorNodeCheckedHandler(item) {
-            let parent = item.parent;
+        updateAncestorNodeCheckedHandler(item, dataList) {
+            let parent = dataList[item.parent];
             if (parent) {
                 if (!item.checked && item.partChecked) {
-                    this.updateAncestorNodePartCheckedHandler(item);
+                    this.updateAncestorNodePartCheckedHandler(item, dataList);
                 }
                 else {
                     let status = this.getSubNodeCheckedStatus(parent.children);
                     if (status === 'partChecked') {
-                        this.updateAncestorNodePartCheckedHandler(item);
+                        this.updateAncestorNodePartCheckedHandler(item, dataList);
                     }
                     else if (status === 'allChecked') {
                         this.$set(parent, 'checked', true);
                         this.$set(parent, 'partChecked', false);
-                        this.updateAncestorNodeCheckedHandler(parent);
+                        this.updateAncestorNodeCheckedHandler(parent, dataList);
                     }
                     else {
                         this.$set(parent, 'checked', false);
                         this.$set(parent, 'partChecked', false);
-                        this.updateAncestorNodeCheckedHandler(parent);
+                        this.updateAncestorNodeCheckedHandler(parent, dataList);
                     }
                 }
             }
@@ -74,12 +75,12 @@ export default {
          *
          * @param {Array} item 节点对象
          */
-        updateAncestorNodePartCheckedHandler(item) {
-            let parent = item.parent;
+        updateAncestorNodePartCheckedHandler(item, dataList) {
+            let parent = dataList[item.parent];
             if (parent) {
                 this.$set(parent, 'checked', false);
                 this.$set(parent, 'partChecked', true);
-                this.updateAncestorNodePartCheckedHandler(parent);
+                this.updateAncestorNodePartCheckedHandler(parent, dataList);
             }
         },
         /**
@@ -124,17 +125,18 @@ export default {
          *
          * @param {Object} srcItem 要移动的节点
          * @param {Object} dirItem 要放置的位置节点
+         * @param {Object} dataList 映射的线性表
          * @return {boolean} 返回判断结果
          */
-        isAncestorNode(srcItem, dirItem) {
+        isAncestorNode(srcItem, dirItem, dataList) {
             let isAncestorNode = false;
-            let parent = dirItem.parent;
+            let parent = dataList[dirItem.parent];
             while (parent) {
                 if (parent === srcItem) {
                     isAncestorNode = true;
                     break;
                 }
-                parent = parent.parent;
+                parent = dataList[parent.parent];
             }
             return isAncestorNode;
         }

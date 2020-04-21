@@ -33,6 +33,10 @@ export default {
                 return {};
             }
         },
+        checkbox: {
+            type: Boolean,
+            default: false
+        },
         // 添加节点图标，支持nv-icon
         appendIcon: {
             type: String,
@@ -110,14 +114,14 @@ export default {
                     selected: false,
                     disabled: false,
                     disabledCheckbox: false,
-                    checkbox: item.checkbox,
+                    checkbox: item.checkbox || this.checkbox,
                     checked: false,
                     partChecked: false,
                     editMode: item.editMode,
                     editing: false,
                     spread: false,
                     level: item.level + 1,
-                    parent: item,
+                    parent: item.id,
                     appendLabel: item.appendLabel,
                     removeLabel: item.removeLabel,
                     editLabel: item.editLabel,
