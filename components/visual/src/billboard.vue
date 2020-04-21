@@ -97,6 +97,13 @@ export default {
             type: String,
             default: 'post',
             required: false
+        },
+
+        // filter data
+        dataFilter: {
+            type: Function,
+            default: data => data,
+            required: false
         }
     },
     components: {nvMask},
@@ -318,6 +325,7 @@ export default {
             }
             this.isLoading = true;
             this.$wRequest(dataParams).then(mdData => {
+                mdData = this.dataFilter(mdData);
                 if (mdData.data.success) {
 
                     // if the configuration's length equal 0,then show 'No Data'.
