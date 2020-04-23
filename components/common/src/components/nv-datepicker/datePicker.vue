@@ -121,23 +121,6 @@ import NvDatePickerTimePanel from './timePanel';
 
 import {t} from '../../locale';
 
-// 日期候选项
-const dateOptions = {
-    years: [],
-    months: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-    weekDays: [
-        t('datepicker.weeks.sun'), 
-        t('datepicker.weeks.mon'),
-        t('datepicker.weeks.tue'),
-        t('datepicker.weeks.wed'),
-        t('datepicker.weeks.thu'),
-        t('datepicker.weeks.fri'),
-        t('datepicker.weeks.sat')
-    ],
-    hours: [],
-    minutes: [],
-    secondes: []
-};
 export default {
     name: 'NvDatePicker',
     components: {
@@ -240,8 +223,6 @@ export default {
             postfix: '',
             // icon样式控制
             iconType: 'calendar',
-            // 日期候选项
-            dateOptions: dateOptions,
             // 时间日期面板控制
             showPickerPanel: false,
             // 显示的格式化后的选中日期
@@ -285,6 +266,23 @@ export default {
                 // 选中日期，供选择时间段使用
                 startSelectedDate: '',
                 endSelectedDate: ''
+            },
+            // 日期候选项
+            dateOptions: {
+                years: [],
+                months: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+                weekDays: [
+                    t.call(this, 'datepicker.weeks.sun'), 
+                    t.call(this, 'datepicker.weeks.mon'),
+                    t.call(this, 'datepicker.weeks.tue'),
+                    t.call(this, 'datepicker.weeks.wed'),
+                    t.call(this, 'datepicker.weeks.thu'),
+                    t.call(this, 'datepicker.weeks.fri'),
+                    t.call(this, 'datepicker.weeks.sat')
+                ],
+                hours: [],
+                minutes: [],
+                secondes: []
             }
         };
     },
