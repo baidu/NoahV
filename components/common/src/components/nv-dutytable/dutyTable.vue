@@ -103,7 +103,7 @@ export default {
             type: String,
             required: false,
             default() {
-                return t.call(this, CONSTANTS.emptyText);
+                return t(CONSTANTS.emptyText);
             }
         },
         // 色块最小宽度
@@ -127,7 +127,7 @@ export default {
             type: String,
             required: false,
             default() {
-                return t.call(this, CONSTANTS.restDayText);
+                return t(CONSTANTS.restDayText);
             }
         }
     },

@@ -62,7 +62,7 @@ export default {
         },
         weekArr: {
             get() {
-                return t.call(this, CONSTANTS.weekArr);
+                return t(CONSTANTS.weekArr);
             }
         },
         yearArr: {
