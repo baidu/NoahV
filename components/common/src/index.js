@@ -66,6 +66,8 @@ import formTpl from './components/nv-form';
 import tableTpl from './components/nv-table';
 import filterTableTpl from './components/nv-filtertable';
 
+import locale from './locale';
+
 const noahv = {
 
     // 业务模板，兼容Nv命名组件
@@ -130,10 +132,13 @@ const noahv = {
 };
 
 
-const install = Vue => {
+const install = (Vue, opts = {}) => {
+    locale.use(opts.locale);
+    locale.i18n(opts.i18n);
     Object.keys(noahv).forEach(key => {
         Vue.component(key, noahv[key]);
     });
+
 };
 
 // auto install

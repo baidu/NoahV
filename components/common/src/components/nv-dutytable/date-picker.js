@@ -4,6 +4,7 @@
  */
 
 import CONSTANTS from './CONSTANTS';
+import {t} from '../../locale';
 
 function isDate(date) {
     return Object.prototype.toString.call(date) === '[object Date]';
@@ -61,7 +62,7 @@ export default {
         },
         weekArr: {
             get() {
-                return CONSTANTS.weekArr;
+                return t(CONSTANTS.weekArr);
             }
         },
         yearArr: {
