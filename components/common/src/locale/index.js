@@ -2,17 +2,17 @@ import Vue from 'vue';
 
 import defaultLang from './zh-CN';
 
-const lang = defaultLang;
+let lang = defaultLang;
 
-function i18nTrans() {
+let i18nTrans = function() {
 	const vuei18n = Object.getPrototypeOf(this || Vue).$t;
 	if (typeof vuei18n === 'function') {
-		return vuei18n.apply(this, arguments);
+		return vuei18n.apply(this, Array.from(arguments));
 	}
 }
 
-let t = function(path, args) {
-	let value = i18nTrans.apply(this, arguments);
+export const t = function(path, args) {
+	let value = i18nTrans.apply(this, Array.from(arguments));
 	if (value !== null && value !== undefined) {
 		return value;
 	}
@@ -42,6 +42,13 @@ let t = function(path, args) {
 
 	return target;
 };
+export const use = function(targetLang) {
+	lang = targetLang || lang;
+};
 
-export {t};
+export const i18n = function(fn) {
+  i18nTrans = fn || i18nTrans;
+};
+
+export default {t, i18n, use};
 
