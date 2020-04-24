@@ -3,8 +3,6 @@
  * @author tanrich@foxmail.com
  */
 
-import {t} from '../../locale';
-
 let today = new Date();
 today = new Date(today.getFullYear(), today.getMonth(), today.getDate());
 // today = new Date(2019, 2, 24);
@@ -16,9 +14,9 @@ const currentDay = today.getDay();
 const maxDate = new Date(currentYear + 50, 11, 31);
 const minDate = new Date(currentYear - 5, 0, 1);
 const colors = ['#108CEE', '#8A58BC', '#545FC8', '#F38800', '#EA2E2E', '#5FB333', '#FBBE04', '#04C1BA'];
-const emptyText = t('dutytable.emptyText');
-const restDayText = t('dutytable.restDay');
-const weekArr = t('dutytable.weekArr');
+const emptyText = 'dutytable.emptyText';
+const restDayText = 'dutytable.restDay';
+const weekArr = 'dutytable.weekArr';
 const handOverTime = '00:00';
 const colorBlockMinWidth = 0;
 const cycle = 1;

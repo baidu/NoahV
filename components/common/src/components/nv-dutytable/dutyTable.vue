@@ -102,7 +102,9 @@ export default {
         emptyText: {
             type: String,
             required: false,
-            default: CONSTANTS.emptyText
+            default() {
+                return t.call(this, CONSTANTS.emptyText);
+            }
         },
         // 色块最小宽度
         colorBlockMinWidth: {
@@ -124,7 +126,9 @@ export default {
         restDayText: {
             type: String,
             required: false,
-            default: () => CONSTANTS.restDayText
+            default() {
+                return t.call(this, CONSTANTS.restDayText);
+            }
         }
     },
     data() {
