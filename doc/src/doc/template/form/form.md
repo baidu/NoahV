@@ -523,6 +523,50 @@ export default {
                     ]
                 },
                 {
+                    name: 'physicalExamination',
+                    title: '体检套餐',
+                    type: 'nvCascader',
+                    splitCharacter: '&',
+                    placeholder: '选择体检套餐',
+                    trigger: 'click',
+                    value: [],
+                    disabled: false,
+                    required: false,
+                    width: 300,
+                    data: [{
+                        value: 'man',
+                        label: '男士',
+                        children: [
+                            {
+                                value: 'Basic Package For Man',
+                                label: '基础套餐'
+                            },
+                            {
+                                value: 'A Package',
+                                label: '加项一'
+                            },
+                            {
+                                value: 'B Package',
+                                label: '加项二'
+                            }
+                        ]
+                    }, 
+                    {
+                        value: 'woman',
+                        label: '女士',
+                        children: [
+                            {
+                                value: 'Basic Package For Woman',
+                                label: '基础套餐'
+                            },
+                            {
+                                value: 'Special Package',
+                                label: '专项一'
+                            },
+                        ],
+                    }]
+                },
+                {
                     name: 'note',
                     title: '',
                     type: 'input',
@@ -711,7 +755,7 @@ export default {
             <td> -</td>
         </tr>
         <tr>
-            <td rowspan="5">type=saTime</td>
+            <td rowspan="5">type=nvTime</td>
             <td>width</td>
             <td>时间日历组件的宽度</td>
             <td>Number</td>
@@ -742,7 +786,7 @@ export default {
             <td>YYYY-MM-DD</td>
         </tr>
         <tr>
-            <td rowspan="5">type=saTimeRange</td>
+            <td rowspan="5">type=nvTimeRange</td>
             <td>width</td>
             <td>时间日历组件的宽度</td>
             <td>Number</td>
@@ -797,6 +841,31 @@ export default {
             <td>级联选择项的数据，value-选项值，lable-选项显示文本，children-子选项，详见示例</td>
             <td>Array</td>
             <td> -</td>
+        </tr>
+        <tr>
+            <td rowspan="4">type=nvCascader</td>
+            <td>data</td>
+            <td>级联多选组件的数据源，详见示例</td>
+            <td>Array</td>
+            <td> -</td>
+        </tr>
+        <tr>
+            <td>value</td>
+            <td>选中的数据集合，详见示例</td>
+            <td>Array</td>
+            <td> -</td>
+        </tr>
+        <tr>
+            <td>trigger</td>
+            <td>触发展开二级菜单面板的方式，详见示例</td>
+            <td>String</td>
+            <td>click</td>
+        </tr>
+        <tr>
+            <td>splitCharacter</td>
+            <td>级联多选展示的链接符号，详见示例</td>
+            <td>String</td>
+            <td> /</td>
         </tr>
         <tr>
             <td rowspan="4">type=inputNumber</td>
