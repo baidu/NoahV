@@ -1,7 +1,7 @@
 <template>
     <div :class="prefixCls" v-clickoutside="close">
         <div class="input-wrapper" @click="toggle($event)">
-            <Input v-model="showValue" :readonly="true" :placeholder="placeholder" :title="showValue" clearable></Input>
+            <Input v-model="showValue" :readonly="true" :disabled="disabled" :placeholder="placeholder" :title="showValue" clearable></Input>
             <NvIcon class="arrow-btn" :type="drop ? 'angle-up' : 'angle-down'"></NvIcon>
         </div>
         <transition>
@@ -12,7 +12,7 @@
                         <NvIcon v-if="item.children && item.children.length" type="angle-right"></NvIcon>
                     </li>
                 </ul>
-                <Caspanel :data="activeMenu.children" @on-change="subMenuClick">
+                <Caspanel :data="activeMenu.children" :disabled="disabled" @on-change="subMenuClick">
                 </Caspanel>
             </div>
         </transition>
@@ -31,9 +31,19 @@ export default {
     props: {
         data: {
             type: Array,
-            default () {
+            default() {
                 return [];
             }
+        },
+        value: {
+            type: Array,
+            default() {
+                return [];
+            }
+        },
+        disabled: {
+            type: Boolean,
+            default: false
         },
         trigger: {
             type: String,
@@ -66,6 +76,8 @@ export default {
     },
     mounted() {
         this.buildLink();
+        this.updateselectedKeys();
+        this.showValue = this.selectedKeys.join(this.splitCharacter);
     },
     methods: {
         /**
@@ -123,6 +135,9 @@ export default {
             // 允许点击选中无子节点的一级菜单项，允许勾选选中二级菜单项
             // 场景1：选中的是无子节点的一级菜单项
             if (!activeItem.hasOwnProperty('children')) {
+                if (this.disabled) {
+                    return;
+                }
                 this.data.forEach(item => {
                     this.$set(item, 'active', item.value === activeItem.value);
                     this.$set(item, 'selected', item.value === activeItem.value);
@@ -195,6 +210,28 @@ export default {
                     });
                 }
             });
+
+            // 同步value值
+            this.updateValue();
+        },
+        /**
+         * 更新选中项到value
+         *
+         */
+        updateValue() {
+            this.clearValue();
+            this.selectedValues.forEach(value => {
+                this.value.push(value);
+            });
+        },
+        /**
+         * 清除value
+         *
+         */
+        clearValue() {
+            while(this.value && this.value.length) {
+                this.value.pop();
+            }
         },
         /**
          * 打开面板时，修正菜单项激活状态，显示选中的项为初始态
@@ -219,6 +256,9 @@ export default {
             }
             this.data.forEach(item => {
                 this.$set(item, 'active', item.value === this.activeMenu.value);
+                (item.children || []).forEach(subItem => {
+                    this.$set(subItem, 'active', this.selectedValues.indexOf(subItem.value) > -1);
+                });
             });
         },
         /**
@@ -274,6 +314,9 @@ export default {
          *
          */
         clear() {
+            if (this.disabled) {
+                return;
+            }
             this.data.forEach(item => {
                 this.$set(item, 'active', false);
                 this.$set(item, 'selected', false);
@@ -284,6 +327,7 @@ export default {
                     });
                 }
             });
+            this.clearValue();
             this.activeMenu = {};
             this.selectedMenu = {};
             this.selectedValues = [];

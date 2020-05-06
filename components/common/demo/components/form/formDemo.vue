@@ -37,12 +37,13 @@ export default {
                     width: '400px'
                 },
                 {
-                    name: 'address',
+                    name: 'search',
                     title: '条件选择',
                     type: 'search',
                     cascader: false,
                     clearable: false,
                     placeholder: '条件选择',
+                    value: {},
                     required: true,
                     data: [
                         {
@@ -114,6 +115,50 @@ export default {
                     required: true,
                     value:"sadadadadssd",
                     width: "100%"
+                },
+                {
+                    name: 'address',
+                    title: '办公地址',
+                    type: 'nvcascader',
+                    splitCharacter: '&',
+                    placeholder: '选择办公地址',
+                    trigger: 'click',
+                    value: [],
+                    disabled: false,
+                    required: true,
+                    width: 300,
+                    data: [{
+                        value: 'beijing',
+                        label: '北京',
+                        children: [
+                            {
+                                value: 'kejiyuan',
+                                label: '百度科技园'
+                            },
+                            {
+                                value: 'dasha',
+                                label: '百度大厦'
+                            },
+                            {
+                                value: 'wanliu',
+                                label: '湾流大厦'
+                            }
+                        ]
+                    }, 
+                    {
+                        value: 'jiangsu',
+                        label: '江苏',
+                        children: [
+                            {
+                                value: 'nanjing',
+                                label: '南京'
+                            },
+                            {
+                                value: 'suzhou',
+                                label: '苏州'
+                            }
+                        ],
+                    }]
                 },
                 {
                     name: 'sexy',

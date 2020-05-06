@@ -197,6 +197,20 @@
                     </Col>
                     <Col
                         :span="item.inline"
+                        v-else-if="item.type.toUpperCase() === 'NVCASCADER'"
+                    >
+                        <NvCascaderSelect
+                            v-model="formtpl[item.name]"
+                            :data="item.data"
+                            :splitCharacter="item.splitCharacter"
+                            :trigger="item.trigger"
+                            :disabled="item.disabled"
+                        >
+                        </NvCascaderSelect>
+                        <slot v-if="item.slot" :name="item.name"></slot>
+                    </Col>
+                    <Col
+                        :span="item.inline"
                         v-else-if="item.type.toUpperCase() === 'INPUTNUMBER'"
                     >
                         <InputNumber
@@ -264,6 +278,7 @@ const FORMTYPE = {
     search: 'object',
     nvtime: 'date',
     nvtimerange: 'array',
+    nvcascader: 'array',
     checkboxgroup: 'array',
     radiogroup: 'string',
     switch: 'boolean',
