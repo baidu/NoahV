@@ -4,6 +4,7 @@
             v-for="(item, i) in data"
             :key="item.value + '_' + i"
             :data="item"
+            :disabled="disabled"
             @on-change="change"
         >
         </Casitem>
@@ -16,7 +17,8 @@
         name: 'Caspanel',
         components: {Casitem},
         props: {
-            data: Array
+            data: Array,
+            disabled: Boolean
         },
         data () {
             return {

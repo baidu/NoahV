@@ -1,6 +1,6 @@
 <template>
     <li class="sub-menu-item">
-        <Checkbox v-model="data.active" @on-change="change"></Checkbox>
+        <Checkbox v-model="data.active" :disabled="disabled" @on-change="change"></Checkbox>
         <span :title="data.label">{{ data.label }}</span>
     </li>
 </template>
@@ -8,7 +8,8 @@
     export default {
         name: 'Casitem',
         props: {
-            data: Object
+            data: Object,
+            disabled: Boolean
         },
         methods: {
             change() {

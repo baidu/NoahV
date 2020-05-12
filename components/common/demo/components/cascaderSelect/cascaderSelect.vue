@@ -1,6 +1,6 @@
 <template>
     <div>
-        <NvCascaderSelect :data="list" :splitCharacter="splitCharacter" trigger="click" @on-change="changeHandler"></NvCascaderSelect>
+        <NvCascaderSelect :value="value" :data="list" :splitCharacter="splitCharacter" trigger="click" :disabled="disabled" @on-change="changeHandler"></NvCascaderSelect>
     </div>
 </template>
 
@@ -10,11 +10,14 @@ export default {
     data () {
         const self = this;
         return {
+            value: [],
+            disabled: true,
             splitCharacter: ',',
             list: [
                 {
                     label: '美食',
-                    value: 'meishi'
+                    value: 'meishi',
+                    selected: true
                 },
                 {
                     label: '酒水',
