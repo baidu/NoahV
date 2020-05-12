@@ -32,9 +32,6 @@ import {t} from './locale';
 import mixin from './mixins';
 
 
-const NODATATIP = t('mdtrend.nodataTip');
-const ERRORCONFIG = t('mdtrend.errorConfig');
-const TITLE = t('mdtrend.title');
 const HEIGHT = 320;
 const TIMING = 60;
 const DEFAULTTIME = 'before(2h)';
@@ -914,7 +911,7 @@ export default {
                     let freshTime = conf.freshTime ? conf.freshTime : TIMING;
                     this.data = mdData.data.data;
                     if (mdData.data.data.length === 0) {
-                        this.showError(NODATATIP);
+                        this.showError(t('mdtrend.nodataTip'));
                     }
                     else {
                         this.initChatType(conf.style.displayType);
@@ -940,7 +937,7 @@ export default {
         renderDataByConf(conf) {
             let trendConf = u.clone(conf);
             this.trendConf = u.extend({
-                title: TITLE,
+                title: t('mdtrend.title'),
                 style: {
                     displayType: 'line',
 
@@ -955,7 +952,7 @@ export default {
                 this.$nextTick(() => {
                     this.data = trendConf.display;
                     if (trendConf.display.length === 0) {
-                        this.showError(NODATATIP);
+                        this.showError(t('mdtrend.nodataTip'));
                     }
                     else {
                         this.renderChart(trendConf.display);
@@ -1300,7 +1297,7 @@ export default {
                     this.freshData();
                 }
                 catch (e) {
-                    this.showError(ERRORCONFIG);
+                    this.showError(t('mdtrend.errorConfig'));
                 }
             }
         },
