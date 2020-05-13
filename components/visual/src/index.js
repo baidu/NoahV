@@ -26,6 +26,8 @@ import NvMDBubble from './mdbubble/mdbubble';
 import NvMap from './nvMap/index';
 import NvMDPie from './nvPie/index';
 
+import locale from './locale';
+
 const defaultEchartsConf = Object.assign({}, ApiConf, eConfig);
 
 const noahVisual = {
@@ -46,7 +48,10 @@ const noahVisual = {
     NvMDPie
 };
 
-const install = (Vue, opts) => {
+const install = (Vue, opts = {}) => {
+    locale.use(opts.locale);
+    locale.i18n(opts.i18n);
+
     Object.keys(noahVisual).forEach(key => {
         Vue.component(key, noahVisual[key]);
     });
