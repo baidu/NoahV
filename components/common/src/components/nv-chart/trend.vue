@@ -291,6 +291,7 @@ export default {
             this.isLoading = false;
             this.noData = false;
             this.errTip = '';
+            this.hasRequested = false;
             this.redraw();
         },
         getData() {
