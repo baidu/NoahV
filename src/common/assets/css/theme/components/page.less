@@ -1,0 +1,40 @@
+@import './select.less';
+@import '../custom.less';
+.ivu-page-item {
+    border: @noahv-page-border;
+    border-radius: @noahv-page-border-radius;
+    min-width: @noahv-page-item-min-width;
+    height: @noahv-page-item-height;
+}
+
+.ivu-page-item-active {
+    background-color: @noahv-page-active-bg;
+}
+
+.ivu-page-prev, .ivu-page-next, .ivu-page-item-jump-prev, .ivu-page-item-jump-next {
+    border: @noahv-page-border;
+    border-radius: @noahv-page-border-radius;
+}
+
+.ivu-page-item:hover a {
+    color: @noahv-page-hover-color;
+}
+.ivu-page-item-active a, .ivu-page-item-active:hover a {
+    color: @noahv-page-avtive-hover-color;
+}
+
+.ivu-page-options {
+	float: @noahv-page-options-float;
+
+	&:before {
+		content: @noahv-page-options-content;
+		display: block;
+		float: left;
+		line-height: @noahv-page-item-height;
+		margin-right: 2px;
+	}
+}
+
+
+
+

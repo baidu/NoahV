@@ -1,0 +1,28 @@
+@import '../custom.less';
+.ivu-input {
+    border-radius: @noahv-input-border-radius;
+    padding: @noahv-input-padding;
+    border: @noahv-input-default-border;
+    color: @noahv-font-text-color;
+    height: @nohav-input-height;
+}
+
+.ivu-input:focus {
+    border-color: @noahv-input-focus-color;
+    box-shadow: @noahv-input-focus-box-shadow;
+    background: @noahv-input-active-bg;
+}
+
+.ivu-input:hover {
+    border-color: @noahv-input-focus-color;
+}
+
+.ivu-input::-webkit-input-placeholder {
+    color: @noahv-font-placeholder-color;
+    font-size: @noahv-font-size-base 
+}
+
+.ivu-input[disabled], fieldset[disabled] .ivu-input {
+    color: @noahv-font-text-disabled-color;
+    background-color: @noahv-input-disabled-bg;
+}

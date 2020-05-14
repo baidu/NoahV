@@ -1,0 +1,47 @@
+@import '../custom.less';
+.ivu-tabs-bar {
+    border-bottom: 1px solid rgba(231, 233, 240, 0.9);
+}
+
+.ivu-tabs-nav .ivu-tabs-tab {
+    padding: @noahv-tabs-padding;
+    font-size: @noahv-tabs-title-font-size;
+}
+
+.ivu-tabs-ink-bar {
+    background-color: @noahv-tabs-bg;
+}
+
+.ivu-tabs-nav .ivu-tabs-tab-active {
+    color: @noahv-tabs-color;
+}
+
+.ivu-tabs-nav .ivu-tabs-tab:hover {
+    color: @noahv-tabs-color;
+}
+
+.ivu-tabs.ivu-tabs-card > .ivu-tabs-bar .ivu-tabs-nav-container {
+    height: @noahv-tabs-card-height;
+}
+.ivu-tabs.ivu-tabs-card > .ivu-tabs-bar .ivu-tabs-tab {
+    height: @noahv-tabs-card-height;
+    padding: @noahv-tabs-padding;
+    margin-right: @noahv-tabs-margin-right;
+    border: @noahv-tabs-border;
+    border-radius: @noahv-tabs-border-radius;
+    background: @noahv-tabs-card-bg;
+}
+
+.ivu-tabs-nav-container:focus .ivu-tabs-tab-focused {
+    border-color: @noahv-tabs-border-color;
+}
+.ivu-tabs.ivu-tabs-card > .ivu-tabs-bar .ivu-tabs-tab-active {
+    height: @noahv-tabs-card-active-height;
+    border-color: @noahv-tabs-border-color;
+    color: @noahv-font-text-color;
+    background: @noahv-tabs-card-active-bg;
+}
+
+.ivu-tabs.ivu-tabs-card > .ivu-tabs-bar .ivu-tabs-tab .ivu-icon-ios-close-empty {
+    margin-right: @noahv-tabs-close-icon-margin-right;
+}
