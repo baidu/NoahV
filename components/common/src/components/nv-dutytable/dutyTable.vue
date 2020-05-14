@@ -429,7 +429,7 @@ export default {
             }
             let timeConfig = row.time[0].isHidden ? row.time[1] : row.time[0];
             const {year, month, date} = timeConfig;
-            const currentTime = new Date();
+            const currentTime = +this.getDateByTimezone();
             const firstWeekDay = new Date(year, month, date);
             const lastWeekDay = new Date(year, month, date + 6, 23, 59, 59);
             return {
@@ -450,8 +450,8 @@ export default {
          * @return {string} 当前时间
          */
         getTimeFormatHourMinute() {
-            let hours = ('00' + new Date().getHours()).slice(-2);
-            let minutes = ('00' + new Date().getMinutes()).slice(-2);
+            let hours = ('00' + this.getDateByTimezone().getHours()).slice(-2);
+            let minutes = ('00' + this.getDateByTimezone().getMinutes()).slice(-2);
             return hours + ':' + minutes;
         },
 
@@ -501,7 +501,7 @@ export default {
                 return this.currentDutyGroup;
             }
             try {
-                const diffDay = (CONSTANTS.today - this.startTime) / 1000 / 3600 / 24;
+                const diffDay = (this.today - this.startTime) / 1000 / 3600 / 24;
                 for (let row = 0; row < this.tableArr.length; row++) {
                     for (let col = 0; this.tableArr[row].duty; col++) {
                         if (this.tableArr[row].duty[col].diffDay === diffDay) {
