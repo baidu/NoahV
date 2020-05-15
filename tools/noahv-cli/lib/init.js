@@ -31,18 +31,18 @@ module.exports = function init({dashboard, ts}) {
         process.exit();
     }
     logUtil.info('noahv-cli', 'info', `Creating a new ${type} project in ${dest}`);
-    let spinner = ora('Generating template...');
-    spinner.start();
+    // let spinner = ora('Generating template...');
+    // spinner.start();
 
     // get template form git
     getGitTemplate(type, dest, function (err) {
-        spinner.stop();
+        // spinner.stop();
         if (err) {
             logUtil.error('noahv-cli', 'error', 'get template failed');
             console.log('');
-            console.log('Error info:');
-            console.log(err);
-            console.log('');
+            // console.log('Error info:');
+            // console.log(err);
+            // console.log('');
             return;
         }
         // remove git repo

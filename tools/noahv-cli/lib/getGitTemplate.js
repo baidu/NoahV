@@ -6,35 +6,27 @@
  * @author darren(darrenywyu@gmail.com)
  */
 
-const fs = require('fs-extra');
-const path = require('path');
-const downloadGit = require('download-git-repo');
-
+let spawn = require('cross-spawn');
 
 const templateDir = 'template';
 
-function filterGitFile(type, dest, cb) {
-    var fileList = fs.readdirSync(dest);
-    fileList.forEach(function (item) {
-        if (item !== templateDir) {
-            fs.removeSync(path.resolve(dest, item));
-        }
-    });
-    fs.copySync(path.resolve(dest, templateDir, type), dest);
-    fs.removeSync(path.resolve(dest, templateDir));
-    cb();
-}
-
 // getTemplate form github
 function getTemplate(type, dest, cb) {
-    downloadGit('github:baidu/NoahV', dest, function(err) {
-        if (err) {
-            cb(err);
-        }
-        else {
-            filterGitFile(type, dest, cb);
-        }
-    });
+    let cloneArgs = [
+        'clone',
+        '--branch',
+        'template_' + type,
+        'https://github.com/baidu/NoahV.git',
+        dest
+    ];
+    let gitCloneCmd = spawn.sync('git', cloneArgs, {stdio: 'inherit'});
+    if (gitCloneCmd.status !== 0) {
+        console.log('');
+        cb('clone template failed!')
+    }
+    else {
+        cb();
+    }
 }
 
 module.exports = getTemplate;
