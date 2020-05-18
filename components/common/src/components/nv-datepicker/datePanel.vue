@@ -183,11 +183,13 @@ export default {
             this.updateYearRange();
             
             this.dateValue.leftDays = datePickerUtils.getMonthData(
+                this,
                 this.dateValue.startYear,
                 this.dateValue.startMonth,
                 this.isDisabledHandler
             )['days'];
             this.dateValue.rightDays = datePickerUtils.getMonthData(
+                this,
                 this.dateValue.endYear,
                 this.dateValue.endMonth,
                 this.isDisabledHandler
@@ -205,11 +207,13 @@ export default {
             this.linkage(pos);
             this.updateYearRange();
             this.dateValue.leftDays = datePickerUtils.getMonthData(
+                this,
                 this.dateValue.startYear,
                 this.dateValue.startMonth,
                 this.isDisabledHandler
             )['days'];
             this.dateValue.rightDays = datePickerUtils.getMonthData(
+                this,
                 this.dateValue.endYear,
                 this.dateValue.endMonth,
                 this.isDisabledHandler
