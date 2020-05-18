@@ -6,16 +6,55 @@
 let datePickerUtils = {};
 
 /**
+ * get offset with utc
+ *
+ * @param {string} timezone the timezone like UTC+8:45
+ * @return the offset with utc
+ */
+function getOffset(timezone) {
+    // timezone: UTC+8:00
+    let offset = 0;
+    let flag = timezone.slice(4, timezone.length);
+    let tags = flag.split(':');
+    for (let i = 0; i < tags.length; i++) {
+        if (i === 0) {
+            offset += Number.parseInt(tags[i], 10) * 60;
+        }
+        else if (i === 1) {
+            offset += Number.parseInt(tags[i], 10);
+        }
+    }
+    // return ms
+    return timezone.slice(3, 4) === '+' ? offset * 60000 : -(offset * 60000);
+};
+
+/**
+ * get time at special timezone
+ *
+ * @param {string} timezone the timezone like UTC+8:45
+ * @return the time at special timezone
+ */
+function getDateByTimezone(date, timezone) {
+    if (!date || !timezone) {
+        return;
+    }
+    let utc = date.getTime() + date.getTimezoneOffset() * 60000;
+    let timeAtZone = getOffset(timezone) + utc;
+    return new Date(timeAtZone);
+};
+
+/**
  * 获取某个月份的所有日期
  *
+ * @param {Object} vue vue实例
  * @param {number} year 年份
  * @param {number} month 月份
  * @param {Function} disabledHandler 不可选日期处理器
  * @return {Object} 所有的日期集合
  */
-datePickerUtils.getMonthData = (year, month, disabledHandler) => {
+datePickerUtils.getMonthData = (vue, year, month, disabledHandler) => {
     let ret = [];
-    let today = new Date();
+    let today = datePickerUtils.getCurrent(vue);
     if (!year || !month) {
         if (month !== 0) {
             year = today.getFullYear();
@@ -108,6 +147,17 @@ datePickerUtils.clearHours = date => {
     const cloneDate = new Date(date);
     cloneDate.setHours(0, 0, 0, 0);
     return cloneDate.getTime();
+};
+
+/**
+ * 获取特定时区的当前时间
+ *
+ * @param {Object} vue vue实例 
+ * @return {Date} 特定时区的时间
+ */
+datePickerUtils.getCurrent = vue => {
+    const timezone = vue && vue.$noahvI18n ? vue.$noahvI18n.getTimezone() : undefined;
+    return timezone ? getDateByTimezone(new Date(), timezone) : new Date();
 };
 
 /**
