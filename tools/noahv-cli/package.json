@@ -1,6 +1,6 @@
 {
   "name": "noahv-cli",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "",
   "bin": {
     "noahv": "bin/noahv",
@@ -28,7 +28,6 @@
     "chalk": "^2.4.1",
     "commander": "^2.15.1",
     "cross-spawn": "^6.0.5",
-    "download-git-repo": "^1.0.2",
     "empty-dir": "^1.0.0",
     "fs-extra": "^6.0.0",
     "inquirer": "^5.2.0",
