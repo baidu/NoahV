@@ -540,13 +540,13 @@ export default {
         initOptions() {
             let minYear, maxYear;
             if (['date', 'datetime'].indexOf(this.type) > -1) {
-                let date = this.dateValue.selectedDate || this.dateValue.startDate || new Date();
+                let date = this.dateValue.selectedDate || this.dateValue.startDate || datePickerUtils.getCurrent(this);
                 minYear = date.getFullYear();
                 maxYear = date.getFullYear();
             }
             else if (['daterange', 'daterangetime'].indexOf(this.type) > -1) {
-                let startDate = this.dateValue.startSelectedDate || this.dateValue.startDate || new Date();
-                let endDate = this.dateValue.endSelectedDate || this.dateValue.endDate || new Date();
+                let startDate = this.dateValue.startSelectedDate || this.dateValue.startDate || datePickerUtils.getCurrent(this);
+                let endDate = this.dateValue.endSelectedDate || this.dateValue.endDate || datePickerUtils.getCurrent(this);
                 minYear = u.min([startDate.getFullYear(), endDate.getFullYear()]);
                 maxYear = u.max([startDate.getFullYear(), endDate.getFullYear()]);
             }
@@ -573,7 +573,7 @@ export default {
             }
         },
         defaultInition() {
-            let now = new Date();
+            let now = datePickerUtils.getCurrent(this);
             if (['date', 'datetime'].indexOf(this.type) > -1) {
                 this.dateValue.startDate = new Date(now.getFullYear(), now.getMonth(), 1);
                 let updateStartKeys = [
