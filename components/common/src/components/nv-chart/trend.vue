@@ -147,7 +147,7 @@ export default {
             default: ''
         },
         params: {
-            type: Object,
+            type: [Object, Array],
             default: () => ({})
         },
         options: {
