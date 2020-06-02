@@ -58,7 +58,7 @@ function requestFailureHandler(error) {
     }
     // 如果isSilent为true，不弹窗提示
     if (error.isSilent === true) {
-        return;
+        return error;
     }
     // 处理弹窗信息，全局配置弹窗参数
     vueInstance.$Notice.config({
@@ -238,14 +238,15 @@ request.install = (Vue, opt) => {
         requestFailureHandler(error);
     });
 
-    axiosInstance.interceptors.response.use(response => {
-        if (typeof request.hooks.beforeSuccess === 'function') {
-            response = request.hooks.beforeSuccess(response);
-        }
-        return requestSuccessHandler(response);
-    }, error => {
-        requestFailureHandler(error);
-    });
+    axiosInstance.interceptors.response.use(
+        response => {
+            if (typeof request.hooks.beforeSuccess === 'function') {
+                response = request.hooks.beforeSuccess(response);
+            }
+            return requestSuccessHandler(response);
+        },
+        error => requestFailureHandler(error)
+    );
 
 };
 

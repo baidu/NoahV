@@ -68,7 +68,7 @@ const start = (container, store, i18n) => {
  *
  * @param  {Object} config router config for project
  */
-const router = config => {
+const router = (config, mode) => {
     invariant(
         config instanceof Array,
         `[noahv.router] router should be Array, but got ${typeof router}`
@@ -115,6 +115,7 @@ const router = config => {
         ];
     }
     noahv._router = new VueRouter({
+        mode: mode ? mode : 'hash',
         routes
     });
 };
