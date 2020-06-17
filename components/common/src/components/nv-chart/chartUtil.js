@@ -158,7 +158,7 @@ chartUtil.formatter = {
         return str + chartUtil.kBitUnit[idx];
     },
     number: function (value, number) {
-        number = number ? number : 1;
+        number = number === 'undefined' ? 1 : number;
         if (value < 10000) {
             return Number(value.toFixed(number));
         } // 15000、20000，当number为0的时候，都是2万
@@ -204,7 +204,8 @@ chartUtil.getUnitType = unit => {
     };
 };
 
-chartUtil.getTooltipValue = (value, unit) => {
+chartUtil.getTooltipValue = (value, unit, decimals) => {
+    decimals = decimals === undefined ? 2 : decimals;
     let {
         type,
         suffix
@@ -216,7 +217,7 @@ chartUtil.getTooltipValue = (value, unit) => {
     else {
         let prefix = value < 0 ? '-' : '';
         value = Math.abs(value);
-        value = chartUtil.formatter[type](value, 2);
+        value = chartUtil.formatter[type](value, decimals);
         valueStr = prefix + value + suffix;
     }
     return valueStr;

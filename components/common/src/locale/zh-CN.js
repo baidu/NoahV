@@ -9,7 +9,9 @@ export default {
 	trend: {
 		loadingData: '数据加载中...',
 		noData: '无数据',
-		getDataErrot: '获取数据失败'
+		getDataError: '获取数据失败',
+		detail: '查看详情',
+		detailTitle: '监控对象'
 	},
 	datepicker: {
 		timeLabel: '时间',

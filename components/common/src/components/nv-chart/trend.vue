@@ -9,7 +9,7 @@
         
         <div class="trend-detail" v-if="showSeriesDetail">
             <div class="detail-handler" @click="toggleDetailPanel">
-                查看详情
+                {{t('trend.detail')}}
                 <nv-icon type="angle-down" v-show="!showDetailPanel" />
                 <nv-icon type="angle-up" v-show="showDetailPanel" />
             </div>
@@ -230,7 +230,7 @@ export default {
             type: Array,
             default: () => [
                 {
-                    title: '监控对象',
+                    title: t('trend.detailTitle'),
                     key: 'name'
                 },
                 {
@@ -338,7 +338,7 @@ export default {
             // 处理xAxis重叠的问题
             if (typeof this.chart.getWidth === 'function') {
                 let chartWidth = this.chart.getWidth();
-                this.curOptions.xAxis.splitNumber = parseInt(chartWidth / 100, 10)
+                this.curOptions.xAxis.splitNumber = parseInt(chartWidth / 100, 10);
             }
 
             this.chart.setOption(this.curOptions, true);
@@ -534,7 +534,7 @@ export default {
                         label: {
                             position: 'insideEndTop',
                             formatter: () => {
-                                return  chartUtil.numberFormat(+this.options.threshold, 0) + (this.options.unit || '');
+                                return chartUtil.getTooltipValue(+this.options.threshold, this.unitName || '', 0);
                             }
                         },
                         data: [
@@ -556,7 +556,6 @@ export default {
                     let colorIndex = index % this.curOptions.color.length;
                     item.statistic.color = this.curOptions.color[colorIndex];
                     this.detailStatistic.push(item.statistic);
-                    console.log(item.statistic)
                 }
             });
             if (this.detailStatistic.length > 0 && this.detailConf) {
@@ -613,7 +612,7 @@ export default {
                     this.getData();
                 }
                 catch (e) {
-                    this.showError(this.t('trend.getDataErrot'));
+                    this.showError(this.t('trend.getDataError'));
                 }
             }
         },

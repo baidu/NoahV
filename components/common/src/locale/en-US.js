@@ -9,7 +9,9 @@ export default {
 	trend: {
 		loadingData: 'Loading...',
 		noData: 'No data',
-		getDataErrot: 'Failed to get data',
+		getDataError: 'Failed to get data',
+		detail: 'Detail',
+		detailTitle: 'Object'
 	},
 	datepicker: {
 		timeLabel: 'Time',
