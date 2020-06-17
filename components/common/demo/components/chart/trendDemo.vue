@@ -1,5 +1,5 @@
 <template>
-    <NvTrend method="post" :options="options" :title="title" :url="url" :params="params" :show-loading="showLoading"></NvTrend>
+    <NvTrend method="post" :options="options" :title="title" :url="url" :params="params" :show-loading="showLoading" :show-series-detail="true" :seriesFilter="seriesFilter" :unfoldSeriesDetail="true"></NvTrend>
 </template>
 
 <script>
@@ -41,6 +41,18 @@ export default {
                 // nullPointMode: 'connect'
             }
         };
+    },
+    methods: {
+        seriesFilter(series) {
+            return series.map((item) => Object.assign(item, {
+                statistic: {
+                    name: item.name,
+                    max: 100,
+                    min: Math.random() * 10 + 90,
+                    avg: 95
+                }
+            }));
+        }
     }
 };
 </script>

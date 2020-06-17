@@ -6,6 +6,38 @@
         </h3>
         <!-- <vue-echarts :options="curOptions" ref="chart"></vue-echarts> -->
         <div :class="getCls('chart')" ref="chart" v-show="displayChart"></div>
+        
+        <div class="trend-detail" v-if="showSeriesDetail">
+            <div class="detail-handler" @click="toggleDetailPanel">
+                查看详情
+                <nv-icon type="angle-down" v-show="!showDetailPanel" />
+                <nv-icon type="angle-up" v-show="showDetailPanel" />
+            </div>
+            <div class="detail-panel" v-show="showDetailPanel">
+                <ul>
+                    <li class="detail-title">
+                        <span v-for="(conf, index) in detailConf">
+                            <span @click="toggleOrder(index)">
+                                {{conf.title}}
+                                <nv-icon type="arrow-up-line" v-if="conf.order === 'asc'" />
+                                <nv-icon type="arrow-down-line" v-else-if="conf.order === 'desc'" />
+                                <nv-icon type="arrow-default" v-else="!conf.order" />
+                            </span>
+                        </span>
+                    </li>
+                    <li v-for="(item, index) in detailStatistic" v-if="item.name" @click="toggleLegend(index)" :class="{active: !item.active}">
+                        <template v-for="conf in detailConf">
+                            <span v-if="conf.key === 'name' && !item.active" :style="{color: item.color}">
+                                {{item[conf.key]}}
+                            </span>
+                            <span v-else>
+                                {{item[conf.key]}}
+                            </span>
+                        </template>
+                    </li>
+                </ul>
+            </div>
+        </div>
         <div class="trend-error-holder" v-show="errTip" :title="errTip">{{errTip}}</div>
         <div class="trend-error-holder" v-show="noData" v-html="noDataTip"></div>
         <div class="show-loading" v-show="!isLoading">
@@ -38,7 +70,7 @@ const trendOptions = {
         containLabel: true,
         left: 0,
         right: 5,
-        top: 15,
+        top: 15
     },
     chart: {
         height: 250
@@ -48,7 +80,16 @@ const trendOptions = {
     },
     yAxis: {
         minPadding: 0,
-        opposite: false
+        opposite: false,
+        axisLine: {
+            show: false
+        },
+        axisLabel: {
+            color: '#666',
+            inside: true,
+            margin: 0,
+            verticalAlign: 'bottom',
+        }
     },
     xAxis: {
         // type: 'time',
@@ -107,25 +148,6 @@ const trendOptions = {
         enabled: false
     },
     tooltip: {
-        formatter(params) {
-            let time;
-            let seriesTooltip = [];
-            _.each(params, item => {
-                time = m(item.axisValue).format(DATE_FORMAT);
-                let html = `<dd style="padding: 3px 10px;color: ${item.color}">`
-                    + item.seriesName
-                    + ': '
-                    + item.value[1]
-                    + '</dd>';
-                seriesTooltip.push(html);
-            });
-            return '<dl style="min-width: 150px;padding-bottom: 3px">'
-                + '<dt style="background-color: #3a62ca;padding: 5px 10px;color: #fff;margin-bottom: 3px;">'
-                + time
-                + '</dt>'
-                + seriesTooltip.join('')
-                + '</dl>';
-        }
     },
     legend: {
         bottom: 0,
@@ -191,6 +213,44 @@ export default {
             default() {
                 return true;
             }
+        },
+        showSeriesDetail: {
+            type: Boolean,
+            default() {
+                return false;
+            }
+        },
+        unfoldSeriesDetail: {
+            type: Boolean,
+            default() {
+                return false;
+            }
+        },
+        seriesDetailConf: {
+            type: Array,
+            default: () => [
+                {
+                    title: '监控对象',
+                    key: 'name'
+                },
+                {
+                    title: 'Max',
+                    key: 'max'
+                },
+                {
+                    title: 'Min',
+                    key: 'min',
+                    order: 'desc'
+                },
+                {
+                    title: 'Avg',
+                    key: 'avg'
+                }
+            ]
+        },
+        unitName: {
+            type: String,
+            default: ''
         }
     },
 
@@ -200,7 +260,10 @@ export default {
             isLoading: false,
             errTip: '',
             noData: false,
-            hasRequested: false
+            hasRequested: false,
+            showDetailPanel: this.unfoldSeriesDetail ? true : false,
+            detailStatistic: [],
+            detailConf: this.seriesDetailConf
         };
     },
     created() {
@@ -433,6 +496,15 @@ export default {
 
             this.curOptions = Object.assign({}, curOptions);
 
+
+            if (this.showSeriesDetail) {
+                this.curOptions.legend.show = false;
+                this.curOptions.grid.bottom = 0;
+                if (this.curOptions.dataZoom) {
+                    this.curOptions.dataZoom[0].show = false;
+                }
+            }
+
             // 判断X轴时间跨度
             if ((timeGap / 1000) < (24 * 60 * 60)) {
                 xAxisFormat = 'HH:mm:ss';
@@ -478,6 +550,56 @@ export default {
                     }
                 });
             }
+
+            this.curOptions.series.forEach((item, index) => {
+                if (item.statistic) {
+                    let colorIndex = index % this.curOptions.color.length;
+                    item.statistic.color = this.curOptions.color[colorIndex];
+                    this.detailStatistic.push(item.statistic);
+                    console.log(item.statistic)
+                }
+            });
+            if (this.detailStatistic.length > 0 && this.detailConf) {
+                let key;
+                let order;
+                this.detailConf.forEach(item => {
+                    if (item.order) {
+                        key = item.key;
+                        order = item.order;
+                    }
+                });
+                if (key && order) {
+                    this.sortSeries(order, key);
+                }
+            }
+
+
+            // 处理坐标轴
+            this.curOptions.yAxis.axisLabel.formatter = value => {
+                return chartUtil.getyAxisValue(value, this.unitName);
+            };
+
+            this.curOptions.tooltip.formatter = params => {
+                let time;
+                let seriesTooltip = [];
+                _.each(params, item => {
+                    time = m(item.axisValue).format(DATE_FORMAT);
+                    let html = `<dd style="padding: 3px 10px;color: ${item.color}">`
+                        + item.seriesName
+                        + ': '
+                        + (item.value[1] === null ? '-'
+                        : chartUtil.getTooltipValue(item.value[1], this.unitName))
+                        + '</dd>';
+                    seriesTooltip.push(html);
+                });
+                return '<dl style="min-width: 150px;padding-bottom: 3px">'
+                    + '<dt style="background-color: #3a62ca;padding: 5px 10px;color: #fff;margin-bottom: 3px;">'
+                    + time
+                    + '</dt>'
+                    + seriesTooltip.join('')
+                    + '</dl>';
+            };
+
             this.renderTrend();
         },
         /**
@@ -548,6 +670,64 @@ export default {
             if (this.chart) {
                 this.chart.resize();
             }
+        },
+        toggleDetailPanel() {
+            this.showDetailPanel = !this.showDetailPanel;
+        },
+        toggleOrder(index) {
+            this.detailConf = this.detailConf.map((item, i) => {
+                if (index === i) {
+                    if (item.order === 'asc') {
+                        item.order = 'desc';
+                        this.sortSeries('desc', item.key);
+                    }
+                    else {
+                        item.order = 'asc';
+                        this.sortSeries('asc', item.key);
+                    }
+                }
+                else {
+                    item.order = 'default';
+                }
+                return item;
+            });
+        },
+        sortSeries(order, key) {
+            this.detailStatistic.sort((a, b) => {
+                if (typeof a[key] === 'number' && typeof b[key] === 'number') {
+                    return order === 'asc' ? a[key] - b[key] : b[key] - a[key];
+                }
+                else if (typeof a[key] === 'string' && typeof b[key] === 'string'){
+                    let aStr = a[key];
+                    let bStr = b[key];
+                    let alen = aStr.length;
+                    let blen = bStr.length;
+                    let i = 0;
+                    while(i < alen && i < blen) {
+                        if (aStr.charAt(i) === bStr.charAt(i)) {
+                            i++;
+                        }
+                        else {
+                            return order === 'asc' ? aStr.charAt(i) - bStr.charAt(i) : bStr.charAt(i) - aStr.charAt(i);
+                        }
+                    }
+                    return order === 'asc' ? alen - blen : blen - alen;
+                }
+                else {
+                    return order === 'asc' ? a[key] > b[key] : b[key] < a[key];
+                }
+            });
+        },
+        toggleLegend(index) {
+            if (this.chart) {
+                this.chart.dispatchAction({
+                    type: 'legendToggleSelect',
+                    name: this.detailStatistic[index].name
+                });
+            }
+            this.detailStatistic[index].active = !this.detailStatistic[index].active;
+            let temp = this.detailStatistic[index];
+            this.detailStatistic.splice(index, 1, temp);
         }
     },
     beforeDestroy() {
