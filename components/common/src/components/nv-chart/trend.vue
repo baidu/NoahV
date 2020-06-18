@@ -9,7 +9,7 @@
         
         <div class="trend-detail" v-if="showSeriesDetail">
             <div class="detail-handler" @click="toggleDetailPanel">
-                {{t('trend.detail')}}
+                {{showSeriesDetailText}}
                 <nv-icon type="angle-down" v-show="!showDetailPanel" />
                 <nv-icon type="angle-up" v-show="showDetailPanel" />
             </div>
@@ -212,6 +212,12 @@ export default {
             type: Boolean,
             default() {
                 return true;
+            }
+        },
+        showSeriesDetailText: {
+            type: String,
+            default () {
+                return t('trend.detail');
             }
         },
         showSeriesDetail: {
