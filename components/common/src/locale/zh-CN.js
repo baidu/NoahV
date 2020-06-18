@@ -11,7 +11,10 @@ export default {
 		noData: '无数据',
 		getDataError: '获取数据失败',
 		detail: '查看详情',
-		detailTitle: '监控对象'
+		detailTitle: '监控对象',
+		tenThousand: '万',
+		million: '百万',
+		must: '千万'
 	},
 	datepicker: {
 		timeLabel: '时间',

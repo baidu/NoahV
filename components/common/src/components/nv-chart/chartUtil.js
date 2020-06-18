@@ -118,7 +118,7 @@ chartUtil.formatter = {
         return _.indexOf(chartUtil.kByteUnit, value) !== -1;
     },
     percent: function (value, number) {
-        number = number ? number : 2; // 如果末尾尾0，不需要显示+ '%'
+        number = number !== undefined ? number : 2;
         return Number(value.toFixed(number));
     },
     bytes: function (value, number, byteUnit, unit) {
@@ -157,22 +157,21 @@ chartUtil.formatter = {
         }
         return str + chartUtil.kBitUnit[idx];
     },
-    number: function (value, number) {
-        number = number === 'undefined' ? 1 : number;
+    number: function (value, number, p1, p2, t) {
+        number = number === undefined ? 2 : number;
         if (value < 10000) {
             return Number(value.toFixed(number));
-        } // 15000、20000，当number为0的时候，都是2万
-        // 所以需要判断一下value是否能整除，不能整除的至少保留一位小数
+        } 
         else if (value < 1000000) {
             return (value / 10000).toFixed(value % 10000 === 0
-                ? number : Math.max(1, number)) + '万';
+                ? number : Math.max(1, number)) + t('trend.tenThousand');
         }
         else if (value < 10000000) {
             return (value / 1000000).toFixed(value % 1000000 === 0
-                ? number : Math.max(1, number)) + '百万';
+                ? number : Math.max(1, number)) + t('trend.million');
         }
         return (value / 10000000.0).toFixed(value % 10000000 === 0
-            ? number : Math.max(1, number)) + '千万';
+            ? number : Math.max(1, number)) + t('trend.must');
     }
 };
 
@@ -204,7 +203,7 @@ chartUtil.getUnitType = unit => {
     };
 };
 
-chartUtil.getTooltipValue = (value, unit, decimals) => {
+chartUtil.getTooltipValue = (value, unit, decimals, t) => {
     decimals = decimals === undefined ? 2 : decimals;
     let {
         type,
@@ -217,20 +216,21 @@ chartUtil.getTooltipValue = (value, unit, decimals) => {
     else {
         let prefix = value < 0 ? '-' : '';
         value = Math.abs(value);
-        value = chartUtil.formatter[type](value, decimals);
+        value = chartUtil.formatter[type](value, decimals, undefined, undefined, t);
         valueStr = prefix + value + suffix;
     }
     return valueStr;
 };
 
-chartUtil.getyAxisValue = (value, unit) => {
+chartUtil.getyAxisValue = (value, unit, decimals, t) => {
+    decimals = decimals === undefined ? 2 : decimals;
     let {
         type,
         suffix
     } = chartUtil.getUnitType(unit);
     let prefix = value < 0 ? '-' : '';
     value = Math.abs(value);
-    value = chartUtil.formatter[type](value, 2);
+    value = chartUtil.formatter[type](value, decimals, undefined, undefined, t);
     return prefix + value + suffix;
 };
 

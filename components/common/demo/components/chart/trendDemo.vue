@@ -1,5 +1,5 @@
 <template>
-    <NvTrend method="post" :options="options" :title="title" :url="url" :params="params" :show-loading="showLoading" :show-series-detail="true" :seriesFilter="seriesFilter" :unfoldSeriesDetail="true" showSeriesDetailText="详情"></NvTrend>
+    <NvTrend method="post" :options="options" :title="title" :url="url" :params="params" :show-loading="showLoading" :show-series-detail="true" :seriesFilter="seriesFilter" :unfoldSeriesDetail="true" showSeriesDetailText="详情" :axisLabelFormatter="axisLabelFormatter" :tooltipFormatter="tooltipFormatter" unitName="bytes"></NvTrend>
 </template>
 
 <script>
@@ -52,6 +52,12 @@ export default {
                     avg: 95
                 }
             }));
+        },
+        axisLabelFormatter(chartUtil, value, unitName, decimals, t) {
+            return chartUtil.getyAxisValue(value, unitName, 0, t)
+        },
+        tooltipFormatter(chartUtil, value, unitName, decimals, t) {
+            return chartUtil.getTooltipValue(value, unitName, 0, t);
         }
     }
 };

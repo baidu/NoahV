@@ -257,7 +257,9 @@ export default {
         unitName: {
             type: String,
             default: ''
-        }
+        },
+        axisLabelFormatter: Function,
+        tooltipFormatter: Function
     },
 
     data() {
@@ -540,7 +542,7 @@ export default {
                         label: {
                             position: 'insideEndTop',
                             formatter: () => {
-                                return chartUtil.getTooltipValue(+this.options.threshold, this.unitName || '', 0);
+                                return chartUtil.getTooltipValue(+this.options.threshold, this.unitName || '', 0, this.t);
                             }
                         },
                         data: [
@@ -581,19 +583,28 @@ export default {
 
             // 处理坐标轴
             this.curOptions.yAxis.axisLabel.formatter = value => {
-                return chartUtil.getyAxisValue(value, this.unitName);
+                let arg = [value, this.unitName, 2, this.t];
+                if (typeof this.axisLabelFormatter === 'function') {
+                    return this.axisLabelFormatter.call(this, chartUtil, ...arg);
+                }
+                return chartUtil.getyAxisValue(...arg);
             };
 
             this.curOptions.tooltip.formatter = params => {
                 let time;
                 let seriesTooltip = [];
+                let getTooltipValue = chartUtil.getTooltipValue;
+                if (typeof this.tooltipFormatter === 'function') {
+                    getTooltipValue = this.tooltipFormatter.bind(this, chartUtil);
+                }
                 _.each(params, item => {
                     time = m(item.axisValue).format(DATE_FORMAT);
+                    let arg = [item.value[1], this.unitName, 2, this.t];
                     let html = `<dd style="padding: 3px 10px;color: ${item.color}">`
                         + item.seriesName
                         + ': '
                         + (item.value[1] === null ? '-'
-                        : chartUtil.getTooltipValue(item.value[1], this.unitName))
+                        : getTooltipValue.call(this, ...arg))
                         + '</dd>';
                     seriesTooltip.push(html);
                 });
