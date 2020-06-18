@@ -25,13 +25,13 @@
                             </span>
                         </span>
                     </li>
-                    <li v-for="(item, index) in detailStatistic" v-if="item.name" @click="toggleLegend(index)" :class="{active: !item.active}">
+                    <li v-for="(item, index) in detailStatistic" v-if="item.name" :class="{active: !item.active}"  @click="toggleLegend(index)">
                         <template v-for="conf in detailConf">
-                            <span v-if="conf.key === 'name' && !item.active" :style="{color: item.color}">
+                            <span v-if="conf.key === 'name' && !item.active" :style="{color: item.color}" >
                                 {{item[conf.key]}}
                             </span>
                             <span v-else>
-                                {{item[conf.key]}}
+                                {{formatStatics(item[conf.key])}}
                             </span>
                         </template>
                     </li>
@@ -744,6 +744,12 @@ export default {
             this.detailStatistic[index].active = !this.detailStatistic[index].active;
             let temp = this.detailStatistic[index];
             this.detailStatistic.splice(index, 1, temp);
+        },
+        formatStatics(value) {
+            if (typeof value !== 'number') {
+                return value;
+            }
+            return chartUtil.getTooltipValue(value, this.unitName || '', 0, this.t);
         }
     },
     beforeDestroy() {
