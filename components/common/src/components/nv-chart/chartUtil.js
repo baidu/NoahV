@@ -110,4 +110,130 @@ chartUtil.numberFormat = (value, number = 1) => {
     return formatNumber;
 };
 
+
+chartUtil.kByteUnit = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB', 'BB'];
+chartUtil.kBitUnit = ['', 'k', 'm', 'g', 't', 'p', 'e', 'z', 'y', 'b'];
+chartUtil.formatter = {
+    isByteUnit: function (value) {
+        return _.indexOf(chartUtil.kByteUnit, value) !== -1;
+    },
+    percent: function (value, number) {
+        number = number !== undefined ? number : 2;
+        return Number(value.toFixed(number));
+    },
+    bytes: function (value, number, byteUnit, unit) {
+        number = number === undefined ? 2 : number;
+        byteUnit = byteUnit ? byteUnit : 1024;
+        var idx = unit ? _.indexOf(chartUtil.kByteUnit, unit) : 0;
+        var len = chartUtil.kByteUnit.length - 1;
+        while (value >= byteUnit && idx < len) {
+            value = value / byteUnit;
+            idx++;
+        }
+        var str = '';
+        if (number === 0) {
+            str = Math.round(value);
+        }
+        else {
+            str = Number(value.toFixed(number));
+        }
+        return str + chartUtil.kByteUnit[idx];
+    },
+    bits: function (value, number, bitUnit) {
+        number = number === undefined ? 2 : number;
+        bitUnit = bitUnit ? bitUnit : 1024;
+        var idx = 0;
+        var len = chartUtil.kBitUnit.length - 1;
+        while (value >= bitUnit && idx < len) {
+            value = value / bitUnit;
+            idx++;
+        }
+        var str = '';
+        if (number === 0) {
+            str = Math.round(value);
+        }
+        else {
+            str = Number(value.toFixed(number));
+        }
+        return str + chartUtil.kBitUnit[idx];
+    },
+    number: function (value, number, p1, p2, t) {
+        number = number === undefined ? 2 : number;
+        if (value < 10000) {
+            return Number(value.toFixed(number));
+        } 
+        else if (value < 1000000) {
+            return (value / 10000).toFixed(value % 10000 === 0
+                ? number : Math.max(1, number)) + t('trend.tenThousand');
+        }
+        else if (value < 10000000) {
+            return (value / 1000000).toFixed(value % 1000000 === 0
+                ? number : Math.max(1, number)) + t('trend.million');
+        }
+        return (value / 10000000.0).toFixed(value % 10000000 === 0
+            ? number : Math.max(1, number)) + t('trend.must');
+    }
+};
+
+chartUtil.getUnitType = unit => {
+    let type;
+    let suffix = '';
+    if (unit.toUpperCase() === 'BYTES' || unit.toUpperCase() === 'BYTES/S') {
+        suffix = unit.toUpperCase() === 'BYTES' ? '' : '/s';
+        type = 'bytes';
+    }
+    else if (unit.toUpperCase() === 'BPS') {
+        type = 'bytes';
+        suffix = unit.substring(1, unit.length);
+    }
+    else if (unit === '%') {
+        type = 'percent';
+        suffix = '%';
+    }
+    else if (chartUtil.formatter.isByteUnit(unit)) {
+        type = 'bytes';
+    }
+    else {
+        type = 'number';
+        suffix = unit;
+    }
+    return {
+        type,
+        suffix
+    };
+};
+
+chartUtil.getTooltipValue = (value, unit, decimals, t) => {
+    decimals = decimals === undefined ? 2 : decimals;
+    let {
+        type,
+        suffix
+    } = chartUtil.getUnitType(unit);
+    let valueStr = '';
+    if (isNaN(value)) {
+        valueStr = '-';
+    }
+    else {
+        let prefix = value < 0 ? '-' : '';
+        value = Math.abs(value);
+        value = chartUtil.formatter[type](value, decimals, undefined, undefined, t);
+        valueStr = prefix + value + suffix;
+    }
+    return valueStr;
+};
+
+chartUtil.getyAxisValue = (value, unit, decimals, t) => {
+    decimals = decimals === undefined ? 2 : decimals;
+    let {
+        type,
+        suffix
+    } = chartUtil.getUnitType(unit);
+    let prefix = value < 0 ? '-' : '';
+    value = Math.abs(value);
+    value = chartUtil.formatter[type](value, decimals, undefined, undefined, t);
+    return prefix + value + suffix;
+};
+
+
+
 export default chartUtil;

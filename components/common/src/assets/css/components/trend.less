@@ -5,6 +5,46 @@
     position: relative;
     .@{noahvPrefixCls}-chart {
     	min-height: 300px;
+    	border: none;
+    	margin-bottom: 0;
+    }
+    .trend-detail {
+    	.detail-handler {
+    		cursor: pointer;
+    		.noahv-icon {
+    			font-size: 12px;
+    			margin-left: 5px;
+    			cursor: pointer  !important;
+
+    		}
+    	}
+    	.detail-panel {
+    		ul {
+    			display: table;
+    			width: 100%;
+    			li {
+		    		list-style: none;
+		    		display: table-row;
+		    		width: 100%;
+		    		color: #999;
+		    		height: 40px;
+		    		line-height: 40px;
+		    		span {
+		    			display: table-cell;
+		    			border-bottom: 1px solid #EBEBEB;
+		    		}
+		    		&.detail-title {
+		    			color: #666;
+		    			.noahv-icon {
+		    				cursor: pointer !important;
+		    			}
+		    		}
+		    		&.active {
+		    			color: #333;
+		    		}
+		    	}
+    		}
+    	}
     }
     .trend-error-holder {
 		margin: 20px;
