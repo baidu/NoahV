@@ -6,7 +6,7 @@
 
 ## 示例
 
-:::demo 趋势图示例
+:::demo 基础示例
 ```html
 <template>
     <nv-trend
@@ -15,7 +15,11 @@
         :options="optionsTrend"
         :url="url"
         :params="params"
-        show-loading="数据加载中..." />
+        unit-name="Bytes"
+        show-loading="数据加载中..."
+        :axisLabelFormatter="axisLabelFormatter"
+        scrollTrigger=".noahv-layout"
+    />
 </template>
 <script>
 export default {
@@ -26,6 +30,77 @@ export default {
             },
             optionsTrend: {},
             url: '/api/trend'
+        }
+    },
+    methods: {
+        axisLabelFormatter(chartUtil, value, unitName, decimals, t) {
+            return chartUtil.getyAxisValue(value, unitName, 0, t)
+        }
+    }
+}
+</script>
+```
+:::
+
+:::demo 展示统计数据示例
+```html
+<template>
+    <nv-trend
+        title="指标详情" 
+        method="post"
+        :options="optionsTrend"
+        :url="url"
+        :params="params"
+        :show-series-detail="true"
+        :unfoldSeriesDetail="true"
+        :seriesFilter="seriesFilter"
+        :seriesDetailConf="seriesDetailConf"
+        show-loading="数据加载中..."
+        unit-name="个"
+        scrollTrigger=".noahv-layout"
+    />
+</template>
+<script>
+export default {
+    data() {
+        return {
+            params: {
+                test: 'trend'
+            },
+            optionsTrend: {},
+            url: '/api/trend',
+            seriesDetailConf: [
+                {
+                    title: '指标名称',
+                    key: 'name' // 第一个key需要固定为name
+                },
+                {
+                    title: '最大值',
+                    key: 'max'  // 该key为对应seriesFilter返回的statistic数据
+                },
+                {
+                    title: '最小值',
+                    key: 'min',
+                    order: 'desc' // 可以通过order指定默认排序
+                },
+                {
+                    title: '平均值',
+                    key: 'avg'
+                }
+            ]
+        }
+    },
+    methods: {
+        seriesFilter(series) {
+            return series.map((item) => Object.assign(item, {
+                // 需要在series中加入statistic数据
+                statistic: {
+                    name: item.name,
+                    max: Math.floor(Math.random() * 10 + 90),
+                    min: Math.floor(Math.random() * 10 + 80),
+                    avg: Math.floor(Math.random() * 10 + 85),
+                }
+            }));
         }
     }
 }
@@ -48,6 +123,21 @@ export default {
 | dataFilter    | 数据后置处理钩子，可在数据请求完成后对数据进行封装处理，参数为请求到的数据，必须要有返回值 | Function | -             |
 | showLoading   | request请求loading文字                                       | String   | 数据加载中... |
 | noDataTip     | 无数据提示，支持HTML                                         | String   | 无数据        |
+| scrollTrigger     | 趋势图会默认添加滚动加载事件，默认相对于document来计算滚动，如有特殊定位需求，可通过该参数指定添加滚动事件的Target,格式如‘#id’, '.test'。  | String   | -        |
+| resizeTrigger     | 趋势图会默认添加resize事件，默认相对于window来计算，如有特殊需求，可通过该参数指定添加resize事件的Target,格式如‘#id’, '.test'。  | String   | -        |
+| needSyncTooltips     | 是否需要联动toolTip,默认为联动                         | Boolean   | true        |
+| unitName     | 数据单位，如果为流量单位，将会根据1024进制转换为类似`KB/KBps`等格式        | String   | -        |
+| axisLabelFormatter     | 纵坐标轴格式化函数，参数为chartUtil,当前值,单位,小数点位数,国际化翻译函数t     | Function   | -        | 
+| tooltipFormatter     | tooltip格式化函数，参数为chartUtil,当前值,单位,小数点位数,国际化翻译t       | Function   | -        |
+| showSeriesDetail    | 展示数据统计信息，如Avg/Max/Min等统计指标,详见上方示例                | Boolean   | false        |
+| showSeriesDetailText    |   统计信息展开收起文案               | String   | '查看详情'        |
+| unfoldSeriesDetail    | 是否默认展示数据统计信息                 | Boolean   | false        |
+| seriesDetailConf    | 展示统计信息配置                 | Object   | [{title:'监控对象',key:'name'},{title:'Max',key:'max'},{title:'Min',key:'min',order:'desc'},{title:'Avg',key:'avg'}]        |
+
+
+
+
+
 
 :::demo request请求返回数据格式
 ```json
