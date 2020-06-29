@@ -1199,8 +1199,10 @@ export default {
                             let html = `<dd class="echarts-tooltip-item" style="color: ${item.color}">`
                                 + item.seriesName
                                 + ': '
+                                + `<span class="echarts-tooltip-item-value">`
                                 + mdutil.setDecimal(item.value[1], decimals)
                                 + valueSuffix
+                                + `</span>`
                                 + '</dd>';
                             seriesTooltip.push(html);
                         });
