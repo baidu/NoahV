@@ -53,7 +53,7 @@ header是一个数组，可以通过children配置二级、三级菜单，当选
 | hasLogin     | 是否启用登录菜单                       | Boolean           | -           |
 | url          | 登录获取用户信息的API                   | String            | -           |
 | logout       | 退出登录的地址                         | String            | -           |
-| subNav       | 登录菜单的下拉子菜单，详见组合示例和下方说明| Array        | -           |
+| subnav       | 登录菜单的下拉子菜单，详见组合示例和下方说明| Array        | -           |
 
 ### subNav配置
 
