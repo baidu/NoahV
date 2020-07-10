@@ -615,8 +615,9 @@ export default {
                     + seriesTooltip.join('')
                     + '</dl>';
             };
-
-            this.renderTrend();
+            this.$nextTick(() => {
+                this.renderTrend();
+            });
         },
         /**
          * caculate the sceen's position and judge whether to load
