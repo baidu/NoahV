@@ -42,7 +42,7 @@ header是一个数组，可以通过children配置二级、三级菜单，当选
 | hasLogo      | 是否需要启用网站logo                   | Boolean           | -           |
 | title        | 鼠标放到logo上时的悬浮提示，hasLogo为false时，显示title替代logo | String            | -           |
 | src          | logo图片的源地址                       | String            | -           |
-| href          | 点击logo跳转地址                       | String            | -           |
+| link          | 点击logo跳转地址                       | String            | -           |
 
 
 
