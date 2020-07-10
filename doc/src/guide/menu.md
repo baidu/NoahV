@@ -42,7 +42,7 @@ header是一个数组，可以通过children配置二级、三级菜单，当选
 | hasLogo      | 是否需要启用网站logo                   | Boolean           | -           |
 | title        | 鼠标放到logo上时的悬浮提示，hasLogo为false时，显示title替代logo | String            | -           |
 | src          | logo图片的源地址                       | String            | -           |
-| href          | 点击logo跳转地址                       | String            | -           |
+| link          | 点击logo跳转地址                       | String            | -           |
 
 
 
@@ -53,7 +53,7 @@ header是一个数组，可以通过children配置二级、三级菜单，当选
 | hasLogin     | 是否启用登录菜单                       | Boolean           | -           |
 | url          | 登录获取用户信息的API                   | String            | -           |
 | logout       | 退出登录的地址                         | String            | -           |
-| subNav       | 登录菜单的下拉子菜单，详见组合示例和下方说明| Array        | -           |
+| subnav       | 登录菜单的下拉子菜单，详见组合示例和下方说明| Array        | -           |
 
 ### subNav配置
 

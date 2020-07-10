@@ -44,9 +44,9 @@ $  noahv create list
 * test (单测模板)
 
 ### 开发调试
-执行如下命令一键启动调试，访问 <a href="http://127.0.0.1:8088" target="_blank">http://127.0.0.1:8088</a> 查看效果。
+执行如下命令一键启动调试，访问 <a href="http://127.0.0.1:8088?em" target="_blank">http://127.0.0.1:8088?em</a> 查看效果。
 
-访问 <a href="http://127.0.0.1:8088/#/test/list" target="_blank">http://127.0.0.1:8088/#/test/list</a>查看上述创建的`test/list`页面，
+访问 <a href="http://127.0.0.1:8088/?em#/test/list" target="_blank">http://127.0.0.1:8088/?em#/test/list</a>查看上述创建的`test/list`页面，
 
 ```
 $  noahv start
