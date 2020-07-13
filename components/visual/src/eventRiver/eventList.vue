@@ -152,6 +152,7 @@ let Timebar = {
 
 // Main component
 export default {
+    mixins: [mixin],
     components: { EventTimer, Timebar, EventDetail },
     props: {
         config: Object,
