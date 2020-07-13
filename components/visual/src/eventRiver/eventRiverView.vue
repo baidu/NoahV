@@ -248,6 +248,12 @@ export default {
             },
             deep: true
         },
+        params: {
+            handler(params) {
+                this.timeParams = params;
+                this.getEventData();
+            }
+        },
         type(type) {
             this.eventType = type;
         }
