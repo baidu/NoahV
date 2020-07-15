@@ -1,6 +1,6 @@
 {
   "name": "noahv-cli",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "",
   "bin": {
     "noahv": "bin/noahv",
