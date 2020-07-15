@@ -210,7 +210,7 @@ export default {
 | type           | 匹配事件关键字，唯一标识                                     | string  | -      | NJ01error                                                    |
 | checked        | 图表初始化时，是否为选中状态                                 | boolean | true   | true                                                         |
 | eventDetailMap | 详情字段自定义配置，用户可以根据查询的结果，自定义配置展示字段的展示与关键字对照 | [{}]    | -      | [{"name":   "创造者", "key": "product.operator",   "type": "arr"}] |
-| eventDetailMap | 详情字段自定义配置，用户可以根据查询的结果，自定义配置展示字段的展示与关键字对照 | [{}]    | -      | [{"name":   "创造者", "key": "product.operator",   "type": "arr"}] |
+
 
 eventDetailMap详情配置说明，用户可以根据业务需求自定义配置需要展示的字段和形式
 
