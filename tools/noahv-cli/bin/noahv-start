@@ -14,10 +14,10 @@ program.on('--help', function () {
   console.log(chalk.gray('    # start in default port'));
   console.log('    $ noahv start');
   console.log();
-  console.log(chalk.gray('    # strat in specified port'));
+  console.log(chalk.gray('    # start in specified port'));
   console.log('    $ noahv start port');
   console.log();
 });
 
-program.parse(process.argv
-// require('../lib/start')(program);
+program.parse(process.argv);
+require('../lib/start')(program);
