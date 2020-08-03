@@ -535,6 +535,7 @@ export default {
 | width      | 时间选择框的宽度                         | Number            | 300         |
 | mode      | 时间展示风格配置，可设置common和console两个值。console代表公有云时间组件风格。详见示列| String | console|
 | theme      | 面板皮肤风格配置，可设置common和console两个值。console代表公有云时间组件风格。详见示列| String | console|
+| readonly  | 设置时间展示面板不可编辑 | Boolean    | true          |
 | autoFix    | 选择的开始时间大于结束时间时，是否自动修正。当type为date或daterange时有效 | Boolean    | false          |
 | autoClose  | 设置自动关闭面板，当type为date或daterange时有效 | Boolean    | false          |
 | dateFormat | 设置日期时间显示格式，详见示例和[说明](http://momentjs.cn/) | String       | YYYY-MM-DD  |

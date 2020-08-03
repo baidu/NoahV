@@ -15,6 +15,7 @@
                     class="input"
                     :value="shownDateStr"
                     :style="style.height"
+                    :readonly="readonly"
                     :placeholder="placeholder"
                 />
             </div>
@@ -209,6 +210,10 @@ export default {
         autoClose: {
             type: Boolean,
             default: false
+        },
+        readonly: {
+            type: Boolean,
+            default: true
         },
         disabledDateClickTip: {
             type: String,
