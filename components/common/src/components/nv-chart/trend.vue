@@ -505,14 +505,6 @@ export default {
             this.curOptions = Object.assign({}, curOptions);
 
 
-            if (this.showSeriesDetail) {
-                this.curOptions.legend.show = false;
-                this.curOptions.grid.bottom = 0;
-                if (this.curOptions.dataZoom) {
-                    this.curOptions.dataZoom[0].show = false;
-                }
-            }
-
             // 判断X轴时间跨度
             if ((timeGap / 1000) < (24 * 60 * 60)) {
                 xAxisFormat = 'HH:mm:ss';
