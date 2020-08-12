@@ -13,6 +13,7 @@ export default {
 		detail: '查看详情',
 		detailTitle: '监控对象',
 		tenThousand: '万',
+		hundredMillion: '亿',
 		million: '百万',
 		must: '千万'
 	},

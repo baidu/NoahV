@@ -13,6 +13,7 @@ export default {
 		detail: 'Detail',
 		detailTitle: 'Object',
 		tenThousand: 'Ten thousand',
+		hundredMillion: 'Hundred million',
 		million: 'Million',
 		must: 'Must'
 	},
