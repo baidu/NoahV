@@ -106,14 +106,7 @@ export default {
 ```html
 <template>
     <div>
-        <NvTree
-        :items="items"
-        :search="search"
-        :checkbox="checkbox"
-        @on-check-change="onCheckChangeHandler"
-        :width="300"
-        >
-        </NvTree>
+        <NvTree :items="items" :search="search" :checkbox="checkbox" @on-check-change="onCheckChangeHandler"></NvTree>
     </div>
 </template>
 
@@ -187,11 +180,7 @@ export default {
 ```html
 <template>
     <div>
-        <NvTree
-        :items="items"
-        :draggable="draggable"
-        :width="300">
-        </NvTree>
+        <NvTree :items="items" :draggable="draggable"></NvTree>
     </div>
 </template>
 
@@ -252,13 +241,7 @@ export default {
 ```html
 <template>
     <div>
-        <NvTree
-        :items="items"
-        :editMode="editMode"
-        :appendIcon="appendIcon"
-        :removeIcon="removeIcon"
-        :editIcon="editIcon"
-        :width="300">
+        <NvTree :items="items" :editMode="editMode" :appendIcon="appendIcon" :removeIcon="removeIcon" :editIcon="editIcon">
         </NvTree>
     </div>
 </template>
@@ -323,12 +306,7 @@ export default {
 ```html
 <template>
     <div>
-        <NvTree
-        :items="items"
-        :width="300"
-        @on-select-change="onSelectChangeHandler"
-        @on-expand-change="onExpandChangeHandler"
-        >
+        <NvTree :items="items" @on-select-change="onSelectChangeHandler" @on-expand-change="onExpandChangeHandler">
         </NvTree>
     </div>
 </template>
@@ -405,23 +383,22 @@ export default {
 <template>
     <div>
         <NvTree
-        :items="items"
-        :search="search"
-        :accordion="accordion"
-        :draggable="draggable"
-        :editMode="editMode"
-        :checkbox="checkbox"
-        :multiple="multiple"
-        :appendIcon="appendIcon"
-        :removeIcon="removeIcon"
-        :editIcon="editIcon"
-        :lazyLoad="lazyLoad"
-        :loadData="loadData"
-        :width="320"
-        @on-check-change="onCheckChange"
-        @on-select-change="onSelectChange"
-        @on-expand-change="onExpandChange"
-        >
+                :items="items"
+                :search="search"
+                :accordion="accordion"
+                :draggable="draggable"
+                :editMode="editMode"
+                :checkbox="checkbox"
+                :multiple="multiple"
+                :appendIcon="appendIcon"
+                :removeIcon="removeIcon"
+                :editIcon="editIcon"
+                :lazyLoad="lazyLoad"
+                :loadData="loadData"
+                @on-check-change="onCheckChange"
+                @on-select-change="onSelectChange"
+                @on-expand-change="onExpandChange"
+            >
         </NvTree>
     </div>
 </template>
@@ -571,7 +548,6 @@ export default {
 | 属性       | 说明                                     | 类型              | 默认值      |
 | ---------- | -----------------------------------------| --------------    | ----------- |
 | items      | 树结构节点数据，每一项item的可配置字段见下方说明     | Array   | -           |
-| width      | 组件的宽度                               |  Number           | 210         |
 | search     | 是否开启搜索功能                         | Boolean           | false       |
 | accordion  | 是否开启手风琴效果                       | Boolean           | false       |
 | draggable  | 是否支持拖动功能                         | Boolean           | false       |
