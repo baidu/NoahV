@@ -592,16 +592,18 @@ export default {
                 _.each(params, item => {
                     time = m(item.axisValue).format(DATE_FORMAT);
                     let arg = [item.value[1], this.unitName, 2, this.t];
-                    let html = `<dd style="padding: 3px 10px;color: ${item.color}">`
+                    let html = `<dd class="trend-tooltip-item" style="color: ${item.color}">`
                         + item.seriesName
                         + ': '
+                        + `<span class="trend-tooltip-item-value">`
                         + (item.value[1] === null ? '-'
                         : getTooltipValue.call(this, ...arg))
+                        + `</span>`
                         + '</dd>';
                     seriesTooltip.push(html);
                 });
-                return '<dl style="min-width: 150px;padding-bottom: 3px">'
-                    + '<dt style="background-color: #3a62ca;padding: 5px 10px;color: #fff;margin-bottom: 3px;">'
+                return '<dl class="trend-tooltip-wrapper">'
+                    + '<dt class="trend-tooltip-title">'
                     + time
                     + '</dt>'
                     + seriesTooltip.join('')
