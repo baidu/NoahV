@@ -14,7 +14,13 @@
                 <nv-icon type="angle-up" v-show="showDetailPanel" />
             </div>
             <div class="detail-panel" v-show="showDetailPanel">
-                <ul>
+                <ul class="detail-title-wrapper">
+                    <colgroup>
+                        <col width="55%">
+                        <col width="15%" >
+                        <col width="15%">
+                        <col width="15%">
+                    </colgroup>
                     <li class="detail-title">
                         <span v-for="(conf, index) in detailConf">
                             <span @click="toggleOrder(index)">
@@ -25,17 +31,27 @@
                             </span>
                         </span>
                     </li>
-                    <li v-for="(item, index) in detailStatistic" v-if="item.name" :class="{active: !item.active}"  @click="toggleLegend(index)">
-                        <template v-for="conf in detailConf">
-                            <span v-if="conf.key === 'name' && !item.active" :style="{color: item.color}" >
-                                {{item[conf.key]}}
-                            </span>
-                            <span v-else>
-                                {{formatStatics(item[conf.key])}}
-                            </span>
-                        </template>
-                    </li>
                 </ul>
+                <div class="detail-list-wrapper">
+                    <ul >
+                        <colgroup>
+                            <col width="55%">
+                            <col width="15%">
+                            <col width="15%">
+                            <col width="15%">
+                        </colgroup>
+                        <li v-for="(item, index) in detailStatistic" v-if="item.name" :class="{active: !item.active}"  @click="toggleLegend(index)">
+                            <template v-for="conf in detailConf">
+                                <span v-if="conf.key === 'name' && !item.active" :style="{color: item.color}" >
+                                    {{item[conf.key]}}
+                                </span>
+                                <span v-else>
+                                    {{formatStatics(item[conf.key])}}
+                                </span>
+                            </template>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
         <div class="trend-error-holder" v-show="errTip" :title="errTip">{{errTip}}</div>
@@ -551,6 +567,7 @@ export default {
                 });
             }
 
+            this.detailStatistic = [];
             this.curOptions.series.forEach((item, index) => {
                 if (item.statistic) {
                     let colorIndex = index % this.curOptions.color.length;
@@ -723,7 +740,12 @@ export default {
                     return order === 'asc' ? alen - blen : blen - alen;
                 }
                 else {
-                    return order === 'asc' ? a[key] > b[key] : b[key] < a[key];
+                    if (order === 'asc') {
+                        return a[key] > b[key] ? -1 : 1;
+                    }
+                    else {
+                        return a[key] > b[key] ? 1 : -1;
+                    }
                 }
             });
         },
