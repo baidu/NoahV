@@ -159,19 +159,20 @@ chartUtil.formatter = {
     },
     number: function (value, number, p1, p2, t) {
         number = number === undefined ? 2 : number;
-        if (value < 10000) {
+        const tenThousand = 10000;
+        const hundredMillion = 100000000;
+
+        if (value < tenThousand) {
             return Number(value.toFixed(number));
         } 
-        else if (value < 1000000) {
-            return (value / 10000).toFixed(value % 10000 === 0
-                ? number : Math.max(1, number)) + t('trend.tenThousand');
+        else if (value < hundredMillion) {
+            return (value / tenThousand).toFixed(value % tenThousand === 0
+                ? number : Math.max(1, number)) + t('trend.tenThousand')
         }
-        else if (value < 10000000) {
-            return (value / 1000000).toFixed(value % 1000000 === 0
-                ? number : Math.max(1, number)) + t('trend.million');
+        else {
+            return (value / hundredMillion).toFixed(value % hundredMillion === 0
+                ? number : Math.max(1, number)) + t('trend.hundredMillion')
         }
-        return (value / 10000000.0).toFixed(value % 10000000 === 0
-            ? number : Math.max(1, number)) + t('trend.must');
     }
 };
 
