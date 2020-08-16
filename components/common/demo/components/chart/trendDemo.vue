@@ -1,5 +1,5 @@
 <template>
-    <NvTrend method="post" :options="options" :title="title" :url="url" :params="params" :show-loading="showLoading" :show-series-detail="true" :seriesFilter="seriesFilter" :unfoldSeriesDetail="true" showSeriesDetailText="详情" :axisLabelFormatter="axisLabelFormatter" :tooltipFormatter="tooltipFormatter" unitName="bytes"></NvTrend>
+    <NvTrend method="post" :options="options" :title="title" :url="url" :params="params" :show-loading="showLoading" :show-series-detail="true" :seriesFilter="seriesFilter" :unfoldSeriesDetail="true" showSeriesDetailText="详情" :axisLabelFormatter="axisLabelFormatter" :tooltipFormatter="tooltipFormatter" :showNull="showNull" unitName="bytes"></NvTrend>
 </template>
 
 <script>
@@ -12,6 +12,7 @@ export default {
             title: '趋势图实例(秒)',
             // api 必选
             url: '/api/trend',
+            showNull: true,
             params: {
                 test: true
             },
@@ -45,6 +46,7 @@ export default {
     methods: {
         seriesFilter(series) {
             return series.map((item) => Object.assign(item, {
+                connectNulls: true,
                 statistic: {
                     name: item.name,
                     max: 100,
