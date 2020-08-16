@@ -275,7 +275,13 @@ export default {
             default: ''
         },
         axisLabelFormatter: Function,
-        tooltipFormatter: Function
+        tooltipFormatter: Function,
+        showNull: {
+            type: Boolean,
+            default() {
+                return false;
+            }
+        }
     },
 
     data() {
@@ -601,30 +607,43 @@ export default {
 
             this.curOptions.tooltip.formatter = params => {
                 let time;
+                let timeHtml = '';
                 let seriesTooltip = [];
+                let itemHtml = '';
                 let getTooltipValue = chartUtil.getTooltipValue;
                 if (typeof this.tooltipFormatter === 'function') {
                     getTooltipValue = this.tooltipFormatter.bind(this, chartUtil);
                 }
+
+                let html = '';
                 _.each(params, item => {
-                    time = m(item.axisValue).format(DATE_FORMAT);
                     let arg = [item.value[1], this.unitName, 2, this.t];
-                    let html = `<dd class="trend-tooltip-item" style="color: ${item.color}">`
-                        + item.seriesName
-                        + ': '
-                        + `<span class="trend-tooltip-item-value">`
-                        + (item.value[1] === null ? '-'
-                        : getTooltipValue.call(this, ...arg))
-                        + `</span>`
-                        + '</dd>';
-                    seriesTooltip.push(html);
+                    let itemVal = '';
+                    if (item.value[1] == null) {
+                        itemVal = this.showNull ? '-' : '';
+                    }
+                    else {
+                        itemVal = getTooltipValue.call(this, ...arg);
+                    }
+                    time = m(item.axisValue).format(DATE_FORMAT);
+                    timeHtml = `<dl class="trend-tooltip-wrapper">
+                                <dt class="trend-tooltip-title">
+                                ${time}
+                                </dt>`;
+                    
+                    itemHtml += `<dd class="trend-tooltip-item" style="color: ${item.color}">
+                                ${item.seriesName}:
+                                <span class="trend-tooltip-item-value">
+                                ${itemVal}
+                                </span></dd></dl>`;
+
+                    if (item.value[1] != null 
+                        || (item.value[1] === null && this.showNull)) {
+                        html = timeHtml + itemHtml;
+                    }
                 });
-                return '<dl class="trend-tooltip-wrapper">'
-                    + '<dt class="trend-tooltip-title">'
-                    + time
-                    + '</dt>'
-                    + seriesTooltip.join('')
-                    + '</dl>';
+
+                return html;
             };
             this.$nextTick(() => {
                 this.renderTrend();
