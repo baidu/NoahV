@@ -760,6 +760,17 @@ export default {
                     }
                     return order === 'asc' ? alen - blen : blen - alen;
                 }
+                else if (a[key] === '' || b[key] === '')  {
+                    if (a[key] === b[key]) {
+                        return 0;
+                    }
+                    if (order === 'asc') {
+                        return a[key] === '' ? -1 : 1;
+                    }
+                    else {
+                        return b[key] === '' ? -1 : 1;
+                    }
+                }
                 else {
                     if (order === 'asc') {
                         return a[key] > b[key] ? -1 : 1;

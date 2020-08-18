@@ -1,5 +1,8 @@
 ## ChangeLog
 
+## 1.1.44
+* [功能优化] 修复趋势图查看详情空字符串排序问题
+
 ## 1.1.43
 [功能修复] 给趋势图tooltip添加showNull（showNull: true tooltip 数据为null, 显示 为"-"; showNull: false: tooltip 数据为null不显示）属性
 
