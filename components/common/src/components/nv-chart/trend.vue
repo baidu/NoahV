@@ -796,7 +796,7 @@ export default {
             if (typeof value !== 'number') {
                 return value;
             }
-            return chartUtil.getTooltipValue(value, this.unitName || '', 0, this.t);
+            return chartUtil.getTooltipValue(value, this.unitName || '', 2, this.t);
         }
     },
     beforeDestroy() {
