@@ -605,46 +605,59 @@ export default {
                 return chartUtil.getyAxisValue(...arg);
             };
 
-            this.curOptions.tooltip.formatter = params => {
-                let time;
-                let timeHtml = '';
-                let seriesTooltip = [];
-                let itemHtml = '';
-                let getTooltipValue = chartUtil.getTooltipValue;
-                if (typeof this.tooltipFormatter === 'function') {
-                    getTooltipValue = this.tooltipFormatter.bind(this, chartUtil);
-                }
+            // this.options的tooltip 优先级最高
+            let hasFormatter = false;
+            if (typeof this.options.tooltip != 'undefined' &&
+              typeof this.options.tooltip.formatter !='undefined') {
+                hasFormatter = true;
+            }
 
-                let html = '';
-                _.each(params, item => {
-                    let arg = [item.value[1], this.unitName, 2, this.t];
-                    let itemVal = '';
-                    if (item.value[1] == null) {
-                        itemVal = this.showNull ? '-' : '';
+            if (!hasFormatter) {
+                this.curOptions.tooltip.formatter = params => {
+                    let time;
+                    let timeHtml = '';
+                    let seriesTooltip = [];
+                    let itemHtml = '';
+                    let getTooltipValue = chartUtil.getTooltipValue;
+                    if (typeof this.tooltipFormatter === 'function') {
+                        getTooltipValue = this.tooltipFormatter.bind(this, chartUtil);
                     }
-                    else {
-                        itemVal = getTooltipValue.call(this, ...arg);
-                    }
-                    time = m(item.axisValue).format(DATE_FORMAT);
-                    timeHtml = `<dl class="trend-tooltip-wrapper">
-                                <dt class="trend-tooltip-title">
-                                ${time}
-                                </dt>`;
-                    
-                    itemHtml += `<dd class="trend-tooltip-item" style="color: ${item.color}">
-                                ${item.seriesName}:
-                                <span class="trend-tooltip-item-value">
-                                ${itemVal}
-                                </span></dd></dl>`;
 
-                    if (item.value[1] != null 
-                        || (item.value[1] === null && this.showNull)) {
-                        html = timeHtml + itemHtml;
-                    }
-                });
+                    let html = '';
+                    _.each(params, item => {
+                        let arg = [item.value[1], this.unitName, 2, this.t];
+                        let itemVal = '';
+                        if (item.value[1] == null) {
+                            itemVal = this.showNull ? '-' : '';
+                        }
+                        else {
+                            itemVal = getTooltipValue.call(this, ...arg);
+                        }
+                        time = m(item.axisValue).format(DATE_FORMAT);
+                        timeHtml = `<dl class="trend-tooltip-wrapper">
+                                    <dt class="trend-tooltip-title">
+                                    ${time}
+                                    </dt>`;
+                        
+                        itemHtml += `<dd class="trend-tooltip-item" style="color: ${item.color}">
+                                    ${item.seriesName}:
+                                    <span class="trend-tooltip-item-value">
+                                    ${itemVal}
+                                    </span></dd></dl>`;
 
-                return html;
-            };
+                        if (item.value[1] != null 
+                            || (item.value[1] === null && this.showNull)) {
+                            html = timeHtml + itemHtml;
+                        }
+                    });
+
+                    return html;
+                };
+            }
+
+
+            // this.options的优先级最高
+            // this.curOptions = chartUtil.deepAssign({}, this.curOptions, this.options);
             this.$nextTick(() => {
                 this.renderTrend();
             });
