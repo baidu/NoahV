@@ -20,7 +20,7 @@ export default {
             showLoading: 'Loading...',
             // options 可选
             options: {
-                threshold: 140000,
+                threshold: 140000
                 // series: [{
                 //     type: 'line', 
                 //     markLine: {

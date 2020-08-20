@@ -654,10 +654,7 @@ export default {
                     return html;
                 };
             }
-
-
-            // this.options的优先级最高
-            // this.curOptions = chartUtil.deepAssign({}, this.curOptions, this.options);
+            
             this.$nextTick(() => {
                 this.renderTrend();
             });
