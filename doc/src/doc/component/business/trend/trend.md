@@ -118,6 +118,7 @@ export default {
 | params        | request请求参数                                              | Object   | -             |
 | options       | Echarts 趋势图配置                                           | Object   | -             |
 | requestConfig | 可以将url和params、method等参数合并到requestConfig中         | Object   | {}            |
+| showNull       | 趋势图数据为 null的时候，tooltip可设置显示'-'或者不显示                                       | Boolean   | false            |
 | trendData     | 可以直接将已经获取好的数据交给趋势图来渲染                   | Object   | {}            |
 | seriesFilter  | 数据线条后置处理钩子，参数为当前有的数据线条，必须要返回需要展示的线条数据 | Function | -             |
 | dataFilter    | 数据后置处理钩子，可在数据请求完成后对数据进行封装处理，参数为请求到的数据，必须要有返回值 | Function | -             |
