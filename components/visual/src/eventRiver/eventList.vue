@@ -23,7 +23,7 @@
                         <div class="fr list-content">{{subEvent.type}}</div>
                         <div class="title">{{subEvent.name}}</div>
                     </div>
-                    <div class="detail" v-show="subEvent.show">
+                    <div class="detail" v-if="subEvent.show">
                         <i class="event-arrow"></i>
                         <EventDetail :event="subEvent" :series="series" />
                     </div>
@@ -54,6 +54,9 @@ const TIME_FORMAT = 'YYYY-MM-DD HH:mm:ss';
  */
 function orderEvents(events) {
     let list = [];
+    if (events === undefined){
+        return list;
+    }
     events.map(event => {
         event.eventList.map(subEvent => {
             subEvent.show = false;
