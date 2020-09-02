@@ -39,6 +39,7 @@
                             :placeholder="item.placeholder"
                             :style="item.style"
                             :disabled="item.disabled"
+                            :clearable="item.clearable"
                             @on-change="selectChange($event, item)"
                         >
                             <Option v-for="(list, i) in item.option"
