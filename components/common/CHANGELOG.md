@@ -1,4 +1,6 @@
 ## ChangeLog
+## 1.1.47
+* [功能优化] 支持表单Select组件clearable可以清空已选项
 
 ## 1.1.46
 * [功能修复] 修复趋势图自定义tooltip无效bug
@@ -10,7 +12,7 @@
 * [功能优化] 修复趋势图查看详情空字符串排序问题
 
 ## 1.1.43
-[功能修复] 给趋势图tooltip添加showNull（showNull: true tooltip 数据为null, 显示 为"-"; showNull: false: tooltip 数据为null不显示）属性
+* [功能修复] 给趋势图tooltip添加showNull（showNull: true tooltip 数据为null, 显示 为"-"; showNull: false: tooltip 数据为null不显示）属性
 
 ## 1.1.42
 * [功能修复] 修复趋势图查看详情排序错误以及刷新时条目数重复添加问题
