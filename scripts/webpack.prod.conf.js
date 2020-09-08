@@ -5,8 +5,8 @@ var webpack = require('webpack')
 var merge = require('webpack-merge')
 var baseWebpackConfig = require('./webpack.base.conf')
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var MiniCssExtractPlugin = require('mini-css-extract-plugin')
 var UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+var MiniCssExtractPlugin = require('mini-css-extract-plugin');
 var OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 var env = config.build.env;
 
@@ -21,7 +21,7 @@ var webpackConfig = merge(baseWebpackConfig, {
         filename: assetsPath('js/[name].js'),
         chunkFilename: assetsPath('js/[name].[chunkhash].min.js')
     },
-    optimization: {
+     optimization: {
         splitChunks: {
             cacheGroups: {
                 // noahv: {
@@ -55,24 +55,22 @@ var webpackConfig = merge(baseWebpackConfig, {
         ]
     },
     plugins: [
-        // extract css into its own file
+        new webpack.optimize.OccurrenceOrderPlugin(),
+
         new MiniCssExtractPlugin({
             filename: assetsPath('css/[name].css?[chunkhash]')
         }),
-         // generate dist index.html with correct asset hash for caching.
-        // you can customize output by editing /index.html
-        // see https://github.com/ampedandwired/html-webpack-plugin
+
         new HtmlWebpackPlugin({
             filename: config.build.index,
             template: 'index.html',
             inject: true,
-            // necessary to consistently work with multiple chunks via CommonsChunkPlugin
             chunksSortMode: 'dependency',
             hash: true,
             favicon: 'src/common/assets/img/favicon.ico',
         })
     ]
-})
+});
 
 if (config.build.productionGzip) {
     var CompressionWebpackPlugin = require('compression-webpack-plugin')
@@ -92,4 +90,4 @@ if (config.build.productionGzip) {
     )
 }
 
-module.exports = webpackConfig
+module.exports = webpackConfig;

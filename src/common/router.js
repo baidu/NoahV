@@ -1,6 +1,7 @@
 /**
  * @file router config
  */
+
 export default [
     /* eslint-disable no-undef */
     // Keep this line if you want auto add router by noahv create
@@ -25,6 +26,23 @@ export default [
     {
         component: r => require.ensure([], () => r(require('src/demo/chart/chartDemo')), 'chartDemo'),
         path: '/chartDemo'
+    },
+    {
+        path: '/dashboard/list',
+        component: r => require.ensure([], () => r(require('../view/dashboard/list')), 'dashboardList'),
+        entry: true
+    },
+    {
+        path: '/dashboard/edit',
+        component: r => require.ensure([], () => r(require('../view/dashboard/edit')), 'dashboardEdit')
+    },
+    {
+        path: '/dashboard/view',
+        component: r => require.ensure([], () => r(require('../view/dashboard/view')), 'dashboardView')
+    },
+    {
+        path: '/dashboard/widget/edit',
+        component: r => require.ensure([], () => r(require('../view/dashboard/widget/edit')), 'dashboardWidgetEdit')
     },
     // please keep this object last one
     {

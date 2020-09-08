@@ -5,8 +5,6 @@ import noahvComponent from 'noahv-component';
 Vue.use(iView);
 Vue.use(noahvComponent);
 
-// @link https://github.com/ElemeFE/element/blob/dev/test/unit/util.js
-
 let id = 0;
 
 const createEle = () => {

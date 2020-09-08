@@ -11,14 +11,18 @@ import 'babel-polyfill';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import iView from 'iview';
+import noahv from 'noahv-core';
 import noahvRequest from 'noahv-request';
 import noahvComponent from 'noahv-component';
-import noahv from 'noahv-core';
+import SAVisualComponents from 'noahv-visual-components';
+
+import store from './store/';
 import routerConfig from './common/router';
 import headerConfig from './common/header';
 import footerApp from './common/layout/footer';
-import store from './store/';
+import WidgetConfig from './common/dashboard/widgetConfig';
 import './common/hook/ajax';
+
 import './common/assets/css/main.less';
 
 // If wanted diy layout, please import this file
@@ -35,6 +39,10 @@ Vue.use(iView);
 Vue.use(noahvRequest);
 
 Vue.use(noahvComponent);
+
+
+Vue.use(SAVisualComponents, WidgetConfig);
+
 
 // use default layout with header config
 noahv.layout(headerConfig, footerApp);

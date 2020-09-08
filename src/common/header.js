@@ -5,6 +5,11 @@
 export default {
     header: [
         {
+            label: '仪表盘',
+            key: 'dashboard',
+            link: 'dashboard/list'
+        },
+        {
             label: '模板示例',
             key: 'tplDemo',
             children: [
@@ -37,7 +42,6 @@ export default {
                 {
                     label: '时序趋势图示例',
                     key: 'demo/chart/trend',
-                    selected: true,
                     link: 'demo/chart/trend'
                 }
             ]
@@ -51,8 +55,6 @@ export default {
     logo: {
         // 是否需要logo
         hasLogo: true,
-        title: 'NoahV',
-        // eslint-disable-next-line no-undef
         src: require('common/assets/img/logo.png')
     },
     login: {

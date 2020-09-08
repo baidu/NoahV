@@ -8,18 +8,18 @@
 'use strict';
 
 /* eslint-disable */
-let chalk = require('chalk');
-let execSync = require('child_process').execSync;
-let spawn = require('cross-spawn');
-let opn = require('opn');
+var chalk = require('chalk');
+var execSync = require('child_process').execSync;
+var spawn = require('cross-spawn');
+var opn = require('opn');
 
 // https://github.com/sindresorhus/opn#app
-let OSX_CHROME = 'google chrome';
+var OSX_CHROME = 'google chrome';
 
 const Actions = Object.freeze({
     NONE: 0,
     BROWSER: 1,
-    SCRIPT: 2
+    SCRIPT: 2,
 });
 
 function getBrowserEnv() {
@@ -31,14 +31,11 @@ function getBrowserEnv() {
     if (!value) {
         // Default.
         action = Actions.BROWSER;
-    }
-    else if (value.toLowerCase().endsWith('.js')) {
+    } else if (value.toLowerCase().endsWith('.js')) {
         action = Actions.SCRIPT;
-    }
-    else if (value.toLowerCase() === 'none') {
+    } else if (value.toLowerCase() === 'none') {
         action = Actions.NONE;
-    }
-    else {
+    } else {
         action = Actions.BROWSER;
     }
     return { action, value };
@@ -47,7 +44,7 @@ function getBrowserEnv() {
 function executeNodeScript(scriptPath, url) {
     const extraArgs = process.argv.slice(2);
     const child = spawn('node', [scriptPath, ...extraArgs, url], {
-        stdio: 'inherit'
+        stdio: 'inherit',
     });
     child.on('close', code => {
         if (code !== 0) {
@@ -59,7 +56,7 @@ function executeNodeScript(scriptPath, url) {
             );
             console.log(chalk.cyan(scriptPath) + ' exited with code ' + code + '.');
             console.log();
-
+            return;
         }
     });
     return true;
@@ -70,9 +67,9 @@ function startBrowserProcess(browser, url) {
     // requested a different browser, we can try opening
     // Chrome with AppleScript. This lets us reuse an
     // existing tab when possible instead of creating a new one.
-    const shouldTryOpenChromeWithAppleScript
-        = process.platform === 'darwin'
-        && (typeof browser !== 'string' || browser === OSX_CHROME);
+    const shouldTryOpenChromeWithAppleScript =
+        process.platform === 'darwin' &&
+        (typeof browser !== 'string' || browser === OSX_CHROME);
 
     if (shouldTryOpenChromeWithAppleScript) {
         try {
@@ -81,11 +78,10 @@ function startBrowserProcess(browser, url) {
             execSync('ps cax | grep "Google Chrome"');
             execSync('osascript openChrome.applescript "' + encodeURI(url) + '"', {
                 cwd: __dirname,
-                stdio: 'ignore'
+                stdio: 'ignore',
             });
             return true;
-        }
-        catch (err) {
+        } catch (err) {
             // Ignore errors.
         }
     }
@@ -101,11 +97,10 @@ function startBrowserProcess(browser, url) {
     // Fallback to opn
     // (It will always open new tab)
     try {
-        let options = { app: browser };
+        var options = { app: browser };
         opn(url, options).catch(() => {}); // Prevent `unhandledRejection` error.
         return true;
-    }
-    catch (err) {
+    } catch (err) {
         return false;
     }
 }

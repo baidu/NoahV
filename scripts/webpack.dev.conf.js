@@ -4,31 +4,28 @@ var webpack = require('webpack')
 var merge = require('webpack-merge')
 var baseWebpackConfig = require('./webpack.base.conf')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
-const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-
-// add hot-reload entry
+// add hot-reload related code to entry chunks
 Object.keys(baseWebpackConfig.entry).forEach(function(name) {
     baseWebpackConfig.entry[name] = ['./scripts/dev-client'].concat(baseWebpackConfig.entry[name])
-});
+})
 
 var webpackConfig = merge(baseWebpackConfig, {
+    // eval-source-map is faster for development
     mode: 'development',
-    devtool: 'source-map',
+    devtool: '#eval-source-map',
     stats: 'minimal',
     plugins: [
         // HMR
         new webpack.HotModuleReplacementPlugin({}),
 
-        // https://github.com/ampedandwired/html-webpack-plugin
+
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: 'index.html',
             favicon: 'src/common/assets/img/favicon.ico',
             inject: true
-        }),
-        new FriendlyErrorsPlugin()
-        // new BundleAnalyzerPlugin()
+        })
     ],
     optimization: {
         splitChunks: {

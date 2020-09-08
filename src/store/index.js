@@ -7,6 +7,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import {LOGIN, UPDATE_BASE_FLAG, UPDATE_USER_FLAG} from './mutation-types';
+import dashboard from './modules/dashboard';
 import api from 'common/header';
 const VUE_INSTANCE = new Vue();
 
@@ -14,8 +15,8 @@ Vue.use(Vuex);
 
 const state = {
     username: 'guest',
-    baseDataReady: false,
-    userNameReady: false
+    userNameReady: false,
+    baseDataReady: false
 };
 
 const mutations = {
@@ -60,7 +61,7 @@ const actions = {
 
 export default new Vuex.Store({
     state: Object.assign({}, state),
-    modules: Object.assign({}),
+    modules: Object.assign({}, {dashboard}),
     actions: Object.assign({}, actions),
     mutations: Object.assign({}, mutations)
 });

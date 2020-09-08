@@ -2,9 +2,9 @@
 var config = require('./config');
 if (!process.env.NODE_ENV) process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV);
 var path = require('path');
+var logger = require('morgan');
 var express = require('express');
 var webpack = require('webpack');
-var logger = require('morgan');
 var opn = require('./openBrowser');
 var proxyMiddleware = require('http-proxy-middleware');
 var webpackConfig = require('./webpack.dev.conf');
@@ -16,6 +16,7 @@ var port = process.env.PORT || config.dev.port;
     // Define HTTP proxies to your custom API backend
     // https://github.com/chimurai/http-proxy-middleware
 
+
 var server = express();
 
 server.use(logger('dev'));
@@ -24,7 +25,8 @@ server.use(logger('dev'));
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 
-var compiler = webpack(webpackConfig)
+
+var compiler = webpack(webpackConfig);
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
     publicPath: webpackConfig.output.publicPath,
@@ -32,12 +34,12 @@ var devMiddleware = require('webpack-dev-middleware')(compiler, {
         colors: true,
         chunks: false
     }
-})
+});
 
 var hotMiddleware = require('webpack-hot-middleware')(compiler, {
      log: console.log,
      heartbeat: 2000
-})
+});
     // force page reload when html-webpack-plugin template changes
 // compiler.plugin('compilation', function(compilation) {
 //     compilation.plugin('html-webpack-plugin-after-emit', function(data, cb) {
@@ -81,7 +83,6 @@ server.use(hotMiddleware);
 var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory);
 server.use(staticPath, express.static('./static'));
 
-
 var signal = ['SIGINT', 'SIGTERM'];
 
 signal.forEach(function(sig) {
@@ -103,4 +104,4 @@ module.exports = server.listen(port, function(err) {
     if (process.env.NODE_ENV !== 'testing') {
         opn(uri);
     }
-})
+});

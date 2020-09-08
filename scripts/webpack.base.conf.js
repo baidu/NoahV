@@ -1,11 +1,10 @@
 /* eslint-disable */
 var path = require('path')
 var config = require('./config')
+var projectRoot = path.resolve(__dirname, '../');
 var VueLoaderPlugin = require('vue-loader/lib/plugin')
 var MiniCssExtractPlugin = require('mini-css-extract-plugin')
-var projectRoot = path.resolve(__dirname, '../');
-
-var env = process.env.NODE_ENV;
+var env = process.env.NODE_ENV
     // check env & config/index.js to decide weither to enable CSS Sourcemaps for the
     // various preprocessor loaders added to vue-loader at the end of this file
 var cssSourceMapDev = (env === 'development' && config.dev.cssSourceMap)
@@ -15,7 +14,6 @@ var useCssSourceMap = cssSourceMapDev || cssSourceMapProd;
 var cssExtractDev = (env === 'development' && config.dev.cssExtract);
 var cssExtractProd = env === 'production';
 var useCssExtract = cssExtractDev || cssExtractProd;
-
 
 var assetsPath = function (_path) {
     var assetsSubDirectory = process.env.NODE_ENV === 'production'
@@ -52,7 +50,7 @@ module.exports = {
     module: {
         rules: [{
             test: /\.vue$/,
-            use: 'vue-loader'
+            loader: 'vue-loader'
         },
         {
             test: /\.js$/,

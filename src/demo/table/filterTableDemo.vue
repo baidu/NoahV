@@ -42,8 +42,6 @@ export default {
                     name: 'date',
                     submitAlias: ['startTime', 'endTime'],
                     title: '创建日期',
-                    theme: 'console',
-                    option: 'top',
                     type: 'nvTimeRange',
                     nvType: 'daterangetime',
                     validateType: 'array',
@@ -175,7 +173,6 @@ export default {
                             },
                             successTip: '删除成功',
                             params: {extra: 'extra params'},
-                            // 暂未实现
                             autoFresh: true
                         }
                     }

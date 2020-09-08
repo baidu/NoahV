@@ -29,16 +29,17 @@ export default {
              * @property {string}  width      所占宽度，不设置会根据内容自动调整
              * @property {string}  key        配置项目字段名称，和API中保持一致
              * @property {string}  link       链接地址，
-             *     如果希望动态将表格当前行的数据传递到url中，可以使用{key}，
-             *     其中key为对应数据的key
-             * @property {string}  target如果希望链接在新页面打开，
+             *      如果希望动态将表格当前行的数据传递到url中，
+             *      可以使用{key}，其中key为对应数据的key
+             *
+             * @property {string}  target     如果希望链接在新页面打开，
              *     请配置target的值为_blank，不配置默认为当前页打开
              *
              * @property {string}  color      配置文字的颜色
              *
              * @property {function(string | array):string}  render  渲染方法，
-             *      在显示单元格的时候会调用该方法，需要return，注意，
-             *      配置render之后链接和颜色的配置都会无效
+             *     在显示单元格的时候会调用该方法，需要return，
+             *     注意，配置render之后链接和颜色的配置都会无效
              */
             columns: [
                 {
@@ -138,28 +139,26 @@ export default {
                      * },
                      */
                     {
-                        type: 'nv-icon',
-                        icon: 'edit',
-                        className: 'edit-icon',
+                        type: 'sa-icon',
+                        icon: 'pencil',
+                        className: 'delete-icon',
                         // label和icon只能展示一个
                         label: '编辑',
                         link: 'https://www.baidu.com?id={id}',
                         target: '_blank'
                     },
                     {
-                        type: 'nv-icon',
+                        type: 'sa-icon',
                         btnType: 'error',
                         className: 'delete-icon',
                         icon: 'trash-alias',
                         style: {
                             color: '#2d8cf0'
                         },
-
                         /*
                          * label和icon只能展示一个
                          * label: '删除',
                          */
-
                         confirm: {
                             title: '删除模板',
                             content: '数据删除后不可恢复，确认删除吗？',

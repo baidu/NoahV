@@ -14,7 +14,7 @@ module.exports = {
         // use ** or / will proxy all requests starting with any string，include static file.
         // proxy useful only while path exist && option.target is exist
 
-        path: ['/api/proxy'],
+        path: ['/api/aproxy'],
         option: {
             // the target to request
             target: '',
