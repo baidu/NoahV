@@ -2,7 +2,7 @@
     <div class="form-demo">
         <div class="page-title"><span>新建操作模板</span></div>
         <NvForm
-            :items="items" 
+            :items="items"
             :action="action"
             position="left"
             :labelwidth="80"
@@ -72,7 +72,7 @@ export default {
                                 label: '王府井'
                             }
                         ]
-                    }, 
+                    },
                     {
                         value: 'jiangsu',
                         label: '江苏',
@@ -144,7 +144,7 @@ export default {
                                 label: '湾流大厦'
                             }
                         ]
-                    }, 
+                    },
                     {
                         value: 'jiangsu',
                         label: '江苏',
@@ -242,6 +242,7 @@ export default {
                     title: '性别',
                     type: 'select',
                     required: true,
+                    clearable: true,
                     value: 'male',
                     width: 300,
                     option: [
@@ -322,7 +323,7 @@ export default {
                             name: '第三性别',
                             value: 'no'
                         }
-                        
+
                     ],
                     event: {
                         onChange: function(value) {
@@ -332,7 +333,7 @@ export default {
                 });
             // this.items[this.items.length - 1].value = 'male'
         // }, 0)
-        
+
     }
 };
 </script>
