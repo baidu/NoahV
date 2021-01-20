@@ -36,6 +36,7 @@
                         v-if="!item.editing"
                         :class="getTitleCls(item)"
                         @click="titleClick(item)"
+                        @mousedown="titleMouseDown($event, item)"
                     >
                         {{item.title}}
                     </span>
@@ -304,6 +305,15 @@ export default {
                 return;
             }
             this.dispatch('NvTree', 'title-click-handler', item);
+        },
+        /**
+         * 鼠标点击节点文本事件
+         *
+         * @param {Object} event 鼠标事件
+         * @param {Object} item 节点对象
+         */
+        titleMouseDown(event, item) {
+            this.dispatch('NvTree', 'title-mousedown-handler', [event, item]);
         },
         /**
          * 关闭title编辑框
