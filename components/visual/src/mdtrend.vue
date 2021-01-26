@@ -1326,6 +1326,7 @@ export default {
                 let name = item.name;
                 let list = item.data;
                 let connectNulls = false;
+                let showSymbol = false;
 
                 // if nullPointMode is true,use 0 replace the null values
                 if (conf.style.nullPointMode === 'zero') {
@@ -1339,6 +1340,10 @@ export default {
                 else if (conf.style.nullPointMode === 'connect') {
                     connectNulls = true;
                 }
+                else {
+                    showSymbol = true;
+                }
+        
                 list = u.map(list, it => {
                     let value = it[1];
                     if (value !== null) {
@@ -1367,6 +1372,61 @@ export default {
                 let yMax = threshold ? Math.max(threshold, max) : max;
                 let yMin = threshold ? Math.min(threshold, min) : min;
 
+                // 设置孤点功能
+                let currentIndx = 1;
+                let lens = list.length;
+                while (currentIndx > 0 && currentIndx  <= lens - 2) {
+                    let preIndx = currentIndx - 1;
+                    let aferIdx = currentIndx + 1;
+
+                    if (
+                        (list[preIndx][1] === undefined || list[preIndx][1] === null)
+                        && (list[aferIdx][1] === undefined || list[aferIdx][1] === null)
+                        && list[currentIndx][1] !== undefined) {
+                        list[currentIndx] = {
+                            value: list[currentIndx],
+                            symbol: 'rect'
+                        };
+                    }
+                    // 第一个节点
+                    else if (currentIndx === 1 
+                        && list[preIndx][1] !== undefined
+                        && (list[currentIndx][1] === undefined || list[currentIndx][1] === null)) {
+                        list[preIndx] = {
+                            value: list[preIndx],
+                            symbol: 'rect'
+                        };
+                    }
+                    // 最后一个点有数据，倒数第二个点没数据
+                    else if (currentIndx === lens - 2
+                        && list[aferIdx][1] !== undefined
+                        && (list[currentIndx][1] === undefined || list[currentIndx][1] === null)) {
+                        list[aferIdx] = {
+                            value: list[aferIdx],
+                            symbol: 'rect'
+                        };
+                    }
+                    // 最后一个点有数据，倒数第二个点有数据
+                    else if (currentIndx === lens - 2
+                        && list[aferIdx][1] !== undefined
+                        && (list[currentIndx][1] !== undefined)) {
+                        list[aferIdx] = {
+                            value: list[aferIdx],
+                            symbol: 'none'
+                        };
+                        list[currentIndx] = {
+                            value: list[currentIndx],
+                            symbol: 'none'
+                        };
+                    }
+                    else {
+                        list[currentIndx] = {
+                            value: list[currentIndx],
+                            symbol: 'none'
+                        };
+                    }
+                    currentIndx++;
+                }
 
                 let currentSeries = {
                     name: name,
@@ -1374,7 +1434,7 @@ export default {
                     dataMax: yMax,
                     dataMin: yMin,
                     symbol: 'rect',
-                    showSymbol: false,
+                    showSymbol: showSymbol,
                     legendHoverLink: false,
                     type: this.chartType === 'column' ? 'bar' : 'line',
                     connectNulls: connectNulls,
@@ -1389,6 +1449,7 @@ export default {
                     areaStyle: this.chartType === 'area' ? {} : null,
                     stack: this.chartStacking === 'normal' ? {} : null
                 };
+
                 if (this.extraStyle && this.extraStyle.series) {
                     series.push(Object.assign({}, currentSeries, this.extraStyle.series));
                 }
