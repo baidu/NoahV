@@ -214,14 +214,22 @@ export default {
         }
         return time;
     },
-    setDecimal(data, decimals) {
+    setDecimal(data, decimals, type) {
         decimals = (typeof decimals === 'number') ? decimals : 2;
         data = data.toString();
         if (data.indexOf('.') > -1) {
             // manage the number of decimal.
             data = data.substring(0, data.indexOf('.') + parseInt(decimals, 10) + 1);
         }
-        return Number(data).toFixed(decimals);
+
+        let result = Number(data).toFixed(decimals);
+
+        if (type && type === 'thousand') {
+            if (Number(result) > 1000) {
+                result = result.replace(/\B(?=(\d{3})+\b)/g,',');
+            }
+        }
+        return result;
     },
     deepClone(data) {
         return JSON.parse(JSON.stringify(data));
