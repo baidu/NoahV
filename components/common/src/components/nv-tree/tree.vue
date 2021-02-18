@@ -75,6 +75,11 @@ export default {
             type: Boolean,
             default: false
         },
+        // 使用鼠标事件
+        mouseDown: {
+            type: Boolean,
+            default: false
+        },
         // 是否开启勾选框
         checkbox: {
             type: Boolean,
@@ -165,6 +170,9 @@ export default {
         this.$on('title-click-handler', item => {
             this.titleClickHandler(item);
         });
+        this.$on('title-mousedown-handler', (event, item) => {
+            this.titleMouseDownHandler(event, item);
+        });
         this.$on('expand-change-handler', item => {
             this.expandChangeHandler(item);
         });
@@ -219,7 +227,7 @@ export default {
             handler(val) {
                 this.dataSet = val;
                 // improve performance
-                if (this.checkbox || this.lazyLoad || this.search || this.accordion || this.editMode || this.draggable) {
+                if (this.checkbox || this.lazyLoad || this.search || this.accordion || this.editMode || this.draggable || this.mouseDown) {
                     this.buildTree(this.dataSet, 0);
                     this.getLinkedTree(this.dataSet);
                 }                
@@ -375,6 +383,17 @@ export default {
                 }
             }
             this.$emit('on-select-change', item, this.selectedItems);
+        },
+        /**
+         * 点击节点文本鼠标事件
+         *
+         * @param {Object} event 鼠标事件
+         * @param {Object} item 结点对象
+         */
+        titleMouseDownHandler(event, item) {
+            if (this.mouseDown) {
+                this.$emit('on-mousedown', event, item, this.dataList);
+            }
         },
         /**
          * 更新选中集合

@@ -15,6 +15,8 @@
             :removeIcon="data.removeIcon"
             :editIcon="data.editIcon"
             :autoCheckBox="data.autoCheckBox"
+            :mouseDown="data.useMouseDownEvent"
+            @on-mousedown="onMouseDown"
             @on-check-change="onCheckChange"
             @on-select-change="onSelectChange"
             @on-expand-change="onExpandChange">
@@ -37,6 +39,7 @@ export default {
                 checkbox: false,
                 multiple: false,
                 autoCheckBox: false,
+                useMouseDownEvent: false,
                 appendLabel: 'Append',
                 removeLabel: 'Delete',
                 editLabel: 'Edit',
@@ -121,6 +124,9 @@ export default {
         }
     },
     methods: {
+        onMouseDown(event, item, dataList) {
+            console.log('on-mousedown watched');
+        },
         onSelectChange(item, items) {
             console.log('on-select-change watched');
         },
