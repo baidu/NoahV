@@ -1,250 +1,162 @@
 <template>
     <div>
-        <div class="usage-item">
-            <h2>概述</h2>
-            <p>该业务组件提供自定义表单对话框</p>
+        <div class="ele">
+            <h4>普通样式 </h4>
+            <nv-button type="default" size="small" style="margin-right: 10px;">普通样式</nv-button>
+            <nv-button type="default" style="margin-right: 10px;">普通样式</nv-button>
+            <nv-button type="default" disabled style="margin-right: 10px;">禁用样式</nv-button>
+            <nv-button type="default" loading style="margin-right: 10px;">普通样式</nv-button>
+            <nv-button type="default" size="big" style="margin-right: 10px;">普通样式</nv-button>
+        </div>
+        <div class="ele">
+            <h4>重要样式 </h4>
+            <nv-button type="primary" size="small" style="margin-right: 10px;">重要样式</nv-button>
+            <nv-button type="primary" style="margin-right: 10px;">重要样式</nv-button>
+            <nv-button type="primary" disabled style="margin-right: 10px;">禁用样式</nv-button>
+            <nv-button loading type="primary" style="margin-right: 10px;">重要样式</nv-button>
+            <nv-button type="primary" size="big" style="margin-right: 10px;">重要样式</nv-button>
+        </div>
+        <div class="ele">
+            <h4>加强样式 </h4>
+            <nv-button type="strong" size="small" style="margin-right: 10px;">加强样式</nv-button>
+            <nv-button type="strong" style="margin-right: 10px;">加强样式</nv-button>
+            <nv-button type="strong" disabled style="margin-right: 10px;">加强样式</nv-button>
+            <nv-button loading type="strong" style="margin-right: 10px;">加强样式</nv-button>
+            <nv-button type="strong" size="big" style="margin-right: 10px;">加强样式</nv-button>
+        </div>
+        <div class="ele">
+            <h4>虚线样式 </h4>
+            <nv-button type="dashed" size="small" style="margin-right: 10px;">虚线样式</nv-button>
+            <nv-button type="dashed" style="margin-right: 10px;">虚线样式</nv-button>
+            <nv-button type="dashed" disabled style="margin-right: 10px;">禁用样式</nv-button>
+            <nv-button loading type="dashed" style="margin-right: 10px;">虚线样式</nv-button>
+            <nv-button type="dashed" size="big" style="margin-right: 10px;">虚线样式</nv-button>
+        </div>
+        <div class="ele">
+            <h4>文字样式</h4>
+            <nv-button type="text" size="small" style="margin-right: 10px;">文字样式</nv-button>
+            <nv-button type="text" disabled style="margin-right: 10px;">文字样式</nv-button>
+            <nv-button loading type="text" style="margin-right: 10px;">文字样式</nv-button>
+            <nv-button type="text" size="big" style="margin-right: 10px;">文字样式</nv-button>
+        </div>
+        <div class="ele">
+            <h4>成功样式</h4>
+            <nv-button  type="success" style="margin-right: 10px;">成功样式</nv-button>
+        </div>
+        <div class="ele">
+            <h4>错误样式</h4>
+            <nv-button  type="error" style="margin-right: 10px;">错误样式</nv-button>
+        </div>
+        <div class="ele">
+            <h4>警告样式 </h4>
+            <nv-button  type="warning" style="margin-right: 10px;">警告样式</nv-button>
+        </div>
+        <div class="ele">
+            <h4>图标样式 </h4>
+            <nv-button style="margin-right: 10px;">
+                <Icon type="md-add"></Icon>
+                创建样式
+            </nv-button>
+            <nv-button type="primary" style="margin-right: 10px;">
+                <Icon type="md-add"></Icon>
+                创建样式
+            </nv-button>
+            <nv-button  icon="md-refresh"  style="margin-right: 10px;"></nv-button>
+            <nv-button  icon="md-download"  style="margin-right: 10px;"></nv-button>
+        </div>
+        <div class="ele">
+            <h4>Button Group </h4>
+            <nv-button-group style="margin-right: 10px;">
+                <nv-button style="margin-right: 10px;">取消</nv-button>
+                <nv-button type="primary">确认</nv-button>
+            </nv-button-group>
+            <nv-button-group>
+                <nv-button>取消</nv-button>
+                <nv-button>确认</nv-button>
+            </nv-button-group>
+        </div>
+        <div class="ele">
+            <nv-button-group style="margin-right: 10px;">
+                <nv-button disabled>Yesterday</nv-button>
+                <nv-button disabled>Today</nv-button>
+                <nv-button disabled>Tomorrow</nv-button>
+            </nv-button-group>
+            <nv-button-group>
+                <nv-button type="primary">L</nv-button>
+                <nv-button>M</nv-button>
+                <nv-button>M</nv-button>
+                <nv-button type="dashed">R</nv-button>
+            </nv-button-group>
+        </div>
+        <div class="ele">
+            <h4>Icons</h4>
+            <nv-button-group style="margin-right: 10px;">
+                <nv-button type="primary">
+                    <Icon type="ios-arrow-back"></Icon>
+                    Backward
+                </nv-button>
+                <nv-button type="primary">
+                    Forward
+                    <Icon type="ios-arrow-forward"></Icon>
+                </nv-button>
+            </nv-button-group>
+            <nv-button-group style="margin-right: 10px;">
+                <nv-button type="primary" icon="ios-skip-backward"></nv-button>
+                <nv-button type="primary" icon="ios-skip-forward"></nv-button>
+            </nv-button-group>
+            <nv-button-group>
+                <nv-button icon="ios-color-wand-outline"></nv-button>
+                <nv-button icon="ios-sunny-outline"></nv-button>
+                <nv-button icon="ios-crop"></nv-button>
+                <nv-button icon="ios-color-filter-outline"></nv-button>
+            </nv-button-group>
         </div>
 
-        <div class="usage-item">
-            <h2>点击直接发送ajax请求按钮</h2>
-            <div class="code">
-                <pre><code><span>&lt;<span>NvButton :type="type" :content="content" :size="size" :icon="icon" :disabled="disabled" :action="action"</span>&gt;&lt;/NvButton&gt;</span></code></pre>
+        <div class="ele">
+            <h4>Size</h4>
+            <nv-button-group size="large" style="margin-right: 10px;">
+                <nv-button>Large</nv-button>
+                <nv-button>Large</nv-button>
+            </nv-button-group>
+            <nv-button-group style="margin-right: 10px;">
+                <nv-button>Default</nv-button>
+                <nv-button>Default</nv-button>
+            </nv-button-group>
+            <nv-button-group size="small" style="margin-right: 10px;">
+                <nv-button>Small</nv-button>
+                <nv-button>Small</nv-button>
+            </nv-button-group>
+            <br><br>
+            <nv-button-group size="large" shape="circle" style="margin-right: 10px;">
+                <nv-button>Large</nv-button>
+                <nv-button>Large</nv-button>
+            </nv-button-group>
+            <nv-button-group shape="circle" style="margin-right: 10px;">
+                <nv-button>Default</nv-button>
+                <nv-button>Default</nv-button>
+            </nv-button-group>
+            <nv-button-group size="small" shape="circle">
+                <nv-button>Small</nv-button>
+                <nv-button>Small</nv-button>
+            </nv-button-group>
             </div>
-            <h2>点击弹出自定义dialog后发送ajax请求按钮</h2>
-            <div class="code">
-                <pre><code><span>&lt;<span>NvButton :type="type" :content="content" :size="size" :icon="icon" :disabled="disabled" @click.native="click"</span>&gt;&lt;/NvButton&gt;</span></code></pre>
-                <pre><code><span>&lt;<span>NvDialog  type="dialog" :dialog="dialog"</span>&gt;&lt;/NvDialog&gt;</span></code></pre>
-            </div>
         </div>
-
-        <div class="usage-item">
-            <h2>API</h2>
-            <NvTable
-                :columns="columns"
-                :pagination="false"
-                :tdata="tdata"
-            />
-        </div>
-
-        <div class="usage-item">
-            <h2>例子</h2>
-            <h4>点击发送ajax请求按钮:</h4>
-            <div class="code"><pre><code>
-                {
-                    type: 'info',
-                    content: 'success',
-                    size: 'default',
-                    icon: 'ios-refresh',
-                    disabled: 'false',
-                    action: {
-                        url: '/xxx',
-                        params: {
-                            params1: 'xxx'
-                        },
-                        method: 'post',
-                        successCallback: (data) => {
-                            this.$Message.info('click ajax button success!');
-                        },
-                        failCallback: (data) => {
-                            this.$Message.info('click ajax button error!');
-                        }
-                    }
-                }
-            </code></pre></div>
-            <h4>效果</h4>
-            <NvButton :content="content" :type="type" :size="size" :icon="icon" :disabled="disabled" :action="action">
-            </NvButton>
-
-        </div>
-
-        <div class="usage-item">
-            <h4>自定义dialog按钮</h4>
-            <div class="code"><pre><code>
-                data() {
-                    dialog: {
-                        value: false,
-                        title: '我是自定义dialog按钮的title',
-                        ok: {
-                            type: 'ajax',
-                            ajax: {
-                                url: '/xxx',
-                                params: {
-                                    params1: 'xxx'
-                                },
-                                method: 'post',
-                                successCallback: () => {
-                                    this.$Message.info('dialog ajax success');
-                                },
-                                failCallback: () =>  {
-                                    this.$Message.info('dialog ajax fail');
-                                }
-                            }
-                        }, 
-                        cancel: () => {
-                            this.$Message.info('cancel');
-                        }
-                    }
-                },
-                methods: {
-                    click() {
-                        this.dialog.value = true;
-                    }
-                }
-            </code></pre></div>
-            <h4>自定义dialog按钮</h4>
-            <NvButton content="dialog" @click.native="click">
-            </NvButton>
-            <nv-dialog type="dialog" :dialog="dialog">           
-                <div slot>
-                    我是dialog自定义插槽，点击确定会发送ajax请求
-                </div>
-            </nv-dialog>
-        </div>         
-    </div>
 </template>
 
 <script>
-export default {
-    data() {
-        return {
-            content: 'success',
-            type: 'info',
-            size: 'default',
-            icon: 'ios-refresh',
-            disabled: false,
-            action: {
-                url: '/api/button',
-                params: {
-                    params1: 'xxx'
-                },
-                method: 'get',
-                successCallback: (data) => {
-                    this.$Message.info('click ajax button success!');
-                },
-                failCallback: (data) => {
-                    this.$Message.info('click ajax button error!');
-                }
-            },
-            actionError: {
-                url: '/api/columnError',
-                params: {
-                    path: '123'
-                },
-                method: 'post',
-                successCallback: (data) => {
-                    this.$Message.info('click button success! data is: ', data);
-                },
-                failCallback: (data) => {
-                    this.$Message.info('click button error!', data);
-                }
-            },
-            dialog: {
-                value: false,
-                title: '我是自定义dialog按钮的title',
-                ok: {
-                    type: 'ajax',
-                    ajax: {
-                        url: '/api/button/dialog',
-                        params: {
-                            params1: 'xxx'
-                        },
-                        method: 'post',
-                        successCallback: () => {
-                            this.$Message.info('dialog ajax success');
-                        },
-                        failCallback: () => {
-                            this.$Message.info('dialog ajax fail');
-                        }
-                    }
-                }, 
-                cancel: () => {
-                    this.$Message.info('cancel');
-                }
-            },
-            columns: [
-                {
-                    title: '属性',
-                    key: 'properties'
-                },
-                {
-                    title: '说明',
-                    key: 'comment'
-                },
-                {
-                    title: '类型',
-                    key: 'type'
-                },
-                {
-                    title: '默认值',
-                    key: 'initValue'
-                }
-            ],
-            tdata: [
-                {
-                    properties: 'type',
-                    comment: 'button类型(primary、ghost、dashed、text、info、success、warning、error)',
-                    type: 'String',
-                    initValue: 'ghost'
-                },
-                {
-                    properties: 'content',
-                    comment: '弹框内容',
-                    type: 'String',
-                    initValue: '-'
-                },
-                {
-                    properties: 'size',
-                    comment: '大小',
-                    type: 'String',
-                    initValue: '-'
-                },
-                {
-                    properties: 'disabled',
-                    comment: '是否禁用',
-                    type: 'String、Boolean',
-                    initValue: 'false'
-                },
-                {
-                    properties: 'icon',
-                    comment: 'button图标',
-                    type: 'String',
-                    initValue: '-'
-                },
-                {
-                    properties: 'action',
-                    comment: '点击行为，不传时点击按钮则不发送ajax请求',
-                    type: 'Object',
-                    initValue: '-'
-                }
-            ]
+    export default {
+        data() {
+            return {
+                
+            };
         }
-    },
-    methods: {
-        click() {
-            this.dialog.value = true;
-        }
-    }
-}
+    };
 </script>
-
 <style lang="less">
-h2 {
-    margin-bottom: 10px;
-}
-h4 {
-    margin-bottom: 10px;
-}
-.usage-item {
-    margin-bottom: 30px;
-    .code {
-        border: 1px solid #ededed;
-        border-radius: 2px;
-        background: #f7f7f7;
-        padding-left: 15px;
-        margin-bottom: 10px;
-    }
-    .show-icon {
-        margin-bottom: 20px;
+.ele {
+    margin-bottom: 20px;
+    h4 {
+        margin: 5px 0;
     }
 }
 </style>

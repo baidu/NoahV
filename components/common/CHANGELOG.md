@@ -1,4 +1,9 @@
 ## ChangeLog
+
+## 2.0.0-alpha.0
+* [功能新增] 添加button组件
+* [功能新增] 添加Radio组件
+
 ## 1.1.47
 * [功能优化] 支持表单Select组件clearable可以清空已选项
 

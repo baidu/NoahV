@@ -2,14 +2,14 @@
  * NoahV
  * Copyright (c) 2016 Baidu, Inc. All Rights Reserved.
  *
- * @file NvButton Component
+ * @file NvButtonTpl Component
  * @author Joannamo(joannamo123@163.com)
  */
 
-import NvButton from './button.vue';
+import NvButtonTpl from './buttonTpl.vue';
 
 export {
-    NvButton
+    NvButtonTpl
 };
 
-export default NvButton;
+export default NvButtonTpl;

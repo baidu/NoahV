@@ -61,10 +61,6 @@ export default [
         component: r => require.ensure([], () => r(require('./components/switch/switch.vue')), 'switch')
     },
     {
-        path: '/nvbutton',
-        component: r => require.ensure([], () => r(require('./components/button/button.vue')), 'button')
-    },
-    {
         path: '/nvtextline',
         component: r => require.ensure([], () => r(require('./components/textLine/textLine.vue')), 'textline')
     },
@@ -95,6 +91,18 @@ export default [
     {
         path: '/nvdutytable',
         component: r => require.ensure([], () => r(require('./components/nvdutytable/nvdutytable.vue')), 'nvdutytable')
+    },
+    {
+        path: '/nvbuttontpl',
+        component: r => require.ensure([], () => r(require('./components/buttonTpl/buttonTpl.vue')), 'buttonTpl')
+    },
+    {
+        path: '/nvbutton',
+        component: r => require.ensure([], () => r(require('./components/button/button.vue')), 'button')
+    },
+    {
+        path: '/nvradio',
+        component: r => require.ensure([], () => r(require('./components/radio/radio.vue')), 'radio')
     },
     {
         path: '/nv404',

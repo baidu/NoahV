@@ -1,16 +1,19 @@
 <template>
     <div :class="getCls('button-tpl')">
-        <i-button :type="type" :size="size" :icon="icon" :disabled="buttonDisabled" @click="click">
+        <!-- <i-button :type="type" :size="size" :icon="icon" :disabled="buttonDisabled" @click="click">
             {{content}}
-        </i-button>
+        </i-button> -->
+        <nv-button :type="type" :size="size" :icon="icon" :disabled="buttonDisabled" @click="click">
+            {{content}}
+        </nv-button>
     </div>
 </template>
 <script>
 import getClassName from '../utils.js';
-
+import {Button} from 'view-design';
 export default {
     name: 'nvButtonTpl',
-    props: {
+    props: Object.assign(Button.props, {
         // 内容
         content: {
             type: String,
@@ -32,7 +35,30 @@ export default {
         icon: String,
         // 点击行为，不传时点击按钮则不发送ajax请求
         action: Object
-    },
+    }),
+    // props: {
+    //     // 内容
+    //     content: {
+    //         type: String,
+    //         default: 'button'
+    //     },
+    //     // 类型
+    //     type: {
+    //         type: String,
+    //         default: 'default'
+    //     },
+    //     // 大小
+    //     size: String,
+    //     // 是否disabled
+    //     disabled: {
+    //         type: [String, Boolean],
+    //         default: false
+    //     },
+    //     // TODO: 支持sa-icon(暂时仅iview图标类型)
+    //     icon: String,
+    //     // 点击行为，不传时点击按钮则不发送ajax请求
+    //     action: Object
+    // },
     data() {
         return {
         };
