@@ -236,24 +236,38 @@ function handleTrendTime(times, contrast, timemap) {
 }
 
 
-function shortValue(value, number = 1) {
-    if (value < 1000 || typeof value !== 'number') {
-        return value;
-    }
-    let formatNumber = value;
-    for (let i = 0; i < numUnit.length; i++) {
-        if (value < Math.pow(1000, i + 2) || i === numUnit.length - 1) {
-            // 保留一位小数
-            formatNumber = (value / Math.pow(1000, i + 1)).toFixed((value % Math.pow(1000, i + 1)) === 0
-                ? number
-                : Math.max(1, number)) + numUnit[i];
-            break;
+function shortValue(value, type, number = 1) {
+    if (type === 'thousand') {
+        let integer = parseInt(value);
+        if (integer < 1000 || typeof integer !== 'number') {
+            return value;
         }
         else {
-            continue;
+            return value.toLocaleString();
         }
+        return parseInt(value);
     }
-    return formatNumber;
+
+    else {
+        if (value < 1000 || typeof value !== 'number') {
+            return value;
+        }
+        let formatNumber = value;
+        for (let i = 0; i < numUnit.length; i++) {
+            if (value < Math.pow(1000, i + 2) || i === numUnit.length - 1) {
+                // 保留一位小数
+                formatNumber = (value / Math.pow(1000, i + 1)).toFixed((value % Math.pow(1000, i + 1)) === 0
+                    ? number
+                    : Math.max(1, number)) + numUnit[i];
+                break;
+            }
+            else {
+                continue;
+            }
+        }
+        return formatNumber;
+
+    }
 }
 
 // Change the type of Chart
@@ -717,7 +731,15 @@ export default {
         extraStyle: {
             type: Object,
             required: false
+        },
+
+        // y轴, tooltip是否根据单位转换 
+        numUnitType: {
+            type: String,
+            default: 'thousand', // thousand, unit
+            required: false           
         }
+
     },
     name: 'NvMDTrend',
     mixins: [ChartType, WarningEvents, CustomEvents, Points, mixin],
@@ -1024,6 +1046,7 @@ export default {
         renderChart(data) {
             const conf = this.trendConf;
             let series = this.manageData(data);
+            const numUnitType = this.numUnitType;
 
             // 如果this.chart已经初始化过了，清除  
             if (typeof this.chart.clear === 'function') {
@@ -1141,7 +1164,7 @@ export default {
                     axisLabel: {
                         color: '#333',
                         formatter(value) {
-                            return shortValue(value);
+                            return shortValue(value, numUnitType);
                         }
                     },
                     axisTick: {
@@ -1200,7 +1223,7 @@ export default {
                                 + item.seriesName
                                 + ': '
                                 + `<span class="echarts-tooltip-item-value">`
-                                + mdutil.setDecimal(item.value[1], decimals)
+                                + mdutil.setDecimal(item.value[1], decimals, numUnitType)
                                 + valueSuffix
                                 + `</span>`
                                 + '</dd>';
@@ -1307,6 +1330,7 @@ export default {
         manageData(data) {
             const conf = this.trendConf;
             const warningColor = widgetConf.extraComponent.themeColor.warningColor;
+            const numUnitType = this.numUnitType;
 
             let max = Number.MIN_VALUE;
             let min = Number.MAX_VALUE;
@@ -1468,7 +1492,15 @@ export default {
                         label: {
                             position: 'end',
                             formatter() {
-                                return  shortValue(+threshold) + (conf.style.unit || '');
+                                let result;
+                                if (numUnitType === 'thousand') {
+                                    result = result > 1000 ? result.toLocaleString() : result;
+                                }
+                                else {
+                                    result = shortValue(+threshold) + (conf.style.unit || '');
+                                }
+                                
+                                return result;
                             }
                         },
                         data: [
