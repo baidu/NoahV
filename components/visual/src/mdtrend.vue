@@ -1459,6 +1459,7 @@ export default {
                     dataMin: yMin,
                     symbol: 'rect',
                     showSymbol: showSymbol,
+                    showAllSymbol: showSymbol,
                     legendHoverLink: false,
                     type: this.chartType === 'column' ? 'bar' : 'line',
                     connectNulls: connectNulls,
