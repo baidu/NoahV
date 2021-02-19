@@ -26,6 +26,7 @@
             <li><router-link to="/nvellipsis">nv-ellipsis</router-link></li>
             <li><router-link to="/nvdutytable">nv-dutytable</router-link></li>
             <li><router-link to="/nv404">nv-404</router-link></li>
+            <li><router-link to="/nvmultiselect">nv-multiSelect</router-link></li>
         </ul>
         <router-view></router-view>
     </div>
