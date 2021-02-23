@@ -1,10 +1,6 @@
 {
   "name": "noahv-component",
-<<<<<<< HEAD
   "version": "2.0.0-alpha.0",
-=======
-  "version": "1.1.48",
->>>>>>> master
   "description": "Components Library For NoahV",
   "main": "src/index",
   "scripts": {
