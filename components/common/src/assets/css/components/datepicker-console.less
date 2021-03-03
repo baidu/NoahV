@@ -29,7 +29,7 @@
                 width: 100%;
                 line-height: 1.5;
                 padding: 4px 32px 4px 7px;
-                border: none;
+                border: 1px solid @noahv-datepicker-input-border-color;
                 color: @noahv-datepicker-input-color;
                 background-color: @noahv-datepicker-input-bg-color;
                 position: relative;
@@ -81,9 +81,9 @@
             color: @noahv-datepicker-btn-color;
         }
         .date-picker-range-selected {
-            background: #e9efff !important;
-            border-left: 2px solid #e9efff !important;
-            border-right: 2px solid #e9efff !important;
+            background: @noahv-datepicker-range-selected-color !important;
+            border-left: 2px solid @noahv-datepicker-range-selected-color  !important;
+            border-right: 2px solid @noahv-datepicker-range-selected-color !important;
         }
         .date-picker-top-bar {
             text-align: left;
@@ -102,7 +102,7 @@
                 color: #fff;
                 background: @noahv-datepicker-selected-color !important;
             }
-        }    
+        }
         .inner-panel-body-wrapper {
             padding-top: 10px;
             .inner-panel-body {
@@ -197,7 +197,7 @@
                     margin: 10;
                     white-space: normal;
                     .cells-header {
-                        margin: 5px auto; 
+                        margin: 5px auto;
                         span {
                             display: inline-block;
                             width: 31px;
@@ -225,7 +225,7 @@
                     }
                     .last-month, .next-month {
                         color: @noahv-datepicker-cells-not-current-color;
-                        cursor: not-allowed 
+                        cursor: not-allowed
                     }
                     .last-month {
                         background-color: @noahv-datepicker-bg-color !important;
@@ -327,7 +327,7 @@
                     display: inline-block;
                     vertical-align: middle;
                     .reset, .primary {
-                        border: none;
+                        // border: none;
                         border-radius: 0;
                         cursor: pointer;
                         width: 64px;
@@ -336,20 +336,37 @@
                         outline: none;
                     }
                     .reset {
-                        color: @noahv-datepicker-primary-color;
+                        border: 1px solid @noahv-datepicker-reset-button-border-color;
+                        color: @noah-datepicker-reset-color;
                         background-color: @noahv-light-primary-color;
+                        &:hover{
+                            background-color: @noahv-datepicker-reset-button-hover;
+                        }
+                        &:active{
+                            background-color:  @noahv-datepicker-reset-button-active;
+                        }
                     }
                     .primary {
+                        border: none;
                         background-color: @noahv-datepicker-primary-color;
                         color: @noahv-datepicker-btn-color;
+                        &:hover{
+                            background-color: @noahv-datepicker-primary-button-hover;
+                        }
+                        &:active{
+                            background-color: @noahv-datepicker-primary-button-active;
+                        }
                     }
                     .confirm-disabled {
                         color: @noahv-datepicker-disabled-color;
                         background-color: @noahv-datepicker-default-color;
                         cursor: not-allowed;
+                        &:hover{
+                            background-color: @noahv-datepicker-default-color;
+                        }
                     }
                 }
             }
-        }  
+        }
     }
 }
