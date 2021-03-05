@@ -15,7 +15,6 @@
             <li><router-link to="/nvlist">nv-list</router-link></li>
             <li><router-link to="/nvdialog">nv-dialog</router-link></li>
             <li><router-link to="/nvswitch">nv-switch</router-link></li>
-            <li><router-link to="/nvbutton">nv-button</router-link></li>
             <li><router-link to="/nvtextline">nv-textline</router-link></li>
             <li><router-link to="/nvcascaderselect">nv-cascaderselect</router-link></li>
             <li><router-link to="/nvsteps">nv-steps</router-link></li>
@@ -26,6 +25,9 @@
             <li><router-link to="/nvellipsis">nv-ellipsis</router-link></li>
             <li><router-link to="/nvdutytable">nv-dutytable</router-link></li>
             <li><router-link to="/nv404">nv-404</router-link></li>
+            <li><router-link to="/nvbuttontpl">nv-button-tpl</router-link></li>
+            <li><router-link to="/nvbutton">nv-button</router-link></li>
+            <li><router-link to="/nvradio">nv-radio</router-link></li>
         </ul>
         <router-view></router-view>
     </div>

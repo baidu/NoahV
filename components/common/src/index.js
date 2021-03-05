@@ -27,7 +27,7 @@ import NvInput from './components/nv-input';
 import NvCheckbox from './components/nv-checkbox';
 import NvTextLine from './components/nv-textline';
 import NvSwitch from './components/nv-switch';
-import NvButton from './components/nv-button';
+import NvButtonTpl from './components/nv-button-tpl';
 import NvDialog from './components/nv-dialog';
 import NvPipline from './components/nv-pipline';
 import NvTransfer from './components/nv-transfer';
@@ -53,7 +53,7 @@ import SaInput from './components/nv-input';
 import SaCheckbox from './components/nv-checkbox';
 import SaTextLine from './components/nv-textline';
 import SaSwitch from './components/nv-switch';
-import SaButton from './components/nv-button';
+import SaButton from './components/nv-button-tpl';
 import SaDialog from './components/nv-dialog';
 import SaPipline from './components/nv-pipline';
 import SaTransfer from './components/nv-transfer';
@@ -66,6 +66,13 @@ import formTpl from './components/nv-form';
 import tableTpl from './components/nv-table';
 import filterTableTpl from './components/nv-filtertable';
 
+// 封装组件
+import NvButton from './components/nv-button';
+import NvButtonGroup from './components/nv-button-group';
+import NvRadio from './components/nv-radio';
+import NvRadioGroup from './components/nv-radio-group';
+
+
 import locale from './locale';
 
 const noahv = {
@@ -77,7 +84,6 @@ const noahv = {
     Nv404,
     NvSwitch,
     NvDialog,
-    NvButton,
     NvContrastTrend,
     NvList,
     NvSteps,
@@ -128,7 +134,17 @@ const noahv = {
     // 暂时兼容部分组件老的命名
     formTpl,
     tableTpl,
-    filterTableTpl
+    filterTableTpl,
+
+    // 新增组件
+    NvButton,
+    NvButtonGroup,
+    NvRadio,
+    NvRadioGroup,
+
+    // 修改组件
+    NvButtonTpl
+
 };
 
 

@@ -1,6 +1,9 @@
 {
-    "presets": ["env", "stage-2"],
-    "plugins": ["transform-runtime", "transform-vue-jsx"],
+    "presets": ["@vue/babel-preset-jsx", "@babel/preset-env"],
+    "plugins": [
+        "@vue/babel-plugin-transform-vue-jsx",
+        "@babel/plugin-transform-runtime"
+    ],
     "comments": false,
     "env": {
         "test": {

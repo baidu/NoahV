@@ -15,9 +15,9 @@
             text-align: center;
             padding: 1px 0;
             cursor: pointer;
-            background-color: #fafafa;
-            color: #dedede;
-            border-left: 1px solid #dededf;
+            background-color: @noahv-tree-search-button-background;
+            color: @noahv-tree-search-button-color;
+            border-left: 1px solid @noahv-tree-search-button-border;
         }
         .search-input {
             border: 1px solid #dededf;
@@ -27,6 +27,9 @@
             padding: 0px 8px;
             line-height: 24px;
             margin-right: 10px;
+            &:focus{
+                outline : none
+            }
         }
     }
     .node-wrapper {
@@ -60,9 +63,9 @@
                     display: inline-block;
                     width: 0;
                     height: 0;
-                    border-top: 6px solid transparent;
-                    border-left: 5px solid #333;
-                    border-bottom: 6px solid transparent;
+                    border-top: @noahv-tree-arrow-normal-top solid transparent;
+                    border-left: @noahv-tree-arrow-normal-left solid #333;
+                    border-bottom: @noahv-tree-arrow-normal-bottom solid transparent;
                     cursor: pointer;
                     position: relative;
                     top: 0px;
@@ -72,9 +75,9 @@
                     display: inline-block;
                     width: 0;
                     height: 0;
-                    border-top: 5px solid #333;
-                    border-left: 6px solid transparent;
-                    border-right: 6px solid transparent;
+                    border-top: @noahv-tree-arrow-expend-top solid #333;
+                    border-left: @noahv-tree-arrow-expend-left solid transparent;
+                    border-right: @noahv-tree-arrow-expend-right solid transparent;
                     cursor: pointer;
                     position: relative;
                     top: -3px;
@@ -215,7 +218,7 @@
                     position: relative;
                     top: -2px;
                     cursor: pointer;
-                    margin-left: 5px;
+                    margin-left: @noahv-tree-node-title-margin-left;
                     border-radius: 2px;
                 }
                 .node-disabled {

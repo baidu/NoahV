@@ -6,10 +6,10 @@
  * @author Joannamo(joannamo123@163.com)
  */
 
-import NvButton from './button.vue';
+import NvRadio from './radio.vue';
 
 export {
-    NvButton
+    NvRadio
 };
 
-export default NvButton;
+export default NvRadio;
