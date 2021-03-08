@@ -1,14 +1,14 @@
 <template>
     <div class="filter-item-multi">
         <Select :style="selectStyle" :placeholder="placeholder" @on-open-change="togglePanel($event)" ref="multiDimensionItem">
-            <Input search :placeholder="searchInputPlaceholder || '请输入搜索内容'"
+            <Input search :placeholder="searchInputPlaceholder"
                 v-model="searchInputValue"
                 v-if="hasSearchInput"
                 @on-keyup="onKeyUpSearch" />
                 <CheckboxGroup v-model="value" @on-change="checkAllGroupChange($event)">
                     <Checkbox v-if="hasAll" v-model="isAll" class="is-all" @on-change="isAllChange($event)">
                     {{allText}}</Checkbox>
-                    <Checkbox :indeterminate="indeterminate" :value="checkAll" @click.prevent.native="handleCheckAll($event)">全选</Checkbox>
+                    <Checkbox :indeterminate="indeterminate" :value="checkAll" @click.prevent.native="handleCheckAll($event)">{{checkAllText}}</Checkbox>
                     <Checkbox :key="dim.name" :label="dim.name" v-for="dim in resultList">{{dim.comment}}</Checkbox>
                 </CheckboxGroup>
         </Select>
@@ -25,6 +25,7 @@
 
 <script>
 import $ from 'jquery';
+import {t} from '../../locale';
 
 function handlerResultTitle(text, params) {
     if (/\{.*?\}/g.test(text)) {
@@ -45,7 +46,9 @@ export default {
         },
         allText: {
             type: String,
-            default: '全部'
+            default() {
+                return t('multiSelect.allText');
+            }
         },
         list: {
             type: Array,
@@ -53,7 +56,9 @@ export default {
         },
         searchInputPlaceholder: {
             type: String,
-            default: '请输入'
+            default() {
+                return t('multiSelect.placeholder');
+            }
         },
         hasSearchInput: {
             type: Boolean,
@@ -61,10 +66,12 @@ export default {
         },
         resultText: {
             type: String,
-            default: '已选{selectNumber}项'
+            default() {
+                return t('multiSelect.resultText');
+            }
         },
         width: {
-            type: String,
+            type: [String, Number],
             default: '200px'
         },
         showTotalNumber: {
@@ -108,14 +115,23 @@ export default {
             result: {},
             resultList: [],
             timeId: '',
-            pageNumber: this.pageNo
+            pageNumber: this.pageNo,
+            checkAllText: t('multiSelect.checkAllText')
         };
     },
     computed: {
         selectStyle() {
-            const style = {
-                width: this.width
-            };
+            let width = 0;
+            if (typeof this.width === 'number') {
+                width = this.width + 'px';
+            }
+            else if (this.width.includes('px')) {
+                width = this.width;
+            }
+            else {
+                width = this.width + 'px';
+            }
+            const style = {width};
             if (this.isFixedSearchInput) {
                 style.overflow = 'visible !important';
             }

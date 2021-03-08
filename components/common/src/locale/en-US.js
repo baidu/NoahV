@@ -101,5 +101,11 @@ export default {
 	},
 	tree: {
 		placeholder: 'search'
-	}
+    },
+    multiSelect: {
+        placeholder: 'Enter search content',
+        checkAllText: 'Select all',
+        allText: 'All',
+        resultText: '{selectNumber} items selected'
+    }
 };

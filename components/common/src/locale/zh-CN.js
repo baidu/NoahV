@@ -98,5 +98,10 @@ export default {
 	},
 	tree: {
 		placeholder: '搜索'
-	}
+    },
+    multiSelect: {
+        placeholder: '请输入搜索内容',
+        checkAllText: '全选',
+        allText: '全部'
+    }
 };
