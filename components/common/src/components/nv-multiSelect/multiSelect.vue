@@ -40,7 +40,7 @@ function handlerResultTitle(text, params) {
     return text;
 }
 export default {
-    name: 'MultiSelect',
+    name: 'NvMultiSelect',
     props: {
         hasAll: {
             type: Boolean,
@@ -192,20 +192,21 @@ export default {
         }
     },
     methods: {
-        setPageResult() {
+        setPageResult(list) {
+            const tempList = list && list.length > 0 ? list : this.list;
             if (this.isPageRender) {
                 let pageNo = 0;
-                for (let i = 0; i < this.list.length; i++) {
+                for (let i = 0; i < tempList.length; i++) {
                     if (i % this.pageSize === 0) {
                         pageNo++;
                         this.result[pageNo] = [];
                     }
-                    this.result[pageNo].push(this.list[i]);
+                    this.result[pageNo].push(tempList[i]);
                 }
                 this.resultList = this.result[this.pageNo];
             }
             else {
-                this.resultList = this.list;
+                this.resultList = tempList;
             }
         },
         bindScrollEvent() {
@@ -266,6 +267,7 @@ export default {
         },
         onKeyUpSearch() {
             this.data = this.list.filter(item => item.comment.indexOf(this.searchInputValue) > -1);
+            this.setPageResult(this.data);
             this.$emit('on-keyup', {
                 value: this.searchInputValue,
                 result: this.data
