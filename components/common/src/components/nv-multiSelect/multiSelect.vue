@@ -1,6 +1,7 @@
 <template>
     <div class="filter-item-multi">
-        <Select :style="selectStyle" :placeholder="placeholder" @on-open-change="togglePanel($event)" ref="multiDimensionItem">
+        <Select :style="selectStyle" :placeholder="placeholder"
+            @on-open-change="togglePanel($event)" ref="multiDimensionItem">
             <Input search :placeholder="searchInputPlaceholder"
                 v-model="searchInputValue"
                 v-if="hasSearchInput"
@@ -8,7 +9,8 @@
                 <CheckboxGroup v-model="value" @on-change="checkAllGroupChange($event)">
                     <Checkbox v-if="hasAll" v-model="isAll" class="is-all" @on-change="isAllChange($event)">
                     {{allText}}</Checkbox>
-                    <Checkbox :indeterminate="indeterminate" :value="checkAll" @click.prevent.native="handleCheckAll($event)">{{checkAllText}}</Checkbox>
+                    <Checkbox :indeterminate="indeterminate" :value="checkAll"
+                        @click.prevent.native="handleCheckAll($event)">{{checkAllText}}</Checkbox>
                     <Checkbox :key="dim.name" :label="dim.name" v-for="dim in resultList">{{dim.comment}}</Checkbox>
                 </CheckboxGroup>
         </Select>
@@ -30,7 +32,7 @@ import {t} from '../../locale';
 function handlerResultTitle(text, params) {
     if (/\{.*?\}/g.test(text)) {
         let matches = text.match(/\{.*?\}/g);
-        matches.forEach( item => {
+        matches.forEach(item => {
             let key = item.substring(1, item.length - 1);
             text = text.replace(item, params[key]);
         });
@@ -253,13 +255,15 @@ export default {
             this.isAll = false;
             if (this.indeterminate) {
                 this.checkAll = false;
-            } else {
+            }
+            else {
                 this.checkAll = !this.checkAll;
             }
             this.indeterminate = false;
             if (this.checkAll) {
                 this.value = this.list && this.list.map(item => item.name);
-            } else {
+            }
+            else {
                 this.value = [];
             }
         },
@@ -267,7 +271,7 @@ export default {
             this.isAll = false;
         },
         onKeyUpSearch() {
-            this.data = this.list.filter(item => item.comment.indexOf(this.searchInputValue)> -1);
+            this.data = this.list.filter(item => item.comment.indexOf(this.searchInputValue) > -1);
             this.$emit('on-keyup', {
                 value: this.searchInputValue,
                 result: this.data
