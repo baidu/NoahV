@@ -6,13 +6,13 @@
                 v-model="searchInputValue"
                 v-if="hasSearchInput"
                 @on-keyup="onKeyUpSearch" />
-                <CheckboxGroup v-model="value" @on-change="checkAllGroupChange($event)">
-                    <Checkbox v-if="hasAll" v-model="isAll" class="is-all" @on-change="isAllChange($event)">
-                    {{allText}}</Checkbox>
-                    <Checkbox :indeterminate="indeterminate" :value="checkAll"
-                        @click.prevent.native="handleCheckAll($event)">{{checkAllText}}</Checkbox>
-                    <Checkbox :key="dim.name" :label="dim.name" v-for="dim in resultList">{{dim.comment}}</Checkbox>
-                </CheckboxGroup>
+            <Checkbox v-if="hasAll" v-model="isAll" class="is-all" @on-change="isAllChange($event)">
+                {{allText}}</Checkbox>
+            <Checkbox :indeterminate="indeterminate" :value="checkAll"
+                @click.prevent.native="handleCheckAll($event)">{{checkAllText}}</Checkbox>
+            <CheckboxGroup v-model="value" @on-change="checkAllGroupChange($event)">
+                <Checkbox :key="dim.name" :label="dim.name" v-for="dim in resultList">{{dim.comment}}</Checkbox>
+            </CheckboxGroup>
         </Select>
         <span class="checked-list" v-if="hasAll && isAll">{{allText}}</span>
         <span class="checked-list" v-else>
@@ -40,7 +40,7 @@ function handlerResultTitle(text, params) {
     return text;
 }
 export default {
-    name: 'NvMultiSelect',
+    name: 'MultiSelect',
     props: {
         hasAll: {
             type: Boolean,
@@ -77,10 +77,6 @@ export default {
             default: '200px'
         },
         showTotalNumber: {
-            type: Boolean,
-            default: false
-        },
-        isFixedSearchInput: {
             type: Boolean,
             default: false
         },
@@ -127,16 +123,13 @@ export default {
             if (typeof this.width === 'number') {
                 width = this.width + 'px';
             }
-            else if (this.width.includes('px')) {
+            else if (this.width.indexOf('px') > -1) {
                 width = this.width;
             }
             else {
                 width = this.width + 'px';
             }
             const style = {width};
-            if (this.isFixedSearchInput) {
-                style.overflow = 'visible !important';
-            }
             return style;
         },
         totalPage() {
@@ -160,8 +153,9 @@ export default {
             handler() {
                 this.setPageResult();
                 this.value = this.hasAll === true ? [] : (this.list.length ? [this.list[0].name] : []);
-                this.indeterminate = this.hasAll ? false : this.list.length > this.value.length;
-                this.checkAll = this.hasAll ? false : this.list.length === this.value.length && this.list.length !== 0;
+                this.indeterminate = this.hasAll === true ? false : this.list.length > this.value.length;
+                this.checkAll = this.hasAll === true
+                    ? false : this.list.length === this.value.length && this.list.length !== 0;
             },
             deep: true
         },
@@ -198,10 +192,6 @@ export default {
         }
     },
     methods: {
-        handleReachBottom() {
-            this.pageNumber++;
-            this.resultList = this.resultList.concat(this.result[this.pageNumber]);
-        },
         setPageResult() {
             if (this.isPageRender) {
                 let pageNo = 0;
@@ -269,6 +259,10 @@ export default {
         },
         checkAllGroupChange() {
             this.isAll = false;
+            // this.$emit('on-change', {
+            //    value: this.value,
+            //    isAll: this.isAll
+            // });
         },
         onKeyUpSearch() {
             this.data = this.list.filter(item => item.comment.indexOf(this.searchInputValue) > -1);
@@ -282,7 +276,7 @@ export default {
 </script>
 
 <style lang="less">
- .filter-item-multi {
+.filter-item-multi {
     .is-all {
         .ivu-checkbox-checked {
             .ivu-checkbox-inner {
