@@ -1,24 +1,47 @@
 <template>
-    <div class="filter-item-multi">
-        <Select :style="selectStyle" :placeholder="placeholder"
-            @on-open-change="togglePanel($event)" ref="multiDimensionItem">
-            <Input search :placeholder="searchInputPlaceholder"
-                v-model="searchInputValue"
-                v-if="hasSearchInput"
+    <div :class="prefix">
+        <Select
+            :style="selectStyle"
+            :placeholder="placeholder"
+            @on-open-change="togglePanel($event)"
+            ref="multiDimensionItem">
+            <Input
+                search
+                :placeholder="searchPlaceHolder"
+                v-model="searchValue"
+                v-if="hasSearch"
                 @on-keyup="onKeyUpSearch" />
-            <Checkbox v-if="hasAll" v-model="isAll" class="is-all" @on-change="isAllChange($event)">
-                {{allText}}</Checkbox>
-            <Checkbox :indeterminate="indeterminate" :value="checkAll"
-                @click.prevent.native="handleCheckAll($event)">{{checkAllText}}</Checkbox>
-            <CheckboxGroup v-model="value" @on-change="checkAllGroupChange($event)">
-                <Checkbox :key="dim.name" :label="dim.name" v-for="dim in resultList">{{dim.comment}}</Checkbox>
+            <Checkbox
+                v-if="hasAll"
+                v-model="isAll"
+                class="is-all"
+                @on-change="allChangeAction($event)">
+                {{allText}}
+            </Checkbox>
+            <Checkbox
+                :indeterminate="indeterminate"
+                :value="checkAll"
+                @click.prevent.native="handleCheckAll($event)">
+                {{checkAllText}}
+            </Checkbox>
+            <CheckboxGroup
+                v-model="value"
+                @on-change="checkAllGroupChange($event)"
+                >
+                <Checkbox
+                    v-for="dim in resultList"
+                    :key="dim.value"
+                    :label="dim.value"
+                    >
+                    {{dim.label}}
+                </Checkbox>
             </CheckboxGroup>
         </Select>
         <span class="checked-list" v-if="hasAll && isAll">{{allText}}</span>
         <span class="checked-list" v-else>
             <i>{{resultTitle}}</i>
             <i class="number-of-total">
-                <template v-if="showTotalNumber">({{value.length}}/{{data.length}})</template>
+                <template v-if="showTotalNumber">({{value.length}}/{{list.length}})</template>
                 <template v-else>({{value.length}})</template>
             </i>
         </span>
@@ -26,8 +49,9 @@
 </template>
 
 <script>
-import $ from 'jquery';
 import {t} from '../../locale';
+
+const prefix = 'noahv-filter-item-multi';
 
 function handlerResultTitle(text, params) {
     if (/\{.*?\}/g.test(text)) {
@@ -39,8 +63,13 @@ function handlerResultTitle(text, params) {
     }
     return text;
 }
+
 export default {
     name: 'NvMultiSelect',
+    model: {
+        prop: 'model',
+        event: 'on-change'
+    },
     props: {
         hasAll: {
             type: Boolean,
@@ -52,35 +81,43 @@ export default {
                 return t('multiSelect.allText');
             }
         },
+        allValue: {
+            type: String,
+            default: 'all'
+        },
         list: {
             type: Array,
             default: () => []
         },
-        searchInputPlaceholder: {
+        searchPlaceHolder: {
             type: String,
             default() {
                 return t('multiSelect.placeholder');
             }
         },
-        hasSearchInput: {
+        hasSearch: {
             type: Boolean,
             default: false
         },
-        resultText: {
+        selectedText: {
             type: String,
             default() {
-                return t('multiSelect.resultText');
+                return t('multiSelect.selectedText');
             }
         },
         width: {
             type: [String, Number],
             default: '200px'
         },
+        model: {
+            type: [String, Array],
+            default: () => []
+        },
         showTotalNumber: {
             type: Boolean,
             default: false
         },
-        isUnfoldLabel: {
+        showAllLabel: {
             type: Boolean,
             default: false
         },
@@ -92,6 +129,10 @@ export default {
             type: Number,
             dafault: 10
         },
+        defaultNumber: {
+            type: Number,
+            default: 50
+        },
         distanceToBottom: {
             type: Number,
             dafault: 20
@@ -99,22 +140,24 @@ export default {
     },
     data() {
         return {
+            prefix,
             placeholder: '',
-            isAll: this.hasAll === true,
+            isAll: false,
             indeterminate: false,
             checkAll: false,
             value: [],
-            searchInputValue: '',
+            searchValue: '',
             data: this.list || [],
-            resultTitle: handlerResultTitle(this.resultText, {
+            resultTitle: handlerResultTitle(this.selectedText, {
                 selectNumber: 0
             }),
-            isPageRender: this.list.length > 1000,
+            isPageRender: this.list.length > this.defaultNumber,
             result: {},
             resultList: [],
             timeId: '',
             pageNumber: this.pageNo,
-            checkAllText: t('multiSelect.checkAllText')
+            checkAllText: t('multiSelect.checkAllText'),
+            container: null
         };
     },
     computed: {
@@ -140,19 +183,21 @@ export default {
         }
     },
     mounted() {
+        this.container = this.$refs.multiDimensionItem.$el.children[1];
+        this.setDefaultValue();
         this.setPageResult();
         this.bindScrollEvent();
     },
     beforeDestroy() {
-        let index = 0;
-        let container = $($('.filter-items-item .ivu-select-dropdown')[index]);
-        container.off('scroll');
+        this.container.removeEventListener('scroll', this.scrollAction);
+        this.container = null;
+
     },
     watch: {
         list: {
             handler() {
                 this.setPageResult();
-                this.value = this.hasAll === true ? [] : (this.list.length ? [this.list[0].name] : []);
+                this.value = this.hasAll === true ? [] : (this.list.length ? [this.list[0].value] : []);
                 this.indeterminate = this.hasAll === true ? false : this.list.length > this.value.length;
                 this.checkAll = this.hasAll === true
                     ? false : this.list.length === this.value.length && this.list.length !== 0;
@@ -165,33 +210,35 @@ export default {
                 this.checkAll = true;
             }
             else if (val.length < this.list.length) {
-                if (val.length === 0) {
-                    this.indeterminate = false;
-                }
-                else {
-                    this.indeterminate = true;
-                }
+                this.indeterminate = val.length !== 0;
                 this.checkAll = false;
             }
             else {
                 this.indeterminate = false;
                 this.checkAll = false;
             }
-            if (this.isUnfoldLabel) {
+            if (this.showAllLabel) {
                 this.resultTitle = this.value.join('、');
             }
             else {
-                this.resultTitle = handlerResultTitle(this.resultText, {
+                this.resultTitle = handlerResultTitle(this.selectedText, {
                     selectNumber: this.value.length
                 });
             }
-            this.$emit('on-change', {
-                value: this.value,
-                isAll: this.isAll
-            });
+
+            let value = this.isAll ? this.allValue : this.value;
+            this.$emit('on-change', value);
         }
     },
     methods: {
+        setDefaultValue() {
+            if (Array.isArray(this.model)) {
+                this.value = this.model;
+            }
+            else {
+                this.isAll = this.model === this.allValue;
+            }
+        },
         setPageResult(list) {
             const tempList = list && list.length > 0 ? list : this.list;
             if (this.isPageRender) {
@@ -211,31 +258,29 @@ export default {
         },
         bindScrollEvent() {
             if (this.isPageRender) {
-                const me = this;
-                let index = 0;
-                let container = $($('.filter-item-multi .ivu-select-dropdown')[index]);
-                container.on('scroll', () => {
-                    clearTimeout(me.timeId);
-                    me.timeId = setTimeout(() => {
-                        let scrollHeight = container[0].scrollHeight || 0;
-                        let scrollTop = container[0].scrollTop || 0;
-                        let divHeight = container.height();
-                        if (scrollHeight > 0 && scrollTop > 0) {
-                            if (scrollTop + divHeight + me.distanceToBottom >= scrollHeight) {
-                                if (me.pageNumber < me.totalPage) {
-                                    me.pageNumber++;
-                                    me.resultList = me.resultList.concat(me.result[me.pageNumber]);
-                                }
-                            }
-                        }
-                    }, 500);
-                });
+                this.container.addEventListener('scroll', this.scrollAction);
             }
+        },
+        scrollAction() {
+            clearTimeout(this.timeId);
+            this.timeId = setTimeout(() => {
+                let scrollHeight = this.container.scrollHeight || 0;
+                let scrollTop = this.container.scrollTop || 0;
+                let divHeight = this.container.offsetHeight;
+                if (scrollHeight > 0 && scrollTop > 0) {
+                    if (scrollTop + divHeight + this.distanceToBottom >= scrollHeight) {
+                        if (this.pageNumber < this.totalPage) {
+                            this.pageNumber++;
+                            this.resultList = this.resultList.concat(this.result[this.pageNumber]);
+                        }
+                    }
+                }
+            }, 500);
         },
         togglePanel(e) {
             this.$emit('on-toggle-panel', e);
         },
-        isAllChange(e) {
+        allChangeAction(e) {
             if (e) {
                 this.checkAll = false;
                 this.indeterminate = false;
@@ -252,24 +297,22 @@ export default {
             }
             this.indeterminate = false;
             if (this.checkAll) {
-                this.value = this.list && this.list.map(item => item.name);
+                this.value = this.list && this.list.map(item => item.value);
             }
             else {
                 this.value = [];
             }
+
         },
         checkAllGroupChange() {
             this.isAll = false;
-            // this.$emit('on-change', {
-            //    value: this.value,
-            //    isAll: this.isAll
-            // });
+            this.$emit('on-change', this.value);
         },
         onKeyUpSearch() {
-            this.data = this.list.filter(item => item.comment.indexOf(this.searchInputValue) > -1);
+            this.data = this.list.filter(item => item.label.indexOf(this.searchValue) > -1);
             this.setPageResult(this.data);
             this.$emit('on-keyup', {
-                value: this.searchInputValue,
+                value: this.searchValue,
                 result: this.data
             });
         }
@@ -277,169 +320,3 @@ export default {
 };
 </script>
 
-<style lang="less">
-.filter-item-multi {
-    .is-all {
-        .ivu-checkbox-checked {
-            .ivu-checkbox-inner {
-                background-color: #fff !important;
-                &:after {
-                    content: '';
-                    display: table;
-                    width: 8px;
-                    height: 8px;
-                    position: absolute;
-                    border-radius: 50%;
-                    background: #108cee;
-                    top: 2px;
-                    left: 2px;
-                    border: 0;
-                    border-top: 0;
-                    border-left: 0;
-                    opacity: 1;
-                    -webkit-transform: scale(1);
-                    transform: scale(1);
-                    transition: all .2s ease-in-out;
-                }
-            }
-        }
-        .ivu-checkbox-inner {
-            display: inline-block;
-            width: 14px;
-            height: 14px;
-            position: relative;
-            top: 0;
-            left: 0;
-            background-color: #fff;
-            border: 1px solid #bbbbbb;
-            border-radius: 50% !important;
-            transition: all .2s ease-in-out;
-            &:after {
-                position: absolute;
-                width: 10px;
-                height: 10px;
-                left: 2px;
-                top: 2px;
-                border-radius: 6px;
-                display: table;
-                border-top: 0;
-                border-left: 0;
-                content: " ";
-                background-color: #2d8cf0;
-                opacity: 0;
-                transition: all .2s ease-in-out;
-                -webkit-transform: scale(0);
-                transform: scale(0);
-            }
-        }
-    }
-    position: relative;
-    float: left;
-    margin-right: 15px;
-    .ivu-select-single {
-        position: relative;
-        z-index: 2;
-        &:hover {
-            & + .checked-list {
-                border-color: #999;
-            }
-        }
-        .ivu-select-dropdown {
-            padding-bottom: 10px;
-            .dimension-button {
-                margin-left: 15px;
-                margin-top: 5px;
-            }
-            margin: 5px 0;
-            .ivu-select-dropdown-list {
-                .ivu-checkbox-inner {
-                    border-radius: 0;
-                }
-                .ivu-checkbox-checked {
-                    .ivu-checkbox-inner {
-                        border-color: #108cee;
-                        background-color: #108cee;
-                    }
-                }
-                .ivu-checkbox-wrapper {
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                    &:hover {
-                        color: #108cee;
-                        background: #eaf6fe;
-                    }
-                }
-            }
-        }
-        .ivu-icon-ios-arrow-down {
-            color: #666;
-            font-size: calc(1em - 4px);
-        }
-        .ivu-select-selection {
-            background: transparent;
-        }
-    }
-
-    .loading {
-        font-size: 12px;
-        text-align: center;
-        padding-top: 5px;
-        padding-bottom: 5px;
-        transition: padding .5s;
-        .ivu-scroll-loader-wrapper {
-            padding: 5px 0;
-            height: 0;
-            background-color: inherit;
-            transform: scale(0);
-            transition: opacity .3s,transform .5s,height .5s;
-        }
-        .ivu-scroll-loader-wrapper-active {
-            height: 40px;
-            transform: scale(1);
-        }
-    }
-
-    .ivu-select-dropdown {
-        max-height: 300px;
-    }
-}
-.ivu-checkbox-wrapper {
-    display: block;
-    height: 30px;
-    line-height: 30px;
-    color: #515a6e;
-    padding-left: 16px;
-    &:hover {
-        color: #3a62ca;
-        background: #f7f8fc;
-        transition: background 0.2s ease-in-out;
-    }
-}
-.checked-list {
-    display: block;
-    position: absolute;
-    height: 30px;
-    line-height: 30px;
-    background: #fff;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    width: 200px;
-    padding-left: 10px;
-    padding-right: 30px;
-    color: #333;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    word-break: break-all;
-    width: 100%;
-    i {
-        font-style: normal;
-    }
-    .number-of-total {
-        position: absolute;
-        right: 30px;
-    }
-}
-</style>
