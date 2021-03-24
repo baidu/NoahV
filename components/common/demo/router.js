@@ -99,5 +99,9 @@ export default [
     {
         path: '/nv404',
         component: r => require.ensure([], () => r(require('./components/404/404.vue')), '404')
+    },
+    {
+        path: '/nvmultiselect',
+        component: r => require.ensure([], () => r(require('./components/multiSelect/multiSelect.vue')), 'multiSelect')
     }
 ];

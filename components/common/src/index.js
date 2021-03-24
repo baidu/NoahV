@@ -20,6 +20,7 @@ import NvSteps from './components/nv-steps';
 import NvSearch from './components/nv-search';
 import NvTag from './components/nv-tag';
 import NvDutyTable from './components/nv-dutytable';
+import NvMultiSelect from './components/nv-multiSelect';
 
 // Basic，Nv命名方式
 import NvIcon from './components/nv-icon';
@@ -84,6 +85,7 @@ const noahv = {
     NvSearch,
     NvTag,
     NvDutyTable,
+    NvMultiSelect,
 
     // 基础组件类，兼容Nv命名组件
     NvIcon,
