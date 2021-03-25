@@ -1,2 +1,7 @@
-## 1.0.5
-* [功能新增] request暴露request参数 config，供在使用hooks接收
+## noahv-request
+
+Request util for [NoahV](https://github.com/baidu/NoahV)
+
+## LICENSE
+
+Apache License 2.0
