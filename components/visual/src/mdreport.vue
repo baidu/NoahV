@@ -49,7 +49,18 @@
                         <tr>
                             <th>{{reportOptions.main}}</th>
                             <template v-for="column in theadColumns">
-                                <th class="sort">{{column.title}}</th>
+                                <th
+                                    v-if="column.items"
+                                    style="border-bottom-width: 1px;"
+                                    :colspan="column.items.length">{{column.name}}</th>
+                                <th
+                                    v-else-if="!column.items"
+                                    class="sort"
+                                    rowspan="2"
+                                    :class="[column.sortType == 'desc'
+                                        ? 'sort-desc' : (column.sortType == 'asc' ? 'sort-asc' : '')]"
+                                    :data-sort="column.sortid"
+                                    @click="sort(column)">{{column.title}}</th>
                             </template>
                         </tr>
                     </template>
@@ -98,7 +109,7 @@
                 </tbody>
                 <tfoot v-if="isShowTotal">
                     <tr>
-                        <td>合计：</td>
+                        <td>合计</td>
                         <template v-for="total in totals">
                             <td v-if="total">{{total}}</td>
                             <td v-else>--</td>
@@ -297,7 +308,7 @@ export default {
 
         // add lazy loading when you scroll the page
         $(scrollTrigger).on('scroll', this.redraw);
-        
+
         if (this.conf) {
             this.renderConf();
         }
@@ -527,6 +538,7 @@ export default {
                     }
                     else {
                         columns.push(col);
+                        this.reportOptions.hasGroup = true;
                     }
                 }
             });
