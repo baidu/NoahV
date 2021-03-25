@@ -15,7 +15,8 @@ const vueInstance = new Vue();
 
 
 let request = {
-    hooks: {}
+    hooks: {},
+    config: {}
 };
 
 // 正在请求数量
@@ -211,6 +212,7 @@ const axiosDefaultConf = {
             }
             config.url = handlerRestfulUrl(config.url, args);
         }
+        request.config = config;
         return axiosDefaults.adapter(config);
     },
     transformResponse: [
@@ -233,6 +235,7 @@ request.install = (Vue, opt) => {
         if (typeof request.hooks.beforeRequest === 'function') {
             return request.hooks.beforeRequest(config);
         }
+        request.config = config;
         return config;
     }, error => {
         requestFailureHandler(error);
