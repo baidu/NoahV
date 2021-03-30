@@ -28,6 +28,7 @@
             <li><router-link to="/nvbuttontpl">nv-button-tpl</router-link></li>
             <li><router-link to="/nvbutton">nv-button</router-link></li>
             <li><router-link to="/nvradio">nv-radio</router-link></li>
+            <li><router-link to="/nvpage">nv-page</router-link></li>
         </ul>
         <router-view></router-view>
     </div>
@@ -35,10 +36,10 @@
 <script>
 export default {
     name: 'App',
-    data () {
-        return {}
+    data() {
+        return {};
     }
-}
+};
 </script>
 <style lang="less" >
 .demo-container {

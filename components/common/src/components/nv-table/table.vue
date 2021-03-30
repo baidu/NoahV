@@ -29,7 +29,7 @@
         </Table>
         <div style="margin: 10px;overflow: hidden" v-if="showPager">
             <div style="float: right;">
-                <Page
+                <nv-page
                     :total="paginationData.totalCount"
                     :current="paginationData.pageNo"
                     :page-size-opts="paginationData.pageSizeOptions"
@@ -40,7 +40,7 @@
                     :show-elevator="showelevator"
                     placement="top"
                 >
-                </Page>
+                </nv-page>
             </div>
         </div>
     </div>
@@ -97,7 +97,7 @@ export default {
         noDataText: {
             type: String,
             default() {
-                return t('table.noData')
+                return t('table.noData');
             }
         },
         showelevator: {
@@ -295,7 +295,7 @@ export default {
                     this.$Message.error(res.message ? res.message : res);
                     this.handlerLoading(false);
                 }
-            }).catch(() => {
+            })['catch'](() => {
                 this.handlerLoading(false);
             });
         },
@@ -668,7 +668,7 @@ export default {
                             if (confirm.callback && typeof confirm.callback === 'function') {
                                 confirm.callback(row);
                             }
-                        }).catch(err => {
+                        })['catch'](err => {
                             this.$Message.error(err);
                         });
                     }

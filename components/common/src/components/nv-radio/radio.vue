@@ -6,12 +6,12 @@ import {Radio} from 'view-design';
 const prefixCls = 'noahv-radio';
 
 export default {
-    name: 'nv-radio',
+    name: 'nvRadio',
     components: {
         Radio
     },
     computed: {
-        nvWrapClasses () {
+        nvWrapClasses() {
             const _this = this.$attrs;
             return [
                 `${prefixCls}-wrapper`,
@@ -26,5 +26,5 @@ export default {
             ];
         }
     }
-}
+};
 </script>

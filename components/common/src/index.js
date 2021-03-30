@@ -71,6 +71,7 @@ import NvButton from './components/nv-button';
 import NvButtonGroup from './components/nv-button-group';
 import NvRadio from './components/nv-radio';
 import NvRadioGroup from './components/nv-radio-group';
+import NvPage from './components/nv-page';
 
 
 import locale from './locale';
@@ -105,7 +106,7 @@ const noahv = {
     NvCascaderSelect,
     NvEllipsis,
 
-     // 业务模板
+    // 业务模板
     SaForm,
     SaTable,
     SaFilterTable,
@@ -141,6 +142,7 @@ const noahv = {
     NvButtonGroup,
     NvRadio,
     NvRadioGroup,
+    NvPage,
 
     // 修改组件
     NvButtonTpl

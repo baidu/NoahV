@@ -1,0 +1,121 @@
+.@{noahvPrefixCls}-page  {
+    font-size: 12px;
+    .@{ivu}-page-item-jump-next, 
+    .@{ivu}-page-item-jump-prev,
+    .@{ivu}-page-next, 
+    .@{ivu}-page-prev,
+    .@{ivu}-page-item {
+        min-width: 30px;
+        height: 30px;
+        line-height: 30px;
+        border: 0;
+    }
+    .@{ivu}-page-item {
+        &:hover {
+            a {
+                color: @noahv-primary-color;
+            }
+        }
+        .@{ivu}-icon-ios-arrow-forward {
+            &:hover {
+                color: @noahv-primary-color;
+            }
+        }
+    }
+    .@{ivu}-page-item-jump-next, 
+    .@{ivu}-page-item-jump-prev {
+        i:first-child {
+            color: @noahv-primary-color;
+        }
+    }
+    .@{ivu}-page-item-active {
+        border: @noahv-primary-color solid 1px;
+        border-radius: 0;
+    }
+    .@{ivu}-select-selection {
+        border: @noahv-primary-color solid 1px;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    .@{ivu}-select-single {
+        .@{ivu}-select-selection {
+            height: 30px;
+        }
+    }
+    .@{ivu}-select-single .@{ivu}-select-selection .@{ivu}-select-placeholder, .@{ivu}-select-single .@{ivu}-select-selection .@{ivu}-select-selected-value {
+        font-size: 12px;;
+    }
+    .@{ivu}-select-dropdown {
+        margin: 0 !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+    }
+    .@{ivu}-select-item {
+        font-size: 12px !important;
+        &:hover {
+            background: @noahv-page-select-item-focus;
+        }
+    }
+    .@{ivu}-select-item-selected, .@{ivu}-select-item-selected:hover {
+        color: @noahv-primary-color;
+    }
+    .@{ivu}-select-item-selected:hover {
+        background: @noahv-page-select-item-focus;
+    }
+    .@{ivu}-select-item-focus {
+        background: @noahv-page-select-item-focus;
+    }
+    .@{ivu}-select-visible .@{ivu}-select-selection {
+        box-shadow: none;
+    }
+    .@{ivu}-page-options-elevator input {
+        height: 30px;
+        border-radius: 0;
+        font-size: 12px;
+        box-shadow: none;
+        &:focus {
+            border-color: @noahv-primary-color;
+        }
+    }
+
+    .@{ivu}-select-small.@{ivu}-select-single .@{ivu}-select-selection {
+        border-radius: 0;
+        height: 24px;
+        line-height: 24px;
+    }
+
+    .@{ivu}-page-item-active a, .@{ivu}-page-item-active:hover a {
+        color: @noahv-primary-color;
+    }
+
+    // diabled
+    &.@{ivu}-page-with-disabled .@{ivu}-select-selection {
+        border: 1px solid #dcdee2;    
+        color: #999;
+    }
+    &.@{ivu}-page-with-disabled .@{ivu}-page-disabled, &.@{ivu}-page-with-disabled .@{ivu}-page-item {
+        background: transparent;
+    }
+    &.@{ivu}-page-with-disabled .ivu-page-item-active {
+        border: 1px solid #dcdee2;  
+        color: #999;
+        background: #f5f5f5;
+    }
+    &.@{ivu}-page-with-disabled .@{ivu}-page-disabled-active a, 
+    &.@{ivu}-page-with-disabled .@{ivu}-page-disabled-active:hover a, 
+    &.@{ivu}-page-with-disabled .@{ivu}-page-item-active a, 
+    &.@{ivu}-page-with-disabled .@{ivu}-page-item-active:hover a {
+        color: #999;
+    }
+}
+
+// mini
+.@{noahvPrefixCls}-page.@{ivu}-page.mini .@{ivu}-page-options-elevator input {
+    border-radius: 0 !important;
+    &:focus {
+        border-color: @noahv-primary-color;
+    }
+}
+
+
+
