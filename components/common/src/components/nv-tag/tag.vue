@@ -213,7 +213,6 @@ export default {
             return {
                 color: textColor,
                 maxWidth: this.closeable ? this.maxLen - 50 + 'px' : this.maxLen + 'px',
-                marginRight: this.closeable ? '5px' : 0
             };
         },
         /**
