@@ -64,7 +64,7 @@ npm run test:coverage
 
 echo "common components tested"
 
-cd $CUR_DIR/components/common
+cd $CUR_DIR/components/visual
 
 echo "install node_module for visual components"
 
