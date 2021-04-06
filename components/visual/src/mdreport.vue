@@ -773,9 +773,10 @@ export default {
                             avg: mdutil.setDecimal(itemTotal / bodyList.length, col.decimals)
                         };
                         totalInfo = col.unit ? footer[col.total] + col.unit : footer[col.total];
-                        if (!footer[col.total]) {
-                            return
-                        }
+                        // 不使用的时候显示 --
+                        // if (!footer[col.total]) {
+                        //     return
+                        // }
                     }
                     catch (e) {
                         totalInfo = this.t('mdreport.caculteError');
