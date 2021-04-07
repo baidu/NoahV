@@ -11,7 +11,7 @@
 import getClassName from '../utils.js';
 
 export default {
-    name: 'nvSwitchTpl',
+    name: 'switchTpl',
     props: {
         // 是open: true, close: false
         value: {

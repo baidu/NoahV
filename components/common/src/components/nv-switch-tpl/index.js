@@ -2,15 +2,15 @@
  * NoahV
  * Copyright (c) 2016 Baidu, Inc. All Rights Reserved.
  *
- * @file NvSwitch Component
+ * @file switchTpl Component
  * @author Joannamo(joannamo123@163.com)
  */
 
- import NvSwitch from './switch.vue';
+ import switchTpl from './switchTpl.vue';
 
  export {
-    NvSwitch
+    switchTpl
  };
  
- export default NvSwitch;
+ export default switchTpl;
  
