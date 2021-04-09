@@ -61,6 +61,10 @@ export default [
         component: r => require.ensure([], () => r(require('./components/switch/switch.vue')), 'switch')
     },
     {
+        path: '/nvswitchtpl',
+        component: r => require.ensure([], () => r(require('./components/switchTpl/switchTpl.vue')), 'switchTpl')
+    },
+    {
         path: '/nvtextline',
         component: r => require.ensure([], () => r(require('./components/textLine/textLine.vue')), 'textline')
     },
