@@ -1,10 +1,6 @@
 <template>
-    <div :class="getCls('switch-tpl')">
-        <i-switch v-model="switchValue" @on-change="changeSwitch" :size="size" :disabled="switchDisabled">
-            <span slot="open">{{openText}}</span>
-            <span slot="close">{{closeText}}</span>
-        </i-switch>
-    </div>
+    <nv-switch v-model="switchValue" :open="open" :close="close" @on-change="changeSwitch" :size="size" :disabled="switchDisabled">
+    </nv-switch>
 </template>
 
 <script>

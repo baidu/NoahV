@@ -59,8 +59,8 @@
                 }
             </code></pre></div>
             <h4>效果</h4>
-            <NvSwitchTpl :value="type" :open="open" :close="close" :size="size" :disabled="disabled">
-            </NvSwitchTpl>
+            <nv-switch-tpl :value="type" :open="open" :close="close" :size="size" :disabled="disabled">
+            </nv-switch-tpl>
         </div>
 
     </div>
