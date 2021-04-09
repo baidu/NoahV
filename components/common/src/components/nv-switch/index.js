@@ -6,11 +6,10 @@
  * @author Joannamo(joannamo123@163.com)
  */
 
- import NvSwitch from './switch.vue';
+import NvSwitch from './switch.vue';
 
- export {
-    NvSwitch
- };
- 
- export default NvSwitch;
- 
+export {
+   NvSwitch
+};
+
+export default NvSwitch;

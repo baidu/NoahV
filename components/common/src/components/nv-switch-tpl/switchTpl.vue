@@ -1,5 +1,7 @@
 <template>
     <nv-switch v-model="switchValue" :open="open" :close="close" @on-change="changeSwitch" :size="size" :disabled="switchDisabled">
+        <span slot="open">{{openText}}</span>
+        <span slot="close">{{closeText}}</span>
     </nv-switch>
 </template>
 
