@@ -25,7 +25,7 @@
                                     class="sort"
                                     rowspan="2"
                                     :class="[column.sortType == 'desc'
-                                        ? 'sort-desc' : (column.sortType == 'asc' ? 'sort-asc' : '')]"
+                                        ? 'sort-desc' : (column.sortType == 'asc' ? 'sort-asc' : 'sort-desc')]"
                                     :data-sort="column.sortid"
                                     @click="sort(column)">{{column.title}}</th>
                             </template>
@@ -38,7 +38,7 @@
                                     <th
                                         class="sort"
                                         :class="[it.sortType == 'desc'
-                                        ? 'sort-desc' : (it.sortType == 'asc' ? 'sort-asc' : '')]"
+                                        ? 'sort-desc' : (it.sortType == 'asc' ? 'sort-asc' : 'sort-desc')]"
                                         :data-sort="it.sortid"
                                         @click="sort(it)" >{{it.title}}</th>
                                 </template>
@@ -58,7 +58,7 @@
                                     class="sort"
                                     rowspan="2"
                                     :class="[column.sortType == 'desc'
-                                        ? 'sort-desc' : (column.sortType == 'asc' ? 'sort-asc' : '')]"
+                                        ? 'sort-desc' : (column.sortType == 'asc' ? 'sort-asc' : 'sort-desc')]"
                                     :data-sort="column.sortid"
                                     @click="sort(column)">{{column.title}}</th>
                             </template>
@@ -538,7 +538,6 @@ export default {
                     }
                     else {
                         columns.push(col);
-                        this.reportOptions.hasGroup = true;
                     }
                 }
             });
@@ -759,21 +758,24 @@ export default {
                     let totalInfo = '';
                     try {
                         let itemTotal = 0;
+                        let count = 0;
                         bodyList.map(trItem => {
-                            trItem.columns.map(trColumnItem => {
-                                if (trColumnItem.sortid === col.sortid) {
-                                    itemTotal += trColumnItem.value;
-                                }
-                                return trColumnItem;
-                            });
+                            if (!trItem.treeInfo.level || trItem.treeInfo.level === 0) {
+                                count++;
+                                trItem.columns.map(trColumnItem => {
+                                    if (trColumnItem.sortid === col.sortid) {
+                                        itemTotal += parseFloat(trColumnItem.value);
+                                    }
+                                    return trColumnItem;
+                                });
+                            }
                             return trItem;
                         });
                         let footer = {
                             sum: mdutil.setDecimal(itemTotal, col.decimals),
-                            avg: mdutil.setDecimal(itemTotal / bodyList.length, col.decimals)
+                            avg: mdutil.setDecimal(itemTotal / count, col.decimals)
                         };
                         totalInfo = col.unit ? footer[col.total] + col.unit : footer[col.total];
-                        // 不使用的时候显示 --
                         // if (!footer[col.total]) {
                         //     return
                         // }
