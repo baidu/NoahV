@@ -15,7 +15,7 @@
 
         <div class="usage-item">
             <h2>API</h2>
-            <NvTable
+            <nv-table-tpl
                 :columns="columns"
                 :pagination="false"
                 :tdata="tdata"
@@ -44,7 +44,7 @@
                                 this.$Message.info('dialog ajax fail');
                             }
                         }
-                    }, 
+                    },
                     cancel: () => {
                         this.$Message.info('cancel click');
                     }
@@ -52,7 +52,7 @@
             </code></pre></div>
             <h4>效果</h4>
             <Button type="primary" @click="dialogClick">dialog</Button>
-            <NvDialog type="dialog" :dialog="dialog">           
+            <NvDialog type="dialog" :dialog="dialog">
                 <div slot>
                     dialog
                 </div>
@@ -89,7 +89,7 @@ export default {
                             this.$Message.info('dialog ajax fail');
                         }
                     }
-                }, 
+                },
                 cancel: () => {
                     this.$Message.info('cancel click');
                 }
@@ -150,14 +150,14 @@ export default {
                     initValue: '-'
                 }
             ]
-        }
+        };
     },
     methods: {
         dialogClick() {
             this.dialog.value = true;
         }
     }
-}
+};
 </script>
 
 <style lang="less">

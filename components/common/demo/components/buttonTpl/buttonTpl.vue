@@ -19,7 +19,7 @@
 
         <div class="usage-item">
             <h2>API</h2>
-            <NvTable
+            <nv-table-tpl
                 :columns="columns"
                 :pagination="false"
                 :tdata="tdata"
@@ -79,7 +79,7 @@
                                     this.$Message.info('dialog ajax fail');
                                 }
                             }
-                        }, 
+                        },
                         cancel: () => {
                             this.$Message.info('cancel');
                         }
@@ -94,12 +94,12 @@
             <h4>自定义dialog按钮</h4>
             <nv-button-tpl content="dialog" @click.native="click">
             </nv-button-tpl>
-            <nv-dialog type="dialog" :dialog="dialog">           
+            <nv-dialog type="dialog" :dialog="dialog">
                 <div slot>
                     我是dialog自定义插槽，点击确定会发送ajax请求
                 </div>
             </nv-dialog>
-        </div>         
+        </div>
     </div>
 </template>
 
@@ -118,10 +118,10 @@ export default {
                     params1: 'xxx'
                 },
                 method: 'get',
-                successCallback: (data) => {
+                successCallback: data => {
                     this.$Message.info('click ajax button success!');
                 },
-                failCallback: (data) => {
+                failCallback: data => {
                     this.$Message.info('click ajax button error!');
                 }
             },
@@ -131,10 +131,10 @@ export default {
                     path: '123'
                 },
                 method: 'post',
-                successCallback: (data) => {
+                successCallback: data => {
                     this.$Message.info('click button success! data is: ', data);
                 },
-                failCallback: (data) => {
+                failCallback: data => {
                     this.$Message.info('click button error!', data);
                 }
             },
@@ -156,7 +156,7 @@ export default {
                             this.$Message.info('dialog ajax fail');
                         }
                     }
-                }, 
+                },
                 cancel: () => {
                     this.$Message.info('cancel');
                 }
@@ -217,14 +217,14 @@ export default {
                     initValue: '-'
                 }
             ]
-        }
+        };
     },
     methods: {
         click() {
             this.dialog.value = true;
         }
     }
-}
+};
 </script>
 
 <style lang="less">

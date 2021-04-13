@@ -11,7 +11,7 @@
             :params="params"
             :showLoading="formShowLoading"
         />
-        <NvTable
+        <nv-table-tpl
             ref="noahvFilterTableTplRefTable"
             :columns="columns"
             :tips="tips"

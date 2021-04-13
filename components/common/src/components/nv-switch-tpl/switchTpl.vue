@@ -1,17 +1,15 @@
 <template>
-    <div :class="getCls('switch-tpl')">
-        <i-switch v-model="switchValue" @on-change="changeSwitch" :size="size" :disabled="switchDisabled">
-            <span slot="open">{{openText}}</span>
-            <span slot="close">{{closeText}}</span>
-        </i-switch>
-    </div>
+    <nv-switch v-model="switchValue" :open="open" :close="close" @on-change="changeSwitch" :size="size" :disabled="switchDisabled">
+        <span slot="open">{{openText}}</span>
+        <span slot="close">{{closeText}}</span>
+    </nv-switch>
 </template>
 
 <script>
 import getClassName from '../utils.js';
 
 export default {
-    name: 'nvSwitchTpl',
+    name: 'switchTpl',
     props: {
         // 是open: true, close: false
         value: {

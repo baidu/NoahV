@@ -16,11 +16,12 @@
             @on-blur="blurHandler"
         >
         </NvTag>
-        <Button type="primary" @click="getDatas">获取标签</Button>
-        <Button type="primary" @click="setDatas">设置标签</Button>
-        <Button type="primary" @click="addTags">添加标签</Button>
-        <Button type="primary" @click="removeTags">移除特定标签</Button>
-        <Button type="primary" @click="clear">清除标签</Button>
+        <br />
+        <nv-button type="primary" @click="getDatas">获取标签</nv-button>
+        <nv-button type="primary" @click="setDatas">设置标签</nv-button>
+        <nv-button type="primary" @click="addTags">添加标签</nv-button>
+        <nv-button type="primary" @click="removeTags">移除特定标签</nv-button>
+        <nv-button type="primary" @click="clear">清除标签</nv-button>
     </div>
 </template>
 

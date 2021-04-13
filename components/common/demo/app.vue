@@ -17,6 +17,7 @@
             <li><router-link to="/nvlist">nv-list</router-link></li>
             <li><router-link to="/nvdialog">nv-dialog</router-link></li>
             <li><router-link to="/nvswitch">nv-switch</router-link></li>
+            <li><router-link to="/nvswitchtpl">nv-switch-tpl</router-link></li>
             <li><router-link to="/nvtextline">nv-textline</router-link></li>
             <li><router-link to="/nvcascaderselect">nv-cascaderselect</router-link></li>
             <li><router-link to="/nvsteps">nv-steps</router-link></li>

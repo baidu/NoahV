@@ -26,7 +26,7 @@ import NvIcon from './components/nv-icon';
 import NvInput from './components/nv-input';
 import NvCheckbox from './components/nv-checkbox';
 import NvTextLine from './components/nv-textline';
-import NvSwitch from './components/nv-switch';
+import NvSwitchTpl from './components/nv-switch-tpl';
 import NvButtonTpl from './components/nv-button-tpl';
 import NvDialog from './components/nv-dialog';
 import NvPipline from './components/nv-pipline';
@@ -67,6 +67,7 @@ import tableTpl from './components/nv-table-tpl';
 import filterTableTpl from './components/nv-filtertable';
 
 // 封装组件
+import NvSwitch from './components/nv-switch';
 import NvButton from './components/nv-button';
 import NvButtonGroup from './components/nv-button-group';
 import NvRadio from './components/nv-radio';
@@ -140,6 +141,7 @@ const noahv = {
     filterTableTpl,
 
     // 新增组件
+    NvSwitch,
     NvButton,
     NvButtonGroup,
     NvRadio,
@@ -148,7 +150,8 @@ const noahv = {
     NvTable,
 
     // 修改组件
-    NvButtonTpl
+    NvButtonTpl,
+    NvSwitchTpl
 
 };
 

@@ -14,7 +14,7 @@
 
         <div class="usage-item">
             <h2>API</h2>
-            <NvTable
+            <nv-table-tpl
                 :columns="columns"
                 :pagination="false"
                 :tdata="tdata"
@@ -55,8 +55,8 @@
             </code></pre></div>
             <h4>效果</h4>
             <NvList :action="currentStatus.action" :type="currentStatus.type" :templates="currentStatus.templates" :data="currentStatus.data">
-            </NvList>  
-        </div>         
+            </NvList>
+        </div>
     </div>
 </template>
 
@@ -78,34 +78,34 @@ export default {
                 },
                 data: [
                     {
-                        "status": "任务开始",
-                        "time": "2018-04-10 14:00:00",
-                        "detail": "任务启动"
+                        'status': '任务开始',
+                        'time': '2018-04-10 14:00:00',
+                        'detail': '任务启动'
                     },
                     {
-                        "status": "监听异常",
-                        "time": "2018-04-10 14:00:10",
-                        "detail": "所有指标正常，这里是多出去的文字"
+                        'status': '监听异常',
+                        'time': '2018-04-10 14:00:10',
+                        'detail': '所有指标正常，这里是多出去的文字'
                     },
                     {
-                        "status": "监听异常",
-                        "time": "2018-04-10 14:00:10",
-                        "detail": "所有指标正常，这里是多出去的文字"
+                        'status': '监听异常',
+                        'time': '2018-04-10 14:00:10',
+                        'detail': '所有指标正常，这里是多出去的文字'
                     },
                     {
-                        "status": "监听异常",
-                        "time": "2018-04-10 14:00:10",
-                        "detail": "所有指标正常，这里是多出去的文字"
+                        'status': '监听异常',
+                        'time': '2018-04-10 14:00:10',
+                        'detail': '所有指标正常，这里是多出去的文字'
                     },
                     {
-                        "status": "监听异常",
-                        "time": "2018-04-10 14:00:10",
-                        "detail": "所有指标正常，这里是多出去的文字"
+                        'status': '监听异常',
+                        'time': '2018-04-10 14:00:10',
+                        'detail': '所有指标正常，这里是多出去的文字'
                     },
                     {
-                        "status": "监听异常",
-                        "time": "2018-04-10 14:00:10",
-                        "detail": "所有指标正常，这里是多出去的文字"
+                        'status': '监听异常',
+                        'time': '2018-04-10 14:00:10',
+                        'detail': '所有指标正常，这里是多出去的文字'
                     }
                 ]
             },
@@ -113,7 +113,7 @@ export default {
                 type: 'flat',
                 templates: {
                     name: '${name}',
-                    link: '/#/${name}',
+                    link: '/#/${name}'
                 },
                 action: {
                     url: '/api/v1/products',
@@ -122,34 +122,34 @@ export default {
                 },
                 data: [
                     {
-                        "id": 1,
-                        "uid": "b598b424-1d7b-328e-a8fd-af9acb457f54",
-                        "name": "im"
+                        'id': 1,
+                        'uid': 'b598b424-1d7b-328e-a8fd-af9acb457f54',
+                        'name': 'im'
                     },
                     {
-                        "id": 2,
-                        "uid": "f7dd5720-4dca-3e92-a24d-8ba37e096293",
-                        "name": "pay"
+                        'id': 2,
+                        'uid': 'f7dd5720-4dca-3e92-a24d-8ba37e096293',
+                        'name': 'pay'
                     },
                     {
-                        "id": 2,
-                        "uid": "f7dd5720-4dca-3e92-a24d-8ba37e096293",
-                        "name": "pay"
+                        'id': 2,
+                        'uid': 'f7dd5720-4dca-3e92-a24d-8ba37e096293',
+                        'name': 'pay'
                     },
                     {
-                        "id": 2,
-                        "uid": "f7dd5720-4dca-3e92-a24d-8ba37e096293",
-                        "name": "pay"
+                        'id': 2,
+                        'uid': 'f7dd5720-4dca-3e92-a24d-8ba37e096293',
+                        'name': 'pay'
                     },
                     {
-                        "id": 2,
-                        "uid": "f7dd5720-4dca-3e92-a24d-8ba37e096293",
-                        "name": "pay"
+                        'id': 2,
+                        'uid': 'f7dd5720-4dca-3e92-a24d-8ba37e096293',
+                        'name': 'pay'
                     },
                     {
-                        "id": 2,
-                        "uid": "f7dd5720-4dca-3e92-a24d-8ba37e096293",
-                        "name": "pay"
+                        'id': 2,
+                        'uid': 'f7dd5720-4dca-3e92-a24d-8ba37e096293',
+                        'name': 'pay'
                     }
                 ]
             },
@@ -197,9 +197,9 @@ export default {
                     initValue: '-'
                 }
             ]
-        }
+        };
     }
-}
+};
 </script>
 
 <style lang="less">
