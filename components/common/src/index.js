@@ -9,7 +9,7 @@
 
 // TPL，Nv命名方式
 import NvForm from './components/nv-form';
-import NvTable from './components/nv-table';
+import NvTableTpl from './components/nv-table-tpl';
 import NvFilterTable from './components/nv-filtertable';
 import NvContrastTrend from './components/nv-chart';
 import Nv404 from './components/nv-404';
@@ -37,7 +37,7 @@ import NvEllipsis from './components/nv-ellipsis';
 
 // TPL，Sa命名方式
 import SaForm from './components/nv-form';
-import SaTable from './components/nv-table';
+import SaTable from './components/nv-table-tpl';
 import SaFilterTable from './components/nv-filtertable';
 import SaContrastTrend from './components/nv-chart';
 import Sa404 from './components/nv-404';
@@ -63,7 +63,7 @@ import SaCascaderSelect from './components/nv-cascaderSelect';
 
 // 暂时兼容部分组件老的命名
 import formTpl from './components/nv-form';
-import tableTpl from './components/nv-table';
+import tableTpl from './components/nv-table-tpl';
 import filterTableTpl from './components/nv-filtertable';
 
 // 封装组件
@@ -72,15 +72,17 @@ import NvButtonGroup from './components/nv-button-group';
 import NvRadio from './components/nv-radio';
 import NvRadioGroup from './components/nv-radio-group';
 import NvPage from './components/nv-page';
+import NvTable from './components/nv-table';
 
 
 import locale from './locale';
+
 
 const noahv = {
 
     // 业务模板，兼容Nv命名组件
     NvForm,
-    NvTable,
+    NvTableTpl,
     NvFilterTable,
     Nv404,
     NvSwitch,
@@ -143,6 +145,7 @@ const noahv = {
     NvRadio,
     NvRadioGroup,
     NvPage,
+    NvTable,
 
     // 修改组件
     NvButtonTpl

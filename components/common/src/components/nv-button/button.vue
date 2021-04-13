@@ -10,17 +10,14 @@ export default {
     components: {
         Button
     },
-    props: {
-
-    },
     computed: {
-        nvClasses () {
+        nvClasses() {
             const _this = this.$attrs;
             return [
                 `${prefixCls}`,
                 `${prefixCls}-${_this.type}`,
                 {
-                    [`${prefixCls}-long`]: _this.long,
+                    [`${prefixCls}-long`]: _this['long'],
                     [`${prefixCls}-${_this.shape}`]: !!_this.shape,
                     [`${prefixCls}-${_this.size}`]: _this.size !== 'default',
                     [`${prefixCls}-loading`]: _this.loading != null && _this.loading,
@@ -30,5 +27,5 @@ export default {
             ];
         }
     }
-}
+};
 </script>

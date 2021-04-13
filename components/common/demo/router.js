@@ -6,11 +6,15 @@ export default [
     },
     {
         path: '/nvtable',
-        component: r => require.ensure([], () => r(require('./components/table/tableDemo.vue')), 'table')
+        component: r => require.ensure([], () => r(require('./components/table/table.vue')), 'table')
+    },
+    {
+        path: '/nvtabletpl',
+        component: r => require.ensure([], () => r(require('./components/tableTpl/tableDemo.vue')), 'tableTpl')
     },
     {
         path: '/nvfiltertable',
-        component: r => require.ensure([], () => r(require('./components/table/filterTableDemo.vue')), 'filtertable')
+        component: r => require.ensure([], () => r(require('./components/tableTpl/filterTableDemo.vue')), 'filtertable')
     },
     {
         path: '/nvform',

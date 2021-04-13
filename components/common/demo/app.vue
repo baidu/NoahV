@@ -1,8 +1,10 @@
+
 <template>
     <div class="demo-container">
         <ul>
             <li><router-link to="/nvbaseui">nv-baseui</router-link></li>
-            <li><router-link to="/nvtable">nv-table</router-link></li>
+             <li><router-link to="/nvtable">nv-table</router-link></li>
+            <li><router-link to="/nvtabletpl">nv-table-tpl</router-link></li>
             <li><router-link to="/nvfiltertable">nv-filtertable</router-link></li>
             <li><router-link to="/nvform">nv-form</router-link></li>
             <li><router-link to="/nvicon">nv-icon</router-link></li>

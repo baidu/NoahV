@@ -1,15 +1,73 @@
 .@{noahvPrefixCls}-table {
-    .tabletpl-header {
-        padding: 0 18px;
-        font-size: 16px;
-        color: #000;
+    font-size: 12px;
+    .@{ivu}-table th {
+        background-color: #f5f5f5;
+        font-size: 12px;
+        border-bottom: 0;
+        font-weight: 400;
     }
-    .tabletpl-footer {
-        background: #f7f7f7;
-        border-radius: 0 0 4px 4px;
-        padding: 0 18px;
+    &.@{ivu}-table-wrapper-with-border {
+        .@{ivu}-table th {
+            border-bottom: #ebebeb solid 1px;
+        }
     }
-    .highlight-error {
-        color: #f00;
+    .@{ivu}-table td {
+        height: auto;
+        padding: 10px 0;
+        font-size: 12px;
+        border-bottom: #ebebeb solid 1px;
     }
+
+    .@{ivu}-table-header thead tr th {
+        padding: 10px 0;
+        border-left: #fff solid 1px;
+    }
+
+    .@{ivu}-table-cell {
+        padding: 0 10px;
+    }
+
+    .@{ivu}-table-sort i.on {
+        color: @noahv-primary-color;
+    }
+
+    .@{noahvPrefixCls}-empty-text {
+        text-align: center;
+        margin-top: -25px;
+    }
+}
+
+.@{ivu}-table-filter-list .@{ivu}-table-filter-select-item {
+    font-size: 12px !important;
+}
+
+.@{ivu}-table-filter i.on,
+.@{ivu}-table-filter-list .@{ivu}-table-filter-select-item-selected, 
+.@{ivu}-table-filter-list .@{ivu}-table-filter-select-item-selected:hover {
+    color: @noahv-primary-color;
+}
+.@{ivu}-table-filter-list .ivu-table-filter-select-item:hover {
+    background-color: @noahv-primary-hover-color;
+    font-size: 12px;
+}
+.@{ivu}-table-filter-list {
+    padding-top: 5px;
+}
+.@{ivu}-table-filter-list ul {
+    padding-bottom: 2px;
+}
+.@{ivu}-poptip-inner {
+    border-radius: 0;
+    font-size: 12px;
+    &.@{ivu}-poptip-body {
+        font-size: 12px;
+    }
+    .@{ivu}-btn-small {
+        font-size: 12px;
+    }
+    .@{ivu}-btn>i, .@{ivu}-btn>span {
+        &:hover {
+            color: @noahv-primary-color
+        }
+    }   
 }

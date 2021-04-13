@@ -1,6 +1,6 @@
 <template>
-    <NvTable 
-        :columns="columns" 
+    <nv-table-tpl
+        :columns="columns"
         :tips="tips"
         :pagination="pagination"
         url="/api/table"
@@ -8,15 +8,15 @@
         title="表格示例"
         :action="action"
         :showelevator="showelevator"
-    ></NvTable>
+    ></nv-table-tpl >
 </template>
 
 <script>
 export default {
     name: 'TableDemo',
-    data () {
+    data() {
         return {
-            /** 
+            /**
              * 表格配置项目
              *
              * @const
@@ -46,7 +46,7 @@ export default {
                             value: '李'
                         }
                     ],
-                    filterMethod (value, row) {
+                    filterMethod(value, row) {
                         return row.name.indexOf(value) > -1;
                     }
                 },
@@ -62,23 +62,23 @@ export default {
                     key: 'sex',
                     render: function (h, obj) {
                         return h('span',
-                        {
-                            on: {
-                                click: () => {
-                                    console.log(222);
+                            {
+                                on: {
+                                    click: () => {
+                                        console.log(222);
+                                    }
+                                },
+                                style: {
+                                    cursor: 'pointer'
                                 }
                             },
-                            style: {
-                                cursor: 'pointer'
-                            },
-                        },
-                        [
-                            h('Icon', {
-                                props: {
-                                    type: 'edit'
-                                }
-                            })
-                        ]);
+                            [
+                                h('Icon', {
+                                    props: {
+                                        type: 'edit'
+                                    }
+                                })
+                            ]);
                     }
                 },
                 {
@@ -101,10 +101,12 @@ export default {
                     target: '_blank',
                     color: 'blue'
                 },
-                // {
-                //     title: 'shanghai',
-                //     key: 'shanghai'
-                // },
+                /*
+                 * {
+                 *     title: 'shanghai',
+                 *     key: 'shanghai'
+                 * },
+                 */
                 {
                     title: '操作',
                     label: '查看详情',
@@ -141,10 +143,12 @@ export default {
                         type: 'nv-icon',
                         btnType: 'error',
                         className: 'delete-icon',
-                        // icon: 'edit',
-                        // style: {} ,
-                        // label和icon只能展示一个
-                        // label: '删除',
+                        /*
+                         * icon: 'edit',
+                         * style: {} ,
+                         * label和icon只能展示一个
+                         * label: '删除',
+                         */
                         confirm: {
                             title: '删除策略',
                             content: 'xx删除后不可恢复，确认删除吗？',
@@ -159,7 +163,7 @@ export default {
                             params: {xx: 'xx'},
                             // 暂未实现
                             autoFresh: true,
-                            callback(item){
+                            callback(item) {
 
                             }
                         }
@@ -167,7 +171,7 @@ export default {
                 ]
             }
 
-        }
+        };
     }
 };
 </script>
