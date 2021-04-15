@@ -109,7 +109,7 @@
                 </tbody>
                 <tfoot v-if="isShowTotal">
                     <tr>
-                        <td>合计</td>
+                        <td>{{t('合计')}}</td>
                         <template v-for="total in totals">
                             <td v-if="total">{{total}}</td>
                             <td v-else>--</td>
