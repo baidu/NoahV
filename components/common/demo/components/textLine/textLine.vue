@@ -12,9 +12,9 @@
       @on-ready="ready"
     >
     </NvTextLine>
-    <Button type="primary" @click="setDatas">设置数据</Button>
-    <Button type="primary" @click="getDatas">获取数据</Button>
-    <Button type="primary" @click="getLineCount">获取行数</Button>
+    <nv-button type="primary" @click="setDatas">设置数据</nv-button>
+    <nv-button type="primary" @click="getDatas">获取数据</nv-button>
+    <nv-button type="primary" @click="getLineCount">获取行数</nv-button>
   </div>
 </template>
 
