@@ -1,11 +1,3 @@
-<!--
- * @Author: your name
- * @Date: 2021-04-13 16:53:09
- * @LastEditTime: 2021-04-19 09:54:57
- * @LastEditors: your name
- * @Description: In User Settings Edit
- * @FilePath: /NoahV/components/common/demo/app.vue
--->
 <template>
     <div class="demo-container">
         <ul>
