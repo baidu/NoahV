@@ -1,4 +1,11 @@
-
+<!--
+ * @Author: your name
+ * @Date: 2021-04-13 16:53:09
+ * @LastEditTime: 2021-04-19 09:54:57
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: /NoahV/components/common/demo/app.vue
+-->
 <template>
     <div class="demo-container">
         <ul>
@@ -32,6 +39,7 @@
             <li><router-link to="/nvbutton">nv-button</router-link></li>
             <li><router-link to="/nvradio">nv-radio</router-link></li>
             <li><router-link to="/nvpage">nv-page</router-link></li>
+            <li><router-link to="/nvtabs">nv-tabs</router-link></li>
         </ul>
         <router-view></router-view>
     </div>
@@ -52,6 +60,13 @@ export default {
     & > ul > li:hover {
         text-decoration: underline;
         cursor: pointer;
+    }
+}
+
+.ele {
+    margin-bottom: 20px;
+    h4 {
+        margin: 5px 0;
     }
 }
 

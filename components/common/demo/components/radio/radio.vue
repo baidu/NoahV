@@ -40,7 +40,7 @@
                 <nv-radio  label="深圳"></nv-radio >
                 <nv-radio  label="杭州"></nv-radio >
             </nv-radio-group>
-        </div> 
+        </div>
         <div class="ele">
             <h4>按钮样式单选组合 -- 加强样式</h4>
             <nv-radio-group  v-model="button7" type="button" buttonType="strong">
@@ -49,29 +49,21 @@
                 <nv-radio label="深圳"></nv-radio>
                 <nv-radio label="杭州"></nv-radio>
             </nv-radio-group>
-        </div>      
+        </div>
     </div>
-    
+
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                groupModel: 'A',
-                button4: '北京',
-                button5: '北京',
-                button6: '北京' ,
-                button7: '北京'               
-            };
-        }
-    };
-</script>
-<style lang="less">
-.ele {
-    margin-bottom: 20px;
-    h4 {
-        margin: 5px 0;
+export default {
+    data() {
+        return {
+            groupModel: 'A',
+            button4: '北京',
+            button5: '北京',
+            button6: '北京',
+            button7: '北京'
+        };
     }
-}
-</style>
+};
+</script>

@@ -1,0 +1,59 @@
+.@{noahvPrefixCls}-tabs {
+    .@{ivu}-tabs-nav .@{ivu}-tabs-tab-active {
+        color: @noahv-primary-color;
+    }
+
+    .@{ivu}-tabs-nav .@{ivu}-tabs-tab {
+        &:hover {
+            color: @noahv-primary-color;
+        }
+        position: relative;
+        z-index: 2;
+    }
+    .@{ivu}-tabs-ink-bar {
+        background-color: @noahv-primary-color;
+    }
+
+    &.@{noahvPrefixCls}-tabs-card >.@{ivu}-tabs-bar {
+        .@{ivu}-tabs-nav-wrap {
+            padding: 0 10px;
+        }
+
+        .@{ivu}-tabs-nav-container {
+            height: 50px;
+            border-top: #ebebeb solid 1px;
+            // border-bottom: #ebebeb solid 1px;
+            background: #f5f5f5;
+        }
+        .@{ivu}-tabs-tab {
+            padding: 0 20px;
+            height: 46px;
+            line-height: 46px;
+            border: 0 none;
+            border-radius: 0;
+            background: transparent;
+
+        }
+
+        &.ivu-tabs-card>.ivu-tabs-bar .ivu-tabs-tab-active {
+            color: @noahv-primary-color !important; 
+            position: relative;
+            z-index: 2;
+            bottom: -1px;
+        }
+        
+    } 
+
+    .@{ivu}-tabs-nav {
+        margin-top: 4px;
+    }
+
+    &.ivu-tabs.ivu-tabs-card>.ivu-tabs-bar .ivu-tabs-tab-active {
+        color: @noahv-primary-color;
+    }
+
+    &.ivu-tabs.ivu-tabs-card>.ivu-tabs-bar .ivu-tabs-tab-active {
+        background: #fff;
+    }
+}
+

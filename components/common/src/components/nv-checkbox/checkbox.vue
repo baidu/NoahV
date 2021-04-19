@@ -1,51 +1,29 @@
 <template>
-    <span :class="getCls()" @click="click($event)">
-        <label class="checkbox"></label>
-        <span v-if="$slots.default" class="slot"><slot></slot></span>
-    </span>
+    <checkbox v-bind="$attrs" v-on="$listeners" :class="nvClasses"><slot></slot></checkbox>
 </template>
-
 <script>
+import {Checkbox} from 'view-design';
 const prefixCls = 'noahv-checkbox';
 
 export default {
-    name: 'NvCheckbox',
-    props: {
-        value: Boolean,
-        partial: Boolean,
-        disabled: Boolean
+    name: 'nv-checkbox',
+    components: {
+        Checkbox
     },
-    data() {
-        return {
-            checked: this.value
-        }
-    },
-    watch: {
-        value(val) {
-            this.checked = val;
-        }
-    },
-    methods: {
-        getCls() {
+    computed: {
+        nvClasses() {
+            const _this = this.$attrs;
             return [
-                `${prefixCls}`,
+                `${prefixCls}-wrapper`,
                 {
-                    [`${prefixCls}-checked`]: this.value,
-                    [`${prefixCls}-partial-checked`]: this.partial && !this.value,
-                    [`${prefixCls}-disabled`]: this.disabled
+                    [`${prefixCls}-group-item`]: _this.group,
+                    [`${prefixCls}-wrapper-checked`]: _this.currentValue,
+                    [`${prefixCls}-wrapper-disabled`]: _this.itemDisabled,
+                    [`${prefixCls}-${_this.size}`]: !!_this.size,
+                    [`${prefixCls}-border`]: _this.border
                 }
             ];
-        },
-        click(event) {
-            if (this.disabled) {
-                return;
-            }
-            this.checked = !this.checked;
-            this.$emit('input', this.checked);
-            this.$emit('on-change', this.checked, event);
-
         }
     }
 };
 </script>
-

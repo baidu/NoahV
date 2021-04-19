@@ -117,6 +117,10 @@ export default [
         component: r => require.ensure([], () => r(require('./components/page/page.vue')), 'page')
     },
     {
+        path: '/nvtabs',
+        component: r => require.ensure([], () => r(require('./components/tabs/tabs.vue')), 'tabs')
+    },
+    {
         path: '/nv404',
         component: r => require.ensure([], () => r(require('./components/404/404.vue')), '404')
     }
