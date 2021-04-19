@@ -25,6 +25,7 @@ import NvDutyTable from './components/nv-dutytable';
 import NvIcon from './components/nv-icon';
 import NvInput from './components/nv-input';
 import NvCheckbox from './components/nv-checkbox';
+import NvCheckboxGroup from './components/nv-checkbox-group';
 import NvTextLine from './components/nv-textline';
 import NvSwitchTpl from './components/nv-switch-tpl';
 import NvButtonTpl from './components/nv-button-tpl';
@@ -34,6 +35,8 @@ import NvTransfer from './components/nv-transfer';
 import {NvTrend, NvChart} from './components/nv-chart';
 import NvCascaderSelect from './components/nv-cascaderSelect';
 import NvEllipsis from './components/nv-ellipsis';
+import NvTabs from './components/nv-tabs';
+import NvTabPane from './components/nv-tab-pane';
 
 // TPL，Sa命名方式
 import SaForm from './components/nv-form';
@@ -99,6 +102,7 @@ const noahv = {
     NvIcon,
     NvInput,
     NvCheckbox,
+    NvCheckboxGroup,
     NvTextLine,
     NvPipline,
     NvTree,
@@ -141,13 +145,14 @@ const noahv = {
     filterTableTpl,
 
     // 新增组件
-    NvSwitch,
     NvButton,
     NvButtonGroup,
     NvRadio,
     NvRadioGroup,
     NvPage,
     NvTable,
+    NvTabs,
+    NvTabPane,
 
     // 修改组件
     NvButtonTpl,
