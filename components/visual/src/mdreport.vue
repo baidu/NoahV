@@ -775,7 +775,9 @@ export default {
                             sum: mdutil.setDecimal(itemTotal, col.decimals),
                             avg: mdutil.setDecimal(itemTotal / count, col.decimals)
                         };
-                        totalInfo = col.unit ? footer[col.total] + col.unit : footer[col.total];
+                        if (col.total) {
+                            totalInfo = col.unit ? footer[col.total] + col.unit : footer[col.total];
+                        }
                         // if (!footer[col.total]) {
                         //     return
                         // }
@@ -867,7 +869,7 @@ export default {
             this.setColumnSortStatus(column);
 
             // sort by row type
-            if (this.reportType === 'rows') {
+            if (this.reportType === 'rows' || this.reportType === 'tree') {
                 bodyLists.sort((a, b) => {
                     let compareResult = false;
                     a.columns.map(aColumnItem => {
