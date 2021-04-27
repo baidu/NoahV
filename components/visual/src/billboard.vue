@@ -406,8 +406,9 @@ export default {
                         if (item.name === mapItem.name) {
                             temp = u.clone(mapItem);
                             try {
+                                item.decimals = item.decimals === 0 ? 0 : (item.decimals || 4);
                                 // The Number type will automatically delete the end 0
-                                temp.data = mdutil.setDecimal(mapItem.value || mapItem.data[0][1] , item.decimals || 4);
+                                temp.data = mdutil.setDecimal(mapItem.value || mapItem.data[0][1] , item.decimals);
                             }
                             catch(err) {
                                 temp.data = '0';
@@ -428,8 +429,8 @@ export default {
                     if (!item.data && item.value) {
                         item.data = item.value;
                     }
-                    console.log(item)
-                    item.data = mdutil.setDecimal(item.data, item.decimals || 4);
+                    item.decimals = item.decimals === 0 ? 0 : (item.decimals || 4);
+                    item.data = mdutil.setDecimal(item.data, item.decimals);
                     nData.push(item);
                     return item;
                 });
