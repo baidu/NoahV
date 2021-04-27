@@ -22,21 +22,24 @@
             line-height: 28px;
             border-radius: 0;
             border: none;
-            color: #3a62ca;
+            color: @noahv-primary-color;
             background-color: #dfe6f7;
             .ivu-select-placeholder {
                 font-family: Microsoft YaHei;
                 font-size: 12px;
-                color: #3a62ca;
+                color: @noahv-primary-color;
                 height: 28px;
                 line-height: 28px;
             }
             .ivu-select-selected-value {
                 height: 28px;
                 line-height: 28px;
+                font-size: 12px;
+                color: #000;
+                background: #f5f5f5;
             }
             .ivu-icon-arrow-down-b::before {
-                color: #3a62ca;
+                color: @noahv-primary-color;
                 content: "\F123";
             }
             &:hover {
@@ -45,19 +48,24 @@
         }
         .ivu-select-dropdown {
             font-family: Microsoft YaHei;
-            font-size: 12px;
+            padding: 0;
+            margin: 3px 0 0;
+            border-radius: 0;
             .ivu-select-not-found {
-                color: #3a62ca;
+                color: @noahv-primary-color;
                 height: 30px;
                 line-height: 30px;
             }
             .ivu-select-dropdown-list {
-                .ivu-select-item:hover {
-                    color: #3a62ca;
-                    background: #f7f8fc;
+                .ivu-select-item {
+                    font-size: 12px !important;
+                    &:hover {
+                        color: @noahv-primary-color;
+                        background: #e3effc;
+                    }
                 }
                 .ivu-select-item-selected, ivu-select-item-focus {
-                    color: #3a62ca;
+                    color: @noahv-primary-color;
                     background: #fff;
                 }
             }
@@ -72,7 +80,7 @@
                 line-height: 28px;
                 border: none;
                 border-radius: 0;
-                color: #3a62ca;
+                color: @noahv-primary-color;
                 background: #e9efff;
                 &:hover, &:focus {
                     border: none;
@@ -80,30 +88,30 @@
                     box-shadow: none;
                 }
                 &::-webkit-input-placeholder {
-                    color: #3a62ca;
+                    color: @noahv-primary-color;
                 }
                 &:-moz-placeholder {
-                    color: #3a62ca;
+                    color: @noahv-primary-color;
                 }
                 &::-moz-placeholder {
-                    color: #3a62ca;
+                    color: @noahv-primary-color;
                 }
                 &:-ms-input-placeholder {
-                    color: #3a62ca;
+                    color: @noahv-primary-color;
                 }
             }
         }
         .ivu-icon-arrow-down-b::before {
-            color: #3a62ca;
+            color: @noahv-primary-color;
             content: "\F123";
         }
         .ivu-select-dropdown {
             .ivu-cascader-menu-item-active {
-                color: #3a62ca;
+                color: @noahv-primary-color;
                 background: #fff;
             }
             .ivu-cascader-menu-item:hover {
-                color: #3a62ca;
+                color: @noahv-primary-color;
                 background: #f7f8fc;
             }
         }
@@ -112,6 +120,7 @@
         input {
             width: 215px;
             height: 28px;
+            font-size: 12px;
             line-height: 28px;
             padding: 0 10px;
             border: none;
@@ -134,6 +143,6 @@
         }
     }
     &:hover {
-        border: 1px solid #3a62ca;
+        border: 1px solid @noahv-primary-color;
     }
 }

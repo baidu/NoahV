@@ -1,7 +1,10 @@
 export default {
 	nv404: {
 		notFound: 'Not found',
-		backToHomePage: 'Homepage'
+		pageError: 'There was an error on the page, ',
+		pleaseReturn: 'please return to ',
+		backToHomePage: 'homepage',
+		restart: ' for restart'
 	},
 	select: {
 		placeholder: 'Select'

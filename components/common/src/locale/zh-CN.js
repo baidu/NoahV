@@ -1,7 +1,10 @@
 export default {
 	nv404: {
 		notFound: '抱歉，找不到路了~',
-		backToHomePage: '返回首页',
+		pageError: '页面显示出现错误，',
+		pleaseReturn: '请返回',
+		backToHomePage: '首页',
+		restart: '重新操作'
 	},
 	select: {
 		placeholder: '请选择'
