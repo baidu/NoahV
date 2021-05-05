@@ -126,7 +126,7 @@ function findEventsByTimestamp(events, t, etype) {
                             color: evt.color
                         })
                     }
-                     
+
                 });
             }
             else if (t === evt[0]) {
@@ -636,7 +636,7 @@ let Points = {
                         }
                     });
                 });
-                
+
                 chart.setOption(option);
             }
         },
@@ -733,11 +733,11 @@ export default {
             required: false
         },
 
-        // y轴, tooltip是否根据单位转换 
+        // y轴, tooltip是否根据单位转换
         numUnitType: {
             type: String,
             default: 'thousand', // thousand, unit
-            required: false           
+            required: false
         }
 
     },
@@ -1048,7 +1048,7 @@ export default {
             let series = this.manageData(data);
             const numUnitType = this.numUnitType;
 
-            // 如果this.chart已经初始化过了，清除  
+            // 如果this.chart已经初始化过了，清除
             if (typeof this.chart.clear === 'function') {
                 this.chart.clear();
             }
@@ -1106,6 +1106,11 @@ export default {
                                 bar: 'image://' + chartcolumnPng,
                                 stack: 'image://' + chartstackPng,
                                 // tiled: 'image://' + chartnormalPng
+                            },
+                            title: {
+                                line: this.t('mdtrend.switchToLine'),
+                                bar: this.t('mdtrend.switchToColumn'),
+                                stack: this.t('mdtrend.switchToStack'),
                             },
                             option: {
                                 line: {
@@ -1255,13 +1260,13 @@ export default {
             this.commonOption.series = series;
 
             this.chart = echarts.init(this.$refs.chart);
-            
+
             // 处理xAxis重叠的问题
             if (typeof this.chart.getWidth === 'function') {
                 let chartWidth = this.chart.getWidth();
                 this.commonOption.xAxis.splitNumber = parseInt(chartWidth / 150, 10)
             }
-            
+
             this.chart.setOption(this.commonOption);
 
 
@@ -1367,7 +1372,7 @@ export default {
                 else {
                     showSymbol = true;
                 }
-        
+
                 list = u.map(list, it => {
                     let value = it[1];
                     if (value !== null) {
@@ -1413,7 +1418,7 @@ export default {
                         };
                     }
                     // 第一个节点
-                    else if (currentIndx === 1 
+                    else if (currentIndx === 1
                         && list[preIndx][1] !== undefined
                         && (list[currentIndx][1] === undefined || list[currentIndx][1] === null)) {
                         list[preIndx] = {
@@ -1500,7 +1505,7 @@ export default {
                                 else {
                                     result = shortValue(+threshold) + (conf.style.unit || '');
                                 }
-                                
+
                                 return result;
                             }
                         },

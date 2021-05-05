@@ -17,6 +17,9 @@ export default {
 		// normalRange: '正常范围',
 		// errorPoint: '异常点',
 		switchToArea: 'Switch to area',
+        switchToLine: 'Switch to line',
+        switchToColumn: 'Switch to column',
+        switchToStack: 'Switch to stack',
 	},
 	customBox: {
 		noConf: 'Not configured'
