@@ -546,6 +546,11 @@ export default {
 
             data = filterThreshold(data, threshold);
             // data mdutil.setDecimal(data, style.decimals)
+            let total = 0;
+            data.forEach(item => {
+                const sum = item.data[0][1];
+                total += Number(sum);
+            });
 
             let echartsConf = {
                 color: color,
@@ -554,8 +559,9 @@ export default {
                     formatter: '{b}: {d}%',
                     confine: true,
                     formatter: function (item) {
-                        let value = mdutil.setDecimal(item.percent, style.decimals);
-                        return `${item.name}: ${value}%`;
+                        let value = (item.value / total) * 100;
+                        let percent = Number(value.toFixed(style.decimals).replace(/0+$/g, ''));
+                        return `${item.name}: ${percent}%`;
                     },
                     backgroundColor: 'rgba(255,255,255,1)',
                     padding: 8,
@@ -670,7 +676,7 @@ export default {
     beforeDestroy() {
         if (this.chart) {
             if (typeof this.chart.clear === 'function') {
-                this.chart.clear(); 
+                this.chart.clear();
             }
             if (typeof this.chart.dispose === 'function') {
                 this.chart.dispose();
