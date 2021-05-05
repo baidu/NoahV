@@ -869,7 +869,7 @@ export default {
             this.setColumnSortStatus(column);
 
             // sort by row type
-            if (this.reportType === 'rows' || this.reportType === 'tree') {
+            if (this.reportType === 'rows') {
                 bodyLists.sort((a, b) => {
                     let compareResult = false;
                     a.columns.map(aColumnItem => {
@@ -898,7 +898,7 @@ export default {
                     let compareResult = false;
 
                     // if sort in the same node
-                    if (!a.treeInfo.hasNext && !a.treeInfo.hasNext && a.treeInfo.parent === b.treeInfo.parent) {
+                    if (!a.treeInfo.hasNext && !b.treeInfo.hasNext && a.treeInfo.parent === b.treeInfo.parent) {
                         a.columns.map(aColumnItem => {
                             if (aColumnItem.sortid === sortId) {
                                 b.columns.map(bColumnItem => {
@@ -906,15 +906,13 @@ export default {
 
                                         //sort tree node orderby 'asc'
                                         if (column.sortType === 'asc') {
-                                            if (b.treeInfo.isLast && aColumnItem.value > bColumnItem.value) {
-                                                a.treeInfo.isLast = true;
-                                                b.treeInfo.isLast = false;
-                                                compareResult = aColumnItem.value - bColumnItem.value;
-                                            }
+                                            a.treeInfo.isLast = true;
+                                            b.treeInfo.isLast = false;
+                                            compareResult = aColumnItem.value - bColumnItem.value;
                                         }
 
                                         //sort tree node orderby 'desc'
-                                        else if (b.treeInfo.isLast && aColumnItem.value < bColumnItem.value) {
+                                        else {
                                             a.treeInfo.isLast = true;
                                             b.treeInfo.isLast = false;
                                             compareResult = bColumnItem.value - aColumnItem.value;

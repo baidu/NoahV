@@ -17,6 +17,9 @@ export default {
 		// normalRange: '正常范围',
 		// errorPoint: '异常点',
 		switchToArea: '切换为面积图',
+        switchToLine: '切换为折线图',
+        switchToColumn: '切换为柱状图',
+        switchToStack: '切换为堆叠',
 	},
 	customBox: {
 		noConf: '没有配置内容'
