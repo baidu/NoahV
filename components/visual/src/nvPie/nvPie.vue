@@ -349,6 +349,17 @@ export default {
                 return '40%';
             }
         },
+        getLegendWidth() {
+            let width;
+            if (this.chart && this.chart.getWidth) {
+                width = this.chart.getWidth();
+            }
+            else {
+                width = $(this.$refs.pie).innerWidth()
+            }
+
+            return width / 2;
+        },
         getLegendLeft() {
             let width;
             if (this.chart && this.chart.getWidth) {
@@ -548,15 +559,16 @@ export default {
             // data mdutil.setDecimal(data, style.decimals)
             let total = 0;
             data.forEach(item => {
-                const sum = item.data[0][1];
-                total += Number(sum);
+                if(item.data[0]) {
+                    const sum = item.data[0][1];
+                    total += Number(sum);
+                }
             });
 
             let echartsConf = {
                 color: color,
                 tooltip: {
                     trigger: 'item',
-                    formatter: '{b}: {d}%',
                     confine: true,
                     formatter: function (item) {
                         let value = (item.value / total) * 100;
@@ -586,7 +598,14 @@ export default {
                     itemHeight: 12,
                     itemGap: 16,
                     textStyle: {
-                        padding: [0, 0, 0, 8]
+                        padding: [0, 0, 0, 8],
+                        rich: {
+                            a: {
+                                width: this.getLegendWidth(),
+                                overflow: 'break',
+                                padding: [0, 0, 0, 8],
+                            },
+                        },
                     }
                 },
                 series: {
