@@ -559,7 +559,7 @@ export default {
             // data mdutil.setDecimal(data, style.decimals)
             let total = 0;
             data.forEach(item => {
-                if(item.data[0]) {
+                if(item.data && item.data[0]) {
                     const sum = item.data[0][1];
                     total += Number(sum);
                 }
