@@ -134,6 +134,7 @@ import nvMask from './mask';
 
 import {t} from './locale';
 import mixin from './mixins';
+import { stringify } from 'qs'
 
 const TITLE = t('mdreport.title');
 const DEFAULTFORMAT = 'MM.DD HH:mm';
@@ -894,27 +895,19 @@ export default {
 
             // sort by tree type
             else {
-                bodyLists.sort((a, b) => {
-                    let compareResult = false;
-
-                    // if sort in the same node
-                    if (!a.treeInfo.hasNext && !b.treeInfo.hasNext && a.treeInfo.parent === b.treeInfo.parent) {
+                let bodyListsMap = this.mapBodyLists();
+                let bodyListsBySort = [];
+                Object.keys(bodyListsMap).forEach(item => {
+                    bodyListsMap[item].sort((a, b) => {
+                        let compareResult = false;
                         a.columns.map(aColumnItem => {
                             if (aColumnItem.sortid === sortId) {
                                 b.columns.map(bColumnItem => {
                                     if (bColumnItem.sortid === sortId) {
-
-                                        //sort tree node orderby 'asc'
                                         if (column.sortType === 'asc') {
-                                            a.treeInfo.isLast = true;
-                                            b.treeInfo.isLast = false;
                                             compareResult = aColumnItem.value - bColumnItem.value;
                                         }
-
-                                        //sort tree node orderby 'desc'
                                         else {
-                                            a.treeInfo.isLast = true;
-                                            b.treeInfo.isLast = false;
                                             compareResult = bColumnItem.value - aColumnItem.value;
                                         }
                                     }
@@ -923,10 +916,78 @@ export default {
                             }
                             return aColumnItem;
                         });
-                    }
-                    return compareResult;
+                        return compareResult;
+                    });
+                    bodyListsBySort = bodyListsBySort.concat(bodyListsMap[item]);
                 });
+
+                let bodyListsByTreeSort = [];
+                this.sortColumnByTree(bodyListsBySort, bodyListsByTreeSort);
+                this.bodyLists = bodyListsByTreeSort;
             }
+        },
+        sortColumnByTree(bodyListsBySort, bodyListsByTreeSort) {
+            let self = this;
+            bodyListsBySort.forEach(item => {             
+                function sort(info) {
+                    let id = info.treeInfo.id;  
+                    let hasId = self.containIdInBodyLists(bodyListsByTreeSort, id);
+                    if (info.treeInfo.hasNext) {
+                        if (!hasId) {
+                            bodyListsByTreeSort.push(info);
+
+                            bodyListsBySort.forEach(subItem => {
+                                let subItemId = subItem.treeInfo.id;
+                                let hasContainId = self.containIdInBodyLists(bodyListsByTreeSort, subItemId);
+                                let isChildren;
+                                if (subItemId.match(id + '-[1-9][0-9]*')) {
+                                    isChildren = (subItemId.match(id + '-[1-9][0-9]*')[0] === subItemId)
+                                                && subItemId.indexOf(id) !== -1;
+                                }
+                                if (!hasContainId && isChildren)  {
+                                    if (subItem.treeInfo.hasNext) {
+                                        sort(subItem);
+                                    } else {
+                                        bodyListsByTreeSort.push(subItem);
+                                    }
+                                }                               
+                            });
+                        }
+                    }
+                }
+                sort(item);
+            });
+            return bodyListsByTreeSort;
+        },
+        /**
+         * map bodyList 
+         * @return  {[type]} bodyListMap
+         */
+        mapBodyLists() {
+            let bodyLists = this.bodyLists;
+            let bodyListsMap = {};
+            bodyLists.forEach(item => {
+                if (!bodyListsMap[item.treeInfo.level]) {
+                    bodyListsMap[item.treeInfo.level] = [];               
+                } 
+                bodyListsMap[item.treeInfo.level].push(item);
+            });
+            return bodyListsMap;
+        },
+        /**
+         * bodyLists contain id or not
+         * @param   {[type]} list [description]
+         * @param   {[type]} id [description]
+         * @return  {[type]} boolean 
+         */
+        containIdInBodyLists(list, id) {
+            let hasContainId = false;
+            list.forEach(item => {
+                if (item.treeInfo.id === id) {
+                    hasContainId = true;
+                }
+            });
+            return hasContainId;
         },
         setColumnSortStatus(column) {
 
