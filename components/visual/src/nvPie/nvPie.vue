@@ -559,10 +559,7 @@ export default {
             // data mdutil.setDecimal(data, style.decimals)
             let total = 0;
             data.forEach(item => {
-                if(item.data && item.data[0]) {
-                    const sum = item.data[0][1];
-                    total += Number(sum);
-                }
+                total += Number(item.value);
             });
 
             let echartsConf = {
@@ -572,7 +569,16 @@ export default {
                     confine: true,
                     formatter: function (item) {
                         let value = (item.value / total) * 100;
-                        let percent = Number(value.toFixed(style.decimals).replace(/0+$/g, ''));
+                        let beforePercent = value.toString().split('.')[0];
+                        let afterPercent = value.toString().split('.')[1];
+                        let percent = beforePercent;
+                        if (afterPercent) {
+                            let decimalsString = afterPercent.slice(0, style.decimals);
+                            let index = decimalsString.split('').find(item => Number(item)!== 0);
+                            if (index) {
+                                percent = beforePercent + '.' + decimalsString;
+                            }
+                        }
                         return `${item.name}: ${percent}%`;
                     },
                     backgroundColor: 'rgba(255,255,255,1)',
