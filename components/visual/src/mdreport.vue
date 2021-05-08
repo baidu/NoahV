@@ -549,6 +549,7 @@ export default {
         buildTableBody(list, columns, level, parentInfo) {
             let len = list.length;
             let hasOwnParent = parentInfo ? true : false;
+
             $.each(list, (i, item) => {
                 let treeInfo = {
                     isShow: true
@@ -937,7 +938,7 @@ export default {
                             bodyListsByTreeSort.push(info);
 
                             bodyListsBySort.forEach(subItem => {
-                                let subItemId = subItem.treeInfo.id;
+                                let subItemId = subItem.treeInfo.id ? subItem.treeInfo.id : '';
                                 let hasContainId = self.containIdInBodyLists(bodyListsByTreeSort, subItemId);
                                 let isChildren;
                                 if (subItemId.match(id + '-[1-9][0-9]*')) {
@@ -952,6 +953,11 @@ export default {
                                     }
                                 }                               
                             });
+                        }
+                    }
+                    else {
+                        if (!hasId) {
+                            bodyListsByTreeSort.push(info);
                         }
                     }
                 }
