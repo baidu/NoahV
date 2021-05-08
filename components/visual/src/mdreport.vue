@@ -941,7 +941,6 @@ export default {
                                 let subItemId = subItem.treeInfo.id ? subItem.treeInfo.id : '';
                                 let hasContainId = self.containIdInBodyLists(bodyListsByTreeSort, subItemId);
                                 let isChildren;
-                                console.log(subItemId);
                                 if (subItemId.match(id + '-[1-9][0-9]*')) {
                                     isChildren = (subItemId.match(id + '-[1-9][0-9]*')[0] === subItemId)
                                                 && subItemId.indexOf(id) !== -1;
