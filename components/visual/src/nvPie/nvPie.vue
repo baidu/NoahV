@@ -583,7 +583,7 @@ export default {
                             return `${item.data.names}: ${percent}%`;
                         }
                         else if (item.name === '其他'||'other') {
-                           return t('nvPie.其他') + `${percent}%`;
+                           return t('nvPie.other') + `${percent}%`;
                         }
                         else {
                             return `${item.data.names}{${item.data.dimensions}}: ${percent}%`;

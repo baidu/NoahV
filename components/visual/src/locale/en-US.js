@@ -58,7 +58,7 @@ export default {
 		title: 'Map',
 		getConfError: 'Configuration get failed',
 		getDataError: 'Data get failed',
-        其他: 'others'
+        other: 'others'
 	},
 	mask: {
 		loading: 'loading...'
