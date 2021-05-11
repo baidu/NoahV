@@ -57,7 +57,8 @@ export default {
 	nvPie: {
 		title: '地图',
 		getConfError: '配置获取失败',
-		getDataError: '数据获取失败'
+		getDataError: '数据获取失败',
+        其他: '其他'
 	},
 	mask: {
 		loading: '加载中...'

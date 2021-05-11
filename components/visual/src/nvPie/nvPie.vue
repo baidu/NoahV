@@ -579,7 +579,15 @@ export default {
                                 percent = beforePercent + '.' + decimalsString;
                             }
                         }
-                        return `${item.name}: ${percent}%`;
+                        if (item.data.dimensions === '') {
+                            return `${item.data.names}: ${percent}%`;
+                        }
+                        else if (item.name === '其他'||'other') {
+                           return t('nvPie.其他') + `${percent}%`;
+                        }
+                        else {
+                            return `${item.data.names}{${item.data.dimensions}}: ${percent}%`;
+                        }
                     },
                     backgroundColor: 'rgba(255,255,255,1)',
                     padding: 8,
