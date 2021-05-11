@@ -57,7 +57,8 @@ export default {
 	nvPie: {
 		title: 'Map',
 		getConfError: 'Configuration get failed',
-		getDataError: 'Data get failed'
+		getDataError: 'Data get failed',
+        其他: 'others'
 	},
 	mask: {
 		loading: 'loading...'
