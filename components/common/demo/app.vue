@@ -32,6 +32,7 @@
             <li><router-link to="/nvradio">nv-radio</router-link></li>
             <li><router-link to="/nvpage">nv-page</router-link></li>
             <li><router-link to="/nvtabs">nv-tabs</router-link></li>
+            <li><router-link to="/nvtooltip">nv-tooltip</router-link></li>
         </ul>
         <router-view></router-view>
     </div>

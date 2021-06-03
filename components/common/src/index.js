@@ -70,6 +70,7 @@ import tableTpl from './components/nv-table-tpl';
 import filterTableTpl from './components/nv-filtertable';
 
 // 封装组件
+import NvTooltip from './components/nv-tooltip';
 import NvSwitch from './components/nv-switch';
 import NvButton from './components/nv-button';
 import NvButtonGroup from './components/nv-button-group';
@@ -89,6 +90,7 @@ const noahv = {
     NvTableTpl,
     NvFilterTable,
     Nv404,
+    NvTooltip,
     NvSwitch,
     NvDialog,
     NvContrastTrend,
