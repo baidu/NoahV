@@ -417,7 +417,8 @@ export default {
         selectHandler(datas, item) {
             datas.forEach(node => {
                 if (item === node) {
-                    this.$set(node, 'selected', !node.selected);
+                    const treeSelected = item.id === node.id;
+                    this.$set(node, 'selected', treeSelected);
                     if (node.selected) {
                         this.selectedItems[0] = node;
                     }
