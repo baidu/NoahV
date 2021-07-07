@@ -560,6 +560,13 @@ export default {
             let total = 0;
             data.forEach(item => {
                 total += Number(item.value);
+                if (total !== 0) {
+                    this.errTip = false;
+                }
+                else {
+                    this.errTip = '无数据';
+                    this.hideMask();
+                }
             });
 
             let echartsConf = {
