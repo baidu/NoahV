@@ -8,23 +8,26 @@
     color: @common-text-color;
 
     .clearfix {
-	    *zoom: 1;
-	}
-	.clearfix:before,
-	.clearfix:after {
-	    display: table;
-	    content: "";
-	    line-height: 0;
-	}
-	.clearfix:after {
-	    clear: both;
-	}
+        *zoom: 1;
+    }
+
+    .clearfix:before,
+    .clearfix:after {
+        display: table;
+        content: "";
+        line-height: 0;
+    }
+
+    .clearfix:after {
+        clear: both;
+    }
 
     .credit {
         position: absolute;
         bottom: 8px;
         right: 12px;
     }
+
     .bd {
         h2 {
             width: 100%;
@@ -36,15 +39,18 @@
             overflow: hidden;
         }
     }
+
     .hd {
         color: @highlight-text-color;
         text-align: left;
         font-size: 14px;
+
         a {
             em {
                 color: #2d8cf0;
             }
         }
+
         em {
             // float: left;
             font-style: normal;
@@ -62,6 +68,7 @@
 
         a {
             color: @highlight-text-color;
+
             span {
                 display: inline-block;
                 margin: 4px 0 0 10px;
@@ -71,6 +78,7 @@
                 background-position: 0 0;
                 background-image: url(../../img/Artboard.png);
             }
+
             &:hover {
                 span {
                     background-position: 0 -11px;
@@ -78,37 +86,51 @@
             }
         }
     }
+
     .time {
         text-align: left;
         margin-top: 3px;
         font-size: 12px;
         color: @billboard-holder-time-color;
     }
+
     .time-false {
         display: none;
     }
+
     ul {
         text-align: left;
     }
+
     li {
         display: inline-block;
         padding: 0;
         padding: @billboard-holder-li-padding;
         width: 50%;
         height: @billboard-holder-li-height;
+
         h3 {
+            width: 100%;
             padding: @billboard-holder-h3-padding;
             line-height: @billboard-holder-h3-line-height;
             font-size: @billboard-holder-h3-font-size;
             text-align: left;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+
             span {
                 color: @strong-text-color;
             }
         }
+
         &.warning {
-            h2, h3 {
+
+            h2,
+            h3 {
                 color: red;
             }
+
             h3 {
                 span {
                     color: red;
@@ -116,6 +138,7 @@
             }
         }
     }
+
     .billboard-error-holder {
         height: @billboard-holder-li-height;
         line-height: @billboard-holder-li-height;
