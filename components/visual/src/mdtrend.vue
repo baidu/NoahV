@@ -1069,7 +1069,7 @@ export default {
                 color: widgetConf.extraComponent.trend.colors,
                 grid: {
                     top: 50,
-                    left: 60,
+                    left: '6%',
                     right: this.threshold ? 60 : 20,
                     bottom: this.showZoom ? 75 : 50
                 },
