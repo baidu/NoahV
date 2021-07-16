@@ -58,17 +58,17 @@ function filterThreshold(data, threshold) {
         if (thresholdColor.length > 0) {
             u.find(thresholdColor, (item, index) => {
                 if (data <= min + (item[0] * (max - min))) {
-                    thresholdArr.push([data / max, item[1]]);
+                    thresholdArr.push([(data-min) / max, item[1]]);
                     return true;
                 }
                 if ((index === thresholdColor.length - 1) && thresholdArr.length === 0) {
-                    thresholdArr.push([data / max, item[1]]);
+                    thresholdArr.push([(data-min) / max, item[1]]);
                 }
             });
         }
         // 如果没有设置阈值，修复问题
         else {
-            thresholdArr.push([data / max, colorMap.default]);
+            thresholdArr.push([(data-min) / max, colorMap.default]);
         }
     }
     return thresholdArr;
@@ -255,7 +255,7 @@ export default {
         });
 
         // add lazy loading when you scroll the page
-        
+
         let scrollTrigger = widgetConf.extraComponent.trend.scrollTrigger || document;
         $(scrollTrigger).on('scroll', this.redraw);
     },
@@ -367,7 +367,7 @@ export default {
             else {
                return this.height - 25;
             }
-            
+
         },
 
         resize() {
@@ -628,7 +628,7 @@ export default {
                 // hide loading mdmask
                 this.hideMask();
             });
-            
+
         },
 
         /**
@@ -685,7 +685,7 @@ export default {
     beforeDestroy() {
         if (this.chart) {
             if (typeof this.chart.clear === 'function') {
-                this.chart.clear(); 
+                this.chart.clear();
             }
             if (typeof this.chart.dispose === 'function') {
                 this.chart.dispose();
