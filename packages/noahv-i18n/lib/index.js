@@ -62,7 +62,8 @@ const install = (Vue, conf) => {
     noahvI18n.i18n = new VueI18n({
         locale: noahvI18n.getLocale(),
         fallbackLocale: conf.defaultLocale,
-        messages: conf.messages
+        messages: conf.messages,
+        silentTranslationWarn: conf.silentTranslationWarn,
     });
 
     // 默认处理
