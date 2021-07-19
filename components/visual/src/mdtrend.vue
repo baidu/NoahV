@@ -236,19 +236,16 @@ function handleTrendTime(times, contrast, timemap) {
 }
 
 
-function shortValue(value, type, number = 1) {
+function shortValue(value, type, conf, number = 1) {
     if (type === 'thousand') {
         let integer = parseInt(value);
         if (integer < 1000 || typeof integer !== 'number') {
-            return value;
+            return conf.style&&conf.style.decimals?value.toFixed(conf.style.decimals):value;
         }
         else {
-            return value.toLocaleString();
+            return conf.style&&conf.style.decimals?value.toLocaleString().toFixed(conf.style.decimals):value.toLocaleString();
         }
-        return parseInt(value);
-    }
-
-    else {
+    }else {
         if (value < 1000 || typeof value !== 'number') {
             return value;
         }
@@ -265,6 +262,7 @@ function shortValue(value, type, number = 1) {
                 continue;
             }
         }
+
         return formatNumber;
 
     }
@@ -1069,9 +1067,10 @@ export default {
                 color: widgetConf.extraComponent.trend.colors,
                 grid: {
                     top: 50,
-                    left: '3%',
+                    left: '2.6%',
                     right: this.threshold ? 60 : 20,
-                    bottom: this.showZoom ? 75 : 50
+                    bottom: this.showZoom ? 75 : 50,
+                    containLabel:true
                 },
                 legend: {
                     type: 'scroll',
@@ -1169,7 +1168,7 @@ export default {
                     axisLabel: {
                         color: '#333',
                         formatter(value) {
-                            return shortValue(value, numUnitType);
+                            return shortValue(value, numUnitType,conf);
                         }
                     },
                     axisTick: {

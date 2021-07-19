@@ -7,9 +7,13 @@
         <div class="bd">
             <div class="time">{{times}}</div>
             <ul class="billboard-list" v-if="!errTip">
-                <li v-for="sub in subTitles" :data-type="sub.display" :class="{warning:sub.warning}">
+                <li v-for="(sub,idx) in subTitles" :data-type="sub.display" :class="{warning:sub.warning}">
                     <h2>{{sub.alias || sub.name}}</h2>
-                    <h3 :title="sub.data + sub.unit"><span>{{sub.data}}</span>{{sub.unit}}</h3>
+                    <h3 :title="sub.data + sub.unit" @mouseenter="checkTipType($event)" @mouseleave="tipType=true">
+                        <Tooltip placement='top' :content="`${sub.data}${sub.unit}`" :disabled='tipType'>
+                            <span >{{sub.data}}</span>
+                        </Tooltip>
+                    {{sub.unit}}</h3>
                 </li>
             </ul>
         </div>
@@ -110,6 +114,7 @@ export default {
     data() {
         let height = this.params ? this.params.height || HEIGHT : HEIGHT;
         return {
+            tipType: true,
             mdStyle: `min-height:${height}px;`,
 
             // a version of params's copy
@@ -220,7 +225,11 @@ export default {
         $(scrollTrigger).on('scroll', this.redraw);
     },
     methods: {
-
+        checkTipType(event){
+            if (event.target.scrollWidth > event.target.offsetWidth) {
+                this.tipType = false
+            }
+        },
         /**
          * init billboard configure
          * user can use this widget with no conf|path|display
