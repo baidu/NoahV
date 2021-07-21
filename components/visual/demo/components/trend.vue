@@ -163,7 +163,7 @@ export default {
         return {
             extraStyle: {
                 dataZoom: {
-                    show:false
+                    show: false
                 },
                 series: {
                     symbol: 'emptyCircle',
@@ -192,32 +192,30 @@ export default {
                 'title': '趋势图标题',
                 eventList: [
                     {
-                        "checked": true,
-                        "datasource": {
-                            "dsId": 12,
-                            "extraParams": {
-                                "productName": [
-                                    "searchbox",
-                                    "vp",
-                                    "vp-other"
+                        'checked': true,
+                        'datasource': {
+                            'dsId': 12,
+                            'extraParams': {
+                                'productName': [
+                                    'searchbox',
+                                    'vp',
+                                    'vp-other'
                                 ]
                             },
-                            "index": "",
-                            "name": "searchbox_orpLaunch",
-                            "type": "orpLaunch",
-                            "url": "http://www.noahv.org"
+                            'index': '',
+                            'name': 'searchbox_orpLaunch',
+                            'type': 'orpLaunch',
+                            'url': 'http://www.noahv.org'
                         },
-                        "dimensionList": [
-
-                        ],
-                        "display": true,
-                        "displayCheckbox": true,
-                        "displayDimension": true,
-                        "dsId": 12,
-                        "id": 12,
-                        "maxNum": 500,
-                        "name": "ORP上线",
-                        "needTimeLine": true
+                        'dimensionList': [],
+                        'display': true,
+                        'displayCheckbox': true,
+                        'displayDimension': true,
+                        'dsId': 12,
+                        'id': 12,
+                        'maxNum': 500,
+                        'name': 'ORP上线',
+                        'needTimeLine': true
                     }
                 ],
                 'data': [
@@ -226,7 +224,7 @@ export default {
                             'forDemoNamespace1',
                             'forDemoNamespace2'
                         ],
-                        ruleNames: ["group.mobile-ux-orp-logstream.MAP.all:group:android-crash率报警"],
+                        ruleNames: ['group.mobile-ux-orp-logstream.MAP.all:group:android-crash率报警'],
                         cycle: '111',
                         'product': 'noahEE',
                         'monitoringType': 'instance',

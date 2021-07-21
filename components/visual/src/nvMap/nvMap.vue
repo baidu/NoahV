@@ -41,7 +41,7 @@ const MAP_OPTIONS = {
                 ${params.value ? params.value * 100 + '%' : t('nvMap.noData')}
                 </span></dd>`;
             if (params.data && params.data.toolTipData) {
-                _.each(params.data.toolTipData, function (item) {
+                _.each(params.data.toolTipData, item => {
                     seriesTooltip.push(`<dd style="padding: 3px 15px;color: #666;font-size: 12px;">
                     ${item.name}
                     : <span style="display: block;float: right;color: #333;">
@@ -105,7 +105,7 @@ const MAP_OPTIONS = {
             name: '',
             type: 'map',
             map: 'china',
-            selectedMode : false,
+            selectedMode: false,
             backgroundColor: '#aaaabb',
             label: {
                 normal: {
@@ -131,7 +131,7 @@ const MAP_OPTIONS = {
                     shadowColor: 'rgba(0, 0, 0, 0.5)'
                 }
             },
-            data:[]
+            data: []
         }
     ]
 };
@@ -142,7 +142,7 @@ export default {
         title: {
             type: String,
             default() {
-                return t('nvMap.title')
+                return t('nvMap.title');
             }
         },
         url: {
@@ -173,7 +173,7 @@ export default {
             type: String,
             required: false,
             default() {
-                return t('nvMap.metricName')
+                return t('nvMap.metricName');
             }
         },
         dataFilter: {
@@ -186,11 +186,11 @@ export default {
             map: null,
             isLoading: false,
             isShowError: false
-        }
+        };
     },
     watch: {
         mapData: {
-            handler () {
+            handler() {
                 if (!this.map) {
                     return;
                 }
@@ -219,7 +219,7 @@ export default {
         renderChart() {
             this.isLoading = true;
             this.map = echarts.init(this.$refs.map);
-            this.map.on('click', 'series', (data) => {
+            this.map.on('click', 'series', data => {
                 this.$emit('on-series-click', {
                     name: data.name,
                     data: data.data
@@ -227,7 +227,7 @@ export default {
             });
             Object.assign(MAP_OPTIONS, this.options);
             if (this.seriesName) {
-                 MAP_OPTIONS.series[0].name = this.seriesName;
+                MAP_OPTIONS.series[0].name = this.seriesName;
             }
             if (this.url) {
                 this.getMapData();
@@ -241,7 +241,7 @@ export default {
         },
         resizeMap() {
             if (this.map && typeof this.map.resize === 'function') {
-                this.map.resize()
+                this.map.resize();
             }
         },
         // 获取数据
@@ -250,7 +250,7 @@ export default {
                 url: this.url,
                 params: this.params,
                 method: this.method
-            }).then((data) => {
+            }).then(data => {
                 let mapData = data.data.data;
                 if (dataFilter && typeof dataFilter === 'function') {
                     mapData = dataFilter(mapData);
@@ -267,7 +267,7 @@ export default {
             if (offset && offset.top < top + height && offset.bottom > top) {
                 return true;
             }
-            return false
+            return false;
         },
         scrollTop() {
             if (!this.isLoading
