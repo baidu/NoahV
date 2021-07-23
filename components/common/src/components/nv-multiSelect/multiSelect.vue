@@ -239,8 +239,8 @@ export default {
                 this.isAll = this.model === this.allValue;
             }
         },
-        setPageResult(list) {
-            const tempList = list && list.length > 0 ? list : this.list;
+        setPageResult(list = [], showEmpty = false) {
+            const tempList = list.length > 0 ? list : (showEmpty ? [] : this.list);
             if (this.isPageRender) {
                 let pageNo = 0;
                 for (let i = 0; i < tempList.length; i++) {
@@ -310,7 +310,7 @@ export default {
         },
         onKeyUpSearch() {
             this.data = this.list.filter(item => item.label.indexOf(this.searchValue) > -1);
-            this.setPageResult(this.data);
+            this.setPageResult(this.data, true);
             this.$emit('on-keyup', {
                 value: this.searchValue,
                 result: this.data
