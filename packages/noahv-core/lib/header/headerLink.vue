@@ -84,15 +84,11 @@
 </template>
 
 <script>
-import headerLink from './headerLink';
 import {eventBus} from '../../util/eventBus';
 
 export default {
     name: 'headerLink',
     props: ['item', 'parent'],
-    components: {
-        headerLink
-    },
     data() {
         return {
             isShow: false,
