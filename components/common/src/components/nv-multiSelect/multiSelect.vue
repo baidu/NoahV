@@ -8,6 +8,7 @@
             <Input
                 search
                 :placeholder="searchPlaceHolder"
+                :disabled="allDisabled"
                 v-model="searchValue"
                 v-if="hasSearch"
                 @on-keyup="onKeyUpSearch" />
@@ -15,12 +16,14 @@
                 v-if="hasAll"
                 v-model="isAll"
                 class="is-all"
+                :disabled="allDisabled"
                 @on-change="allChangeAction($event)">
                 {{allText}}
             </Checkbox>
             <Checkbox
                 :indeterminate="indeterminate"
                 :value="checkAll"
+                :disabled="allDisabled"
                 @click.prevent.native="handleCheckAll($event)">
                 {{checkAllText}}
             </Checkbox>
@@ -32,13 +35,14 @@
                     v-for="dim in resultList"
                     :key="dim.value"
                     :label="dim.value"
+                    :disabled="allDisabled"
                     >
                     {{dim.label}}
                 </Checkbox>
             </CheckboxGroup>
         </Select>
-        <span class="checked-list" v-if="hasAll && isAll">{{allText}}</span>
-        <span class="checked-list" v-else>
+        <span class="checked-list" :class="{'disableStyle': allDisabled}" v-if="hasAll && isAll">{{allText}}</span>
+        <span class="checked-list" :class="{'disableStyle': allDisabled}" v-else>
             <i>{{resultTitle}}</i>
             <i class="number-of-total">
                 <template v-if="showTotalNumber">({{value.length}}/{{list.length}})</template>
@@ -136,7 +140,11 @@ export default {
         distanceToBottom: {
             type: Number,
             dafault: 20
-        }
+        },
+        allDisabled: {
+            type: Boolean,
+            default: false
+        },
     },
     data() {
         return {
@@ -288,6 +296,8 @@ export default {
             }
         },
         handleCheckAll() {
+            // disable时，'全选'不可点击
+            if (this.allDisabled) return;
             this.isAll = false;
             if (this.indeterminate) {
                 this.checkAll = false;
