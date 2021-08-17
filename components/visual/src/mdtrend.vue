@@ -118,13 +118,13 @@ function findEventsByTimestamp(events, t, etype) {
 
             // 兼容自定义异常点的形式
             if (Object.prototype.toString.call(evt) === '[object Object]') {
-                u.find(evt.data, (item) => {
+                u.find(evt.data, item => {
                     if (item[0] === t) {
                         data.push({
                             name: evt.name,
                             value: item[1],
                             color: evt.color
-                        })
+                        });
                     }
 
                 });
@@ -240,12 +240,13 @@ function shortValue(value, type, conf, number = 1) {
     if (type === 'thousand') {
         let integer = parseInt(value);
         if (integer < 1000 || typeof integer !== 'number') {
-            return conf.style&&conf.style.decimals?value.toFixed(conf.style.decimals):value;
+            return conf.style && conf.style.decimals ? value.toFixed(conf.style.decimals) : value;
         }
         else {
-            return conf.style&&conf.style.decimals?parseInt(value.toLocaleString()).toFixed(conf.style.decimals):value.toLocaleString();
+            return conf.style && conf.style.decimals ? parseInt(value.toLocaleString()).toFixed(conf.style.decimals) : value.toLocaleString();
         }
-    }else {
+    }
+    else {
         if (value < 1000 || typeof value !== 'number') {
             return value;
         }
@@ -585,7 +586,7 @@ let Points = {
                 if (this.abnormals && this.params === paramString) {
                     this.renderAbnormals(chart, this.abnormals);
                 }
-                else if (this.extraUrls && this.extraUrls.trendPointsUrl){
+                else if (this.extraUrls && this.extraUrls.trendPointsUrl) {
                     this.$wRequest.post(this.extraUrls.trendPointsUrl, params).then(data => {
                         let res = data.data;
                         if (res && res.success) {
@@ -661,7 +662,7 @@ let Points = {
                     }
                     else {
                         cur = evt[3];
-                        name = '异常点'
+                        name = '异常点';
                     }
                     htm.push(`<dd class="echarts-tooltip-item echarts-tooltip-point-item"><span ${style}>${name}: </span>`
                         + mdutil.numberFormat(cur, conf.style.decimals) + '</dd>');
@@ -967,7 +968,7 @@ export default {
             }, trendConf);
             if (trendConf && trendConf.display) {
                 if (trendConf.style && trendConf.style.displayType) {
-                    this.initChatType(trendConf.style.displayType)
+                    this.initChatType(trendConf.style.displayType);
                 }
                 this.$nextTick(() => {
                     this.data = trendConf.display;
@@ -981,7 +982,7 @@ export default {
                 });
                 return;
             }
-            this.$nextTick( () => {
+            this.$nextTick(() => {
                 this.scrollTop();
             });
         },
@@ -1070,7 +1071,7 @@ export default {
                     left: '2.6%',
                     right: this.threshold ? 60 : 20,
                     bottom: this.showZoom ? 75 : 50,
-                    containLabel:true
+                    containLabel: true
                 },
                 legend: {
                     type: 'scroll',
@@ -1092,24 +1093,22 @@ export default {
                                 u.each(this.commonOption.series, item => {
                                     item.type = 'line';
                                     item.areaStyle = {};
-                                    item.stack = this.chartStacking === 'normal' ? {} : null
+                                    item.stack = this.chartStacking === 'normal' ? {} : null;
                                 });
                                 this.chart.setOption(this.commonOption);
                             }
                         },
                         magicType: {
                             show: true,
-                            type: ['line', 'bar', 'stack', 'tiled'],
+                            type: ['line', 'bar'],
                             icon: {
                                 line: 'image://' + chartlinePng,
-                                bar: 'image://' + chartcolumnPng,
-                                stack: 'image://' + chartstackPng,
+                                bar: 'image://' + chartcolumnPng
                                 // tiled: 'image://' + chartnormalPng
                             },
                             title: {
-                                line: this.t('mdtrend.switchToLine'),
-                                bar: this.t('mdtrend.switchToColumn'),
-                                stack: this.t('mdtrend.switchToStack'),
+                                line: t('mdtrend.switchToLine'),
+                                bar: t('mdtrend.switchToColumn')
                             },
                             option: {
                                 line: {
@@ -1119,6 +1118,16 @@ export default {
                                         areaStyle: null
                                     }
                                 }
+                            }
+                        },
+                        myToolStack: {
+                            title: this.t('mdtrend.switchToStack'),
+                            icon: 'image://' + chartstackPng,
+                            onclick: () => {
+                                u.each(this.commonOption.series, item => {
+                                    item.stack = !item.stack;
+                                });
+                                this.chart.setOption(this.commonOption);
                             }
                         }
                     }
@@ -1168,7 +1177,7 @@ export default {
                     axisLabel: {
                         color: '#333',
                         formatter(value) {
-                            return shortValue(value, numUnitType,conf);
+                            return shortValue(value, numUnitType, conf);
                         }
                     },
                     axisTick: {
@@ -1226,10 +1235,10 @@ export default {
                             let html = `<dd class="echarts-tooltip-item" style="color: ${item.color}">`
                                 + item.seriesName
                                 + ': '
-                                + `<span class="echarts-tooltip-item-value">`
+                                + '<span class="echarts-tooltip-item-value">'
                                 + mdutil.setDecimal(item.value[1], decimals, numUnitType)
                                 + valueSuffix
-                                + `</span>`
+                                + '</span>'
                                 + '</dd>';
                             seriesTooltip.push(html);
                         });
@@ -1263,7 +1272,7 @@ export default {
             // 处理xAxis重叠的问题
             if (typeof this.chart.getWidth === 'function') {
                 let chartWidth = this.chart.getWidth();
-                this.commonOption.xAxis.splitNumber = parseInt(chartWidth / 150, 10)
+                this.commonOption.xAxis.splitNumber = parseInt(chartWidth / 150, 10);
             }
 
             this.chart.setOption(this.commonOption);
@@ -1281,7 +1290,7 @@ export default {
                     u.each(this.commonOption.series, item => {
                         item.areaStyle = null;
                         item.type = 'line';
-                        item.stack = this.chartStacking === 'normal' ? {} : null
+                        item.stack = this.chartStacking === 'normal' ? {} : null;
                     });
                     this.chart.setOption(this.commonOption);
                 }
@@ -1310,7 +1319,7 @@ export default {
             if (offset && offset.top < top + height && offset.bottom > top) {
                 return true;
             }
-            return false
+            return false;
         },
 
         /**
@@ -1403,7 +1412,7 @@ export default {
                 // 设置孤点功能
                 let currentIndx = 1;
                 let lens = list.length;
-                while (currentIndx > 0 && currentIndx  <= lens - 2) {
+                while (currentIndx > 0 && currentIndx <= lens - 2) {
                     let preIndx = currentIndx - 1;
                     let aferIdx = currentIndx + 1;
 
@@ -1626,7 +1635,7 @@ export default {
                 && typeof this.chart.dispatchAction === 'function'
                 && typeof this.chart.makeActionFromEvent === 'function'
                 && this.isInScreen()
-                ) {
+            ) {
                 this.chart.dispatchAction(
                     this.chart.makeActionFromEvent(params),
                     true
