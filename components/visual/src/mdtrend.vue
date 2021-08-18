@@ -4,7 +4,7 @@
             <h2 v-if="linkUrl">
                 <a :href="linkUrl" target="_blank">{{title}}</a>
             </h2>
-            <h2 v-else>{{title}}{{'('+trendConf.style.unit+')'}}</h2>
+            <h2 v-else>{{title}}{{trendConf.style.unit?'('+trendConf.style.unit+')':null}}</h2>
         </div>
         <div class="multiple-chart-body" v-show="!errTip">
             <div class="echarts" ref="chart" :style="mdStyle"></div>
@@ -25,7 +25,6 @@ import echarts from 'echarts';
 import chartareaPng from './assets/img/trend/chartarea.png';
 import chartcolumnPng from './assets/img/trend/chartcolumn.png';
 import chartlinePng from './assets/img/trend/chartline.png';
-import chartnormalPng from './assets/img/trend/chartnormal.png';
 import chartstackPng from './assets/img/trend/chartstack.png';
 
 import {t} from './locale';
@@ -1108,7 +1107,6 @@ export default {
                             icon: {
                                 line: 'image://' + chartlinePng,
                                 bar: 'image://' + chartcolumnPng
-                                // tiled: 'image://' + chartnormalPng
                             },
                             title: {
                                 line: t('mdtrend.switchToLine'),
