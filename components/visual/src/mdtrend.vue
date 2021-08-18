@@ -4,7 +4,7 @@
             <h2 v-if="linkUrl">
                 <a :href="linkUrl" target="_blank">{{title}}</a>
             </h2>
-            <h2 v-else>{{title}}</h2>
+            <h2 v-else>{{title}}{{'('+trendConf.style.unit+')'}}</h2>
         </div>
         <div class="multiple-chart-body" v-show="!errTip">
             <div class="echarts" ref="chart" :style="mdStyle"></div>
@@ -237,13 +237,17 @@ function handleTrendTime(times, contrast, timemap) {
 
 
 function shortValue(value, type, conf, number = 1) {
+    function changeDecimals(number, decimals) {
+        let numberArr = String(number).split('.');
+        return Number(numberArr[0]).toLocaleString() + '.' + number.toFixed(decimals).split('.')[1];
+    }
     if (type === 'thousand') {
         let integer = parseInt(value);
         if (integer < 1000 || typeof integer !== 'number') {
             return conf.style && conf.style.decimals ? value.toFixed(conf.style.decimals) : value;
         }
         else {
-            return conf.style && conf.style.decimals ? parseInt(value.toLocaleString()).toFixed(conf.style.decimals) : value.toLocaleString();
+            return conf.style && conf.style.decimals ? changeDecimals(value, conf.style.decimals) : value.toLocaleString();
         }
     }
     else {
