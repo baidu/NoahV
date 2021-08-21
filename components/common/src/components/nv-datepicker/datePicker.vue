@@ -150,13 +150,13 @@ export default {
         },
         // 时间显示风格
         mode: {
-            validator: (value) => {
+            validator: value => {
                 return ['common', 'console'].indexOf(value) > -1;
             },
             default: 'console'
         },
         tips: {
-            validator: (value) => {
+            validator: value => {
                 return typeof value === 'string';
             }
         },
@@ -174,8 +174,8 @@ export default {
         },
         placeholder: {
             type: String,
-            default () {
-                return t('datepicker.placeholder')
+            default() {
+                return t('datepicker.placeholder');
             }
         },
         confirm: {
@@ -217,7 +217,7 @@ export default {
         },
         disabledDateClickTip: {
             type: String,
-            default () {
+            default() {
                 return t('datepicker.disabledDateTip');
             }
         }
@@ -277,7 +277,7 @@ export default {
                 years: [],
                 months: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
                 weekDays: [
-                    t.call(this, 'datepicker.weeks.sun'), 
+                    t.call(this, 'datepicker.weeks.sun'),
                     t.call(this, 'datepicker.weeks.mon'),
                     t.call(this, 'datepicker.weeks.tue'),
                     t.call(this, 'datepicker.weeks.wed'),
@@ -340,7 +340,7 @@ export default {
                 lineHeight: this.height + 'px'
             };
 
-            if (['date','datetime'].indexOf(this.type) > -1) {
+            if (['date', 'datetime'].indexOf(this.type) > -1) {
                 if (this.hotKeyCtrl.inner) {
                     style.innerPanelStyle = {
                         width: '330px',
@@ -360,7 +360,7 @@ export default {
                     };
                 }
             }
-            else if (['daterange','daterangetime'].indexOf(this.type) > -1) {
+            else if (['daterange', 'daterangetime'].indexOf(this.type) > -1) {
                 if (this.hotKeyCtrl.inner) {
                     style.innerPanelStyle = {
                         width: '550px',
@@ -412,7 +412,7 @@ export default {
                             control.inner = false;
                             control.top = true;
                             break;
-                        default: 
+                        default:
                             control.outer = false;
                             control.inner = false;
                             control.top = false;
@@ -478,7 +478,7 @@ export default {
             handler(val) {
                 if (this.isDifferent(val)) {
                     this.valueUpdate(val);
-                    this.dateChange();
+                    // this.dateChange();
                 }
             }
         },
@@ -533,17 +533,17 @@ export default {
                     }
                     this.dateChange();
                 }
-                else if (!this.value){
+                else if (!this.value) {
                     this.defaultInition();
                 }
             }
-            else if (!this.value){
+            else if (!this.value) {
                 this.defaultInition();
-            };
+            }
             this.initOptions();
         },
         initOptions() {
-            let minYear, maxYear;
+            let minYear; let maxYear;
             if (['date', 'datetime'].indexOf(this.type) > -1) {
                 let date = this.dateValue.selectedDate || this.dateValue.startDate || datePickerUtils.getCurrent(this);
                 minYear = date.getFullYear();
@@ -558,14 +558,14 @@ export default {
             else {
                 return;
             }
-            
+
             let from = minYear - 3;
             let to = maxYear + 2;
             let leftYears = [];
             let rightYears = [];
             for (let i = from; i <= to; i++) {
-                leftYears[i-from] = i;
-                rightYears[i-from] = i;
+                leftYears[i - from] = i;
+                rightYears[i - from] = i;
             }
             this.$set(this.dateOptions, 'leftYears', leftYears);
             this.$set(this.dateOptions, 'rightYears', rightYears);
@@ -633,7 +633,7 @@ export default {
                     this.$refs['saDatePickerDatePanel' + this.postfix].headerChange('left');
                 }
             }
-            if (['daterange', 'daterangetime'].indexOf(this.type) > -1){
+            if (['daterange', 'daterangetime'].indexOf(this.type) > -1) {
                 if (
                     (this.dateValue.startSelectedDate && this.dateValue.endSelectedDate)
                     || (!this.dateValue.startSelectedDate && !this.dateValue.endSelectedDate)
@@ -653,7 +653,7 @@ export default {
                 return !u.isEqual(this.turnToDate(value), this.dateValue.selectedDate);
             }
             else if (['daterange', 'daterangetime'].indexOf(this.type) > -1 && u.isArray(value) && value.length === 2) {
-                return !u.isEqual(this.turnToDate(value), [this.dateValue.startSelectedDate, this.dateValue.endSelectedDate]); 
+                return !u.isEqual(this.turnToDate(value), [this.dateValue.startSelectedDate, this.dateValue.endSelectedDate]);
             }
             return false;
         },
@@ -765,7 +765,7 @@ export default {
             if (['date', 'datetime'].indexOf(this.type) > -1) {
                 if (startDate && u.isDate(startDate)) {
                     if (this.isDisabledHandler(startDate, [startDate])) {
-                        //cann't set disabled date
+                        // cann't set disabled date
                         return;
                     }
                     else {
@@ -827,14 +827,14 @@ export default {
         getDate() {
             let dateMap = {};
             if (['date', 'datetime'].indexOf(this.type) > -1) {
-                dateMap['selectDate'] = this.dateValue.selectedDate;
+                dateMap.selectDate = this.dateValue.selectedDate;
             }
             else if (['daterange', 'daterangetime'].indexOf(this.type) > -1) {
                 if (this.dateValue.startSelectedDate && this.dateValue.endSelectedDate) {
-                    dateMap['selectDate'] = [this.dateValue.startSelectedDate, this.dateValue.endSelectedDate];
+                    dateMap.selectDate = [this.dateValue.startSelectedDate, this.dateValue.endSelectedDate];
                 }
                 else {
-                    dateMap['selectDate'] = [];
+                    dateMap.selectDate = [];
                 }
             }
             return dateMap;
@@ -849,8 +849,8 @@ export default {
         isDisabledHandler(date, targetDate) {
             if (this.options && this.options.disabledHandler && typeof this.options.disabledHandler === 'function') {
                 let selectedDate = ['date', 'datetime'].indexOf(this.type) > -1 ? this.dateValue.selectedDate : {
-                    "startSelectedDate": this.dateValue.startSelectedDate,
-                    "endSelectedDate": this.dateValue.endSelectedDate
+                    'startSelectedDate': this.dateValue.startSelectedDate,
+                    'endSelectedDate': this.dateValue.endSelectedDate
                 };
                 return this.options.disabledHandler(date, selectedDate, targetDate || []);
             }
@@ -956,7 +956,7 @@ export default {
             if (this.showPickerPanel) {
                 this.clearDateTable();
                 this.clearHotKeys();
-            }            
+            }
             this.$emit('on-clear');
         },
         /**
@@ -971,7 +971,7 @@ export default {
          *
          */
         clearHotKeys() {
-            let shortcuts = this.options ? (this.options.shortcuts || []): [];
+            let shortcuts = this.options ? (this.options.shortcuts || []) : [];
             shortcuts.forEach(item => {
                 this.$set(item, 'selected', false);
             });
@@ -1033,7 +1033,7 @@ export default {
                 this.$nextTick(() => {
                     for (let i in shortcuts) {
                         if (shortcuts.hasOwnProperty(i) && shortcuts[i].hasOwnProperty('id')) {
-                            if (shortcuts[i]['id'] === id) {
+                            if (shortcuts[i].id === id) {
                                 this.$set(shortcuts[i], 'selected', true);
                             }
                             else {
@@ -1050,7 +1050,7 @@ export default {
                 this.$nextTick(() => {
                     for (let i in shortcuts) {
                         if (shortcuts.hasOwnProperty(i) && shortcuts[i].hasOwnProperty('text')) {
-                            if (shortcuts[i]['text'] === text) {
+                            if (shortcuts[i].text === text) {
                                 this.$set(shortcuts[i], 'selected', true);
                             }
                             else {
