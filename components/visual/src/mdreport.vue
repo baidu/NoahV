@@ -24,7 +24,7 @@
                                     v-else-if="!column.items"
                                     class="sort"
                                     rowspan="2"
-                                    :class="[column.sortType == 'desc'
+                                    :class="[column.disableSort?'':column.sortType == 'desc'
                                         ? 'sort-desc' : (column.sortType == 'asc' ? 'sort-asc' : 'sort-desc')]"
                                     :data-sort="column.sortid"
                                     @click="sort(column)">{{column.title}}</th>
@@ -37,7 +37,7 @@
                                     v-for="it in column.items">
                                     <th
                                         class="sort"
-                                        :class="[it.sortType == 'desc'
+                                        :class="[column.disableSort?'':it.sortType == 'desc'
                                         ? 'sort-desc' : (it.sortType == 'asc' ? 'sort-asc' : 'sort-desc')]"
                                         :data-sort="it.sortid"
                                         @click="sort(it)" >{{it.title}}</th>
@@ -57,7 +57,7 @@
                                     v-else-if="!column.items"
                                     class="sort"
                                     rowspan="2"
-                                    :class="[column.sortType == 'desc'
+                                    :class="[column.disableSort?'':column.sortType == 'desc'
                                         ? 'sort-desc' : (column.sortType == 'asc' ? 'sort-asc' : 'sort-desc')]"
                                     :data-sort="column.sortid"
                                     @click="sort(column)">{{column.title}}</th>
@@ -134,7 +134,7 @@ import nvMask from './mask';
 
 import {t} from './locale';
 import mixin from './mixins';
-import { stringify } from 'qs'
+import { stringify } from 'qs';
 
 const TITLE = t('mdreport.title');
 const DEFAULTFORMAT = 'MM.DD HH:mm';
@@ -454,7 +454,7 @@ export default {
                     this.isLoading = false;
                     if (mdData.data.success) {
                         this.errTip = false;
-                        this.$nextTick( () => {
+                        this.$nextTick(() => {
                             this.data = mdData.data.data;
                             this.render(mdData.data.data);
                         });
@@ -522,7 +522,8 @@ export default {
                         threshold: item.threshold,
                         sortid: index,
                         sortType: false,
-                        total: item.total
+                        total: item.total,
+                        disableSort: item.disableSort ? item.disableSort : false
                     };
                     if (group) {
                         if (groups[group]) {
@@ -548,7 +549,7 @@ export default {
 
         buildTableBody(list, columns, level, parentInfo) {
             let len = list.length;
-            let hasOwnParent = parentInfo ? true : false;
+            let hasOwnParent = !!parentInfo;
 
             $.each(list, (i, item) => {
                 let treeInfo = {
@@ -740,7 +741,7 @@ export default {
                                     avg: mdutil.setDecimal(itemTotal / bodyList.length, col2.decimals)
                                 };
                                 if (!footer[col2.total]) {
-                                    return
+                                    return;
                                 }
                                 totalInfo = col2.unit ? footer[col2.total] + col2.unit : footer[col2.total];
                             }
@@ -780,9 +781,11 @@ export default {
                         if (col.total) {
                             totalInfo = col.unit ? footer[col.total] + col.unit : footer[col.total];
                         }
-                        // if (!footer[col.total]) {
-                        //     return
-                        // }
+                        /*
+                         * if (!footer[col.total]) {
+                         *     return
+                         * }
+                         */
                     }
                     catch (e) {
                         totalInfo = this.t('mdreport.caculteError');
@@ -866,6 +869,9 @@ export default {
          * @return {[type]}        [description]
          */
         sort(column) {
+            if (column.disableSort) {
+                return;
+            }
             let bodyLists = this.bodyLists;
             let sortId = column.sortid;
             this.setColumnSortStatus(column);
@@ -929,9 +935,9 @@ export default {
         },
         sortColumnByTree(bodyListsBySort, bodyListsByTreeSort) {
             let self = this;
-            bodyListsBySort.forEach(item => {             
+            bodyListsBySort.forEach(item => {
                 function sort(info) {
-                    let id = info.treeInfo.id;  
+                    let id = info.treeInfo.id;
                     let hasId = self.containIdInBodyLists(bodyListsByTreeSort, id);
                     if (info.treeInfo.hasNext) {
                         if (!hasId) {
@@ -945,20 +951,19 @@ export default {
                                     isChildren = (subItemId.match(id + '-[1-9][0-9]*')[0] === subItemId)
                                                 && subItemId.indexOf(id) !== -1;
                                 }
-                                if (!hasContainId && isChildren)  {
+                                if (!hasContainId && isChildren) {
                                     if (subItem.treeInfo.hasNext) {
                                         sort(subItem);
-                                    } else {
+                                    }
+                                    else {
                                         bodyListsByTreeSort.push(subItem);
                                     }
-                                }                               
+                                }
                             });
                         }
                     }
-                    else {
-                        if (!hasId) {
-                            bodyListsByTreeSort.push(info);
-                        }
+                    else if (!hasId) {
+                        bodyListsByTreeSort.push(info);
                     }
                 }
                 sort(item);
@@ -966,7 +971,7 @@ export default {
             return bodyListsByTreeSort;
         },
         /**
-         * map bodyList 
+         * map bodyList
          * @return  {[type]} bodyListMap
          */
         mapBodyLists() {
@@ -974,8 +979,8 @@ export default {
             let bodyListsMap = {};
             bodyLists.forEach(item => {
                 if (!bodyListsMap[item.treeInfo.level]) {
-                    bodyListsMap[item.treeInfo.level] = [];               
-                } 
+                    bodyListsMap[item.treeInfo.level] = [];
+                }
                 bodyListsMap[item.treeInfo.level].push(item);
             });
             return bodyListsMap;
@@ -984,7 +989,7 @@ export default {
          * bodyLists contain id or not
          * @param   {[type]} list [description]
          * @param   {[type]} id [description]
-         * @return  {[type]} boolean 
+         * @return  {[type]} boolean
          */
         containIdInBodyLists(list, id) {
             let hasContainId = false;
