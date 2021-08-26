@@ -24,10 +24,11 @@
                                     v-else-if="!column.items"
                                     class="sort"
                                     rowspan="2"
-                                    :class="[column.disableSort?'':column.sortType == 'desc'
-                                        ? 'sort-desc' : (column.sortType == 'asc' ? 'sort-asc' : 'sort-desc')]"
                                     :data-sort="column.sortid"
-                                    @click="sort(column)">{{column.title}}</th>
+                                    @click="sort(column)">
+                                    <span :class="[column.disableSort?'':column.sortType == 'desc'
+                                        ? 'sort-desc' : (column.sortType == 'asc' ? 'sort-asc' : 'sort-desc')]">{{column.title}}</span>
+                                    </th>
                             </template>
                         </tr>
                         <tr>
@@ -37,10 +38,11 @@
                                     v-for="it in column.items">
                                     <th
                                         class="sort"
-                                        :class="[column.disableSort?'':it.sortType == 'desc'
-                                        ? 'sort-desc' : (it.sortType == 'asc' ? 'sort-asc' : 'sort-desc')]"
                                         :data-sort="it.sortid"
-                                        @click="sort(it)" >{{it.title}}</th>
+                                        @click="sort(it)" >
+                                             <span :class="[column.disableSort?'':it.sortType == 'desc'
+                                        ? 'sort-desc' : (it.sortType == 'asc' ? 'sort-asc' : 'sort-desc')]">{{it.title}}</span>
+                                        </th>
                                 </template>
                             </template>
                         </tr>
@@ -57,10 +59,11 @@
                                     v-else-if="!column.items"
                                     class="sort"
                                     rowspan="2"
-                                    :class="[column.disableSort?'':column.sortType == 'desc'
-                                        ? 'sort-desc' : (column.sortType == 'asc' ? 'sort-asc' : 'sort-desc')]"
                                     :data-sort="column.sortid"
-                                    @click="sort(column)">{{column.title}}</th>
+                                    @click="sort(column)">
+                                        <span :class="[column.disableSort?'':column.sortType == 'desc'
+                                        ? 'sort-desc' : (column.sortType == 'asc' ? 'sort-asc' : 'sort-desc')]">{{column.title}}</span>
+                                    </th>
                             </template>
                         </tr>
                     </template>
