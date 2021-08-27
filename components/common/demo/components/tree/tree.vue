@@ -2,7 +2,7 @@
     <div style="width:420px; overflow-x: auto; border: 1px solid #000;">
         <NvTree
             ref="nvTreeRef"
-            :width="400" 
+            :width="400"
             :tip="data.tip"
             :items="data.items"
             :search="data.search"
@@ -27,12 +27,12 @@
 <script>
 export default {
     name: 'treeDemo',
-    data () {
+    data() {
         const self = this;
         return {
             data: {
                 tip: '未获取到数据',
-                search: false,
+                search: true,
                 accordion: false,
                 draggable: false,
                 editable: false,
@@ -46,7 +46,7 @@ export default {
                 appendIcon: 'plus-small-square-o',
                 removeIcon: 'minus-small-square-o',
                 editIcon: 'edit-o',
-                items:[
+                items: [
                     {
                         title: 'node1',
                         name: 'node1',
@@ -121,7 +121,7 @@ export default {
                 ]
             }
 
-        }
+        };
     },
     methods: {
         onMouseDown(event, item, dataList) {

@@ -44,7 +44,7 @@ import tree from './tree.js';
 import NvTreeNode from './node.vue';
 import mixin from '../../mixins';
 
-const prefixCls = "noahv-tree";
+const prefixCls = 'noahv-tree';
 
 export default {
     name: 'NvTree',
@@ -230,7 +230,7 @@ export default {
                 if (this.checkbox || this.lazyLoad || this.search || this.accordion || this.editMode || this.draggable || this.mouseDown) {
                     this.buildTree(this.dataSet, 0);
                     this.getLinkedTree(this.dataSet);
-                }                
+                }
             }
         }
     },
@@ -289,9 +289,7 @@ export default {
          *
          */
         searchHandler() {
-            if (this.searchValue !== '') {
-                this.searchSubNodeHandler(this.dataSet);
-            }
+            this.searchSubNodeHandler(this.dataSet);
         },
         /**
          * 搜索符合条件的节点，并展开路径
@@ -300,7 +298,7 @@ export default {
          */
         searchSubNodeHandler(items) {
             items.forEach(node => {
-                if (node.title.indexOf(this.searchValue) > -1) {
+                if (this.searchValue && node.title.indexOf(this.searchValue) > -1) {
                     this.$set(node, 'selected', true);
                     let parent = this.dataList[node.parent];
                     while (parent) {
@@ -571,7 +569,7 @@ export default {
                     // improve performance
                     this.buildTree(this.dataSet, 0);
                 }
-                
+
                 this.getLinkedTree(this.dataSet);
 
                 // 处理原位置祖先节点的选中逻辑
