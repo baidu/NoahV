@@ -6,7 +6,7 @@
         </h3>
         <!-- <vue-echarts :options="curOptions" ref="chart"></vue-echarts> -->
         <div :class="getCls('chart')" ref="chart" v-show="displayChart"></div>
-        
+
         <div class="trend-detail" v-if="showSeriesDetail">
             <div class="detail-handler" @click="toggleDetailPanel">
                 {{showSeriesDetailText}}
@@ -54,8 +54,16 @@
                 </div>
             </div>
         </div>
-        <div class="trend-error-holder" v-show="errTip" :title="errTip">{{errTip}}</div>
-        <div class="trend-error-holder" v-show="noData" v-html="noDataTip"></div>
+        <div class="trend-error-holder" v-show="errTip" :title="errTip">
+            <slot name="error-tip">
+                {{ errTip }}
+            </slot>
+        </div>
+        <div class="trend-error-holder" v-show="noData">
+            <slot name="no-data-tip">
+                <div v-html="noDataTip"></div>
+            </slot>
+        </div>
         <div class="show-loading" v-show="!isLoading">
             <div class="mask"></div>
             <div class="content">{{showLoading}}</div>
@@ -638,14 +646,14 @@ export default {
                                     <dt class="trend-tooltip-title">
                                     ${time}
                                     </dt>`;
-                        
+
                         itemHtml += `<dd class="trend-tooltip-item" style="color: ${item.color}">
                                     ${item.seriesName}:
                                     <span class="trend-tooltip-item-value">
                                     ${itemVal}
                                     </span></dd></dl>`;
 
-                        if (item.value[1] != null 
+                        if (item.value[1] != null
                             || (item.value[1] === null && this.showNull)) {
                             html = timeHtml + itemHtml;
                         }
@@ -654,7 +662,7 @@ export default {
                     return html;
                 };
             }
-            
+
             this.$nextTick(() => {
                 this.renderTrend();
             });
