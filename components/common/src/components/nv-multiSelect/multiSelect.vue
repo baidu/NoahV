@@ -145,6 +145,10 @@ export default {
             type: Boolean,
             default: false
         },
+        allByResultList: {
+            type: Boolean,
+            default: false
+        }
     },
     data() {
         return {
@@ -307,7 +311,11 @@ export default {
             }
             this.indeterminate = false;
             if (this.checkAll) {
-                this.value = this.list && this.list.map(item => item.value);
+                if(this.allByResultList){
+                    this.value = this.resultList.map(item => item.value);
+                }else{
+                    this.value = this.list && this.list.map(item => item.value);
+                }
             }
             else {
                 this.value = [];
