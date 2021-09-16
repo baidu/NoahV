@@ -1,5 +1,7 @@
 ## ChangeLog
 
+## 1.1.57
+* [功能新增] multiselect组件加入allByResultList参数
 ## 1.1.56
 * [功能新增] 趋势图增加自定义error内容的slot
 ## 1.1.55
