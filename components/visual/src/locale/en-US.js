@@ -21,7 +21,9 @@ export default {
         switchToArea: 'Switch to area',
         switchToLine: 'Switch to line',
         switchToColumn: 'Switch to column',
-        switchToStack: 'Switch to stack'
+        switchToStack: 'Switch to stack',
+        switchAsc: 'Ascending order',
+        switchDesc: 'Descending order'
     },
     customBox: {
         noConf: 'Not configured'

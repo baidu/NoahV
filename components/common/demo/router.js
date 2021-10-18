@@ -69,6 +69,10 @@ export default [
         component: r => require.ensure([], () => r(require('./components/textLine/textLine.vue')), 'textline')
     },
     {
+        path: '/nvtextarea',
+        component: r => require.ensure([], () => r(require('./components/textArea/textArea.vue')), 'textline')
+    },
+    {
         path: '/nvpipline',
         component: r => require.ensure([], () => r(require('./components/pipline/pipline.vue')), 'pipline')
     },
