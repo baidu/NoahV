@@ -1,0 +1,33 @@
+.@{noahvPrefixCls}-text-area-wrapper {
+    pre {
+        width: 100%;
+        height: 200px;
+        white-space: pre-wrap;
+        margin: 0;
+        padding: 10px;
+        box-sizing: border-box;
+        display: inline-block;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        border: 1px solid #D9DBE3;
+        color: #000;
+    }
+
+    span {
+        background: yellow;
+    }
+
+    pre:focus {
+        outline: none;
+    }
+
+    pre:empty:before {
+        content: attr(placeholder);
+        color: #999;
+    }
+
+    /*焦点时内容为空*/
+    pre:focus:before {
+        content: none;
+    }
+}
