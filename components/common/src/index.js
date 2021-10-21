@@ -28,6 +28,7 @@ import NvInput from './components/nv-input';
 import NvCheckbox from './components/nv-checkbox';
 import NvTextLine from './components/nv-textline';
 import NvTextArea from './components/nv-textArea';
+import NvScrollTab from './components/nv-scrolltab';
 import NvSwitch from './components/nv-switch';
 import NvButton from './components/nv-button';
 import NvDialog from './components/nv-dialog';
@@ -95,6 +96,7 @@ const noahv = {
     NvCheckbox,
     NvTextLine,
     NvTextArea,
+    NvScrollTab,
     NvPipline,
     NvTree,
     NvDatePicker,
