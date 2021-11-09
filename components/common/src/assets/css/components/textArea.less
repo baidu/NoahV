@@ -1,20 +1,54 @@
 .@{noahvPrefixCls}-text-area-wrapper {
-    pre {
+    position: relative;
+
+    .disabled {
+        background: #f3f4f5;
+
+        pre {
+            color: #999999 !important;
+        }
+
+        p {
+            color: #999999 !important;
+        }
+    }
+
+    .disabled:hover {
+        cursor: no-drop
+    }
+
+    div {
         width: 100%;
         height: 200px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        border: 1px solid #D9DBE3;
+    }
+
+
+
+    p {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+    }
+
+    pre {
+        width: 100%;
         white-space: pre-wrap;
         margin: 0;
         padding: 10px;
         box-sizing: border-box;
         display: inline-block;
-        overflow-y: scroll;
-        overflow-x: hidden;
-        border: 1px solid #D9DBE3;
         color: #000;
+        line-height: 20px;
     }
 
+
+
     span {
-        background: yellow;
+        background: #f1cf7d;
+        color: #c15a1c;
     }
 
     pre:focus {

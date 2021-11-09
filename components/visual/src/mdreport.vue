@@ -40,7 +40,7 @@
                                         class="sort"
                                         :data-sort="it.sortid"
                                         @click="sort(it)" >
-                                             <span :class="[column.disableSort?'':it.sortType == 'desc'
+                                        <span :class="[column.disableSort?'':it.sortType == 'desc'
                                         ? 'sort-desc' : (it.sortType == 'asc' ? 'sort-asc' : 'sort-desc')]">{{it.title}}</span>
                                         </th>
                                 </template>
@@ -61,8 +61,7 @@
                                     rowspan="2"
                                     :data-sort="column.sortid"
                                     @click="sort(column)">
-                                        <span :class="[column.disableSort?'':column.sortType == 'desc'
-                                        ? 'sort-desc' : (column.sortType == 'asc' ? 'sort-asc' : 'sort-desc')]">{{column.title}}</span>
+                                        <span :class="[column.disableSort?'':column.sortType == 'desc'? 'sort-desc' : (column.sortType == 'asc' ? 'sort-asc' : 'sort-desc')]">{{column.title}}</span>
                                     </th>
                             </template>
                         </tr>
@@ -359,6 +358,9 @@ export default {
         },
         renderConf() {
             const conf = this.reportConf;
+            if (!conf) {
+                return;
+            }
             let reportOptions = {
                 title: conf.title,
 
