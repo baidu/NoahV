@@ -2,8 +2,9 @@
     <div>
         <NvTextArea
             placeholder="请复制一段日志作为提取样例，便于验证日志提取规则是否正确，行数上限100，字符上限10000"
-            :highLight="arr"
-            :value='value'
+            :highLightRule="rule"
+            v-model='content'
+            :disabled='true'
         />
         <Button type="primary" @click="changeHighLight">数据提取</Button>
         <Button type="primary"  @click="addData">数据添加</Button>
@@ -13,16 +14,19 @@
 export default {
     data() {
         return {
-            arr: [],
-            value: ''
+            rule: '',
+            content: '2021-09-14 19:56:34.402535  test.go] method: DELETE, status:fail, num1:17, num2:6, num3:5, num4:19, num5:49, num6:0, num7:5, num8:9,bj:beijing_hw2,ip:1.0.32.0\n2021-09-14 19:56:37.405409  test.go] method: GET, status:fail, num1:16, num2:18, num3:5, num4:31, num5:64, num6:6, num7:4, num8:5,bj:beijing_hw2,ip:1.12.1.0'
         };
     },
     methods: {
         changeHighLight() {
-            this.arr = ['num3:115, num4:3'];
+            this.rule = '(?<NumA>num1):(?<NumAValue>[0-9]+).*(?<NumB>num2):(?<NumBValue>[0-9]+).*(?<NumC>num3):(?<NumCValue>[0-9]+).*(?<NumD>num4):(?<NumDValue>[0-9]+).*(?<NumE>num5):(?<NumEValue>[0-9]+).*(?<Num6>num6):(?<Num6Value>[0-9]+).*(?<Num7>num7):(?<Num7Value>[0-9]+).*(?<Num8>num8):(?<Num8Value>[0-9]+).*(?<BJ>bj):(?<beijing>[a-z]+.*[0-9]).*(?<Ip>ip):(?<logstreamIsp>[0-9]+.[0-9]+.[0-9]+.[0-9]+)';
         },
-        addData() {
-            this.value = '2021-09-27 13:38:31.353255 test.go] dimension_one:c, dimension_two:a ,dimension_three:a ,dimension_four:b ,dimension_five:c ,dimension_A:c ,dimension_B:a ,dimension_C:b ,dimension_D:a ,dimension_F:c ,method: PUT, status:, num1:34, num2:77, num3:115, num4:3, num5:46, num6:4, num7:2,num8:3,bj:beijing_hw0,ip:1.9.0.0';
+        addData() {}
+    },
+    watch: {
+        content: function () {
+            console.log(this.content);
         }
     }
 };

@@ -3,6 +3,7 @@
     v-model='arr'
     label='name'
     scrollSpeed='middle'
+    disabled
   />
 </template>
 

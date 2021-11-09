@@ -1252,7 +1252,7 @@ export default {
                         });
                         if (this.commonOption.toolbox.sortType) {
                             paramsArr.sort((a, b) => {
-                                return this.commonOption.toolbox.sortType === 'asc' ? a.decimal - b.decimal : b.decimal - a.decimal;
+                                return this.commonOption.toolbox.sortType === 'asc' ? parseFloat(a.decimal ? a.decimal.replace(/,/g, '',) : 0) - parseFloat(b.decimal ? b.decimal.replace(/,/g, '') : 0) : parseFloat(b.decimal ? b.decimal.replace(/,/g, '') : 0) - parseFloat(a.decimal ? a.decimal.replace(/,/g, '') : 0);
                             });
                         }
                         u.each(paramsArr, item => {
