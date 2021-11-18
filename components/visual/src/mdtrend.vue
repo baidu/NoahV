@@ -1088,7 +1088,7 @@ export default {
                     show: true,
                     left: 20,
                     top: 0,
-                    sortType: null,
+                    sortType: 'asc',
                     feature: {
                         myTool: {
                             show: this.changeType,

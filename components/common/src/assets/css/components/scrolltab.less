@@ -39,20 +39,30 @@
     p {
         width: 80px;
         height: 35px;
-        padding: 0 5px;
+        padding: 0 10px;
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: space-around;
-        cursor: pointer;
         flex-shrink: 0;
         position: relative;
+
+        span {
+            cursor: pointer;
+            display: block;
+            width: 45px;
+            height: 18px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
 
         i {
             font-size: 10px;
             color: #999;
             left: 50%;
             top: 50%;
+            cursor: pointer;
         }
 
         input {

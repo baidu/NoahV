@@ -100,29 +100,33 @@ export default {
             else {
                 this.colNum = Math.floor(this.$refs[this.mirrorId].offsetHeight / 20 - 1, 10);
             }
-            this.c;
             this.contentLength = contentText.trim().length;
         },
         // 处理高亮
         changeHighLight(val) {
             let domStr;
             domStr = this.$refs[this.mirrorId].innerText;
-            let highLightArr = domStr.match(new RegExp(val, 'g'));
-            if (!highLightArr) {
-                return;
-            }
-            highLightArr.forEach(item => {
-                if (item) {
-                    let exp = new RegExp(item, 'g');
-                    domStr = domStr.replace(exp, `<span>${item}</span>`);
+            try {
+                let highLightArr = domStr.match(new RegExp(val, 'g'));
+                if (!highLightArr) {
+                    return;
                 }
-            });
-            this.$refs[this.mirrorId].innerHtml = '';
-            this.$refs[this.mirrorId].innerText = '';
-            let node = new DOMParser().parseFromString(domStr, 'text/html').body.childNodes;
-            new Array(node.length).fill(1, 0).forEach(() => {
-                this.$refs[this.mirrorId].appendChild(node[0]);
-            });
+                highLightArr.forEach(item => {
+                    if (item) {
+                        let exp = new RegExp(item, 'g');
+                        domStr = domStr.replace(exp, `<span>${item}</span>`);
+                    }
+                });
+                this.$refs[this.mirrorId].innerHtml = '';
+                this.$refs[this.mirrorId].innerText = '';
+                let node = new DOMParser().parseFromString(domStr, 'text/html').body.childNodes;
+                new Array(node.length).fill(1, 0).forEach(() => {
+                    this.$refs[this.mirrorId].appendChild(node[0]);
+                });
+            }
+            catch {
+                throw new Error('提取规则格式报错');
+            }
         }
     }
 };
