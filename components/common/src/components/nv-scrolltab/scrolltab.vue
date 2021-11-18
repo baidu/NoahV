@@ -118,7 +118,7 @@ export default {
                 return;
             }
             if (this.maxLength > 0 && this.value.length >= this.maxLength) {
-                this.$emit('scrollTabError', `近允许配置${this.maxLength}条提取规则，但规则较多时有可能导致采集性能下降`);
+                this.$emit('scrollTabError', `仅允许配置${this.maxLength}条提取规则，但规则较多时有可能导致采集性能下降`);
                 return;
             }
             this.$emit('addTab', this.value.length);
