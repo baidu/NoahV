@@ -7,10 +7,9 @@
                 v-for="(item,idx) in value"
                 :class="tabIdx === idx ? 'tabChecked' : ''"
                 @click.stop="tabCheck(idx)"
-                @dblclick.stop="changeLabel(idx)"
                 :key="idx"
             >
-                <span>{{item[label]}}</span>
+                <span @dblclick.stop="changeLabel(idx)">{{item[label]}}</span>
                 <i class="noahv-icon noahv-icon-close-small" :class="{disabled:disabled}" @click.stop="tabDelete($event,idx)"></i>
                 <input @blur="blur($event,idx)" v-show="inputIdx===idx" :ref="`inputBox${idx}`" class="inputBox" type="text"  :value="item[label]">
             </p>
@@ -65,10 +64,14 @@ export default {
         },
         blur(event, idx) {
             const tabName = this.value[idx][this.label];
-            const obj = this.value.find(item => {
-                return item[this.label] === event.currentTarget.value;
+            const obj = this.value.find((item, index) => {
+                return item[this.label] === event.currentTarget.value && index !== idx;
             });
-            if (obj) {
+            if (!event.currentTarget.value) {
+                this.value[idx][this.label] = tabName;
+                this.$emit('scrollTabError', '规则名称不能为空');
+            }
+            else if (obj) {
                 this.value[idx][this.label] = tabName;
                 this.$emit('scrollTabError', '规则名称重复');
             }
@@ -95,6 +98,9 @@ export default {
             if (this.disabled) {
                 return;
             }
+            if (this.value.length <= 1) {
+                return;
+            }
             this.value.splice(idx, 1);
             this.$emit('deleteTab', idx);
         },
@@ -112,7 +118,7 @@ export default {
                 return;
             }
             if (this.maxLength > 0 && this.value.length >= this.maxLength) {
-                this.$emit('scrollTabError', `允许配置${this.maxLength}条提取规则，但规则较多时有可能导致采集性能下降`);
+                this.$emit('scrollTabError', `近允许配置${this.maxLength}条提取规则，但规则较多时有可能导致采集性能下降`);
                 return;
             }
             this.$emit('addTab', this.value.length);
