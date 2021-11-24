@@ -11,10 +11,11 @@
                 @input="changeText"
             ></pre>
         </div>
-        <p>行数：{{colNum}}/100，字符：{{contentLength}}/10000</p>
+        <p>{{columnNum}}：{{colNum}}/100，{{rowNum}}：{{contentLength}}/10000</p>
     </div>
 </template>
 <script>
+import {t} from '../../locale';
 import getClassName from '../utils.js';
 export default {
     data() {
@@ -22,7 +23,9 @@ export default {
             mirrorId: '',
             contentLength: 0,
             colNum: 0,
-            focusType: false
+            focusType: false,
+            columnNum: t('textArea.columnNum'),
+            rowNum: t('textArea.rowNum')
         };
     },
     props: {
