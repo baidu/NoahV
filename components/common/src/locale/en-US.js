@@ -107,5 +107,15 @@ export default {
         checkAllText: 'Select all',
         allText: 'All',
         selectedText: '{selectNumber} items selected'
+    },
+    textArea: {
+        columnNum: 'Number of rows:',
+        rowNum: 'Number of characters:'
+    },
+    scrolltab: {
+        empty: 'Rule name cannot be empty',
+        Duplicate: 'Duplicate rule name',
+        only: 'Only',
+        rule: 'extraction rule is allowed to be configured, but more rules may degrade the collection performance'
     }
 };

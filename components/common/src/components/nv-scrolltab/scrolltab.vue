@@ -21,6 +21,7 @@
 
 <script>
 import getClassName from '../utils.js';
+import {t} from '../../locale';
 export default {
     data() {
         return {
@@ -69,11 +70,11 @@ export default {
             });
             if (!event.currentTarget.value) {
                 this.value[idx][this.label] = tabName;
-                this.$emit('scrollTabError', '规则名称不能为空');
+                this.$emit('scrollTabError', t('scrolltab.empty'));
             }
             else if (obj) {
                 this.value[idx][this.label] = tabName;
-                this.$emit('scrollTabError', '规则名称重复');
+                this.$emit('scrollTabError', t('scrolltab.Duplicate'));
             }
             else {
                 this.value[idx][this.label] = event.currentTarget.value;
@@ -118,7 +119,7 @@ export default {
                 return;
             }
             if (this.maxLength > 0 && this.value.length >= this.maxLength) {
-                this.$emit('scrollTabError', `仅允许配置${this.maxLength}条提取规则，但规则较多时有可能导致采集性能下降`);
+                this.$emit('scrollTabError', `${t('scrolltab.only')} ${this.maxLength} ${t('scrolltab.rule')}`);
                 return;
             }
             this.$emit('addTab', this.value.length);
