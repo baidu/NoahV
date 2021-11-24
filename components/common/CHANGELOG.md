@@ -1,4 +1,6 @@
 ## ChangeLog
+## 1.1.64
+* [功能修复] 增加textarea 行数，字符长度国际化
 ## 1.1.63
 * [功能修复] 增加scrollTab，textarea国际化
 ## 1.1.62
