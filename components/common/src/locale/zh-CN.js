@@ -104,5 +104,15 @@ export default {
         checkAllText: '全选',
         allText: '全部',
         selectedText: '已选{selectNumber}项'
+    },
+    textArea: {
+        columnNum: '行数：',
+        rowNum: '字符：'
+    },
+    scrolltab: {
+        empty: '规则名称不能为空',
+        Duplicate: '规则名称重复',
+        only: '仅允许配置',
+        rule: '条提取规则，但规则较多时有可能导致采集性能下降'
     }
 };

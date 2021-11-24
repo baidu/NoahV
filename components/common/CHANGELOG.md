@@ -1,4 +1,6 @@
 ## ChangeLog
+## 1.1.63
+* [功能修复] 增加scrollTab，textarea国际化
 ## 1.1.62
 * [功能修复] scrollTab标签长度为1时禁止删除,捕获textArea正则判断
 ## 1.1.61
