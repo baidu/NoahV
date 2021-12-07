@@ -680,7 +680,11 @@ let Points = {
 
 export default {
     props: {
-
+        defaultSort: {
+            type: String,
+            default: 'desc',
+            required: false
+        },
         // get conf's url
         url: {
             type: String,
@@ -1088,7 +1092,7 @@ export default {
                     show: true,
                     left: 20,
                     top: 0,
-                    sortType: 'asc',
+                    sortType: this.defaultSort,
                     feature: {
                         myTool: {
                             show: this.changeType,
