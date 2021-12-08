@@ -127,7 +127,7 @@ export default {
                     this.$refs[this.mirrorId].appendChild(node[0]);
                 });
             }
-            catch {
+            catch (err) {
                 throw new Error('提取规则格式报错');
             }
         }

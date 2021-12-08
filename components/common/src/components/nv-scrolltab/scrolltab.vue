@@ -7,9 +7,10 @@
                 v-for="(item,idx) in value"
                 :class="tabIdx === idx ? 'tabChecked' : ''"
                 @click.stop="tabCheck(idx)"
+                @dblclick.stop="changeLabel(idx)"
                 :key="idx"
             >
-                <span @dblclick.stop="changeLabel(idx)">{{item[label]}}</span>
+                <NvEllipsis :content="item[label]" placement='top'/>
                 <i class="noahv-icon noahv-icon-close-small" :class="{disabled:disabled}" @click.stop="tabDelete($event,idx)"></i>
                 <input @blur="blur($event,idx)" v-show="inputIdx===idx" :ref="`inputBox${idx}`" class="inputBox" type="text"  :value="item[label]">
             </p>
