@@ -10,6 +10,9 @@
             :no-data-text="noDataText"
             @on-sort-change="tableSort"
             @on-selection-change="selectionChange"
+            @on-select-all="handleSelectAll"
+            @on-select-all-cancel="handleSelectAll"
+            @on-select-cancel="selectionCancel"
             @on-row-click="chooseRow"
         >
             <h1
@@ -107,6 +110,10 @@ export default {
         highlightRow: {
             type: Boolean,
             default: false
+        },
+        preserveSelected:{
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -129,7 +136,8 @@ export default {
                 pageSize: this.pagination ? this.pagination.defaultPageSize || 10 : 10,
                 pageSizeOptions: this.pagination ? this.pagination.pageSizeOptions
                     || defaultPageSizeOptions : defaultPageSizeOptions
-            }
+            },
+            selectedIds: new Map(),
         };
     },
     watch: {
@@ -423,8 +431,36 @@ export default {
          *
          */
         selectionChange(selection) {
+            if(this.preserveSelected){
+                selection.forEach((item)=>{
+                    this.selectedIds.set(item.id, item);
+                });
+                this.$emit('on-selected-ids-change',this.selectedIds);
+            }
             this.selection = selection;
             this.$emit('on-selection-change', selection);
+        },
+        selectionCancel(selection, row){
+            if(this.preserveSelected){
+                this.selectedIds.delete(row.id);
+                this.$emit('on-selected-ids-change',this.selectedIds);
+            }
+            this.$emit('on-selection-cancel', row);
+        },
+        handleSelectAll(selection){
+            if(this.preserveSelected){
+                if(selection.length === 0){
+                    // 删除当页所有项
+                    this.tableData.forEach((item)=>{
+                        this.selectedIds.delete(item.id);
+                    });
+                }else{
+                    // 选中当页所有项
+                    this.tableData.forEach((item)=>{
+                        this.selectedIds.set(item.id, item);
+                    });
+                }
+            }
         },
         /**
          * 获取已经选中的列
@@ -432,7 +468,13 @@ export default {
          * @return {Array} 选中的列信息
          */
         getSelectItem() {
+            if (this.preserveSelected){
+                return [...this.selectedIds.values()];
+            }
             return this.selection;
+        },
+        preservedSelectedIdsSize(){
+            return this.selectedIds.size;
         },
         /**
          * 页码变化
