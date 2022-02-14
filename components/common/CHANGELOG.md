@@ -1,5 +1,7 @@
 ## ChangeLog
-## 1.1.64
+## 1.1.66
+* [功能优化] nv-table增加preserveSelected参数
+## 1.1.65
 * [功能优化] 增加scrolltab省略组件NvEllipsis tips提示
 ## 1.1.64
 * [功能修复] 增加textarea 行数，字符长度国际化
