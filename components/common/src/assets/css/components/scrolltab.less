@@ -1,0 +1,120 @@
+.@{noahvPrefixCls}-scroll-tab-wrapper {
+    width: 100%;
+    height: 40px;
+    background: #EBEBEB;
+    padding: 5px 65px 0 30px;
+    position: relative;
+
+
+
+    .noahv-icon-angle-right {
+        position: absolute;
+        right: 45px;
+        top: 12px;
+        cursor: pointer;
+    }
+
+    .noahv-icon-angle-left {
+        position: absolute;
+        left: 10px;
+        top: 12px;
+        cursor: pointer;
+    }
+
+    .addList {
+        cursor: pointer;
+        display: inline-block;
+        width: 26px;
+        height: 26px;
+        border: 1px solid #3a62ca;
+        position: absolute;
+        right: 10px;
+        top: 7px;
+        text-align: center;
+        line-height: 20px;
+        font-size: 22px;
+        color: #3a62ca;
+    }
+
+    p {
+        width: 80px;
+        height: 35px;
+        padding: 0 10px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        flex-shrink: 0;
+        position: relative;
+
+        span {
+            cursor: pointer;
+            display: block;
+            width: 45px;
+            height: 18px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        i {
+            font-size: 10px;
+            color: #999;
+            left: 50%;
+            top: 50%;
+            cursor: pointer;
+        }
+
+        input {
+            width: 70px;
+            height: 25px;
+            position: absolute;
+            border: 1px solid #d9dbe3;
+            padding: 2px 5px;
+            background: #fff;
+            scrollbar-width: none;
+            /* firefox */
+            -ms-overflow-style: none;
+            /* IE 10+ */
+            outline: none;
+        }
+
+        input::-webkit-scrollbar {
+            display: none;
+        }
+
+        .inputBox::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    .tabChecked {
+        background: #fff;
+        color: #3a62ca;
+    }
+
+    div::-webkit-scrollbar {
+        display: none;
+        /* Chrome Safari */
+    }
+
+    div {
+        overflow-x: scroll;
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        scrollbar-width: none;
+        /* firefox */
+        -ms-overflow-style: none;
+        /* IE 10+ */
+        overflow-y: hidden;
+    }
+
+    .disabled {
+        opacity: 0.5;
+    }
+
+    .disabled:hover {
+        cursor: no-drop
+    }
+}

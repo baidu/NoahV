@@ -17,6 +17,8 @@
             <li><router-link to="/nvswitch">nv-switch</router-link></li>
             <li><router-link to="/nvbutton">nv-button</router-link></li>
             <li><router-link to="/nvtextline">nv-textline</router-link></li>
+            <li><router-link to="/nvtextarea">nv-textarea</router-link></li>
+            <li><router-link to="/nvscrolltab">nv-scrolltab</router-link></li>
             <li><router-link to="/nvcascaderselect">nv-cascaderselect</router-link></li>
             <li><router-link to="/nvsteps">nv-steps</router-link></li>
             <li><router-link to="/nvsearch">nv-search</router-link></li>
@@ -34,10 +36,10 @@
 <script>
 export default {
     name: 'App',
-    data () {
-        return {}
+    data() {
+        return {};
     }
-}
+};
 </script>
 <style lang="less" >
 .demo-container {

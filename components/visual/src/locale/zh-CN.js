@@ -21,7 +21,9 @@ export default {
         switchToArea: '切换为面积图',
         switchToLine: '切换为折线图',
         switchToColumn: '切换为柱状图',
-        switchToStack: '切换为堆叠'
+        switchToStack: '切换为堆叠',
+        switchAsc: '升序',
+        switchDesc: '降序'
     },
     customBox: {
         noConf: '没有配置内容'

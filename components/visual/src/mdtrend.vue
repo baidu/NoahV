@@ -26,6 +26,8 @@ import chartareaPng from './assets/img/trend/chartarea.png';
 import chartcolumnPng from './assets/img/trend/chartcolumn.png';
 import chartlinePng from './assets/img/trend/chartline.png';
 import chartstackPng from './assets/img/trend/chartstack.png';
+import sortDesc from './assets/img/trend/sortDesc.png';
+import sortAsc from './assets/img/trend/sortAsc.png';
 
 import {t} from './locale';
 import mixin from './mixins';
@@ -678,7 +680,11 @@ let Points = {
 
 export default {
     props: {
-
+        defaultSort: {
+            type: String,
+            default: 'desc',
+            required: false
+        },
         // get conf's url
         url: {
             type: String,
@@ -1056,8 +1062,7 @@ export default {
             }
 
             this.commonOption = {
-                noDataLoadingOption:
-                {
+                noDataLoadingOption: {
                     text: widgetConf.nodata,
                     effect: 'bubble',
                     effectOption:
@@ -1087,6 +1092,7 @@ export default {
                     show: true,
                     left: 20,
                     top: 0,
+                    sortType: this.defaultSort,
                     feature: {
                         myTool: {
                             show: this.changeType,
@@ -1129,6 +1135,22 @@ export default {
                                 u.each(this.commonOption.series, item => {
                                     item.stack = !item.stack;
                                 });
+                                this.chart.setOption(this.commonOption);
+                            }
+                        },
+                        myToolAsc: {
+                            title: this.t('mdtrend.switchAsc'),
+                            icon: 'image://' + sortAsc,
+                            onclick: () => {
+                                this.commonOption.toolbox.sortType = 'asc';
+                                this.chart.setOption(this.commonOption);
+                            }
+                        },
+                        myToolDesc: {
+                            title: this.t('mdtrend.switchDesc'),
+                            icon: 'image://' + sortDesc,
+                            onclick: () => {
+                                this.commonOption.toolbox.sortType = 'desc';
                                 this.chart.setOption(this.commonOption);
                             }
                         }
@@ -1228,17 +1250,26 @@ export default {
                         let decimals = conf.style.decimals;
                         let time;
                         let seriesTooltip = [];
-                        u.each(params, item => {
+                        let paramsArr = params;
+                        paramsArr.forEach(item => {
+                            item.decimal = item.value[1] ? mdutil.setDecimal(item.value[1], decimals, numUnitType) : null;
+                        });
+                        if (this.commonOption.toolbox.sortType) {
+                            paramsArr.sort((a, b) => {
+                                return this.commonOption.toolbox.sortType === 'asc' ? parseFloat(a.decimal ? a.decimal.replace(/,/g, '',) : 0) - parseFloat(b.decimal ? b.decimal.replace(/,/g, '') : 0) : parseFloat(b.decimal ? b.decimal.replace(/,/g, '') : 0) - parseFloat(a.decimal ? a.decimal.replace(/,/g, '') : 0);
+                            });
+                        }
+                        u.each(paramsArr, item => {
                             let valueSuffix = this.commonOption.series[item.seriesIndex].tooltip.valueSuffix || '';
                             time = moment(item.axisValue).format(timeFormatter);
-                            if (item.value[1] === null || item.value[1] === undefined) {
+                            if (!item.decimal) {
                                 return;
                             }
                             let html = `<dd class="echarts-tooltip-item" style="color: ${item.color}">`
                                 + item.seriesName
                                 + ': '
                                 + '<span class="echarts-tooltip-item-value">'
-                                + mdutil.setDecimal(item.value[1], decimals, numUnitType)
+                                + item.decimal
                                 + valueSuffix
                                 + '</span>'
                                 + '</dd>';
@@ -1466,7 +1497,6 @@ export default {
                     }
                     currentIndx++;
                 }
-
                 let currentSeries = {
                     name: name,
                     data: list,
@@ -1487,7 +1517,8 @@ export default {
                     barGap: '-100%',
                     animation: false,
                     areaStyle: this.chartType === 'area' ? {} : null,
-                    stack: this.chartStacking === 'normal' ? {} : null
+                    stack: this.chartStacking === 'normal' ? {} : null,
+                    sortType: 'asc'
                 };
 
                 if (this.extraStyle && this.extraStyle.series) {

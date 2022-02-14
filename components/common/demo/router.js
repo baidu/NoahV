@@ -69,6 +69,14 @@ export default [
         component: r => require.ensure([], () => r(require('./components/textLine/textLine.vue')), 'textline')
     },
     {
+        path: '/nvtextarea',
+        component: r => require.ensure([], () => r(require('./components/textArea/textArea.vue')), 'textArea')
+    },
+    {
+        path: '/nvscrolltab',
+        component: r => require.ensure([], () => r(require('./components/scrolltab/scrolltab.vue')), 'scrolltab')
+    },
+    {
         path: '/nvpipline',
         component: r => require.ensure([], () => r(require('./components/pipline/pipline.vue')), 'pipline')
     },

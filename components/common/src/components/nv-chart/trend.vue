@@ -4,6 +4,8 @@
             <span class="trend-title" :title="resTitle">{{resTitle}}</span>
             <slot name="header-right"></slot>
         </h3>
+        <!-- 显示维度 -->
+        <slot name="dimension-info"></slot>
         <!-- <vue-echarts :options="curOptions" ref="chart"></vue-echarts> -->
         <div :class="getCls('chart')" ref="chart" v-show="displayChart"></div>
 
@@ -112,7 +114,7 @@ const trendOptions = {
             color: '#666',
             inside: true,
             margin: 0,
-            verticalAlign: 'bottom',
+            verticalAlign: 'bottom'
         }
     },
     xAxis: {
@@ -202,7 +204,7 @@ export default {
         },
         showLoading: {
             type: String,
-            default () {
+            default() {
                 return t('trend.loadingData');
             }
         },
@@ -220,7 +222,7 @@ export default {
         },
         noDataTip: {
             type: String,
-            default () {
+            default() {
                 return t('trend.noData');
             }
         },
@@ -240,7 +242,7 @@ export default {
         },
         showSeriesDetailText: {
             type: String,
-            default () {
+            default() {
                 return t('trend.detail');
             }
         },
@@ -299,7 +301,7 @@ export default {
             errTip: '',
             noData: false,
             hasRequested: false,
-            showDetailPanel: this.unfoldSeriesDetail ? true : false,
+            showDetailPanel: !!this.unfoldSeriesDetail,
             detailStatistic: [],
             detailConf: this.seriesDetailConf
         };
@@ -324,7 +326,7 @@ export default {
         let resizeTarget = document.querySelector(this.resizeTrigger) || window;
         resizeTarget.addEventListener('resize', this.resizeHandler);
 
-        this.$nextTick( () => {
+        this.$nextTick(() => {
             this.scrollTop();
         });
     },
@@ -333,7 +335,7 @@ export default {
             return [this.params, this.trendData];
         },
         displayChart() {
-            return !this.errTip && !this.noData
+            return !this.errTip && !this.noData;
         }
     },
     watch: {
@@ -435,7 +437,7 @@ export default {
                         return data;
                     })
                     .then(this.initData)
-                    .catch((err) => {
+                    ['catch'](err => {
                         console.warn(err);
                     });
             }
@@ -508,8 +510,7 @@ export default {
                 // 寻找X轴时间最佳展示Label格式
                 if (item.data
                     && item.data.length > 0
-                    && timeGap < (item.data[item.data.length - 1][0] - item.data[0][0]))
-                {
+                    && timeGap < (item.data[item.data.length - 1][0] - item.data[0][0])) {
                     timeGap = (item.data[item.data.length - 1][0] - item.data[0][0]);
                 }
             });
@@ -615,8 +616,8 @@ export default {
 
             // this.options的tooltip 优先级最高
             let hasFormatter = false;
-            if (typeof this.options.tooltip != 'undefined' &&
-              typeof this.options.tooltip.formatter !='undefined') {
+            if (typeof this.options.tooltip !== 'undefined'
+              && typeof this.options.tooltip.formatter !== 'undefined') {
                 hasFormatter = true;
             }
 
@@ -703,7 +704,7 @@ export default {
             if (offset && offset.top - 50 < height && offset.bottom > 0) {
                 return true;
             }
-            return false
+            return false;
         },
         /**
          * 同步tooltip
@@ -726,10 +727,10 @@ export default {
         getInitOptions() {
             return this.options
                 ? chartUtil.deepAssign({}, this.defaultOptions(), trendOptions, this.options)
-                : chartUtil.deepAssign({}, this.defaultOptions(), trendOptions)
+                : chartUtil.deepAssign({}, this.defaultOptions(), trendOptions);
         },
         defaultOptions() {
-            return options['lineChart'];
+            return options.lineChart;
         },
         resizeChart() {
             if (this.chart) {
@@ -762,13 +763,13 @@ export default {
                 if (typeof a[key] === 'number' && typeof b[key] === 'number') {
                     return order === 'asc' ? a[key] - b[key] : b[key] - a[key];
                 }
-                else if (typeof a[key] === 'string' && typeof b[key] === 'string'){
+                else if (typeof a[key] === 'string' && typeof b[key] === 'string') {
                     let aStr = a[key];
                     let bStr = b[key];
                     let alen = aStr.length;
                     let blen = bStr.length;
                     let i = 0;
-                    while(i < alen && i < blen) {
+                    while (i < alen && i < blen) {
                         if (aStr.charAt(i) === bStr.charAt(i)) {
                             i++;
                         }
@@ -778,7 +779,7 @@ export default {
                     }
                     return order === 'asc' ? alen - blen : blen - alen;
                 }
-                else if (a[key] === '' || b[key] === '')  {
+                else if (a[key] === '' || b[key] === '') {
                     if (a[key] === b[key]) {
                         return 0;
                     }
@@ -789,13 +790,11 @@ export default {
                         return b[key] === '' ? -1 : 1;
                     }
                 }
+                else if (order === 'asc') {
+                    return a[key] > b[key] ? -1 : 1;
+                }
                 else {
-                    if (order === 'asc') {
-                        return a[key] > b[key] ? -1 : 1;
-                    }
-                    else {
-                        return a[key] > b[key] ? 1 : -1;
-                    }
+                    return a[key] > b[key] ? 1 : -1;
                 }
             });
         },
