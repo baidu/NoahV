@@ -1,4 +1,6 @@
 ## ChangeLog
+## 1.1.67
+* [功能优化] 允许用户传入趋势图的点
 ## 1.1.66
 * [功能优化] nv-table增加preserveSelected参数
 ## 1.1.65
