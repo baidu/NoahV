@@ -489,7 +489,7 @@ export default {
             // set the series
             data.data.forEach(item => {
                 item.type = 'line';
-                item.symbol = 'none';
+                item.symbol = item.symbol ? item.symbol : 'none';
                 if (this.options.nullPointMode === 'zero') {
                     item.data.map(list => {
                         if (list[1] === null || list[1] === undefined) {
