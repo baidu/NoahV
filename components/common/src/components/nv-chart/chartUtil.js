@@ -11,7 +11,7 @@ const numUnit = ['K', 'M', 'G', 'T', 'P', 'E'];
 
 
 let viewRoot = document.compatMode === 'BackCompat'
-    ? body
+    ? document.body
     : document.documentElement;
 
 let chartUtil = {};
