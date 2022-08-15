@@ -114,12 +114,7 @@ export default {
                 if (!highLightArr) {
                     return;
                 }
-                highLightArr.forEach(item => {
-                    if (item) {
-                        let exp = new RegExp(item, 'g');
-                        domStr = domStr.replace(exp, `<span>${item}</span>`);
-                    }
-                });
+                domStr = domStr.replace(new RegExp(val, 'g'), `<span>$&</span>`);
                 this.$refs[this.mirrorId].innerHtml = '';
                 this.$refs[this.mirrorId].innerText = '';
                 let node = new DOMParser().parseFromString(domStr, 'text/html').body.childNodes;
